@@ -14,8 +14,18 @@ def run():
 def get_overlay_canvas() -> io.BytesIO:
         data = io.BytesIO()
         pdf = canvas.Canvas(data)
-        pdf.drawString(x=33, y=550, text=)
-        pdf.drawString(x=148, y=550, text='John')
+        pdf.drawString(x=87, y=115, text="Character Name")
+        pdf.drawString(x=384, y=84, text='Wizard 1')
+        pdf.drawString(x=540, y=84, text='Acolyte')
+        pdf.drawString(x=384, y=122, text='Air Genasi')
+        pdf.drawString(x=540, y=122, text='Lawful Good')
+        pdf.drawString(x=65, y=242, text='15')
+        pdf.drawString(x=71, y=278, text='+2')
+        pdf.drawString(x=65, y=348, text='11')
+        pdf.drawString(x=71, y=375, text='0')
+        pdf.drawString(x=65, y=443, text='17')
+        pdf.drawString(x=71, y=474, text='+3')
+
         pdf.save()
         data.seek(0)
         return data
