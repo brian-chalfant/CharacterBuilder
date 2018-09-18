@@ -1,17 +1,11 @@
 
-def diceroll(number, sides):
+def diceroll():
     from random import randrange
 
-    a = 0
-    b = 0
-    for i in range(3):
-        a = 0
-        for j in range(number):
-            a += randrange(1, (sides + 1))
-        if b == 0:
-            b = a
-        else:
-            if a > b:
-                b = a
-    return b
+    a = []
+    for i in range(4):
+        a.append(randrange(1,7))
+    a.sort()
+    total = a[1] + a[2] + a[3]
+    return total
 

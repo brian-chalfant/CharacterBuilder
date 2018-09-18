@@ -10,12 +10,12 @@ from language import choose_language
 
 class Race:
     def __init__(self, level=None):
-        self.intelligence = diceroll(3, 6)
-        self.dexterity = diceroll(3, 6)
-        self.wisdom = diceroll(3, 6)
-        self.charisma = diceroll(3, 6)
-        self.constitution = diceroll(3, 6)
-        self.strength = diceroll(3, 6)
+        self.intelligence = diceroll()
+        self.dexterity = diceroll()
+        self.wisdom = diceroll()
+        self.charisma = diceroll()
+        self.constitution = diceroll()
+        self.strength = diceroll()
         self.language = ["Common"]
         if level is None:
             level = 1
