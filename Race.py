@@ -45,6 +45,7 @@ class Race:
 class Aarakocra(Race):
     def __init__(self):
         super(Aarakocra, self).__init__()
+        self.name = 'Aarakocra'
         self.dexterity += 1
         self.wisdom += 1
         self.abilities = ["FLIGHT"]
@@ -63,6 +64,7 @@ class Dragonborn(Race):
         super(Dragonborn, self).__init__()
         ancestry = ("Black: Acid", "Blue: Lightning", "Brass: Fire", "Bronze: Lightning", "Copper: Acid", "Gold: Fire",
                     "Green: Poison", "Red: Fire", "Silver: Cold", "White: Cold")
+        self.name = 'Dragonborn'
         self.strength += 2
         self.charisma += 1
         self.speed = 30
@@ -105,6 +107,7 @@ class HillDwarf(Dwarf):
         super(HillDwarf, self).__init__()
         self.wisdom += 1
         self.abilities.append("DWARVEN TOUGHNESS")
+        self.name = 'Hill Dwarf'
 
 
 class MountainDwarf(Dwarf):
@@ -112,6 +115,7 @@ class MountainDwarf(Dwarf):
         super(MountainDwarf, self).__init__()
         self.strength += 2
         self.abilities.append("DWARVEN ARMOUR TRAINING")
+        self.name = 'Mountain Dwarf'
 
 
 # Start Elf --------------------------------------------------
@@ -119,6 +123,7 @@ class Elf(Race):
     def __init__(self):
         super(Elf, self).__init__()
         self.dexterity += 2
+        self.name = 'Elf'
         self.abilities = ["FEY ANCESTRY", "TRANCE"]
         self.language.append("Elvish")
         self.speed = 30
@@ -128,6 +133,7 @@ class HighElf(Elf):
     def __init__(self):
         super(HighElf, self).__init__()
         self.intelligence += 1
+        self.name = 'High Elf'
         self.magic = True
         self.cantrip = [str(choose_wizard_cantrip())]
         self.language.append(str(choose_language()))
@@ -137,6 +143,7 @@ class WoodElf(Elf):
     def __init__(self):
         super(WoodElf, self).__init__()
         self.wisdom += 1
+        self.name = 'Wood Elf'
         self.abilities = ["ELF WEAPON TRAINING", "FLEET OF FOOT", "MASK OF THE WILD"]
 
 
@@ -144,6 +151,7 @@ class Eladrin(Elf):
     def __init__(self):
         super(Eladrin, self).__init__()
         self.intelligence += 1
+        self.name = 'Eladrin'
         self.abilities = ["ELF WEAPON TRAINING", "FEY STEP"]
 
 
@@ -151,6 +159,7 @@ class DrowElf(Elf):
     def __init__(self):
         super(DrowElf, self).__init__()
         self.charisma += 1
+        self.name = 'Drow Elf'
         self.abilities = ["SUPERIOR DARKVISION", "DROW MAGIC", "SUNLIGHT SENSITIVITY"]
         self.magic = True
         self.cantrip = ["DANCING LIGHTS"]
@@ -166,6 +175,7 @@ class Genasi(Race):
     def __init__(self):
         super(Genasi, self).__init__()
         self.constitution += 2
+        self.name = 'Genasi'
         self.speed = 30
         self.abilities = []
 
@@ -174,6 +184,7 @@ class AirGenasi(Genasi):
     def __init__(self):
         super(AirGenasi, self).__init__()
         self.dexterity += 1
+        self.name = 'Air Genasi'
         self.abilities.append("UNENDING BREATH")
         self.abilities.append("MINGLE WITH THE WIND")
         self.magic = True
@@ -184,6 +195,7 @@ class EarthGenasi(Genasi):
     def __init__(self):
         super(EarthGenasi, self).__init__()
         self.strength += 1
+        self.name = 'Earth Genasi'
         self.abilities.append("EARTH WALK")
         self.abilities.append("MERGE WITH STONE")
         self.magic = True
@@ -194,6 +206,7 @@ class FireGenasi(Genasi):
     def __init__(self):
         super(FireGenasi, self).__init__()
         self.intelligence += 1
+        self.name = 'Fire Genasi'
         self.abilities.append("DARKVISION")
         self.abilities.append("FIRE RESISTANCE")
         self.abilities.append("REACH THE BLAZE")
@@ -205,6 +218,7 @@ class WaterGenasi(Genasi):
     def __init__(self):
         super(WaterGenasi, self).__init__()
         self.wisdom += 1
+        self.name = 'Water Genasi'
         self.abilities.append("ACID RESISTANCE")
         self.abilities.append("AMPHIBIOUS")
         self.abilities.append("SWIM")
@@ -218,6 +232,7 @@ class Gnome(Race):
     def __init__(self):
         super(Gnome, self).__init__()
         self.intelligence += 2
+        self.name = 'Gnome'
         self.speed = 25
         self.abilities = ["DARKVISION", "GNOME CUNNING"]
         self.language.append("Gnomish")
@@ -227,6 +242,7 @@ class RockGnome(Gnome):
     def __init__(self):
         super(RockGnome, self).__init__()
         self.constitution += 1
+        self.name = 'Rock Gnome'
         self.abilities.append("ARTIFICER'S LORE")
         self.abilities.append("TINKER")
 
@@ -235,6 +251,7 @@ class DeepGnome(Gnome):
     def __init__(self):
         super(DeepGnome, self).__init__()
         self.dexterity += 1
+        self.name = 'Deep Gnome'
         self.abilities.append("SUPERIOR DARKVISION")
         self.abilities.append("STONE CAMOUFLAGE")
         self.language.append("Undercommon")
@@ -246,6 +263,7 @@ class Goliath(Race):
         super(Goliath, self).__init__()
         self.strength += 2
         self.constitution += 1
+        self.name = 'Goliath'
         self.speed = 30
         self.abilities = ["NATURAL ATHLETE", "STONE'S ENDURANCE", "POWERFUL BUILD", "MOUNTAIN BORN"]
         self.language.append("Giant")
@@ -256,6 +274,7 @@ class HalfElf(Race):
     def __init__(self):
         super(HalfElf, self).__init__()
         self.charisma += 2
+        self.name = 'Half-Elf'
         self.speed = 30
         self.abilities = ["DARKVISION", "FEY ANCESTRY", "SKILL VERSATILITY"]
         self.language.append("Elvish")
@@ -268,6 +287,7 @@ class HalfOrc(Race):
         super(HalfOrc, self).__init__()
         self.strength += 2
         self.strength += 1
+        self.name = 'Half-Orc'
         self.speed = 30
         self.abilities = ["DARKVISION", "MENACING", "RELENTLESS ENDURANCE", "SAVAGE ATTACKS"]
         self.language.append("Orc")
@@ -278,6 +298,7 @@ class Halfling(Race):
     def __init__(self):
         super(Halfling, self).__init__()
         self.dexterity += 2
+        self.name = 'Halfling'
         self.speed = 25
         self.abilities = ["LUCKY", "BRAVE", "HALFLING NIMBLENESS"]
         self.language.append("Halfling")
@@ -287,6 +308,7 @@ class LightfootHalfling(Halfling):
     def __init__(self):
         super(LightfootHalfling, self).__init__()
         self.charisma += 1
+        self.name = 'Lightfoot Halfling'
         self.abilities.append("NATURALLY STEALTHY")
 
 
@@ -294,6 +316,7 @@ class StoutHalfling(Halfling):
     def __init__(self):
         super(StoutHalfling, self).__init__()
         self.constitution += 1
+        self.name = 'Stout Halfling'
         self.abilities.append("STOUT RESILIENCE")
 
 
@@ -307,6 +330,7 @@ class Human(Race):
         self.intelligence += 1
         self.wisdom += 1
         self.strength += 1
+        self.name = 'Human'
         self.speed = 30
         self.language.append(str(choose_language()))
 
@@ -317,6 +341,7 @@ class Tiefling(Race):
         super(Tiefling, self).__init__()
         self.intelligence += 1
         self.charisma += 2
+        self.name = 'Tiefling'
         self.speed = 30
         self.abilities = ["DARKVISION", "HELLISH RESISTANCE", "INFERNAL LEGACY"]
         self.magic = True

@@ -1,5 +1,5 @@
 from Race import *
-import CharacterClass
+from CharacterClass import *
 import os
 # clear screen method
 
@@ -48,11 +48,12 @@ halfling_races = {
     2: "Stout Halfling"
 }
 
-
+_race = Race()
 # ----- MAIN PROGRAM -----------------
 print("Welcome to Character Creator.")
 # Enter Character's Name
 character_name = str(input("Please Enter your character's name :"))
+user_level = int(input("What level is your character? (1-20): "))
 # List the main races available for the user and query for selection
 print("Please Choose a Race.")
 for key, value in list_races.items():
@@ -160,3 +161,49 @@ classes_list = {
 for key, value in classes_list.items():
     print(key, value)
 _class = int(input("Enter a number: "))
+if _class == 1:
+    _class = Barbarian()
+elif _class == 2:
+    _class = Bard()
+elif _class == 3:
+    _class = Cleric()
+elif _class == 4:
+    _class = Druid()
+elif _class == 5:
+    _class = Fighter()
+elif _class == 6:
+    _class = Monk()
+elif _class == 7:
+    _class = Paladin()
+elif _class == 8:
+    _class = Ranger()
+elif _class == 9:
+    _class = Rogue()
+elif _class == 10:
+    _class = Sorcerer()
+elif _class == 11:
+    _class = Warlock()
+elif _class == 12:
+    _class = Wizard()
+
+user_race = _race
+user_class = _class
+
+character_data = {
+
+    "name": character_name,
+    "race": user_race.name,
+    "level": user_level,
+    "class": user_class.name,
+    "strength": user_race.get_strength(),
+    "wisdom": user_race.get_wisdom(),
+    "dexterity": user_race.get_dexterity(),
+    "constitution": user_race.get_constitution(),
+    "charisma": user_race.get_charisma(),
+    "intelligence": user_race.get_intelligence(),
+
+
+
+}
+
+print(character_data)

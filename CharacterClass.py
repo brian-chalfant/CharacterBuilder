@@ -11,6 +11,7 @@ class CharacterClass:
 class Barbarian(CharacterClass):
     def __init__(self):
         super(Barbarian, self).__init__()
+        self.name = 'Barbarian'
         self.hit_die = diceroll(1, 12)
         self.primary_ability = "Strength"
         self.saves = ["Strength", "Constitution"]
@@ -41,3 +42,50 @@ class Barbarian(CharacterClass):
         if self.level >= 3:
             self.abilities.append("PRIMAL PATH")
 #        if self.level >= 4:
+
+
+class Bard(CharacterClass):
+    def __init__(self):
+        super(Bard, self).__init__()
+        self.name = 'Bard'
+
+class Cleric(CharacterClass):
+    def __init__(self):
+        super(Cleric, self).__init__()
+        self.name = 'Cleric'
+class Druid(CharacterClass):
+    def __init__(self):
+        super(Druid, self).__init__()
+        self.name = 'Druid'
+class Fighter(CharacterClass):
+    def __init__(self):
+        super(Fighter, self).__init__()
+        self.name = 'Fighter'
+class Monk(CharacterClass):
+    def __init__(self):
+        super(Monk, self).__init__()
+        self.name = 'Monk'
+class Paladin(CharacterClass):
+    def __init__(self):
+        super(Paladin, self).__init__()
+        self.name = 'Paladin'
+class Ranger(CharacterClass):
+    def __init__(self):
+        super(Ranger, self).__init__()
+        self.name = 'Ranger'
+class Rogue(CharacterClass):
+    def __init__(self):
+        super(Rogue, self).__init__()
+        self.name = 'Rogue'
+class Sorcerer(CharacterClass):
+    def __init__(self):
+        super(Sorcerer, self).__init__()
+        self.name = 'Sorcerer'
+class Warlock(CharacterClass):
+    def __init__(self):
+        super(Warlock, self).__init__()
+        self.name = 'Warlock'
+class Wizard(CharacterClass):
+    def __init__(self):
+        super(Wizard, self).__init__()
+        self.name = 'Wizard'
