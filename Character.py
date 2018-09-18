@@ -1,6 +1,7 @@
 from Race import *
 from CharacterClass import *
 import os
+from modifiers import ability_modifiers
 # clear screen method
 
 
@@ -201,6 +202,12 @@ character_data = {
     "constitution": user_race.get_constitution(),
     "charisma": user_race.get_charisma(),
     "intelligence": user_race.get_intelligence(),
+    "strength_mod": ability_modifiers(user_race.get_strength()),
+    "wisdom_mod": ability_modifiers(user_race.get_wisdom()),
+    "dexterity_mod": ability_modifiers(user_race.get_dexterity()),
+    "constitution_mod": ability_modifiers(user_race.get_constitution()),
+    "charisma_mod": ability_modifiers(user_race.get_charisma()),
+    "intelligence_mod": ability_modifiers(user_race.get_intelligence())
 
 
 

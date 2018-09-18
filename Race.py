@@ -160,7 +160,7 @@ class DrowElf(Elf):
         super(DrowElf, self).__init__()
         self.charisma += 1
         self.name = 'Drow Elf'
-        self.abilities = ["SUPERIOR DARKVISION", "DROW MAGIC", "SUNLIGHT SENSITIVITY"]
+        self.abilities = ["SUPERIOR DARKVISION", "DROW MAGIC", "DROW WEAPON TRAINING", "SUNLIGHT SENSITIVITY"]
         self.magic = True
         self.cantrip = ["DANCING LIGHTS"]
         if self.level > 3:
