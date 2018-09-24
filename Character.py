@@ -69,9 +69,9 @@ if user_race == 3:
         print(key, value)
     user_race = (int(input("Enter a number:")))
     if user_race == 1:
-        _race = HillDwarf()
+        _race = HillDwarf(user_level)
     else:
-        _race = MountainDwarf()
+        _race = MountainDwarf(user_level)
 
 # the user picked Elf, clear the screen and display elf sub-races, query for selection
 elif user_race == 4:
@@ -81,13 +81,13 @@ elif user_race == 4:
         print(key, value)
     user_race = (int(input("Enter a number:")))
     if user_race == 1:
-        _race = HighElf()
+        _race = HighElf(user_level)
     elif user_race == 2:
-        _race = WoodElf()
+        _race = WoodElf(user_level)
     elif user_race == 3:
-        _race = Eladrin()
+        _race = Eladrin(user_level)
     else:
-        _race = DrowElf()
+        _race = DrowElf(user_level)
 
 # the user picked Genasi, clear the screen and display genasi sub-races, query for selection
 elif user_race == 5:
@@ -97,13 +97,13 @@ elif user_race == 5:
         print(key, value)
     user_race = (int(input("Enter a number:")))
     if user_race == 1:
-        _race = AirGenasi()
+        _race = AirGenasi(user_level)
     elif user_race == 2:
-        _race = EarthGenasi()
+        _race = EarthGenasi(user_level)
     elif user_race == 3:
-        _race = FireGenasi()
+        _race = FireGenasi(user_level)
     else:
-        _race = WaterGenasi()
+        _race = WaterGenasi(user_level)
 
 # the user picked Halfling, clear teh screen and display genasi sub-races, query for selection
 elif user_race == 10:
@@ -113,28 +113,28 @@ elif user_race == 10:
         print(key, value)
     user_race = (int(input("Enter a number:")))
     if user_race == 1:
-        _race = LightfootHalfling()
+        _race = LightfootHalfling(user_level)
     else:
-        _race = StoutHalfling()
+        _race = StoutHalfling(user_level)
 
 # the user pick a main race that does not have sub-races.  assign appropriate race to the _race variable.
 else:
     if user_race == 1:
-        _race = Aarakocra()
+        _race = Aarakocra(user_level)
     elif user_race == 2:
-        _race = Dragonborn()
+        _race = Dragonborn(user_level)
     elif user_race == 6:
-        _race = Gnome()
+        _race = Gnome(user_level)
     elif user_race == 7:
-        _race = Goliath()
+        _race = Goliath(user_level)
     elif user_race == 8:
-        _race = HalfElf()
+        _race = HalfElf(user_level)
     elif user_race == 9:
-        _race = HalfOrc()
+        _race = HalfOrc(user_level)
     elif user_race == 11:
-        _race = Human()
+        _race = Human(user_level)
     elif user_race == 12:
-        _race = Tiefling()
+        _race = Tiefling(user_level)
 # This shouldn't happen.  if it does tell the user that there was a problem.
     else:
         print("Error, Please Try Again")
@@ -163,29 +163,29 @@ for key, value in classes_list.items():
     print(key, value)
 _class = int(input("Enter a number: "))
 if _class == 1:
-    _class = Barbarian()
+    _class = Barbarian(user_level)
 elif _class == 2:
-    _class = Bard()
+    _class = Bard(user_level)
 elif _class == 3:
-    _class = Cleric()
+    _class = Cleric(user_level)
 elif _class == 4:
-    _class = Druid()
+    _class = Druid(user_level)
 elif _class == 5:
-    _class = Fighter()
+    _class = Fighter(user_level)
 elif _class == 6:
-    _class = Monk()
+    _class = Monk(user_level)
 elif _class == 7:
-    _class = Paladin()
+    _class = Paladin(user_level)
 elif _class == 8:
-    _class = Ranger()
+    _class = Ranger(user_level)
 elif _class == 9:
-    _class = Rogue()
+    _class = Rogue(user_level)
 elif _class == 10:
-    _class = Sorcerer()
+    _class = Sorcerer(user_level)
 elif _class == 11:
-    _class = Warlock()
+    _class = Warlock(user_level)
 elif _class == 12:
-    _class = Wizard()
+    _class = Wizard(user_level)
 
 user_race = _race
 user_class = _class
