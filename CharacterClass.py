@@ -1,4 +1,5 @@
 from DiceRoll import diceroll
+from modifiers import primary_abilities
 
 
 class CharacterClass:
@@ -21,6 +22,12 @@ class CharacterClass:
         self.intimidation_skill = False
         self.performance_skill = False
         self.persuasion_skill = False
+        self.strength_addition = 0
+        self.dexterity_addition = 0
+        self.constitution_addition = 0
+        self.intelligence_addition = 0
+        self.wisdom_addition = 0
+        self.charisma_addition = 0
 
     def get_athletics(self):
         return self.athletics_skill
@@ -102,35 +109,73 @@ class Barbarian(CharacterClass):
         s = int(s)
         r = input("Enter the second number:")
         r = int(r)
-        print("user entered", r, s)
         if (s == 1) or (r == 1):
             self.animal_handling_skill = True
-            print("Animal Handling", self.animal_handling_skill)
+
         if (s == 2) or (r == 2):
             self.athletics_skill = True
-            print("Athletics", self.athletics_skill)
+
         if (s == 3) or (r == 3):
             self.intimidation_skill = True
-            print("Intimidation", self.intimidation_skill)
+
         if (s == 4) or (r == 4):
             self.nature_skill = True
-            print("Nature", self.nature_skill)
+
         if (s == 5) or (r == 5):
             self.perception_skill = True
-            print("Perception", self.perception_skill)
+
         if (s == 6) or (r == 6):
             self.survival_skill = True
-            print("Survival")
-            print(self.survival_skill)
 
-        self.skillpro = [skill_list.get(s), skill_list.get(r)]
         self.abilities = ["RAGE", "UNARMORED DEFENSE"]
         if level >= 2:
             self.abilities.append("RECKLESS ATTACK")
             self.abilities.append("DANGER SENSE")
         if level >= 3:
             self.abilities.append("PRIMAL PATH")
-#        if self.level >= 4:
+        if level >= 4:
+            print("You may increase one ability score by 2, or two ability scores by 1, which do you prefer \n"
+                  "1: One ability score by 2 \n"
+                  "2: Two ability scores by 1")
+            a = input(": ")
+            if a == 1:
+                print(primary_abilities())
+                b = input("Enter a number: ")
+                if b == 1:
+                    self.strength_addition += 2
+                if b == 2:
+                    self.dexterity_addition += 2
+                if b == 3:
+                    self.constitution_addition += 2
+                if b == 4:
+                    self.intelligence_addition += 2
+                if b == 5:
+                    self.wisdom_addition += 2
+                if b == 6:
+                    self.charisma_addition += 2
+                else:
+                    print("ERROR")
+            elif a == 2:
+                print(primary_abilities()) # Enter code to keep the user from entering the same number twice
+                b = int(input("Enter the first number: "))
+                c = int(input("Enter the second number: "))
+
+                if (b == 1) or (c == 1):
+                    self.strength_addition += 1
+                if (b == 2) or (c == 2):
+                    self.dexterity_addition += 1
+                if (b == 3) or (c == 3):
+                    self.constitution_addition += 1
+                if (b == 4) or (c == 4):
+                    self.intelligence_addition += 1
+                if (b == 5) or (c == 5):
+                    self.wisdom_addition += 1
+                if (b == 6) or (c == 6):
+                    self.charisma_addition += 1
+                else:
+                    print("ERROR")
+            else:
+                print("error")
 
 
 class Bard(CharacterClass):

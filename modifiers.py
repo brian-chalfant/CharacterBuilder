@@ -87,3 +87,16 @@ def proficiency(level):
         20: 6
     }
     return pro_bonus.get(level)
+
+
+def primary_abilities():
+
+    primary_abilities_list = {
+        1: "Strength",
+        2: "Dexterity",
+        3: "Constitution",
+        4: "Intelligence",
+        5: "Wisdom",
+        6: "Charisma"
+        }
+    return primary_abilities_list
