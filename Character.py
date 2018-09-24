@@ -196,18 +196,21 @@ character_data = {
     "race": user_race.name,
     "level": user_level,
     "class": user_class.name,
-    "strength": user_race.get_strength(),
-    "wisdom": user_race.get_wisdom(),
-    "dexterity": user_race.get_dexterity(),
-    "constitution": user_race.get_constitution(),
-    "charisma": user_race.get_charisma(),
-    "intelligence": user_race.get_intelligence(),
-    "strength_mod": ability_modifiers(user_race.get_strength()),
-    "wisdom_mod": ability_modifiers(user_race.get_wisdom()),
-    "dexterity_mod": ability_modifiers(user_race.get_dexterity()),
-    "constitution_mod": ability_modifiers(user_race.get_constitution()),
-    "charisma_mod": ability_modifiers(user_race.get_charisma()),
-    "intelligence_mod": ability_modifiers(user_race.get_intelligence())
+    "speed": user_race.speed + user_class.get_speed_addition(),
+    "strength": user_race.get_strength() + user_class.get_strength_addition(),
+    "wisdom": user_race.get_wisdom() + user_class.get_wisdom_addition(),
+    "dexterity": user_race.get_dexterity() + user_class.get_dexterity_addition(),
+    "constitution": user_race.get_constitution()+ user_class.get_constitution_addition(),
+    "charisma": user_race.get_charisma() + user_class.get_charisma_addition(),
+    "intelligence": user_race.get_intelligence()+ user_class.get_intelligence_addition(),
+    "strength_mod": ability_modifiers(user_race.get_strength() + user_class.get_strength_addition()),
+    "wisdom_mod": ability_modifiers(user_race.get_wisdom() + user_class.get_wisdom_addition()),
+    "dexterity_mod": ability_modifiers(user_race.get_dexterity() + user_class.get_dexterity_addition()),
+    "constitution_mod": ability_modifiers(user_race.get_constitution() + user_class.get_constitution_addition()),
+    "charisma_mod": ability_modifiers(user_race.get_charisma() + user_class.get_charisma_addition()),
+    "intelligence_mod": ability_modifiers(user_race.get_intelligence() + user_class.get_intelligence_addition()),
+    "abilities": user_class.abilities
+
 
 
 

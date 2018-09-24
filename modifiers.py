@@ -100,3 +100,63 @@ def primary_abilities():
         6: "Charisma"
         }
     return primary_abilities_list
+
+
+def levelup_ability_increase():
+    strength_addition = 0
+    dexterity_addition = 0
+    constitution_addition = 0
+    intelligence_addition = 0
+    wisdom_addition = 0
+    charisma_addition = 0
+    print("You may increase one ability score by 2, or two ability scores by 1, which do you prefer \n"
+          "1: One ability score by 2 \n"
+          "2: Two ability scores by 1")
+    a = int(input(": "))
+    if a == 1:
+        print(primary_abilities())
+        b = input("Enter a number: ")
+        if b == 1:
+            strength_addition = 2
+        if b == 2:
+            dexterity_addition = 2
+        if b == 3:
+            constitution_addition = 2
+        if b == 4:
+            intelligence_addition = 2
+        if b == 5:
+            wisdom_addition = 2
+        if b == 6:
+            charisma_addition = 2
+        else:
+            print("ERROR")
+    elif a == 2:
+        print(primary_abilities())  # Enter code to keep the user from entering the same number twice
+        b = int(input("Enter the first number: "))
+        c = int(input("Enter the second number: "))
+        d = []
+        if (b == 1) or (c == 1):
+            strength_addition = 1
+        if (b == 2) or (c == 2):
+            dexterity_addition = 1
+        if (b == 3) or (c == 3):
+            constitution_addition = 1
+        if (b == 4) or (c == 4):
+            intelligence_addition = 1
+        if (b == 5) or (c == 5):
+            wisdom_addition = 1
+        if (b == 6) or (c == 6):
+            charisma_addition = 1
+        else:
+            print("ERROR")
+    else:
+        print("error")
+    ability_dict = {
+        1: strength_addition,
+        2: dexterity_addition,
+        3: constitution_addition,
+        4: intelligence_addition,
+        5: wisdom_addition,
+        6: charisma_addition
+        }
+    return ability_dict

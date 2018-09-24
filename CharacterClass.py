@@ -1,5 +1,5 @@
 from DiceRoll import diceroll
-from modifiers import primary_abilities
+from modifiers import levelup_ability_increase
 
 
 class CharacterClass:
@@ -28,6 +28,9 @@ class CharacterClass:
         self.intelligence_addition = 0
         self.wisdom_addition = 0
         self.charisma_addition = 0
+        self.armor = 'None'
+        self.speed_addition = 0
+        self.abilities = []
 
     def get_athletics(self):
         return self.athletics_skill
@@ -83,6 +86,30 @@ class CharacterClass:
     def get_persuasion(self):
         return self.persuasion_skill
 
+    def get_abilities(self):
+        return self.abilities
+
+    def get_strength_addition(self):
+        return self.strength_addition
+
+    def get_dexterity_addition(self):
+        return self.dexterity_addition
+
+    def get_constitution_addition(self):
+        return self.constitution_addition
+
+    def get_intelligence_addition(self):
+        return self.intelligence_addition
+
+    def get_wisdom_addition(self):
+        return self.wisdom_addition
+
+    def get_charisma_addition(self):
+        return self.wisdom_addition
+
+    def get_speed_addition(self):
+        return self.speed_addition
+
 
 class Barbarian(CharacterClass):
     def __init__(self, level):
@@ -132,50 +159,134 @@ class Barbarian(CharacterClass):
             self.abilities.append("RECKLESS ATTACK")
             self.abilities.append("DANGER SENSE")
         if level >= 3:
-            self.abilities.append("PRIMAL PATH")
-        if level >= 4:
-            print("You may increase one ability score by 2, or two ability scores by 1, which do you prefer \n"
-                  "1: One ability score by 2 \n"
-                  "2: Two ability scores by 1")
-            a = input(": ")
+            print("you must now choose your primal path, you have the following options: \n"
+                  "1: Path of the Berzerker ('FRENZY', 'MINDLESS RAGE', 'INTIMIDATING PRESENCE') \n"
+                  "2: Path of the Totem Warrior ('TOTEM SPIRIT', 'ASPECT OF THE BEAST', 'SPIRIT WALKER')")
+            a = int(input("Choose your Path: "))
             if a == 1:
-                print(primary_abilities())
-                b = input("Enter a number: ")
-                if b == 1:
-                    self.strength_addition += 2
-                if b == 2:
-                    self.dexterity_addition += 2
-                if b == 3:
-                    self.constitution_addition += 2
-                if b == 4:
-                    self.intelligence_addition += 2
-                if b == 5:
-                    self.wisdom_addition += 2
-                if b == 6:
-                    self.charisma_addition += 2
-                else:
-                    print("ERROR")
-            elif a == 2:
-                print(primary_abilities()) # Enter code to keep the user from entering the same number twice
-                b = int(input("Enter the first number: "))
-                c = int(input("Enter the second number: "))
-
-                if (b == 1) or (c == 1):
-                    self.strength_addition += 1
-                if (b == 2) or (c == 2):
-                    self.dexterity_addition += 1
-                if (b == 3) or (c == 3):
-                    self.constitution_addition += 1
-                if (b == 4) or (c == 4):
-                    self.intelligence_addition += 1
-                if (b == 5) or (c == 5):
-                    self.wisdom_addition += 1
-                if (b == 6) or (c == 6):
-                    self.charisma_addition += 1
-                else:
-                    print("ERROR")
+                self.classpath = "Berzerker"
+                self.abilities.append("FRENZY")
             else:
-                print("error")
+                self.classpath = "Totem"
+                self.abilities.append("SPIRIT SEEKER")
+        if level >= 4:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+
+            # print("You may increase one ability score by 2, or two ability scores by 1, which do you prefer \n"
+            #       "1: One ability score by 2 \n"
+            #       "2: Two ability scores by 1")
+            # a = input(": ")
+            # if a == 1:
+            #     print(primary_abilities())
+            #     b = input("Enter a number: ")
+            #     if b == 1:
+            #         self.strength_addition += 2
+            #     if b == 2:
+            #         self.dexterity_addition += 2
+            #     if b == 3:
+            #         self.constitution_addition += 2
+            #     if b == 4:
+            #         self.intelligence_addition += 2
+            #     if b == 5:
+            #         self.wisdom_addition += 2
+            #     if b == 6:
+            #         self.charisma_addition += 2
+            #     else:
+            #         print("ERROR")
+            # elif a == 2:
+            #     print(primary_abilities()) # Enter code to keep the user from entering the same number twice
+            #     b = int(input("Enter the first number: "))
+            #     c = int(input("Enter the second number: "))
+            #
+            #     if (b == 1) or (c == 1):
+            #         self.strength_addition += 1
+            #     if (b == 2) or (c == 2):
+            #         self.dexterity_addition += 1
+            #     if (b == 3) or (c == 3):
+            #         self.constitution_addition += 1
+            #     if (b == 4) or (c == 4):
+            #         self.intelligence_addition += 1
+            #     if (b == 5) or (c == 5):
+            #         self.wisdom_addition += 1
+            #     if (b == 6) or (c == 6):
+            #         self.charisma_addition += 1
+            #     else:
+            #         print("ERROR")
+            # else:
+            #     print("error")
+        if level >= 5:
+            self.abilities.append("EXTRA ATTACK")
+            if self.armor != 'Heavy':
+                self.speed_addition += 10
+            else:
+                pass
+        if level >= 6:
+            if self.classpath == "Berzerker":
+                self.abilities.append("MINDLESS RAGE")
+            else:
+                self.abilities.append("ASPECT OF THE BEAST")
+        if level >= 7:
+            self.abilities.append("FERAL INSTINCT")
+        if level >= 8:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 9:
+            self.abilities.append("BRUTAL CRITICAL")
+        if level >= 10:
+            if self.classpath == "Berzerker" :
+                self.abilities.append("INTIMIDATING PRESENCE")
+            else:
+                self.abilities.append("SPIRIT WALKER")
+        if level >= 11:
+            self.abilities.append("RELENTLESS RAGE")
+        if level >= 12:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 16:
+            if self.classpath == "Totem":
+                self.abilities.append("TOTEMIC ATTUNEMENT")
+        if level >= 15:
+            self.abilities.append("PERSISTANT RAGE")
+        if level >= 16:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 18:
+            self.abilities.append("INDOMITABLE MIGHT")
+        if level >= 19:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level == 20:
+            self.strength_addition += 4
+            self.constitution_addition += 4
+
+    def get_classpath(self):
+        return self.classpath
 
 
 class Bard(CharacterClass):
