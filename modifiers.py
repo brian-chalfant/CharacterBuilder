@@ -115,7 +115,7 @@ def levelup_ability_increase():
     a = int(input(": "))
     if a == 1:
         print(primary_abilities())
-        b = input("Enter a number: ")
+        b = int(input("Enter a number: "))
         if b == 1:
             strength_addition = 2
         if b == 2:
@@ -128,13 +128,10 @@ def levelup_ability_increase():
             wisdom_addition = 2
         if b == 6:
             charisma_addition = 2
-        else:
-            print("ERROR")
     elif a == 2:
         print(primary_abilities())  # Enter code to keep the user from entering the same number twice
         b = int(input("Enter the first number: "))
         c = int(input("Enter the second number: "))
-        d = []
         if (b == 1) or (c == 1):
             strength_addition = 1
         if (b == 2) or (c == 2):
@@ -147,8 +144,6 @@ def levelup_ability_increase():
             wisdom_addition = 1
         if (b == 6) or (c == 6):
             charisma_addition = 1
-        else:
-            print("ERROR")
     else:
         print("error")
     ability_dict = {

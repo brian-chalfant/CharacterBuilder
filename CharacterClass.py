@@ -112,16 +112,16 @@ class CharacterClass:
 
 
 class Barbarian(CharacterClass):
-    def __init__(self, level):
+    def __init__(self, level): #initiate
         super(Barbarian, self).__init__()
-        self.name = 'Barbarian'
-        self.hit_die = diceroll(1, 12)
-        self.primary_ability = "Strength"
-        self.saves = ["Strength", "Constitution"]
-        self.armorpro = ["Light Armor", "Medium Armor", "Shields"]
-        self.weaponpro = ["Simple Weapons", "Martial Weapons"]
+        self.name = 'Barbarian' # class name
+        self.hit_die = diceroll(1, 12) # Hit die is 1d12
+        self.primary_ability = "Strength" # primary ability is Strength
+        self.saves = ["Strength", "Constitution"] # Saving throws are Strength and Constitution
+        self.armorpro = ["Light Armor", "Medium Armor", "Shields"] # Proficient in Light, Medium Armor and Shields
+        self.weaponpro = ["Simple Weapons", "Martial Weapons"] # Proficient in Simple and Martial Weapons
         self.toolpro = []
-        skill_list = {
+        skill_list = {  # List options for Skill Proficiency
             1: "Animal Handling",
             2: "Athletics",
             3: "Intimidation",
@@ -156,9 +156,11 @@ class Barbarian(CharacterClass):
 
         self.abilities = ["RAGE", "UNARMORED DEFENSE"]
         if level >= 2:
+            # Level 2 Add two Abilities, Reckless attack and Danger Sense
             self.abilities.append("RECKLESS ATTACK")
             self.abilities.append("DANGER SENSE")
         if level >= 3:
+            # Level 3 Choose your class path, either Path of the Berzerker or Path of the Totem Warrior
             print("you must now choose your primal path, you have the following options: \n"
                   "1: Path of the Berzerker ('FRENZY', 'MINDLESS RAGE', 'INTIMIDATING PRESENCE') \n"
                   "2: Path of the Totem Warrior ('TOTEM SPIRIT', 'ASPECT OF THE BEAST', 'SPIRIT WALKER')")
@@ -169,7 +171,7 @@ class Barbarian(CharacterClass):
             else:
                 self.classpath = "Totem"
                 self.abilities.append("SPIRIT SEEKER")
-        if level >= 4:
+        if level >= 4: # First Stat Increase
             ability_dict = levelup_ability_increase()
             self.strength_addition += ability_dict.get(1)
             self.dexterity_addition += ability_dict.get(2)
@@ -177,49 +179,6 @@ class Barbarian(CharacterClass):
             self.intelligence_addition += ability_dict.get(4)
             self.wisdom_addition += ability_dict.get(5)
             self.charisma_addition += ability_dict.get(6)
-
-            # print("You may increase one ability score by 2, or two ability scores by 1, which do you prefer \n"
-            #       "1: One ability score by 2 \n"
-            #       "2: Two ability scores by 1")
-            # a = input(": ")
-            # if a == 1:
-            #     print(primary_abilities())
-            #     b = input("Enter a number: ")
-            #     if b == 1:
-            #         self.strength_addition += 2
-            #     if b == 2:
-            #         self.dexterity_addition += 2
-            #     if b == 3:
-            #         self.constitution_addition += 2
-            #     if b == 4:
-            #         self.intelligence_addition += 2
-            #     if b == 5:
-            #         self.wisdom_addition += 2
-            #     if b == 6:
-            #         self.charisma_addition += 2
-            #     else:
-            #         print("ERROR")
-            # elif a == 2:
-            #     print(primary_abilities()) # Enter code to keep the user from entering the same number twice
-            #     b = int(input("Enter the first number: "))
-            #     c = int(input("Enter the second number: "))
-            #
-            #     if (b == 1) or (c == 1):
-            #         self.strength_addition += 1
-            #     if (b == 2) or (c == 2):
-            #         self.dexterity_addition += 1
-            #     if (b == 3) or (c == 3):
-            #         self.constitution_addition += 1
-            #     if (b == 4) or (c == 4):
-            #         self.intelligence_addition += 1
-            #     if (b == 5) or (c == 5):
-            #         self.wisdom_addition += 1
-            #     if (b == 6) or (c == 6):
-            #         self.charisma_addition += 1
-            #     else:
-            #         print("ERROR")
-            # else:
-            #     print("error")
         if level >= 5:
             self.abilities.append("EXTRA ATTACK")
             if self.armor != 'Heavy':
@@ -233,7 +192,7 @@ class Barbarian(CharacterClass):
                 self.abilities.append("ASPECT OF THE BEAST")
         if level >= 7:
             self.abilities.append("FERAL INSTINCT")
-        if level >= 8:
+        if level >= 8: # Second Stat Increase
             ability_dict = levelup_ability_increase()
             self.strength_addition += ability_dict.get(1)
             self.dexterity_addition += ability_dict.get(2)
@@ -250,7 +209,7 @@ class Barbarian(CharacterClass):
                 self.abilities.append("SPIRIT WALKER")
         if level >= 11:
             self.abilities.append("RELENTLESS RAGE")
-        if level >= 12:
+        if level >= 12: # Third Stat Increase
             ability_dict = levelup_ability_increase()
             self.strength_addition += ability_dict.get(1)
             self.dexterity_addition += ability_dict.get(2)
@@ -263,7 +222,7 @@ class Barbarian(CharacterClass):
                 self.abilities.append("TOTEMIC ATTUNEMENT")
         if level >= 15:
             self.abilities.append("PERSISTANT RAGE")
-        if level >= 16:
+        if level >= 16: # Fourth Stat Increase
             ability_dict = levelup_ability_increase()
             self.strength_addition += ability_dict.get(1)
             self.dexterity_addition += ability_dict.get(2)
@@ -273,7 +232,7 @@ class Barbarian(CharacterClass):
             self.charisma_addition += ability_dict.get(6)
         if level >= 18:
             self.abilities.append("INDOMITABLE MIGHT")
-        if level >= 19:
+        if level >= 19: # Fifth Stat Increase
             ability_dict = levelup_ability_increase()
             self.strength_addition += ability_dict.get(1)
             self.dexterity_addition += ability_dict.get(2)

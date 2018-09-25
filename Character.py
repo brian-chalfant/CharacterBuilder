@@ -2,6 +2,8 @@ from Race import *
 from CharacterClass import *
 import os
 from modifiers import ability_modifiers
+from pathlib import Path
+home = str(Path.home())
 # clear screen method
 
 
@@ -189,31 +191,31 @@ elif _class == 12:
 
 user_race = _race
 user_class = _class
+with open(home + '\\desktop\\output.txt', 'w') as outputfile:
+    character_data = {
 
-character_data = {
-
-    "name": character_name,
-    "race": user_race.name,
-    "level": user_level,
-    "class": user_class.name,
-    "speed": user_race.speed + user_class.get_speed_addition(),
-    "strength": user_race.get_strength() + user_class.get_strength_addition(),
-    "wisdom": user_race.get_wisdom() + user_class.get_wisdom_addition(),
-    "dexterity": user_race.get_dexterity() + user_class.get_dexterity_addition(),
-    "constitution": user_race.get_constitution()+ user_class.get_constitution_addition(),
-    "charisma": user_race.get_charisma() + user_class.get_charisma_addition(),
-    "intelligence": user_race.get_intelligence()+ user_class.get_intelligence_addition(),
-    "strength_mod": ability_modifiers(user_race.get_strength() + user_class.get_strength_addition()),
-    "wisdom_mod": ability_modifiers(user_race.get_wisdom() + user_class.get_wisdom_addition()),
-    "dexterity_mod": ability_modifiers(user_race.get_dexterity() + user_class.get_dexterity_addition()),
-    "constitution_mod": ability_modifiers(user_race.get_constitution() + user_class.get_constitution_addition()),
-    "charisma_mod": ability_modifiers(user_race.get_charisma() + user_class.get_charisma_addition()),
-    "intelligence_mod": ability_modifiers(user_race.get_intelligence() + user_class.get_intelligence_addition()),
-    "abilities": user_class.abilities
-
-
+        "name": character_name,
+        "race": user_race.name,
+        "level": user_level,
+        "class": user_class.name,
+        "speed": user_race.speed + user_class.get_speed_addition(),
+        "strength": user_race.get_strength() + user_class.get_strength_addition(),
+        "wisdom": user_race.get_wisdom() + user_class.get_wisdom_addition(),
+        "dexterity": user_race.get_dexterity() + user_class.get_dexterity_addition(),
+        "constitution": user_race.get_constitution()+ user_class.get_constitution_addition(),
+        "charisma": user_race.get_charisma() + user_class.get_charisma_addition(),
+        "intelligence": user_race.get_intelligence()+ user_class.get_intelligence_addition(),
+        "strength_mod": ability_modifiers(user_race.get_strength() + user_class.get_strength_addition()),
+        "wisdom_mod": ability_modifiers(user_race.get_wisdom() + user_class.get_wisdom_addition()),
+        "dexterity_mod": ability_modifiers(user_race.get_dexterity() + user_class.get_dexterity_addition()),
+        "constitution_mod": ability_modifiers(user_race.get_constitution() + user_class.get_constitution_addition()),
+        "charisma_mod": ability_modifiers(user_race.get_charisma() + user_class.get_charisma_addition()),
+        "intelligence_mod": ability_modifiers(user_race.get_intelligence() + user_class.get_intelligence_addition()),
+        "abilities": user_class.abilities
 
 
-}
 
+
+    }
+    outputfile.write(str(character_data))
 print(character_data)
