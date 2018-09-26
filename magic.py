@@ -28,3 +28,4 @@ def choose_wizard_cantrip():
         for key, value in cantrips.items():
             print(key, value)
         return cantrips.get(int(input("Which Cantrip? (Enter a number):")))
+

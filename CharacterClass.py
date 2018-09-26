@@ -1,6 +1,6 @@
 from DiceRoll import diceroll
-from modifiers import levelup_ability_increase
-
+from modifiers import levelup_ability_increase, barbarian_skill_list, full_skill_list
+from spells import magic_selection, bard_slots
 
 class CharacterClass:
     def __init__(self):
@@ -112,25 +112,18 @@ class CharacterClass:
 
 
 class Barbarian(CharacterClass):
-    def __init__(self, level): #initiate
+    def __init__(self, level):  # initiate
         super(Barbarian, self).__init__()
-        self.name = 'Barbarian' # class name
-        self.hit_die = diceroll(1, 12) # Hit die is 1d12
-        self.primary_ability = "Strength" # primary ability is Strength
-        self.saves = ["Strength", "Constitution"] # Saving throws are Strength and Constitution
-        self.armorpro = ["Light Armor", "Medium Armor", "Shields"] # Proficient in Light, Medium Armor and Shields
-        self.weaponpro = ["Simple Weapons", "Martial Weapons"] # Proficient in Simple and Martial Weapons
+        self.name = 'Barbarian'  # class name
+        self.hit_die = diceroll(1, 12)  # Hit die is 1d12
+        self.primary_ability = "Strength"  # primary ability is Strength
+        self.saves = ["Strength", "Constitution"]  # Saving throws are Strength and Constitution
+        self.armorpro = ["Light Armor", "Medium Armor", "Shields"]  # Proficient in Light, Medium Armor and Shields
+        self.weaponpro = ["Simple Weapons", "Martial Weapons"]  # Proficient in Simple and Martial Weapons
         self.toolpro = []
-        skill_list = {  # List options for Skill Proficiency
-            1: "Animal Handling",
-            2: "Athletics",
-            3: "Intimidation",
-            4: "Nature",
-            5: "Perception",
-            6: "Survival"
-        }
+
         print("pick two(2) skills from this list")
-        for key, value in skill_list.items():
+        for key, value in barbarian_skill_list().items():
             print(key, value)
         s = input("Enter one number:")
         s = int(s)
@@ -171,7 +164,7 @@ class Barbarian(CharacterClass):
             else:
                 self.classpath = "Totem"
                 self.abilities.append("SPIRIT SEEKER")
-        if level >= 4: # First Stat Increase
+        if level >= 4:  # First Stat Increase
             ability_dict = levelup_ability_increase()
             self.strength_addition += ability_dict.get(1)
             self.dexterity_addition += ability_dict.get(2)
@@ -192,7 +185,7 @@ class Barbarian(CharacterClass):
                 self.abilities.append("ASPECT OF THE BEAST")
         if level >= 7:
             self.abilities.append("FERAL INSTINCT")
-        if level >= 8: # Second Stat Increase
+        if level >= 8:  # Second Stat Increase
             ability_dict = levelup_ability_increase()
             self.strength_addition += ability_dict.get(1)
             self.dexterity_addition += ability_dict.get(2)
@@ -203,13 +196,13 @@ class Barbarian(CharacterClass):
         if level >= 9:
             self.abilities.append("BRUTAL CRITICAL")
         if level >= 10:
-            if self.classpath == "Berzerker" :
+            if self.classpath == "Berzerker":
                 self.abilities.append("INTIMIDATING PRESENCE")
             else:
                 self.abilities.append("SPIRIT WALKER")
         if level >= 11:
             self.abilities.append("RELENTLESS RAGE")
-        if level >= 12: # Third Stat Increase
+        if level >= 12:  # Third Stat Increase
             ability_dict = levelup_ability_increase()
             self.strength_addition += ability_dict.get(1)
             self.dexterity_addition += ability_dict.get(2)
@@ -222,7 +215,7 @@ class Barbarian(CharacterClass):
                 self.abilities.append("TOTEMIC ATTUNEMENT")
         if level >= 15:
             self.abilities.append("PERSISTANT RAGE")
-        if level >= 16: # Fourth Stat Increase
+        if level >= 16:  # Fourth Stat Increase
             ability_dict = levelup_ability_increase()
             self.strength_addition += ability_dict.get(1)
             self.dexterity_addition += ability_dict.get(2)
@@ -232,7 +225,7 @@ class Barbarian(CharacterClass):
             self.charisma_addition += ability_dict.get(6)
         if level >= 18:
             self.abilities.append("INDOMITABLE MIGHT")
-        if level >= 19: # Fifth Stat Increase
+        if level >= 19:  # Fifth Stat Increase
             ability_dict = levelup_ability_increase()
             self.strength_addition += ability_dict.get(1)
             self.dexterity_addition += ability_dict.get(2)
@@ -252,6 +245,239 @@ class Bard(CharacterClass):
     def __init__(self, level):
         super(Bard, self).__init__()
         self.name = 'Bard'
+        self.hit_die = diceroll(1, 8)  # Hit die is 1d8
+        self.primary_ability = "Charisma"  # primary ability is Strength
+        self.saves = ["Dexterity", "Charisma"]  # Saving throws are Strength and Constitution
+        self.armorpro = ["Light Armor"]  # Proficient in Light, Medium Armor and Shields
+        self.weaponpro = ["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"]
+        self.toolpro = []  # any three musical instruments
+        self.spellcasting = True
+        self.spellcasting_ability = "Charisma"
+
+        # assign equipment in here somewhere
+        self.skill_list = full_skill_list()
+        for key, value in self.skill_list.items():
+            print(key, value)
+        print("Please Choose 3 Skill Proficiencies:")
+        skill_1 = int(input("Skill 1: "))
+        skill_2 = int(input("Skill 2: "))
+        skill_3 = int(input("Skill 3: "))
+        if (skill_1 == 1) or (skill_2 == 1) or (skill_3 == 1):
+            self.athletics_skill = True
+            self.skill_list.pop(1)
+        if (skill_1 == 2) or (skill_2 == 2) or (skill_3 == 2):
+            self.acrobatics_skill = True
+            self.skill_list.pop(2)
+        if (skill_1 == 3) or (skill_2 == 3) or (skill_3 == 3):
+            self.sleight_of_hand_skill = True
+            self.skill_list.pop(3)
+        if (skill_1 == 4) or (skill_2 == 4) or (skill_3 == 4):
+            self.stealth_skill = True
+            self.skill_list.pop(4)
+        if (skill_1 == 5) or (skill_2 == 5) or (skill_3 == 5):
+            self.arcana_skill = True
+            self.skill_list.pop(5)
+        if (skill_1 == 6) or (skill_2 == 6) or (skill_3 == 6):
+            self.history_skill = True
+            self.skill_list.pop(6)
+        if (skill_1 == 7) or (skill_2 == 7) or (skill_3 == 7):
+            self.investigation_skill = True
+            self.skill_list.pop(7)
+        if (skill_1 == 8) or (skill_2 == 8) or (skill_3 == 8):
+            self.nature_skill = True
+            self.skill_list.pop(8)
+        if (skill_1 == 9) or (skill_2 == 9) or (skill_3 == 9):
+            self.religion_skill = True
+            self.skill_list.pop(9)
+        if (skill_1 == 10) or (skill_2 == 10) or (skill_3 == 10):
+            self.animal_handling_skill = True
+            self.skill_list.pop(10)
+        if (skill_1 == 11) or (skill_2 == 11) or (skill_3 == 11):
+            self.insight_skill = True
+            self.skill_list.pop(11)
+        if (skill_1 == 12) or (skill_2 == 12) or (skill_3 == 12):
+            self.medicine_skill = True
+            self.skill_list.pop(12)
+        if (skill_1 == 13) or (skill_2 == 13) or (skill_3 == 13):
+            self.perception_skill = True
+            self.skill_list.pop(13)
+        if (skill_1 == 14) or (skill_2 == 14) or (skill_3 == 14):
+            self.survival_skill = True
+            self.skill_list.pop(14)
+        if (skill_1 == 15) or (skill_2 == 15) or (skill_3 == 15):
+            self.deception_skill = True
+            self.skill_list.pop(15)
+        if (skill_1 == 16) or (skill_2 == 16) or (skill_3 == 16):
+            self.intimidation_skill = True
+            self.skill_list.pop(16)
+        if (skill_1 == 17) or (skill_2 == 17) or (skill_3 == 17):
+            self.performance_skill = True
+            self.skill_list.pop(17)
+        if (skill_1 == 18) or (skill_2 == 18) or (skill_3 == 18):
+            self.persuasion_skill = True
+            self.skill_list.pop(18)
+        # Start Level stuff
+
+        if level >= 1:
+            self.abilities.append("BARDIC INSPIRATION (1d6)")
+        if level >= 2:
+            self.abilities.append("JACK OF ALL TRADES")
+            self.abilities.append("SONG OF REST (1d6)")
+        if level >= 3:
+            self.abilities.append("EXPERTISE")
+            # Level 3 Choose your class path, either Path of the Berzerker or Path of the Totem Warrior
+            print("you must now choose your Bard College, you have the following options: \n"
+                  "1: College of Lore ('CUTTING WORDS', 'ADDITIONAL MAGICAL SECRETS', 'PEERLESS SKILL') \n"
+                  "2: College of Valor ('BONUS PROFICIENCIES', 'COMBAT INSPIRATION', 'EXTRA ATTACK')")
+            a = int(input("Choose your Path: "))
+            if a == 1:
+                self.classpath = "Lore"
+                self.abilities.append("CUTTING WORDS")
+                #  Bonus Proficiencies
+                print(self.skill_list)
+                print("Please Choose 3 Additional Skill Proficiencies:")
+                skill_1 = int(input("Skill 1: "))
+                skill_2 = int(input("Skill 2: "))
+                skill_3 = int(input("Skill 3: "))
+                if (skill_1 == 1) or (skill_2 == 1) or (skill_3 == 1):
+                    self.athletics_skill = True
+                    self.skill_list.pop(1)
+                if (skill_1 == 2) or (skill_2 == 2) or (skill_3 == 2):
+                    self.acrobatics_skill = True
+                    self.skill_list.pop(2)
+                if (skill_1 == 3) or (skill_2 == 3) or (skill_3 == 3):
+                    self.sleight_of_hand_skill = True
+                    self.skill_list.pop(3)
+                if (skill_1 == 4) or (skill_2 == 4) or (skill_3 == 4):
+                    self.stealth_skill = True
+                    self.skill_list.pop(4)
+                if (skill_1 == 5) or (skill_2 == 5) or (skill_3 == 5):
+                    self.arcana_skill = True
+                    self.skill_list.pop(5)
+                if (skill_1 == 6) or (skill_2 == 6) or (skill_3 == 6):
+                    self.history_skill = True
+                    self.skill_list.pop(6)
+                if (skill_1 == 7) or (skill_2 == 7) or (skill_3 == 7):
+                    self.investigation_skill = True
+                    self.skill_list.pop(7)
+                if (skill_1 == 8) or (skill_2 == 8) or (skill_3 == 8):
+                    self.nature_skill = True
+                    self.skill_list.pop(8)
+                if (skill_1 == 9) or (skill_2 == 9) or (skill_3 == 9):
+                    self.religion_skill = True
+                    self.skill_list.pop(9)
+                if (skill_1 == 10) or (skill_2 == 10) or (skill_3 == 10):
+                    self.animal_handling_skill = True
+                    self.skill_list.pop(10)
+                if (skill_1 == 11) or (skill_2 == 11) or (skill_3 == 11):
+                    self.insight_skill = True
+                    self.skill_list.pop(11)
+                if (skill_1 == 12) or (skill_2 == 12) or (skill_3 == 12):
+                    self.medicine_skill = True
+                    self.skill_list.pop(12)
+                if (skill_1 == 13) or (skill_2 == 13) or (skill_3 == 13):
+                    self.perception_skill = True
+                    self.skill_list.pop(13)
+                if (skill_1 == 14) or (skill_2 == 14) or (skill_3 == 14):
+                    self.survival_skill = True
+                    self.skill_list.pop(14)
+                if (skill_1 == 15) or (skill_2 == 15) or (skill_3 == 15):
+                    self.deception_skill = True
+                    self.skill_list.pop(15)
+                if (skill_1 == 16) or (skill_2 == 16) or (skill_3 == 16):
+                    self.intimidation_skill = True
+                    self.skill_list.pop(16)
+                if (skill_1 == 17) or (skill_2 == 17) or (skill_3 == 17):
+                    self.performance_skill = True
+                    self.skill_list.pop(17)
+                if (skill_1 == 18) or (skill_2 == 18) or (skill_3 == 18):
+                    self.persuasion_skill = True
+                    self.skill_list.pop(18)
+            else:
+                self.classpath = "Valor"
+                self.abilities.append("COMBAT INSPIRATION")
+                self.armorpro.append("Medium Armor")
+                self.armorpro.append("Shields")
+                self.armorpro.append("Martial Weapons")
+        if level >= 4:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 5:
+            self.abilities.remove("BARDIC INSPIRATION (1d6)")
+            self.abilities.append("BARDIC INSPIRATION (1d8)")
+            self.abilities.append("FONT OF INSPIRATION")
+        if level >= 6:
+            self.abilities.append("COUNTERCHARM")
+            if self.classpath == "Lore":
+                self.abilities.append("********MORE SPELLS*********")
+            else:
+                self.abilities.append("EXTRA ATTACK")
+        if level >= 8:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 9:
+            self.abilities.remove("SONG OF REST (1d6)")
+            self.abilities.append("SONG OF REST (1d8)")
+
+        if level >= 10:
+            self.abilities.remove("BARDIC INSPIRATION (1d8)")
+            self.abilities.append("BARDIC INSPIRATION (1d10)")
+            self.abilities.append("EXPERTISE 2")
+            self.abilities.append("****MAGICAL SECRETS ****")
+        if level >= 12:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 13:
+            self.abilities.remove("SONG OF REST (1d8)")
+            self.abilities.append("SONG OF REST (1d10)")
+        if level >= 14:
+            self.abilities.append("*****MAGICAL SECRETS 2*****")
+            if self.classpath == "Lore":
+                self.abilities.append("PEERLESS SKILL")
+            else:
+                self.abilities.append("BATTLE MAGIC")
+        if level >= 15:
+            self.abilities.remove("BARDIC INSPIRATION (1d10)")
+            self.abilities.append("BARDIC INSPIRATION (1d12)")
+        if level >= 16:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 17:
+            self.abilities.remove("SONG OF REST (1d10)")
+            self.abilities.append("SONG OF REST (1d12)")
+        if level >= 18:
+            self.abilities.append("*****MAGICAL SECRETS 3*****")
+        if level >= 19:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 20:
+            self.abilities.append("SUPERIOR INSPIRATION")
+        self.spells = magic_selection(bard_slots(level))
 
 
 class Cleric(CharacterClass):

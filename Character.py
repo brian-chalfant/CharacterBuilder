@@ -217,5 +217,6 @@ with open(home + '\\desktop\\output.txt', 'w') as outputfile:
 
 
     }
-    outputfile.write(str(character_data))
+    for key, value in character_data.items():
+        outputfile.write('%s:%s\n' % (key, value))
 print(character_data)

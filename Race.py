@@ -100,6 +100,7 @@ class Dwarf(Race):
         self.constitution += 2
         self.abilities = ["DARKVISION", "DWARVEN RESILIENCE", "DWARVEN COMBAT TRAINING", "STONECUNNING"]
         self.language.append("Dwarvish")
+        self.speed = 25
 
 
 class HillDwarf(Dwarf):

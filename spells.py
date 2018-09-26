@@ -1,5 +1,33 @@
-def bard0():
-    spell_list = {
+def bard_slots(level):
+    slots = {
+        1:  {0: 2, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        2:  {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        3:  {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        4:  {0: 3, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        5:  {0: 3, 1: 4, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        6:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        7:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        8:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        9:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 3, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0},
+        10: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 0, 7: 0, 8: 0, 9: 0},
+        11: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0, 9: 0},
+        12: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0, 9: 0},
+        13: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 1, 8: 0, 9: 0},
+        14: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 1, 8: 0, 9: 0},
+        15: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 1, 8: 1, 9: 0},
+        16: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 1, 8: 1, 9: 0},
+        17: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 1, 8: 1, 9: 1},
+        18: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 3, 6: 1, 7: 1, 8: 1, 9: 1},
+        19: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 3, 6: 2, 7: 1, 8: 1, 9: 1},
+        20: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 3, 6: 2, 7: 2, 8: 1, 9: 1},
+    }
+    return slots.get(level)
+
+
+def bard(level):
+
+    spell_list_0 = {
+        0: 'CANTRIPS',
         1: 'Blade Ward',
         2: 'Dancing Lights',
         3: 'Friends',
@@ -12,11 +40,9 @@ def bard0():
         10: 'Prestidigitation',
         11: 'True Strike'
         }
-    return spell_list
 
-
-def bard1():
-    spell_list = {
+    spell_list_1 = {
+        0: 'LEVEL 1 SPELLS',
         1: 'Animal Friendship',
         2: 'Bane',
         3: 'Charm Person',
@@ -37,15 +63,13 @@ def bard1():
         18: 'Silent Image',
         19: 'Sleep',
         20: 'Speak with Animals',
-        21: 'Tasha\'sHideous Laughter',
+        21: 'Tasha\'s Hideous Laughter',
         22: 'Thunderwave',
         23: 'Unseen Servant'
         }
-    return spell_list
 
-
-def bard2():
-    spell_list = {
+    spell_list_2 = {
+        0: 'LEVEL 2 SPELLS',
         1: 'Animal Messenger',
         2: 'Blindness/Deafness',
         3: 'Calm Emotions',
@@ -59,7 +83,7 @@ def bard2():
         11: 'Invisibility',
         12: 'Knock',
         13: 'Lesser Restoration',
-        14: 'LOcate Animals or Plants',
+        14: 'Locate Animals or Plants',
         15: 'Locate Object',
         16: 'Magic Mouth',
         17: 'Phantasmal Force',
@@ -69,11 +93,9 @@ def bard2():
         21: 'Suggestion',
         22: 'Zone of Truth'
         }
-    return spell_list
 
-
-def bard3():
-    spell_list = {
+    spell_list_3 = {
+        0: 'LEVEL 3 SPELLS',
         1: 'Bestow Curse',
         2: 'Clairvoyance',
         3: 'Dispel Magic',
@@ -91,11 +113,10 @@ def bard3():
         15: 'Stinking Cloud',
         16: 'Tongues'
         }
-    return spell_list
 
 
-def bard4():
-    spell_list = {
+    spell_list_4 = {
+        0: 'LEVEL 4 SPELLS',
         1: 'Compulsion',
         2: 'Confusion',
         3: 'Dimension Door',
@@ -105,11 +126,10 @@ def bard4():
         7: 'Locate Creature',
         8: 'Polymorph'
         }
-    return spell_list
 
 
-def bard5():
-    spell_list = {
+    spell_list_5 = {
+        0: 'LEVEL 5 SPELLS',
         1: 'Animate Objects',
         2: 'Awaken',
         3: 'Dominate Person',
@@ -127,11 +147,9 @@ def bard5():
         15: 'Seeming',
         16: 'Teleportation Circle'
         }
-    return spell_list
 
-
-def bard6():
-    spell_list = {
+    spell_list_6 = {
+        0: 'LEVEL 6 SPELLS',
         1: 'Eyebite',
         2: 'Find the Path',
         3: 'Guards and Wards',
@@ -140,11 +158,9 @@ def bard6():
         6: 'Programmed Illusion',
         7: 'True Seeing'
         }
-    return spell_list
 
-
-def bard7():
-    spell_list = {
+    spell_list_7 = {
+        0: 'LEVEL 7 SPELLS',
         1: 'Etherealness',
         2: 'Forcecage',
         3: 'Mirage Arcane',
@@ -156,25 +172,62 @@ def bard7():
         9: 'Symbol',
         10: 'Teleport'
         }
-    return spell_list
 
-
-def bard8():
-    spell_list = {
+    spell_list_8 = {
+        0: 'LEVEL 8 SPELLS',
         1: 'Dominate Monster',
         2: 'Feeblemind',
         3: 'Glibness',
         4: 'Mind Blank',
         5: 'Power Word Stun'
         }
-    return spell_list
 
-
-def bard9():
-    spell_list = {
+    spell_list_9 = {
+        0: 'LEVEL 9 SPELLS',
         1: 'Foresight',
         2: 'Power Word Heal',
         3: 'Power Word Kill',
         4: 'True Polymorph'
         }
+
+    if level == 0:
+        return spell_list_0
+    elif level == 1:
+        return spell_list_1
+    elif level == 2:
+        return spell_list_2
+    elif level == 3:
+        return spell_list_3
+    elif level == 4:
+        return spell_list_4
+    elif level == 5:
+        return spell_list_5
+    elif level == 6:
+        return spell_list_6
+    elif level == 7:
+        return spell_list_7
+    elif level == 8:
+        return spell_list_8
+    elif level == 9:
+        return spell_list_9
+    else:
+        TypeError
+
+
+def magic_selection(spell_dict):
+
+    spell_list = []
+    for j in range(10):
+        x = bard(j)
+        for i in range(spell_dict.get(j)):
+            for keys, values in x.items():
+                print(keys, values)
+            print("you have", (spell_dict.get(j) - i), "Spells in this Level Remaining")
+            item_number = int(input("Please choose a Spell: "))
+            selection = x.pop(item_number)
+            spell_list.append(str(selection))
     return spell_list
+
+
+# a = magic_selection(bard_slots(10))
+# print(a)

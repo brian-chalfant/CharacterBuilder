@@ -155,3 +155,40 @@ def levelup_ability_increase():
         6: charisma_addition
         }
     return ability_dict
+
+
+def barbarian_skill_list():
+    skill_list = {  # List options for Skill Proficiency
+        1: "Animal Handling",
+        2: "Athletics",
+        3: "Intimidation",
+        4: "Nature",
+        5: "Perception",
+        6: "Survival"
+        }
+    return skill_list
+
+
+def full_skill_list():
+
+    skill_list = {
+        1: 'Athletics',
+        2: 'Acrobatics',
+        3: 'Sleight of Hand',
+        4: 'Stealth',
+        5: 'Arcana',
+        6: 'History',
+        7: 'Investigation',
+        8: 'Nature',
+        9: 'Religion',
+        10: 'Animal Handling',
+        11: 'Insight',
+        12: 'Medicine',
+        13: 'Perception',
+        14: 'Survival',
+        15: 'Deception',
+        16: 'Intimidation',
+        17: 'Performance',
+        18: 'Persuasion'
+        }
+    return skill_list
