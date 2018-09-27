@@ -169,6 +169,17 @@ def barbarian_skill_list():
     return skill_list
 
 
+def cleric_skill_list():
+    skill_list = {
+        1: "History",
+        2: "Insight",
+        3: "Medicine",
+        4: "Persuasion",
+        5: "Religion"
+    }
+    return skill_list
+
+
 def full_skill_list():
 
     skill_list = {

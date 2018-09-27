@@ -1,6 +1,7 @@
 from DiceRoll import diceroll
-from modifiers import levelup_ability_increase, barbarian_skill_list, full_skill_list
-from spells import magic_selection, bard_slots
+from modifiers import levelup_ability_increase, barbarian_skill_list, full_skill_list, cleric_skill_list
+from spells import bard_magic_selection, bard_slots
+
 
 class CharacterClass:
     def __init__(self):
@@ -477,13 +478,46 @@ class Bard(CharacterClass):
             self.charisma_addition += ability_dict.get(6)
         if level >= 20:
             self.abilities.append("SUPERIOR INSPIRATION")
-        self.spells = magic_selection(bard_slots(level))
+        self.spells = bard_magic_selection(bard_slots(level))
 
 
 class Cleric(CharacterClass):
     def __init__(self, level):
         super(Cleric, self).__init__()
         self.name = 'Cleric'
+        self.hit_die = diceroll(1, 8)  # Hit die is 1d8
+        self.primary_ability = "Wisdom"  # primary ability is Strength
+        self.saves = ["Wisdom", "Charisma"]  # Saving throws are Strength and Constitution
+        self.armorpro = ["Light Armor", "Medium Armor", "Shields"]  # Proficient in Light, Medium Armor and Shields
+        self.weaponpro = ["Simple Weapons"]
+        self.toolpro = []  # None
+        self.spellcasting = True
+        self.spellcasting_ability = "Wisdom"
+
+        print("pick two(2) skills from this list")
+        for key, value in cleric_skill_list().items():
+            print(key, value)
+        s = input("Enter one number:")
+        s = int(s)
+        r = input("Enter the second number:")
+        r = int(r)
+        if (s == 1) or (r == 1):
+            self.animal_handling_skill = True
+
+        if (s == 2) or (r == 2):
+            self.athletics_skill = True
+
+        if (s == 3) or (r == 3):
+            self.intimidation_skill = True
+
+        if (s == 4) or (r == 4):
+            self.nature_skill = True
+
+        if (s == 5) or (r == 5):
+            self.perception_skill = True
+
+        if (s == 6) or (r == 6):
+            self.survival_skill = True
 
 
 class Druid(CharacterClass):

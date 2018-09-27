@@ -211,7 +211,25 @@ with open(home + '\\desktop\\output.txt', 'w') as outputfile:
         "constitution_mod": ability_modifiers(user_race.get_constitution() + user_class.get_constitution_addition()),
         "charisma_mod": ability_modifiers(user_race.get_charisma() + user_class.get_charisma_addition()),
         "intelligence_mod": ability_modifiers(user_race.get_intelligence() + user_class.get_intelligence_addition()),
-        "abilities": user_class.abilities
+        "abilities": user_class.abilities,
+        "athletics_skill": user_class.athletics_skill,
+        "acrobatics_skill": user_class.acrobatics_skill,
+        "sleight_of_hand_skill": user_class.sleight_of_hand_skill,
+        "stealth_skill": user_class.stealth_skill,
+        "arcana_skill": user_class.arcana_skill,
+        "history_skill": user_class.history_skill,
+        "investigation_skill": user_class.investigation_skill,
+        "nature_skill": user_class.nature_skill,
+        "religion_skill": user_class.religion_skill,
+        "animal_handling_skill": user_class.animal_handling_skill,
+        "insight_skill": user_class.insight_skill,
+        "medicine_skill": user_class.medicine_skill,
+        "perception_skill": user_class.perception_skill,
+        "survival_skill": user_class.survival_skill,
+        "deception_skill": user_class.deception_skill,
+        "intimidation_skill": user_class.intimidation_skill,
+        "performance_skill": user_class.performance_skill,
+        "persuasion_skill": user_class.persuasion_skill,
 
 
 
