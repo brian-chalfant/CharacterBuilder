@@ -45,6 +45,12 @@ genasi_races = {
     3: "Fire Genasi",
     4: "Water Genasi"
 }
+# gnome sub-races
+gnome_races = {
+    1: "Rock Gnome",
+    2: "Deep Gnome"
+    }
+
 # halfling sub-races
 halfling_races = {
     1: "Lightfoot Halfling",
@@ -107,6 +113,18 @@ elif user_race == 5:
     else:
         _race = WaterGenasi(user_level)
 
+elif user_race == 6:
+    clear()
+    print("Please Choose a Race.")
+    for key, value in gnome_races.items():
+        print(key, value)
+    user_race = (int(input("Enter a number")))
+    if user_race == 1:
+        _race = RockGnome(user_level)
+    elif user_race == 2:
+        _race = DeepGnome(user_level)
+
+
 # the user picked Halfling, clear teh screen and display genasi sub-races, query for selection
 elif user_race == 10:
     clear()
@@ -125,8 +143,6 @@ else:
         _race = Aarakocra(user_level)
     elif user_race == 2:
         _race = Dragonborn(user_level)
-    elif user_race == 6:
-        _race = Gnome(user_level)
     elif user_race == 7:
         _race = Goliath(user_level)
     elif user_race == 8:
@@ -211,7 +227,6 @@ with open(home + '\\desktop\\output.txt', 'w') as outputfile:
         "constitution_mod": ability_modifiers(user_race.get_constitution() + user_class.get_constitution_addition()),
         "charisma_mod": ability_modifiers(user_race.get_charisma() + user_class.get_charisma_addition()),
         "intelligence_mod": ability_modifiers(user_race.get_intelligence() + user_class.get_intelligence_addition()),
-        "abilities": user_class.abilities,
         "athletics_skill": user_class.athletics_skill,
         "acrobatics_skill": user_class.acrobatics_skill,
         "sleight_of_hand_skill": user_class.sleight_of_hand_skill,
@@ -230,6 +245,9 @@ with open(home + '\\desktop\\output.txt', 'w') as outputfile:
         "intimidation_skill": user_class.intimidation_skill,
         "performance_skill": user_class.performance_skill,
         "persuasion_skill": user_class.persuasion_skill,
+        "abilities": user_class.abilities + user_race.abilities,
+        "languages": user_race.language + user_class.language,
+        "spells": user_class.spells + user_race.cantrip
 
 
 

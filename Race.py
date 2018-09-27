@@ -17,6 +17,7 @@ class Race:
         self.constitution = initial_diceroll()
         self.strength = initial_diceroll()
         self.language = ["Common"]
+        self.cantrip = []
         if level is None:
             level = 1
         self.level = level
@@ -212,7 +213,7 @@ class FireGenasi(Genasi):
         self.abilities.append("FIRE RESISTANCE")
         self.abilities.append("REACH THE BLAZE")
         self.magic = True
-        self.cantrips = ["PRODUCE FLAME"]
+        self.cantrip = ["PRODUCE FLAME"]
 
 
 class WaterGenasi(Genasi):

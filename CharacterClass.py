@@ -588,7 +588,208 @@ class Cleric(CharacterClass):
                 self.armorpro.append("Heavy Armor")
                 self.weaponpro.append("Martial Weapons")
                 self.abilities.append("WAR PRIEST")
+        if level >= 2:
+            self.abilities.append("CHANNEL DIVINITY 1/REST")
+            if self.classpath == "Knowledge Domain":
+                self.abilities.append("KNOWLEDGE OF THE AGES")
+                self.spells.append("Augury")
+                self.spells.append("Suggestion")
 
+            elif self.classpath == "Life Domain":
+                self.abilities.append("PRESERVE LIFE")
+                self.spells.append("Lesser Restoration")
+                self.spells.append("Spiritual Weapon")
+
+            elif self.classpath == "Light Domain":
+                self.abilities.append("RADIANCE OF THE DAWN")
+                self.spells.append("Flaming Sphere")
+                self.spells.append("Scorching Ray")
+
+            elif self.classpath == "Nature Domain":
+                self.abilities.append("CHARM ANIMALS AND PLANTS")
+                self.spells.append("Barkskin")
+                self.spells.append("Spike Growth")
+
+            elif self.classpath == "Tempest Domain":
+                self.abilities.append("DESTRUCTIVE WRATH")
+                self.spells.append("Gust of Wind")
+                self.spells.append("Shatter")
+
+            elif self.classpath == "Trickery Domain":
+                self.abilities.append("INVOKE DUPLICITY")
+                self.spells.append("Mirror Image")
+                self.spells.append("Pass Without Trace")
+
+            elif self.classpath == "War Domain":
+                self.abilities.append("GUIDED STRIKE")
+                self.spells.append("Magic Weapon")
+                self.spells.append("Spiritual Weapon")
+
+        if level >= 4:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+
+        if level >= 5:
+            self.abilities.append("DESTROY UNDEAD 1/2")
+            if self.classpath == "Knowledge Domain":
+                self.spells.append("Nondetection")
+                self.spells.append("Speak with Dead")
+
+            elif self.classpath == "Life Domain":
+                self.spells.append("Beacon of Hope")
+                self.spells.append("Revivify")
+
+            elif self.classpath == "Light Domain":
+                self.spells.append("Daylight")
+                self.spells.append("Fireball")
+
+            elif self.classpath == "Nature Domain":
+                self.spells.append("Plant Growth")
+                self.spells.append("Wind Wall")
+
+            elif self.classpath == "Tempest Domain":
+                self.spells.append("Call Lightning")
+                self.spells.append("Sleet Storm")
+
+            elif self.classpath == "Trickery Domain":
+                self.spells.append("Blink")
+                self.spells.append("Dispel Magic")
+
+            elif self.classpath == "War Domain":
+                self.spells.append("Crusader\'s Mantle")
+                self.spells.append("Spirit Guardian")
+
+        if level >= 6:
+            self.abilities.remove("CHANNEL DIVINITY 1/REST")
+            self.abilities.append("CHANNEL DIVINITY 2/REST")
+            if self.classpath == "Knowledge Domain":
+                self.abilities.append("READ THOUGHTS")
+
+            elif self.classpath == "Life Domain":
+                self.abilities.append("BLESSED HEALER")
+
+            elif self.classpath == "Light Domain":
+                self.abilities.remove("WARDING FLAME")
+                self.abilities.append("IMPROVED FLARE")
+
+            elif self.classpath == "Nature Domain":
+                self.abilities.append("DAMPEN ELEMENTS")
+
+            elif self.classpath == "Tempest Domain":
+                self.abilities.append("THUNDERBOLT STRIKE")
+
+            elif self.classpath == "Trickery Domain":
+                self.abilities.append("CLOAK OF SHADOWS")
+
+            elif self.classpath == "War Domain":
+                self.abilities.append("WAR GOD\'S BLESSING")
+
+        if level >= 8:
+            self.abilities.remove("DESTROY UNDEAD 1/2")
+            self.abilities.append("DESTROY UNDEAD 1")
+
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+            if self.classpath == "Knowledge Domain":
+                self.abilities.append("POTENT SPELLCASTING")
+
+            elif self.classpath == "Life Domain":
+                self.abilities.append("DIVINE STRIKE")
+
+            elif self.classpath == "Light Domain":
+                self.abilities.append("POTENT SPELLCASTING")
+
+            elif self.classpath == "Nature Domain":
+                self.abilities.append("DIVINE STRIKE")
+
+            elif self.classpath == "Tempest Domain":
+                self.abilities.append("DIVINE STRIKE")
+
+            elif self.classpath == "Trickery Domain":
+                self.abilities.append("DIVINE STRIKE")
+
+            elif self.classpath == "War Domain":
+                self.abilities.append("DIVINE STRIKE")
+
+        if level >= 10:
+            self.abilities.append("DIVINE INTERVENTION")
+
+        if level >= 11:
+            self.abilities.remove("DESTROY UNDEAD 1")
+            self.abilities.append("DESTROY UNDEAD 2")
+
+        if level >= 12:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+
+        if level >= 14:
+            self.abilities.remove("DESTROY UNDEAD 2")
+            self.abilities.append("DESTROY UNDEAD 3")
+
+        if level >= 16:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+
+        if level >= 17:
+            self.abilities.remove("DESTROY UNDEAD 3")
+            self.abilities.append("DESTROY UNDEAD 4")
+            if self.classpath == "Knowledge Domain":
+                self.abilities.append("VISIONS OF THE PAST")
+
+            elif self.classpath == "Life Domain":
+                self.abilities.append("SUPREME HEALING")
+
+            elif self.classpath == "Light Domain":
+                self.abilities.append("CORONA OF LIGHT")
+
+            elif self.classpath == "Nature Domain":
+                self.abilities.append("MASTER OF NATURE")
+
+            elif self.classpath == "Tempest Domain":
+                self.abilities.append("STORMBORN")
+
+            elif self.classpath == "Trickery Domain":
+                self.abilities.remove("INVOKE DUPLICITY")
+                self.abilities.append("IMPROVED DUPLICITY")
+
+            elif self.classpath == "War Domain":
+                self.abilities.append("AVATAR OF BATTLE")
+        if level >= 18:
+            self.abilities.remove("CHANNEL DIVINITY 2/REST")
+            self.abilities.append("CHANNEL DIVINITY 3/REST")
+
+        if level >= 19:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+
+        if level >= 20:
+            self.abilities.remove("DIVINE INTERVENTION")
+            self.abilities.append("IMPROVED DIVINE INTERVENTION")
 
 
 class Druid(CharacterClass):
