@@ -203,3 +203,17 @@ def full_skill_list():
         18: 'Persuasion'
         }
     return skill_list
+
+
+def divine_domains():
+
+    domains = {
+        1: "Knowledge Domain",
+        2: "Life Domain",
+        3: "Light Domain",
+        4: "Nature Domain",
+        5: "Tempest Domain",
+        6: "Trickery Domain",
+        7: "War Domain"
+        }
+    return domains

@@ -1,6 +1,7 @@
 from DiceRoll import diceroll
-from modifiers import levelup_ability_increase, barbarian_skill_list, full_skill_list, cleric_skill_list
+from modifiers import levelup_ability_increase, barbarian_skill_list, full_skill_list, cleric_skill_list, divine_domains
 from spells import bard_magic_selection, bard_slots
+from language import choose_language
 
 
 class CharacterClass:
@@ -491,8 +492,10 @@ class Cleric(CharacterClass):
         self.armorpro = ["Light Armor", "Medium Armor", "Shields"]  # Proficient in Light, Medium Armor and Shields
         self.weaponpro = ["Simple Weapons"]
         self.toolpro = []  # None
+        self.spells = []
         self.spellcasting = True
         self.spellcasting_ability = "Wisdom"
+        self.language = []
 
         print("pick two(2) skills from this list")
         for key, value in cleric_skill_list().items():
@@ -502,22 +505,90 @@ class Cleric(CharacterClass):
         r = input("Enter the second number:")
         r = int(r)
         if (s == 1) or (r == 1):
-            self.animal_handling_skill = True
+            self.history_skill = True
 
         if (s == 2) or (r == 2):
-            self.athletics_skill = True
+            self.insight_skill = True
 
         if (s == 3) or (r == 3):
-            self.intimidation_skill = True
+            self.medicine_skill = True
 
         if (s == 4) or (r == 4):
-            self.nature_skill = True
+            self.persuasion_skill = True
 
         if (s == 5) or (r == 5):
-            self.perception_skill = True
+            self.religion_skill = True
+        # Start Level Stuff
 
-        if (s == 6) or (r == 6):
-            self.survival_skill = True
+        if level >= 1:
+            print("Choose one of the following Divine Domains:")
+            print(divine_domains())
+            selection = int(input(": "))
+            self.classpath = divine_domains().get(selection)
+            self.magic = True
+
+            if self.classpath == "Knowledge Domain":
+                self.spells.append("Command")
+                self.spells.append("Identify")
+                self.language.append(choose_language())
+                self.language.append(choose_language())
+                knowledge_domain_skills = {1: "Arcana", 2: "History", 3: "Nature", 4: "Religion"}
+                print("pick two(2) skills from this list")
+                for key, value in knowledge_domain_skills.items():
+                    print(key, value)
+                s = input("Enter one number:")
+                s = int(s)
+                r = input("Enter the second number:")
+                r = int(r)
+                if (s == 1) or (r == 1):
+                    self.arcana_skill = True
+
+                if (s == 2) or (r == 2):
+                    self.history_skill = True
+
+                if (s == 3) or (r == 3):
+                    self.nature_skill = True
+
+                if (s == 4) or (r == 4):
+                    self.religion_skill = True
+
+            elif self.classpath == "Life Domain":
+                self.spells.append("Bless")
+                self.spells.append("Cure Wounds")
+                self.armorpro.append("Heavy Armor")
+                self.abilities.append("DISCIPLE OF LIFE")
+
+            elif self.classpath == "Light Domain":
+                self.spells.append("Burning Hands")
+                self.spells.append("Faerie Fire")
+                self.spells.append("Light")
+                self.abilities.append("WARDING FLAME")
+
+            elif self.classpath == "Nature Domain":
+                self.spells.append("Animal Friendship")
+                self.spells.append("Speak with Animals")
+                self.spells.append("ONE DRUID CANTRIP")
+                self.armorpro.append("Heavy Armor")
+
+            elif self.classpath == "Tempest Domain":
+                self.spells.append("Fog Cloud")
+                self.spells.append("Thunderwave")
+                self.armorpro.append("Heavy Armor")
+                self.weaponpro.append("Martial Weapons")
+                self.abilities.append("WRATH OF THE STORM")
+
+            elif self.classpath == "Trickery Domain":
+                self.spells.append("Charm Person")
+                self.spells.append("Disguise Self")
+                self.abilities.append("BLESSING OF THE TRICKSTER")
+
+            elif self.classpath == "War Domain":
+                self.spells.append("Divine Favor")
+                self.spells.append("Shield of Faith")
+                self.armorpro.append("Heavy Armor")
+                self.weaponpro.append("Martial Weapons")
+                self.abilities.append("WAR PRIEST")
+
 
 
 class Druid(CharacterClass):
