@@ -33,6 +33,8 @@ class CharacterClass:
         self.armor = 'None'
         self.speed_addition = 0
         self.abilities = []
+        self.language = []
+        self.spells = []
 
     def get_athletics(self):
         return self.athletics_skill
@@ -123,7 +125,7 @@ class Barbarian(CharacterClass):
         self.armorpro = ["Light Armor", "Medium Armor", "Shields"]  # Proficient in Light, Medium Armor and Shields
         self.weaponpro = ["Simple Weapons", "Martial Weapons"]  # Proficient in Simple and Martial Weapons
         self.toolpro = []
-
+        self.language = []
         print("pick two(2) skills from this list")
         for key, value in barbarian_skill_list().items():
             print(key, value)
@@ -255,7 +257,7 @@ class Bard(CharacterClass):
         self.toolpro = []  # any three musical instruments
         self.spellcasting = True
         self.spellcasting_ability = "Charisma"
-
+        self.language = []
         # assign equipment in here somewhere
         self.skill_list = full_skill_list()
         for key, value in self.skill_list.items():

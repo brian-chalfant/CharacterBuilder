@@ -3,6 +3,7 @@ from CharacterClass import *
 import os
 from modifiers import ability_modifiers
 from pathlib import Path
+import json
 home = str(Path.home())
 # clear screen method
 
@@ -253,6 +254,10 @@ with open(home + '\\desktop\\output.txt', 'w') as outputfile:
 
 
     }
+#     for key, value in character_data.items():
+#         outputfile.write('%s:%s\n' % (key, value))
     for key, value in character_data.items():
-        outputfile.write('%s:%s\n' % (key, value))
-print(character_data)
+        print(key.capitalize(), ":", value)
+
+with open('data.json','w') as outfile:
+    json.dump(character_data, outfile)
