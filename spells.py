@@ -442,3 +442,219 @@ def cleric_magic_selection(spell_dict):
             selection = x.pop(item_number)
             spell_list.append(str(selection))
     return spell_list
+
+
+def druid_slots(level):
+    slots = {
+        1:  {0: 2, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        2:  {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        3:  {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        4:  {0: 3, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        5:  {0: 3, 1: 4, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        6:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        7:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        8:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        9:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 3, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0},
+        10: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 0, 7: 0, 8: 0, 9: 0},
+        11: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0, 9: 0},
+        12: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0, 9: 0},
+        13: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 1, 8: 0, 9: 0},
+        14: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 1, 8: 0, 9: 0},
+        15: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 1, 8: 1, 9: 0},
+        16: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 1, 8: 1, 9: 0},
+        17: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 1, 8: 1, 9: 1},
+        18: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 3, 6: 1, 7: 1, 8: 1, 9: 1},
+        19: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 3, 6: 2, 7: 1, 8: 1, 9: 1},
+        20: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 3, 6: 2, 7: 2, 8: 1, 9: 1},
+    }
+    return slots.get(level)
+
+
+def druid(level):
+
+    spell_list_0 = {
+        0: 'CANTRIPS',
+        1: 'Druidcraft',
+        2: 'Guidance',
+        3: 'Mending',
+        4: 'Poison Spray',
+        5: 'Produce Flame',
+        6: 'Resistance',
+        7: 'Shillelagh',
+        8: 'Thorn Whip'
+        }
+
+    spell_list_1 = {
+        0: 'LEVEL 1 SPELLS',
+        1: 'Animal Friendship',
+        2: 'Charm Person',
+        3: 'Create or Destroy Water',
+        4: 'Cure Wounds',
+        5: 'Detect Magic',
+        6: 'Detect Poison and Disease',
+        7: 'Entangle',
+        8: 'Faerie Fire',
+        9: 'Fog Cloud',
+        10: 'Goodberry',
+        11: 'Healing Word',
+        12: 'Jump',
+        13: 'Longstrider',
+        14: 'Purify Food and Drink',
+        15: 'Speak with Animals',
+        16: 'Thunderwave'
+        }
+
+    spell_list_2 = {
+        0: 'LEVEL 2 SPELLS',
+        1: 'Animal Messenger',
+        2: 'Barkskin',
+        3: 'Beast Sense',
+        4: 'Darkvision',
+        5: 'Enhance Ability',
+        6: 'Find Traps',
+        7: 'Flame Blade',
+        8: 'Flaming Sphere',
+        9: 'Gust of Wind',
+        10: 'Heat Metal',
+        11: 'Hold Person',
+        12: 'Lesser Restoration',
+        13: 'Locate Animals or Plants',
+        14: 'Locate Object',
+        15: 'Moonbeam',
+        16: 'Pass Without Trace',
+        17: 'Protection from Poison',
+        18: 'Spike Growth'
+        }
+
+    spell_list_3 = {
+        0: 'LEVEL 3 SPELLS',
+        1: 'Call Lightning',
+        2: 'Conjure Animals',
+        3: 'Daylight',
+        4: 'Dispel Magic',
+        5: 'Feign Death',
+        6: 'Meld into Stone',
+        7: 'Plant Growth',
+        8: 'Protection from Energy',
+        9: 'Sleet Storm',
+        10: 'Speak with Plants',
+        11: 'Water Breathing',
+        12: 'Water Walk',
+        13: 'Wind Wall',
+        }
+
+    spell_list_4 = {
+        0: 'LEVEL 4 SPELLS',
+        1: 'Blight',
+        2: 'Confusion',
+        3: 'Conjure Minor Elementals',
+        4: 'Conjure Woodland Beings',
+        5: 'Control Water',
+        6: 'Dominate Beast',
+        7: 'Freedom of Movement',
+        8: 'Giant Insect',
+        9: 'Grasping Vine',
+        10: 'Hallucinatory Terrain',
+        11: 'Ice Storm',
+        12: 'Locate Creature',
+        13: 'Polymorph',
+        14: 'Stoneskin',
+        15: 'Wall of Fire'
+        }
+
+    spell_list_5 = {
+        0: 'LEVEL 5 SPELLS',
+        1: 'Antilife Shell',
+        2: 'Awaken',
+        3: 'Commune with Nature',
+        4: 'Conjure Elemental',
+        5: 'Contagion',
+        6: 'Geas',
+        7: 'Greater Restoration',
+        8: 'Insect Plague',
+        9: 'Mass Cure Wounds',
+        10: 'Planar Binding',
+        11: 'Reincarnate',
+        12: 'Scrying',
+        13: 'Tree Stride',
+        14: 'Wall of Stone'
+        }
+
+    spell_list_6 = {
+        0: 'LEVEL 6 SPELLS',
+        1: 'Conjure Fey',
+        2: 'Find the Path',
+        3: 'Heal',
+        4: 'Heroes\'s Feast',
+        5: 'Move Earth',
+        6: 'Sunbeam',
+        7: 'Transport via Plants',
+        8: 'Wall of Thorns',
+        9: 'Wind Walk',
+        }
+
+    spell_list_7 = {
+        0: 'LEVEL 7 SPELLS',
+        1: 'Fire Storm',
+        2: 'Mirage Arcane',
+        3: 'Plane Shift',
+        4: 'Regenerate',
+        5: 'Reverse Gravity',
+        }
+
+    spell_list_8 = {
+        0: 'LEVEL 8 SPELLS',
+        1: 'Animal Shapes',
+        2: 'Antipathy/Sympathy',
+        3: 'Control Weather',
+        4: 'Earthquake',
+        5: 'Feeblemind',
+        6: 'Sunburst',
+        7: 'Tsunami'
+        }
+
+    spell_list_9 = {
+        0: 'LEVEL 9 SPELLS',
+        1: 'Foresight',
+        2: 'Shapechange',
+        3: 'Storm of Vengeance',
+        4: 'True Resurrection'
+        }
+
+    if level == 0:
+        return spell_list_0
+    elif level == 1:
+        return spell_list_1
+    elif level == 2:
+        return spell_list_2
+    elif level == 3:
+        return spell_list_3
+    elif level == 4:
+        return spell_list_4
+    elif level == 5:
+        return spell_list_5
+    elif level == 6:
+        return spell_list_6
+    elif level == 7:
+        return spell_list_7
+    elif level == 8:
+        return spell_list_8
+    elif level == 9:
+        return spell_list_9
+    else:
+        TypeError
+
+
+def druid_magic_selection(spell_dict):
+
+    spell_list = []
+    for j in range(10):
+        x = cleric(j)
+        for i in range(spell_dict.get(j)):
+            for keys, values in x.items():
+                print(keys, values)
+            print("you have", (spell_dict.get(j) - i), "Spells in this Level Remaining")
+            item_number = int(input("Please choose a Spell: "))
+            selection = x.pop(item_number)
+            spell_list.append(str(selection))
+    return spell_list

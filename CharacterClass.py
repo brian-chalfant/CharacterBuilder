@@ -1,6 +1,6 @@
 from DiceRoll import diceroll
-from modifiers import levelup_ability_increase, barbarian_skill_list, full_skill_list, cleric_skill_list, divine_domains
-from spells import bard_magic_selection, bard_slots
+from modifiers import *
+from spells import *
 from language import choose_language
 
 
@@ -790,12 +790,149 @@ class Cleric(CharacterClass):
         if level >= 20:
             self.abilities.remove("DIVINE INTERVENTION")
             self.abilities.append("IMPROVED DIVINE INTERVENTION")
+        self.spells = cleric_magic_selection(cleric_slots(level))
 
 
 class Druid(CharacterClass):
     def __init__(self, level):
         super(Druid, self).__init__()
         self.name = 'Druid'
+        self.hit_die = diceroll(1, 8)  # Hit die is 1d8
+        self.primary_ability = "Wisdom"  # primary ability is Strength
+        self.saves = ["Intelligence", "Wisdom"]  # Saving throws are Strength and Constitution
+        self.armorpro = ["Light Armor", "Medium Armor", "Shields"]  # Proficient in Light, Medium Armor and Shields
+        self.weaponpro = ["Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles",
+                          "Slings", "Spears"]
+        self.toolpro = ["Herbalism Kit"]
+        self.spells = []
+        self.spellcasting = True
+        self.spellcasting_ability = "Wisdom"
+        self.language = ["Druidic"]
+        print("Where did you become a druid")
+        druidic_lands = {
+            1: "Arctic",
+            2: "Coast",
+            3: "Desert",
+            4: "Forest",
+            5: "Grassland",
+            6: "Mountain",
+            7: "Swamp",
+            8: "Underdark"
+        }
+        for key, value in druidic_lands.items():
+            print(key, ": ", value)
+        self.land_type = druidic_lands.pop(int(input("Enter a Number: ")))
+        print("pick two(2) skills from this list")
+        for key, value in druid_skill_list().items():
+            print(key, value)
+        s = input("Enter one number:")
+        s = int(s)
+        r = input("Enter the second number:")
+        r = int(r)
+        if (s == 1) or (r == 1):
+            self.arcana_skill = True
+
+        if (s == 2) or (r == 2):
+            self.animal_handling_skill = True
+
+        if (s == 3) or (r == 3):
+            self.insight_skill = True
+
+        if (s == 4) or (r == 4):
+            self.medicine_skill = True
+
+        if (s == 5) or (r == 5):
+            self.nature_skill = True
+
+        if (s == 6) or (r == 6):
+            self.perception_skill = True
+
+        if (s == 7) or (r == 7):
+            self.religion_skill = True
+
+        if (s == 8) or (r == 8):
+            self.survival_skill = True
+
+        if level >= 1:
+            self.abilities.append("WILD SHAPE (1/4)")
+        if level >= 2:
+            print("you must now choose your Druid Circle, you have the following options: \n"
+                  "1: Circle of the Land ('NATURAL RECOVERY', 'CIRCLE SPELLS', 'LANDS STRIDE') \n"
+                  "2: Circle of the Moon ('COMBAT WILD SHAPE', 'CIRCLE FORMS', 'PRIMAL STRIKE')")
+            a = int(input("Choose your Path: "))
+            if a == 1:
+                self.classpath = "Circle of the Land"
+                self.abilities.append("BONUS CANTRIP")
+            else:
+                self.classpath = "Circle of the Moon"
+                self.abilities.append("COMBAT WILD SHAPE")
+                self.abilities.append("CIRCLE FORMS")
+        if level >= 3:
+            if self.classpath == "Circle of the Land":
+                self.spells += circle_spells(self.land_type, 3)
+        if level >= 4:
+            self.abilities.remove("WILD SHAPE (1/4)")
+            self.abilities.append("WILD SHAPE (1/2)")
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 6:
+            if self.classpath == "Circle of the Land":
+                self.abilities.append("LAND\'S STRIDE")
+            else:
+                self.abilities.append("PRIMAL STRIKE")
+        if level >= 7:
+            if self.classpath == "Circle of the Land":
+                self.spells += circle_spells(self.land_type, 7)
+        if level >= 8:
+            self.abilities.remove("WILD SHAPE (1/2)")
+            self.abilities.append("WILD SHAPE (1)")
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 9:
+            if self.classpath == "Circle of the Land":
+                self.spells += circle_spells(self.land_type, 9)
+        if level >= 10:
+            if self.classpath == "Circle of the Land":
+                self.abilities.append("NATURE\'S WARD")
+            else:
+                self.abilities.append("ELEMENTAL WILD SHAPE")
+        if level >= 12:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 14:
+            if self.classpath == "Circle of the Land":
+                self.abilities.append("NATURE\'S SANCTUARY")
+            else:
+                self.abilities.append("THOUSAND FORMS")
+        if level >= 16:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 18:
+            self.abilities.append("TIMELESS BODY")
+            self.abilities.append("BEAST SPELLS")
+        if level >= 20:
+            self.abilities.append("ARCHDRUID")
+        self.spells = druid_magic_selection(druid_slots(level))
 
 
 class Fighter(CharacterClass):

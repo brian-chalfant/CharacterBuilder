@@ -180,6 +180,20 @@ def cleric_skill_list():
     return skill_list
 
 
+def druid_skill_list():
+
+    skill_list = {
+        1: 'Arcana',
+        2: 'Animal Handling',
+        3: 'Insight',
+        4: 'Medicine',
+        5: 'Nature',
+        6: 'Perception',
+        7: 'Religion',
+        8: 'Survival',
+    }
+    return skill_list
+
 def full_skill_list():
 
     skill_list = {
@@ -217,3 +231,70 @@ def divine_domains():
         7: "War Domain"
         }
     return domains
+
+
+def circle_spells(land_type, level):
+    if land_type == "Arctic":
+        switcher = {
+            3: ["Hold Person", "Spike Growth"],
+            5: ["Sleet Storm", "Slow"],
+            7: ["Freedom of Movement", "Ice Storm"],
+            9: ["Commune with Nature", "Cone of Cold"]
+        }
+        return switcher.get(level)
+    if land_type == "Coast":
+        switcher = {
+            3: ["Mirror Image", "Misty Step"],
+            5: ["Water Breathing", "Water Walk"],
+            7: ["Control Water", "Freedom of Movement"],
+            9: ["Conjure Elemental", "Scrying"]
+        }
+        return switcher.get(level)
+    if land_type == "Desert":
+        switcher = {
+            3: ["Blur", "Silence"],
+            5: ["Create Food and Water", "Protection from Energy"],
+            7: ["Blight", "Hallucinatory Terrain"],
+            9: ["Insect Plague", "Wall of Stone"]
+        }
+        return switcher.get(level)
+    if land_type == "Forest":
+        switcher = {
+            3: ["Barkskin", "Spider Climb"],
+            5: ["Call Lightning", "Plant Growth"],
+            7: ["Freedom of Movement", "Divination"],
+            9: ["Commune with Nature", "Tree Stride"]
+        }
+        return switcher.get(level)
+    if land_type == "Grassland":
+        switcher = {
+            3: ["Invisibility", "Pass without Trace"],
+            5: ["Daylight", "Haste"],
+            7: ["Divination", "Freedom of Movement"],
+            9: ["Dream", "Insect Plague"]
+        }
+        return switcher.get(level)
+    if land_type == "Mountain":
+        switcher = {
+            3: ["Spider Climb", "Spike Growth"],
+            5: ["Lighting Bolt", "Meld into Stone"],
+            7: ["Stone Shape", "Stone Skin"],
+            9: ["Passwall", "Wall of Stone"]
+        }
+        return switcher.get(level)
+    if land_type == "Swamp":
+        switcher = {
+            3: ["Darkness", "Melf\'s Acid Arrow"],
+            5: ["Water Walk", "Stinking Cloud"],
+            7: ["Freedom of Movement", "Locate Creature"],
+            9: ["Insect Plague", "Scrying"]
+        }
+        return switcher.get(level)
+    if land_type == "Underdark":
+        switcher = {
+            3: ["Spider Climb", "Web"],
+            5: ["Gaseous Form", "Stinking Cloud"],
+            7: ["Greater Invisibility", "Stone Shape"],
+            9: ["Cloudkill", "Insect Plague"]
+        }
+        return switcher.get(level)
