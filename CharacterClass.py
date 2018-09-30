@@ -941,6 +941,54 @@ class Fighter(CharacterClass):
     def __init__(self, level):
         super(Fighter, self).__init__()
         self.name = 'Fighter'
+        self.hit_die = diceroll(1, 10)  # Hit die is 1d8
+        self.primary_ability = "Strength"  # primary ability is Strength
+        self.saves = ["Strength", "Constitution"]  # Saving throws are Strength and Constitution
+        self.armorpro = ["Light Armor", "Medium Armor", "Heavy Armor", "Shields"]  # Proficient in Light, Medium Armor and Shields
+        self.weaponpro = ["Simple Weapons", "Martial Weapons"]
+        self.toolpro = []
+        self.spells = []
+        self.spellcasting = False
+        self.spellcasting_ability = "Wisdom"
+        self.language = []
+        x = fighter_fighting_style()
+        print("pick two(2) skills from this list")
+        for key, value in fighter_skill_list().items():
+            print(key, value)
+        s = input("Enter one number:")
+        s = int(s)
+        r = input("Enter the second number:")
+        r = int(r)
+        if (s == 1) or (r == 1):
+            self.acrobatics_skill = True
+
+        if (s == 2) or (r == 2):
+            self.animal_handling_skill = True
+
+        if (s == 3) or (r == 3):
+            self.athletics_skill = True
+
+        if (s == 4) or (r == 4):
+            self.history_skill = True
+
+        if (s == 5) or (r == 5):
+            self.insight_skill = True
+
+        if (s == 6) or (r == 6):
+            self.intimidation_skill = True
+
+        if (s == 7) or (r == 7):
+            self.perception_skill = True
+
+        if (s == 8) or (r == 8):
+            self.survival_skill = True
+
+        for key, value in x.item():
+            print(key, value)
+        print("Pick a fighting style:")
+        a = int(input(": "))
+        self.fighting_style = x.pop(a)
+        
 
 
 class Monk(CharacterClass):

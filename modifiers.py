@@ -194,6 +194,32 @@ def druid_skill_list():
     }
     return skill_list
 
+
+def fighter_skill_list():
+    skill_list = {  # List options for Skill Proficiency
+        1: "Acrobatics",
+        2: "Animal Handling",
+        3: "Athletics",
+        4: "History",
+        5: "Insight",
+        6: "Intimidation"
+        8: "Perception",
+        9: "Survival"
+        }
+    return skill_list
+
+def fighter_fighting_style():
+    style_list = {
+        1: "Archery ( +2 Bonus to Ranged Attacks)",
+        2: "Defense ( +1 Bonus to AC)",
+        3: "Dueling ( +2 Bonus to Damage)",
+        4: "Great Weapon Fighting (Re-roll 1's and 2's)",
+        5: "Protection ( Invoke Disadvantage on Attacks on players near you)",
+        6: "Two-Weapon Fighting ( Add Ability Modifier to Damage for Second Weapon)",
+        }
+    return style_list
+
+
 def full_skill_list():
 
     skill_list = {
