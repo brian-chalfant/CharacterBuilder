@@ -658,3 +658,285 @@ def druid_magic_selection(spell_dict):
             selection = x.pop(item_number)
             spell_list.append(str(selection))
     return spell_list
+
+
+
+def fighter_slots(level):
+    slots = {
+        3:  {0: 2, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        4:  {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        5:  {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        6:  {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        7:  {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        8:  {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        9:  {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        10: {0: 3, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        11: {0: 3, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        12: {0: 3, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        13: {0: 3, 1: 4, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        14: {0: 3, 1: 4, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        15: {0: 3, 1: 4, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        16: {0: 3, 1: 4, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        17: {0: 3, 1: 4, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        18: {0: 3, 1: 4, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        19: {0: 3, 1: 4, 2: 3, 3: 3, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        20: {0: 3, 1: 4, 2: 3, 3: 3, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+    }
+    return slots.get(level)
+
+
+def fighter(level):
+
+    spell_list_0 = {
+        0: 'CANTRIPS',
+        1: 'Acid Splash',
+        2: 'Blade Ward',
+        3: 'Chill Touch',
+        4: 'Dancing Lights',
+        5: 'Fire Bolt',
+        6: 'Friends',
+        7: 'Light',
+        8: 'Mage Hand',
+        9: 'Mending',
+        10: 'Message',
+        11: 'Minor Illusion',
+        12: 'Poison Spray',
+        13: 'Prestidigitation',
+        14: 'Ray of Frost',
+        15: 'Shocking Grasp',
+        16: 'True Strike'
+        }
+
+    spell_list_1 = {
+        0: 'LEVEL 1 SPELLS',
+        1: 'Alarm',
+        2: 'Burning Hands',
+        3: 'Charm Person',
+        4: 'Chromatic Orb',
+        5: 'Color Spray',
+        6: 'Comprehend Languages',
+        7: 'Detect Magic',
+        8: 'Disguise Self',
+        9: 'Expeditious Retreat',
+        10: 'False Life',
+        11: 'Feather Fall',
+        12: 'Find Familiar',
+        13: 'Fog Cloud',
+        14: 'Grease',
+        15: 'Identify',
+        16: 'Illusory Script',
+        17: 'Jump',
+        18: 'Longstrider',
+        19: 'Mage Armor',
+        20: 'Magic Missile',
+        21: 'Protection from Evil and Good',
+        22: 'Ray of Sickness',
+        23: 'Shield',
+        24: 'Silent Image',
+        25: 'Sleep',
+        26: 'Tasha\'s Hideous Laughter',
+        27: 'Tenser\'s Floating Disk',
+        28: 'Thunderwave',
+        29: 'Unseen Servent',
+        30: 'Witch Bolt'
+        }
+
+    spell_list_2 = {
+        0: 'LEVEL 2 SPELLS',
+        1: 'Alter Self',
+        2: 'Arcane Lock',
+        3: 'Blindness/Deafness',
+        4: 'Blur',
+        5: 'Cloud of Daggers',
+        6: 'Continual Flame',
+        7: 'Crown of Madness',
+        8: 'Darkness',
+        9: 'Darkvision',
+        10: 'Detect Thoughts',
+        11: 'Enlarge/Reduce',
+        12: 'Flaming Sphere',
+        13: 'Gentle Repose',
+        14: 'Gust of Wind',
+        15: 'Hold Person',
+        16: 'Invisibility',
+        17: 'Knock',
+        18: 'Levitate',
+        19: 'Locate Object',
+        20: 'Magic Mouth',
+        21: 'Magic Weapon',
+        22: 'Melf\'s Acid Arrow',
+        23: 'Mirror Image',
+        24: 'Misty Step',
+        25: 'Nystul\'s Magic Aura',
+        26: 'Phantasmal Force',
+        27: 'Ray of Enfeeblement',
+        28: 'Rope Trick',
+        29: 'Scorching Ray',
+        30: 'See Invisibility',
+        31: 'Shatter',
+        32: 'Spider Climb',
+        33: 'Suggestion',
+        34: 'Web'
+        }
+
+    spell_list_3 = {
+        0: 'LEVEL 3 SPELLS',
+        1: 'Animate Dead',
+        2: 'Bestow Curse',
+        3: 'Blink',
+        4: 'Clairvoyance',
+        5: 'Counterspell',
+        6: 'Dispel Magic',
+        7: 'Fear',
+        8: 'Feign Death',
+        9: 'Fireball',
+        10: 'Fly',
+        11: 'Gaseous Form',
+        12: 'Glyph of Warding',
+        13: 'Haste',
+        14: 'Hypnotic Pattern',
+        15: 'Leomund\'s Tiny Hut',
+        16: 'Lightning Bolt',
+        17: 'Magic Circle',
+        18: 'Major Image',
+        19: 'Nondetection',
+        20: 'Phantom Seed',
+        21: 'Protection from Energy',
+        22: 'Remove Curse',
+        23: 'Sending',
+        24: 'Sleet Storm',
+        25: 'Slow',
+        26: 'Stinking Cloud',
+        27: 'Tongues',
+        28: 'Vampiric Touch',
+        29: 'Water Breathing',
+
+        }
+
+    spell_list_4 = {
+        0: 'LEVEL 4 SPELLS',
+        1: 'Arcane Eye',
+        2: 'Banishment',
+        3: 'Blight',
+        4: 'Confusion',
+        5: 'Conjure Major Elementals',
+        6: 'Control Water',
+        7: 'Dimension Door',
+        8: 'Evard\'s Black Tentacles',
+        9: 'Fabricate',
+        10: 'Fire Shield',
+        11: 'Greater Invisibility',
+        12: 'Hallucinatory Terrain',
+        13: 'Ice Storm',
+        14: 'Leomund\'s Secret Chest',
+        15: 'Locate Creature',
+        16: 'Mordenkainen\'s Faithful Hound',
+        17: 'Mordenkainen\'s Private Sanctum',
+        18: 'Otiluke\'s Resilient Sphere',
+        19: 'Phantasmal Killer',
+        20: 'Polymorph',
+        21: 'Stone Shape',
+        22: 'Stoneskin',
+        23: 'Wall of Fire.',
+        }
+
+    spell_list_5 = {
+        0: 'LEVEL 5 SPELLS',
+        1: 'Antilife Shell',
+        2: 'Awaken',
+        3: 'Commune with Nature',
+        4: 'Conjure Elemental',
+        5: 'Contagion',
+        6: 'Geas',
+        7: 'Greater Restoration',
+        8: 'Insect Plague',
+        9: 'Mass Cure Wounds',
+        10: 'Planar Binding',
+        11: 'Reincarnate',
+        12: 'Scrying',
+        13: 'Tree Stride',
+        14: 'Wall of Stone'
+        }
+
+    spell_list_6 = {
+        0: 'LEVEL 6 SPELLS',
+        1: 'Conjure Fey',
+        2: 'Find the Path',
+        3: 'Heal',
+        4: 'Heroes\'s Feast',
+        5: 'Move Earth',
+        6: 'Sunbeam',
+        7: 'Transport via Plants',
+        8: 'Wall of Thorns',
+        9: 'Wind Walk',
+        }
+
+    spell_list_7 = {
+        0: 'LEVEL 7 SPELLS',
+        1: 'Fire Storm',
+        2: 'Mirage Arcane',
+        3: 'Plane Shift',
+        4: 'Regenerate',
+        5: 'Reverse Gravity',
+        }
+
+    spell_list_8 = {
+        0: 'LEVEL 8 SPELLS',
+        1: 'Animal Shapes',
+        2: 'Antipathy/Sympathy',
+        3: 'Control Weather',
+        4: 'Earthquake',
+        5: 'Feeblemind',
+        6: 'Sunburst',
+        7: 'Tsunami'
+        }
+
+    spell_list_9 = {
+        0: 'LEVEL 9 SPELLS',
+        1: 'Foresight',
+        2: 'Shapechange',
+        3: 'Storm of Vengeance',
+        4: 'True Resurrection'
+        }
+
+    if level == 0:
+        return spell_list_0
+    elif level == 1:
+        return spell_list_1
+    elif level == 2:
+        return spell_list_2
+    elif level == 3:
+        return spell_list_3
+    elif level == 4:
+        return spell_list_4
+    elif level == 5:
+        return spell_list_5
+    elif level == 6:
+        return spell_list_6
+    elif level == 7:
+        return spell_list_7
+    elif level == 8:
+        return spell_list_8
+    elif level == 9:
+        return spell_list_9
+    else:
+        TypeError
+
+
+def druid_magic_selection(spell_dict):
+
+    spell_list = []
+    for j in range(10):
+        x = cleric(j)
+        for i in range(spell_dict.get(j)):
+            for keys, values in x.items():
+                print(keys, values)
+            print("you have", (spell_dict.get(j) - i), "Spells in this Level Remaining")
+            item_number = int(input("Please choose a Spell: "))
+            selection = x.pop(item_number)
+            spell_list.append(str(selection))
+    return spell_list
+
+
+# There has to be a better way to do this.  maybe make the spells an array and
+# link them with classes that they are associated with

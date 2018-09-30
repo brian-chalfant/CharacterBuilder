@@ -951,44 +951,65 @@ class Fighter(CharacterClass):
         self.spellcasting = False
         self.spellcasting_ability = "Wisdom"
         self.language = []
-        x = fighter_fighting_style()
-        print("pick two(2) skills from this list")
-        for key, value in fighter_skill_list().items():
-            print(key, value)
-        s = input("Enter one number:")
-        s = int(s)
-        r = input("Enter the second number:")
-        r = int(r)
-        if (s == 1) or (r == 1):
-            self.acrobatics_skill = True
+        if level >= 1:
+            self.abilities.append("SECOND WIND")
+            x = fighter_fighting_style()
+            print("pick two(2) skills from this list")
+            for key, value in fighter_skill_list().items():
+                print(key, value)
+            s = input("Enter one number:")
+            s = int(s)
+            r = input("Enter the second number:")
+            r = int(r)
+            if (s == 1) or (r == 1):
+                self.acrobatics_skill = True
 
-        if (s == 2) or (r == 2):
-            self.animal_handling_skill = True
+            if (s == 2) or (r == 2):
+                self.animal_handling_skill = True
 
-        if (s == 3) or (r == 3):
-            self.athletics_skill = True
+            if (s == 3) or (r == 3):
+                self.athletics_skill = True
 
-        if (s == 4) or (r == 4):
-            self.history_skill = True
+            if (s == 4) or (r == 4):
+                self.history_skill = True
 
-        if (s == 5) or (r == 5):
-            self.insight_skill = True
+            if (s == 5) or (r == 5):
+                self.insight_skill = True
 
-        if (s == 6) or (r == 6):
-            self.intimidation_skill = True
+            if (s == 6) or (r == 6):
+                self.intimidation_skill = True
 
-        if (s == 7) or (r == 7):
-            self.perception_skill = True
+            if (s == 7) or (r == 7):
+                self.perception_skill = True
 
-        if (s == 8) or (r == 8):
-            self.survival_skill = True
+            if (s == 8) or (r == 8):
+                self.survival_skill = True
 
-        for key, value in x.item():
-            print(key, value)
-        print("Pick a fighting style:")
-        a = int(input(": "))
-        self.fighting_style = x.pop(a)
-        
+            for key, value in x.item():
+                print(key, value)
+            print("Pick a fighting style:")
+            a = int(input(": "))
+            self.fighting_style = x.pop(a)
+        if level >= 2:
+            self.abilities.append("ACTION SURGE")
+        if level >= 3:
+            print("you must now choose your Martial Archtype, you have the following options: \n"
+                  "1: Champion ('IMPROVED CRITICAL', 'REMARKABLE ATHLETE', 'ADDITIONAL FIGHTING STYLE') \n"
+                  "2: Battle Master ('COMBAT SUPERIORITY', 'STUDENT OF WAR', 'KNOW YOUR ENEMY') \n"
+                  "3: Eldritch Knight ('SPELLCASTING', 'WEAPON BOND', 'WAR MAGIC')")
+            a = int(input("Choose your Path: "))
+            if a == 1:
+                self.classpath = "Champion"
+                self.abilities.append("IMPROVED CRITICAL")
+            elif a == 2:
+                self.classpath = "Battle Master"
+                self.abilities.append("COMBAT SUPERIORITY")
+                self.superiority_die = 4
+                #  choose Maneuvers
+            elif a == 3:
+                self.classpath = "Eldritch Knight"
+
+
 
 
 class Monk(CharacterClass):
@@ -1031,3 +1052,6 @@ class Wizard(CharacterClass):
     def __init__(self, level):
         super(Wizard, self).__init__()
         self.name = 'Wizard'
+
+
+# Notes to yourself:  Add in Proficiency bonus for each level.
