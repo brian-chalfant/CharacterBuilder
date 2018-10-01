@@ -1,3 +1,5 @@
+from dbquery import dbconnect
+
 def bard_slots(level):
     slots = {
         1: {0: 2, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
@@ -24,167 +26,70 @@ def bard_slots(level):
     return slots.get(level)
 
 
-def bard(level):
+def paladin(level):
     spell_list_0 = {
-        0: 'CANTRIPS',
-        1: 'Blade Ward',
-        2: 'Dancing Lights',
-        3: 'Friends',
-        4: 'Light',
-        5: 'Mage Hand',
-        6: 'Mending',
-        7: 'Message',
-        8: 'Message',
-        9: 'Minor Illusion',
-        10: 'Prestidigitation',
-        11: 'True Strike'
+
+        1: 'Bless',
+        2: 'Command',
+        3: 'Compelled Duel',
+        4: 'Cure Wounds',
+        5: 'Detect Evil and Good',
+        6: 'Detect Magic',
+        7: 'Detect Poison and Disease',
+        8: 'Divine Favor',
+        9: 'Heroism',
+        10: 'Protection from Evil and Good',
+        11: 'Purify Food and Drink',
+        12: 'Searing Smite',
+        13: 'Shield of Faith',
+        14: 'Thunderous Smite',
+        15: 'Wrathful Smite'
     }
 
     spell_list_1 = {
-        0: 'LEVEL 1 SPELLS',
-        1: 'Animal Friendship',
-        2: 'Bane',
-        3: 'Charm Person',
-        4: 'Comprehend Languages',
-        5: 'Cure',
-        6: 'Detect Magic',
-        7: 'Wounds',
-        8: 'Detect Magic',
-        9: 'Disguise Self',
-        10: 'Dissonant Whispers',
-        11: 'Faerie Fire',
-        12: 'Feather Fall',
-        13: 'Healing Word',
-        14: 'Heroism',
-        15: 'Identify',
-        16: 'Illusory Script',
-        17: 'Longstrider',
-        18: 'Silent Image',
-        19: 'Sleep',
-        20: 'Speak with Animals',
-        21: 'Tasha\'s Hideous Laughter',
-        22: 'Thunderwave',
-        23: 'Unseen Servant'
+
+        1: 'Aid',
+        2: 'Branding Smite',
+        3: 'Find Steed',
+        4: 'Lesser Restoration',
+        5: 'Locate Object',
+        6: 'Magic Weapon',
+        7: 'Protection from Poison',
+        8: 'Zone of Truth',
     }
 
     spell_list_2 = {
-        0: 'LEVEL 2 SPELLS',
-        1: 'Animal Messenger',
-        2: 'Blindness/Deafness',
-        3: 'Calm Emotions',
-        4: 'Cloud of Daggers',
-        5: 'Crown of Madness',
-        6: 'Detect Thoughts',
-        7: 'Enhance Ability',
-        8: 'Enthrall',
-        9: 'Heat Metal',
-        10: 'Hold Person',
-        11: 'Invisibility',
-        12: 'Knock',
-        13: 'Lesser Restoration',
-        14: 'Locate Animals or Plants',
-        15: 'Locate Object',
-        16: 'Magic Mouth',
-        17: 'Phantasmal Force',
-        18: 'See Invisibility',
-        19: 'Shatter',
-        20: 'Silence',
-        21: 'Suggestion',
-        22: 'Zone of Truth'
+
+        1: 'Aura of Vitality',
+        2: 'Blinding Smite',
+        3: 'Create Food and Water',
+        4: 'Crusader\'s Mantle',
+        5: 'Daylight',
+        6: 'Dispel Magic',
+        7: 'Elemental Weapon',
+        8: 'Magic Circle',
+        9: 'Remove Curse',
+        10: 'Revivify',
     }
 
     spell_list_3 = {
-        0: 'LEVEL 3 SPELLS',
-        1: 'Bestow Curse',
-        2: 'Clairvoyance',
-        3: 'Dispel Magic',
-        4: 'Fear',
-        5: 'Feign Death',
-        6: 'Glyph of Warding',
-        7: 'Hypnotic Pattern',
-        8: 'Leomund\'s Tiny Hut',
-        9: 'Major Image',
-        10: 'Nondetection',
-        11: 'Plant Growth',
-        12: 'Sending',
-        13: 'Speak with Dead',
-        14: 'Speak with Plants',
-        15: 'Stinking Cloud',
-        16: 'Tongues'
+
+        1: 'Aura of Life',
+        2: 'Aura of Purity',
+        3: 'Banishment',
+        4: 'Death Ward',
+        5: 'Locate Creature',
+        6: 'Staggering Smite'
     }
 
     spell_list_4 = {
-        0: 'LEVEL 4 SPELLS',
-        1: 'Compulsion',
-        2: 'Confusion',
-        3: 'Dimension Door',
-        4: 'Freedom of Movement',
-        5: 'Greater Invisibility',
-        6: 'Hallucinatory Terrain',
-        7: 'Locate Creature',
-        8: 'Polymorph'
-    }
 
-    spell_list_5 = {
-        0: 'LEVEL 5 SPELLS',
-        1: 'Animate Objects',
-        2: 'Awaken',
-        3: 'Dominate Person',
-        4: 'Dream',
+        1: 'Banishing Smite',
+        2: 'Circle of Power',
+        3: 'Destructive Wave',
+        4: 'Dispel Evil and Good',
         5: 'Geas',
-        6: 'Greater Restoration',
-        7: 'Hold Monster',
-        8: 'Legend Lore',
-        9: 'Mass Cure Wounds',
-        10: 'Mislead',
-        11: 'Modify Memory',
-        12: 'Planar Binding',
-        13: 'Raise Dead',
-        14: 'Scrying',
-        15: 'Seeming',
-        16: 'Teleportation Circle'
-    }
-
-    spell_list_6 = {
-        0: 'LEVEL 6 SPELLS',
-        1: 'Eyebite',
-        2: 'Find the Path',
-        3: 'Guards and Wards',
-        4: 'Mass Suggestion',
-        5: 'Otto\'s Irresistible Dance',
-        6: 'Programmed Illusion',
-        7: 'True Seeing'
-    }
-
-    spell_list_7 = {
-        0: 'LEVEL 7 SPELLS',
-        1: 'Etherealness',
-        2: 'Forcecage',
-        3: 'Mirage Arcane',
-        4: 'Mordenkainen\'s Magnificent Mansion',
-        5: 'Mordenkainen\'s Sword',
-        6: 'Project Image',
-        7: 'Regenerate',
-        8: 'Resurrection',
-        9: 'Symbol',
-        10: 'Teleport'
-    }
-
-    spell_list_8 = {
-        0: 'LEVEL 8 SPELLS',
-        1: 'Dominate Monster',
-        2: 'Feeblemind',
-        3: 'Glibness',
-        4: 'Mind Blank',
-        5: 'Power Word Stun'
-    }
-
-    spell_list_9 = {
-        0: 'LEVEL 9 SPELLS',
-        1: 'Foresight',
-        2: 'Power Word Heal',
-        3: 'Power Word Kill',
-        4: 'True Polymorph'
+        6: 'Raise Dead'
     }
 
     if level == 0:
@@ -197,29 +102,18 @@ def bard(level):
         return spell_list_3
     elif level == 4:
         return spell_list_4
-    elif level == 5:
-        return spell_list_5
-    elif level == 6:
-        return spell_list_6
-    elif level == 7:
-        return spell_list_7
-    elif level == 8:
-        return spell_list_8
-    elif level == 9:
-        return spell_list_9
 
 
 def bard_magic_selection(spell_dict):
     spell_list = []
     for j in range(10):
-        x = bard(j)
+        x = (j)
         for i in range(spell_dict.get(j)):
             for keys, values in x.items():
-                print(keys, values)
-            print("you have", (spell_dict.get(j) - i), "Spells in this Level Remaining")
-            item_number = int(input("Please choose a Spell: "))
-            selection = x.pop(item_number)
-            spell_list.append(str(selection))
+            #     print(keys, values)
+            # print("you have", (spell_dict.get(j) - i), "Spells in this Level Remaining")
+            # item_number = int(input("Please choose a Spell: "))
+                spell_list.append(values)
     return spell_list
 
 
@@ -253,7 +147,7 @@ def cleric_slots(level):
 
 def cleric(level):
     spell_list_0 = {
-        0: 'CANTRIPS',
+
         1: 'Guidance',
         2: 'Light',
         3: 'Mending',
@@ -264,7 +158,7 @@ def cleric(level):
     }
 
     spell_list_1 = {
-        0: 'LEVEL 1 SPELLS',
+
         1: 'Bane',
         2: 'Bless',
         3: 'Command',
@@ -283,7 +177,7 @@ def cleric(level):
     }
 
     spell_list_2 = {
-        0: 'LEVEL 2 SPELLS',
+
         1: 'Aid',
         2: 'Augury',
         3: 'Blindness/Deafness',
@@ -304,7 +198,7 @@ def cleric(level):
     }
 
     spell_list_3 = {
-        0: 'LEVEL 3 SPELLS',
+
         1: 'Animate Dead',
         2: 'Beacon of Hope',
         3: 'Bestow Curse',
@@ -328,7 +222,7 @@ def cleric(level):
     }
 
     spell_list_4 = {
-        0: 'LEVEL 4 SPELLS',
+
         1: 'Banishment',
         2: 'Control Water',
         3: 'Death Ward',
@@ -340,7 +234,7 @@ def cleric(level):
     }
 
     spell_list_5 = {
-        0: 'LEVEL 5 SPELLS',
+
         1: 'Commune',
         2: 'Contagion',
         3: 'Dispel Evil and Good',
@@ -357,7 +251,7 @@ def cleric(level):
     }
 
     spell_list_6 = {
-        0: 'LEVEL 6 SPELLS',
+
         1: 'Blade Barrier',
         2: 'Create Undead',
         3: 'Find the Path',
@@ -371,7 +265,7 @@ def cleric(level):
     }
 
     spell_list_7 = {
-        0: 'LEVEL 7 SPELLS',
+
         1: 'Conjure Celestial',
         2: 'Divine Word',
         3: 'Etherealness',
@@ -383,7 +277,7 @@ def cleric(level):
     }
 
     spell_list_8 = {
-        0: 'LEVEL 8 SPELLS',
+
         1: 'Anti-magic Field',
         2: 'Control Weather',
         3: 'Earthquake',
@@ -391,7 +285,7 @@ def cleric(level):
     }
 
     spell_list_9 = {
-        0: 'LEVEL 9 SPELLS',
+
         1: 'Astral Projection',
         2: 'Gate',
         3: 'Mass Heal',
@@ -462,7 +356,7 @@ def druid_slots(level):
 
 def druid(level):
     spell_list_0 = {
-        0: 'CANTRIPS',
+
         1: 'Druidcraft',
         2: 'Guidance',
         3: 'Mending',
@@ -474,7 +368,7 @@ def druid(level):
     }
 
     spell_list_1 = {
-        0: 'LEVEL 1 SPELLS',
+
         1: 'Animal Friendship',
         2: 'Charm Person',
         3: 'Create or Destroy Water',
@@ -494,7 +388,7 @@ def druid(level):
     }
 
     spell_list_2 = {
-        0: 'LEVEL 2 SPELLS',
+
         1: 'Animal Messenger',
         2: 'Barkskin',
         3: 'Beast Sense',
@@ -516,7 +410,7 @@ def druid(level):
     }
 
     spell_list_3 = {
-        0: 'LEVEL 3 SPELLS',
+
         1: 'Call Lightning',
         2: 'Conjure Animals',
         3: 'Daylight',
@@ -533,7 +427,7 @@ def druid(level):
     }
 
     spell_list_4 = {
-        0: 'LEVEL 4 SPELLS',
+
         1: 'Blight',
         2: 'Confusion',
         3: 'Conjure Minor Elementals',
@@ -552,7 +446,7 @@ def druid(level):
     }
 
     spell_list_5 = {
-        0: 'LEVEL 5 SPELLS',
+
         1: 'Antilife Shell',
         2: 'Awaken',
         3: 'Commune with Nature',
@@ -570,7 +464,7 @@ def druid(level):
     }
 
     spell_list_6 = {
-        0: 'LEVEL 6 SPELLS',
+
         1: 'Conjure Fey',
         2: 'Find the Path',
         3: 'Heal',
@@ -583,7 +477,7 @@ def druid(level):
     }
 
     spell_list_7 = {
-        0: 'LEVEL 7 SPELLS',
+
         1: 'Fire Storm',
         2: 'Mirage Arcane',
         3: 'Plane Shift',
@@ -592,7 +486,7 @@ def druid(level):
     }
 
     spell_list_8 = {
-        0: 'LEVEL 8 SPELLS',
+
         1: 'Animal Shapes',
         2: 'Antipathy/Sympathy',
         3: 'Control Weather',
@@ -603,7 +497,7 @@ def druid(level):
     }
 
     spell_list_9 = {
-        0: 'LEVEL 9 SPELLS',
+
         1: 'Foresight',
         2: 'Shapechange',
         3: 'Storm of Vengeance',
@@ -672,7 +566,7 @@ def fighter_slots(level):
 
 def fighter(level):
     spell_list_0 = {
-        0: 'CANTRIPS',
+
         1: 'Acid Splash',
         2: 'Blade Ward',
         3: 'Chill Touch',
@@ -692,7 +586,7 @@ def fighter(level):
     }
 
     spell_list_1 = {
-        0: 'LEVEL 1 SPELLS',
+
         1: 'Alarm',
         2: 'Burning Hands',
         3: 'Charm Person',
@@ -726,7 +620,7 @@ def fighter(level):
     }
 
     spell_list_2 = {
-        0: 'LEVEL 2 SPELLS',
+
         1: 'Alter Self',
         2: 'Arcane Lock',
         3: 'Blindness/Deafness',
@@ -764,7 +658,7 @@ def fighter(level):
     }
 
     spell_list_3 = {
-        0: 'LEVEL 3 SPELLS',
+
         1: 'Animate Dead',
         2: 'Bestow Curse',
         3: 'Blink',
@@ -798,7 +692,7 @@ def fighter(level):
     }
 
     spell_list_4 = {
-        0: 'LEVEL 4 SPELLS',
+
         1: 'Arcane Eye',
         2: 'Banishment',
         3: 'Blight',
@@ -825,7 +719,7 @@ def fighter(level):
     }
 
     spell_list_5 = {
-        0: 'LEVEL 5 SPELLS',
+
         1: 'Animate Objects',
         2: 'Bigby\'s Hand',
         3: 'Cloudkill',
@@ -852,7 +746,7 @@ def fighter(level):
     }
 
     spell_list_6 = {
-        0: 'LEVEL 6 SPELLS',
+
         1: 'Arcane Gate',
         2: 'Chain Lightning',
         3: 'Circle of Death',
@@ -876,7 +770,7 @@ def fighter(level):
     }
 
     spell_list_7 = {
-        0: 'LEVEL 7 SPELLS',
+
         1: 'Delayed Blast Fireball',
         2: 'Etherealness',
         3: 'Finger of Death',
@@ -895,7 +789,7 @@ def fighter(level):
     }
 
     spell_list_8 = {
-        0: 'LEVEL 8 SPELLS',
+
         1: 'Antimagic Field',
         2: 'Antipathy/Sympathy',
         3: 'Clone',
@@ -912,7 +806,7 @@ def fighter(level):
     }
 
     spell_list_9 = {
-        0: 'LEVEL 9 SPELLS',
+
         1: 'Astral Projection',
         2: 'Foresight',
         3: 'Gate',
@@ -964,3 +858,17 @@ def fighter_magic_selection(spell_dict):
 
 # There has to be a better way to do this.  maybe make the spells an array and
 # link them with classes that they are associated with
+
+
+sqltext = ""
+spell_list = []
+c = dbconnect('spells.db').cursor()
+for i in range(5):
+    spell_list += paladin(i).values()
+for i in range(len(spell_list)):
+
+    c.execute("UPDATE {tn} SET {bs} = {v} WHERE {cn} = \"{name}\";\n".format(tn="Spells", bs="PALADIN_SPELL", v=1, cn="NAME", name=spell_list[i]))
+    sqltext += ("UPDATE {tn} SET {bs} = {v} WHERE {cn} = \"{name}\";\n".format(tn="Spells", bs="PALADIN_SPELL", v=1, cn="NAME", name=spell_list[i]))
+    dbconnect('spells.db').commit()
+print(sqltext)
+dbconnect('spells.db').close()
