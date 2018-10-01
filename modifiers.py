@@ -202,7 +202,7 @@ def fighter_skill_list():
         3: "Athletics",
         4: "History",
         5: "Insight",
-        6: "Intimidation"
+        6: "Intimidation",
         8: "Perception",
         9: "Survival"
         }

@@ -1,14 +1,14 @@
 def bard_slots(level):
     slots = {
-        1:  {0: 2, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        2:  {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        3:  {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        4:  {0: 3, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        5:  {0: 3, 1: 4, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        6:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        7:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        8:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        9:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 3, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0},
+        1: {0: 2, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        2: {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        3: {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        4: {0: 3, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        5: {0: 3, 1: 4, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        6: {0: 3, 1: 4, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        7: {0: 3, 1: 4, 2: 3, 3: 3, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        8: {0: 3, 1: 4, 2: 3, 3: 3, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        9: {0: 3, 1: 4, 2: 3, 3: 3, 4: 3, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0},
         10: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 0, 7: 0, 8: 0, 9: 0},
         11: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0, 9: 0},
         12: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0, 9: 0},
@@ -25,7 +25,6 @@ def bard_slots(level):
 
 
 def bard(level):
-
     spell_list_0 = {
         0: 'CANTRIPS',
         1: 'Blade Ward',
@@ -39,7 +38,7 @@ def bard(level):
         9: 'Minor Illusion',
         10: 'Prestidigitation',
         11: 'True Strike'
-        }
+    }
 
     spell_list_1 = {
         0: 'LEVEL 1 SPELLS',
@@ -66,7 +65,7 @@ def bard(level):
         21: 'Tasha\'s Hideous Laughter',
         22: 'Thunderwave',
         23: 'Unseen Servant'
-        }
+    }
 
     spell_list_2 = {
         0: 'LEVEL 2 SPELLS',
@@ -92,7 +91,7 @@ def bard(level):
         20: 'Silence',
         21: 'Suggestion',
         22: 'Zone of Truth'
-        }
+    }
 
     spell_list_3 = {
         0: 'LEVEL 3 SPELLS',
@@ -112,8 +111,7 @@ def bard(level):
         14: 'Speak with Plants',
         15: 'Stinking Cloud',
         16: 'Tongues'
-        }
-
+    }
 
     spell_list_4 = {
         0: 'LEVEL 4 SPELLS',
@@ -125,8 +123,7 @@ def bard(level):
         6: 'Hallucinatory Terrain',
         7: 'Locate Creature',
         8: 'Polymorph'
-        }
-
+    }
 
     spell_list_5 = {
         0: 'LEVEL 5 SPELLS',
@@ -146,7 +143,7 @@ def bard(level):
         14: 'Scrying',
         15: 'Seeming',
         16: 'Teleportation Circle'
-        }
+    }
 
     spell_list_6 = {
         0: 'LEVEL 6 SPELLS',
@@ -157,7 +154,7 @@ def bard(level):
         5: 'Otto\'s Irresistible Dance',
         6: 'Programmed Illusion',
         7: 'True Seeing'
-        }
+    }
 
     spell_list_7 = {
         0: 'LEVEL 7 SPELLS',
@@ -171,7 +168,7 @@ def bard(level):
         8: 'Resurrection',
         9: 'Symbol',
         10: 'Teleport'
-        }
+    }
 
     spell_list_8 = {
         0: 'LEVEL 8 SPELLS',
@@ -180,7 +177,7 @@ def bard(level):
         3: 'Glibness',
         4: 'Mind Blank',
         5: 'Power Word Stun'
-        }
+    }
 
     spell_list_9 = {
         0: 'LEVEL 9 SPELLS',
@@ -188,7 +185,7 @@ def bard(level):
         2: 'Power Word Heal',
         3: 'Power Word Kill',
         4: 'True Polymorph'
-        }
+    }
 
     if level == 0:
         return spell_list_0
@@ -210,12 +207,9 @@ def bard(level):
         return spell_list_8
     elif level == 9:
         return spell_list_9
-    else:
-        TypeError
 
 
 def bard_magic_selection(spell_dict):
-
     spell_list = []
     for j in range(10):
         x = bard(j)
@@ -233,15 +227,15 @@ def bard_magic_selection(spell_dict):
 # print(a)
 def cleric_slots(level):
     slots = {
-        1:  {0: 3, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        2:  {0: 3, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        3:  {0: 3, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        4:  {0: 4, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        5:  {0: 4, 1: 4, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        6:  {0: 4, 1: 4, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        7:  {0: 4, 1: 4, 2: 3, 3: 3, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        8:  {0: 4, 1: 4, 2: 3, 3: 3, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        9:  {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0},
+        1: {0: 3, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        2: {0: 3, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        3: {0: 3, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        4: {0: 4, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        5: {0: 4, 1: 4, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        6: {0: 4, 1: 4, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        7: {0: 4, 1: 4, 2: 3, 3: 3, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        8: {0: 4, 1: 4, 2: 3, 3: 3, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        9: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0},
         10: {0: 5, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 0, 7: 0, 8: 0, 9: 0},
         11: {0: 5, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0, 9: 0},
         12: {0: 5, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0, 9: 0},
@@ -258,7 +252,6 @@ def cleric_slots(level):
 
 
 def cleric(level):
-
     spell_list_0 = {
         0: 'CANTRIPS',
         1: 'Guidance',
@@ -268,7 +261,7 @@ def cleric(level):
         5: 'Sacred Flame',
         6: 'Spare the Dying',
         7: 'Thaumaturgy',
-        }
+    }
 
     spell_list_1 = {
         0: 'LEVEL 1 SPELLS',
@@ -287,7 +280,7 @@ def cleric(level):
         13: 'Purify Food and Drink',
         14: 'Sanctuary',
         15: 'Shield of Faith',
-        }
+    }
 
     spell_list_2 = {
         0: 'LEVEL 2 SPELLS',
@@ -308,7 +301,7 @@ def cleric(level):
         15: 'Spiritual Weapon',
         16: 'Warding Bond',
         17: 'Zone of Truth',
-        }
+    }
 
     spell_list_3 = {
         0: 'LEVEL 3 SPELLS',
@@ -332,7 +325,7 @@ def cleric(level):
         18: 'Spirit Guardians',
         19: 'Tongues',
         20: 'Water Walk'
-        }
+    }
 
     spell_list_4 = {
         0: 'LEVEL 4 SPELLS',
@@ -344,7 +337,7 @@ def cleric(level):
         6: 'Guardian of Faith',
         7: 'Locate Creature',
         8: 'Stone Shape'
-        }
+    }
 
     spell_list_5 = {
         0: 'LEVEL 5 SPELLS',
@@ -361,7 +354,7 @@ def cleric(level):
         11: 'Planar Binding',
         12: 'Raise Dead',
         13: 'Scrying',
-        }
+    }
 
     spell_list_6 = {
         0: 'LEVEL 6 SPELLS',
@@ -375,7 +368,7 @@ def cleric(level):
         8: 'Planar Ally',
         9: 'True Seeing',
         10: 'Word of Recall'
-        }
+    }
 
     spell_list_7 = {
         0: 'LEVEL 7 SPELLS',
@@ -387,7 +380,7 @@ def cleric(level):
         6: 'Regenerate',
         7: 'Resurrection',
         8: 'Symbol',
-        }
+    }
 
     spell_list_8 = {
         0: 'LEVEL 8 SPELLS',
@@ -395,7 +388,7 @@ def cleric(level):
         2: 'Control Weather',
         3: 'Earthquake',
         4: 'Holy Aura',
-        }
+    }
 
     spell_list_9 = {
         0: 'LEVEL 9 SPELLS',
@@ -403,7 +396,7 @@ def cleric(level):
         2: 'Gate',
         3: 'Mass Heal',
         4: 'True Resurrection'
-        }
+    }
 
     if level == 0:
         return spell_list_0
@@ -425,12 +418,9 @@ def cleric(level):
         return spell_list_8
     elif level == 9:
         return spell_list_9
-    else:
-        TypeError
 
 
 def cleric_magic_selection(spell_dict):
-
     spell_list = []
     for j in range(10):
         x = cleric(j)
@@ -446,15 +436,15 @@ def cleric_magic_selection(spell_dict):
 
 def druid_slots(level):
     slots = {
-        1:  {0: 2, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        2:  {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        3:  {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        4:  {0: 3, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        5:  {0: 3, 1: 4, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        6:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        7:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        8:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        9:  {0: 3, 1: 4, 2: 3, 3: 3, 4: 3, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0},
+        1: {0: 2, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        2: {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        3: {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        4: {0: 3, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        5: {0: 3, 1: 4, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        6: {0: 3, 1: 4, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        7: {0: 3, 1: 4, 2: 3, 3: 3, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        8: {0: 3, 1: 4, 2: 3, 3: 3, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        9: {0: 3, 1: 4, 2: 3, 3: 3, 4: 3, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0},
         10: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 0, 7: 0, 8: 0, 9: 0},
         11: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0, 9: 0},
         12: {0: 4, 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0, 9: 0},
@@ -471,7 +461,6 @@ def druid_slots(level):
 
 
 def druid(level):
-
     spell_list_0 = {
         0: 'CANTRIPS',
         1: 'Druidcraft',
@@ -482,7 +471,7 @@ def druid(level):
         6: 'Resistance',
         7: 'Shillelagh',
         8: 'Thorn Whip'
-        }
+    }
 
     spell_list_1 = {
         0: 'LEVEL 1 SPELLS',
@@ -502,7 +491,7 @@ def druid(level):
         14: 'Purify Food and Drink',
         15: 'Speak with Animals',
         16: 'Thunderwave'
-        }
+    }
 
     spell_list_2 = {
         0: 'LEVEL 2 SPELLS',
@@ -524,7 +513,7 @@ def druid(level):
         16: 'Pass Without Trace',
         17: 'Protection from Poison',
         18: 'Spike Growth'
-        }
+    }
 
     spell_list_3 = {
         0: 'LEVEL 3 SPELLS',
@@ -541,7 +530,7 @@ def druid(level):
         11: 'Water Breathing',
         12: 'Water Walk',
         13: 'Wind Wall',
-        }
+    }
 
     spell_list_4 = {
         0: 'LEVEL 4 SPELLS',
@@ -560,7 +549,7 @@ def druid(level):
         13: 'Polymorph',
         14: 'Stoneskin',
         15: 'Wall of Fire'
-        }
+    }
 
     spell_list_5 = {
         0: 'LEVEL 5 SPELLS',
@@ -578,7 +567,7 @@ def druid(level):
         12: 'Scrying',
         13: 'Tree Stride',
         14: 'Wall of Stone'
-        }
+    }
 
     spell_list_6 = {
         0: 'LEVEL 6 SPELLS',
@@ -591,7 +580,7 @@ def druid(level):
         7: 'Transport via Plants',
         8: 'Wall of Thorns',
         9: 'Wind Walk',
-        }
+    }
 
     spell_list_7 = {
         0: 'LEVEL 7 SPELLS',
@@ -600,7 +589,7 @@ def druid(level):
         3: 'Plane Shift',
         4: 'Regenerate',
         5: 'Reverse Gravity',
-        }
+    }
 
     spell_list_8 = {
         0: 'LEVEL 8 SPELLS',
@@ -611,7 +600,7 @@ def druid(level):
         5: 'Feeblemind',
         6: 'Sunburst',
         7: 'Tsunami'
-        }
+    }
 
     spell_list_9 = {
         0: 'LEVEL 9 SPELLS',
@@ -619,7 +608,7 @@ def druid(level):
         2: 'Shapechange',
         3: 'Storm of Vengeance',
         4: 'True Resurrection'
-        }
+    }
 
     if level == 0:
         return spell_list_0
@@ -641,12 +630,9 @@ def druid(level):
         return spell_list_8
     elif level == 9:
         return spell_list_9
-    else:
-        TypeError
 
 
 def druid_magic_selection(spell_dict):
-
     spell_list = []
     for j in range(10):
         x = cleric(j)
@@ -660,16 +646,15 @@ def druid_magic_selection(spell_dict):
     return spell_list
 
 
-
 def fighter_slots(level):
     slots = {
-        3:  {0: 2, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        4:  {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        5:  {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        6:  {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        7:  {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        8:  {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
-        9:  {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        3: {0: 2, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        4: {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        5: {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        6: {0: 2, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        7: {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        8: {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        9: {0: 2, 1: 4, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
         10: {0: 3, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
         11: {0: 3, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
         12: {0: 3, 1: 4, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
@@ -686,7 +671,6 @@ def fighter_slots(level):
 
 
 def fighter(level):
-
     spell_list_0 = {
         0: 'CANTRIPS',
         1: 'Acid Splash',
@@ -705,7 +689,7 @@ def fighter(level):
         14: 'Ray of Frost',
         15: 'Shocking Grasp',
         16: 'True Strike'
-        }
+    }
 
     spell_list_1 = {
         0: 'LEVEL 1 SPELLS',
@@ -737,9 +721,9 @@ def fighter(level):
         26: 'Tasha\'s Hideous Laughter',
         27: 'Tenser\'s Floating Disk',
         28: 'Thunderwave',
-        29: 'Unseen Servent',
+        29: 'Unseen Servant',
         30: 'Witch Bolt'
-        }
+    }
 
     spell_list_2 = {
         0: 'LEVEL 2 SPELLS',
@@ -777,7 +761,7 @@ def fighter(level):
         32: 'Spider Climb',
         33: 'Suggestion',
         34: 'Web'
-        }
+    }
 
     spell_list_3 = {
         0: 'LEVEL 3 SPELLS',
@@ -811,7 +795,7 @@ def fighter(level):
         28: 'Vampiric Touch',
         29: 'Water Breathing',
 
-        }
+    }
 
     spell_list_4 = {
         0: 'LEVEL 4 SPELLS',
@@ -838,66 +822,110 @@ def fighter(level):
         21: 'Stone Shape',
         22: 'Stoneskin',
         23: 'Wall of Fire.',
-        }
+    }
 
     spell_list_5 = {
         0: 'LEVEL 5 SPELLS',
-        1: 'Antilife Shell',
-        2: 'Awaken',
-        3: 'Commune with Nature',
-        4: 'Conjure Elemental',
-        5: 'Contagion',
-        6: 'Geas',
-        7: 'Greater Restoration',
-        8: 'Insect Plague',
-        9: 'Mass Cure Wounds',
-        10: 'Planar Binding',
-        11: 'Reincarnate',
-        12: 'Scrying',
-        13: 'Tree Stride',
-        14: 'Wall of Stone'
-        }
+        1: 'Animate Objects',
+        2: 'Bigby\'s Hand',
+        3: 'Cloudkill',
+        4: 'Cone of Cold',
+        5: 'Conjure Elemental',
+        6: 'Contact Other Plane',
+        7: 'Creation',
+        8: 'Dominate Person',
+        9: 'Dream',
+        11: 'Geas',
+        10: 'Hold Monster',
+        12: 'Legend Lore',
+        13: 'Mislead',
+        14: 'Modify Memory',
+        15: 'Passwall',
+        16: 'Planar Binding',
+        17: 'Rary\'s Telepathic Bond',
+        18: 'Scrying',
+        19: 'Seeming',
+        20: 'Telekinesis',
+        21: 'Teleportation Circle',
+        22: 'Wall of Force',
+        23: 'Wall of Stone',
+    }
 
     spell_list_6 = {
         0: 'LEVEL 6 SPELLS',
-        1: 'Conjure Fey',
-        2: 'Find the Path',
-        3: 'Heal',
-        4: 'Heroes\'s Feast',
-        5: 'Move Earth',
-        6: 'Sunbeam',
-        7: 'Transport via Plants',
-        8: 'Wall of Thorns',
-        9: 'Wind Walk',
-        }
+        1: 'Arcane Gate',
+        2: 'Chain Lightning',
+        3: 'Circle of Death',
+        4: 'Contingency',
+        5: 'Create Undead',
+        6: 'Disintegrate',
+        7: 'Drawmij\'s Instant Summons',
+        8: 'Eyebite',
+        9: 'Flesh to Stone',
+        10: 'Globe of Invulnerability',
+        11: 'Guards and Wards',
+        12: 'Magic Jar',
+        13: 'Mass Suggestion',
+        14: 'Move Earth',
+        15: 'Otiluke\'s Freezing Sphere',
+        16: 'Otto\'s Irresistible Dance',
+        17: 'Programmed Illusion',
+        18: 'Sunbeam',
+        19: 'True Seeing',
+        20: 'Wall of Ice',
+    }
 
     spell_list_7 = {
         0: 'LEVEL 7 SPELLS',
-        1: 'Fire Storm',
-        2: 'Mirage Arcane',
-        3: 'Plane Shift',
-        4: 'Regenerate',
-        5: 'Reverse Gravity',
-        }
+        1: 'Delayed Blast Fireball',
+        2: 'Etherealness',
+        3: 'Finger of Death',
+        4: 'Forcecage',
+        5: 'Mirage Arcane',
+        6: 'Mordenkainen\'s Magnificent Mansion',
+        7: 'Mordenkainen\'s Sword',
+        8: 'Plane Shift',
+        9: 'Prismatic Spray',
+        10: 'Project Image',
+        11: 'Reverse Gravity',
+        12: 'Sequester',
+        13: 'Simulacrum',
+        14: 'Symbol',
+        15: 'Teleport'
+    }
 
     spell_list_8 = {
         0: 'LEVEL 8 SPELLS',
-        1: 'Animal Shapes',
+        1: 'Antimagic Field',
         2: 'Antipathy/Sympathy',
-        3: 'Control Weather',
-        4: 'Earthquake',
-        5: 'Feeblemind',
-        6: 'Sunburst',
-        7: 'Tsunami'
-        }
+        3: 'Clone',
+        4: 'Control Weather',
+        5: 'Demiplane',
+        6: 'Dominate Monster',
+        7: 'Feeblemind',
+        8: 'Incendiary Cloud',
+        9: 'Maze',
+        10: 'Mind Blank',
+        11: 'Power Word Stun',
+        12: 'Sunburst',
+        13: 'Telepathy'
+    }
 
     spell_list_9 = {
         0: 'LEVEL 9 SPELLS',
-        1: 'Foresight',
-        2: 'Shapechange',
-        3: 'Storm of Vengeance',
-        4: 'True Resurrection'
-        }
+        1: 'Astral Projection',
+        2: 'Foresight',
+        3: 'Gate',
+        4: 'Imprisonment',
+        5: 'Meteor Swarm',
+        6: 'Power Word Kill',
+        7: 'Prismatic Wall',
+        8: 'Shapechange',
+        9: 'Time Stop',
+        10: 'True Polymorph',
+        11: 'Weird',
+        12: 'Wish'
+    }
 
     if level == 0:
         return spell_list_0
@@ -919,12 +947,9 @@ def fighter(level):
         return spell_list_8
     elif level == 9:
         return spell_list_9
-    else:
-        TypeError
 
 
-def druid_magic_selection(spell_dict):
-
+def fighter_magic_selection(spell_dict):
     spell_list = []
     for j in range(10):
         x = cleric(j)
@@ -936,7 +961,6 @@ def druid_magic_selection(spell_dict):
             selection = x.pop(item_number)
             spell_list.append(str(selection))
     return spell_list
-
 
 # There has to be a better way to do this.  maybe make the spells an array and
 # link them with classes that they are associated with
