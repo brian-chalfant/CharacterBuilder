@@ -212,7 +212,7 @@ def get_spells(user_class, level, **kwargs):
     spell_dict = {}
     conn = sqlite3.connect('spells.db')
     c = conn.cursor()
-    if kwargs is not None:
+    if 'school' in kwargs:
         x = []  # Pull Each School of Magic from the database that is listed in kwargs
         for key, value in kwargs.items():
             c.execute(
@@ -225,13 +225,14 @@ def get_spells(user_class, level, **kwargs):
         x += set(rtn_list)
         x.sort()
     else:  # no schools listed, pull from class and level only
+        x = []
         c.execute("SELECT NAME FROM Spells WHERE {usc}_SPELL = 1 and LEVEL = {lvl} "
                   "ORDER BY NAME ASC".format(usc=user_class, lvl=level))
         spell_list = c.fetchall()
         for row in spell_list:
             for item in row:
                 rtn_list.append(item)
-        x = rtn_list
+        x += set(rtn_list)
     # got dict?
     for i in range(len(x)):
         spell_dict[i+1] = x[i]
@@ -260,9 +261,10 @@ def spell_queue(user_class, level, **kwargs):
         for key, value in slots.items():
             print(key, value)
             if value > 0:
-                print(get_spells(user_class, key, **kwargs))
+                x = get_spells(user_class, key, **kwargs)
+                for key in x:
+                    print(value)
 
 
 spell_queue("Bard", 2)
 
-print(get_spells("Bard", 2))
