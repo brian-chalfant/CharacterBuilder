@@ -951,9 +951,9 @@ class Fighter(CharacterClass):
         self.spellcasting = False
         self.spellcasting_ability = "Wisdom"
         self.language = []
+        x = fighter_fighting_style()
         if level >= 1:
             self.abilities.append("SECOND WIND")
-            x = fighter_fighting_style()
             print("pick two(2) skills from this list")
             for key, value in fighter_skill_list().items():
                 print(key, value)
@@ -1005,9 +1005,120 @@ class Fighter(CharacterClass):
                 self.classpath = "Battle Master"
                 self.abilities.append("COMBAT SUPERIORITY")
                 self.superiority_die = 4
+                self.superiority_die_type = 'd8'
                 #  choose Maneuvers
             elif a == 3:
                 self.classpath = "Eldritch Knight"
+                self.abilities.append("SPELLCASTING")
+                self.abilities.append("WEAPON BOND")
+        if level >= 4:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 5:
+            self.abilities.append("EXTRA ATTACK")
+        if level >= 6:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 7:
+            if self.classpath == "Champion":
+                self.abilities.append("REMARKABLE ATHLETE")
+            elif self.classpath == "Battle Master":
+                self.abilities.append("KNOW YOUR ENEMY")
+                self.superiority_die += 1
+            elif self.classpath == "Eldritch Knight":
+                self.abilities.append("WAR MAGIC")
+        if level >= 8:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 9:
+            self.abilities.append("INDOMITABLE")
+        if level >= 10:
+            if self.classpath == "Champion":
+                for key, value in x.item():
+                    print(key, value)
+                print("Pick a fighting style:")
+                a = int(input(": "))
+                self.fighting_style += x.pop(a)
+            elif self.classpath == "Battle Master":
+                self.superiority_die_type = 'd10'
+            elif self.classpath == "Eldritch Knight":
+                self.abilities.append("ELDRITCH STRIKE")
+        if level >= 11:
+            self.abilities.remove("EXTRA ATTACK")
+            self.abilities.append("EXTRA ATTACK (2)")
+        if level >= 12:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 13:
+            self.abilities.remove("INDOMITABLE")
+            self.abilities.append("INDOMITABLE (2)")
+        if level >= 14:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 15:
+            if self.classpath == "Champion":
+                self.abilities.remove("IMPROVED CRITICAL")
+                self.abilities.append("SUPERIOR CRITICAL")
+            elif self.classpath == "Battle Master":
+                self.superiority_die += 1
+                self.abilities.append("RELENTLESS")
+            elif self.classpath == "Eldritch Knight":
+                self.abilities.append("ARCANE CHARGE")
+        if level >= 16:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 17:
+            self.abilities.remove("ACTION SURGE")
+            self.abilities.append("ACTION SURGE (2)")
+            self.abilities.remove("INDOMITABLE (2)")
+            self.abilities.append("INDOMITABLE (3)")
+        if level >= 18:
+            if self.classpath == "Champion":
+                self.abilities.append("SURVIVOR")
+            elif self.classpath == "Eldritch Knight":
+                self.abilities.remove("WAR MAGIC")
+                self.abilities.append("IMPROVED WAR MAGIC")
+        if level >= 19:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 20:
+            self.abilities.remove("EXTRA ATTACK (2)")
+            self.abilities.append("EXTRA ATTACK (3)")
 
 
 class Monk(CharacterClass):
