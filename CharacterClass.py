@@ -1,6 +1,6 @@
 from DiceRoll import diceroll
 from modifiers import *
-from spells import *
+from spells import spell_queue
 from language import choose_language
 
 
@@ -481,7 +481,7 @@ class Bard(CharacterClass):
             self.charisma_addition += ability_dict.get(6)
         if level >= 20:
             self.abilities.append("SUPERIOR INSPIRATION")
-        self.spells = bard_magic_selection(bard_slots(level))
+        self.spells = spell_queue("Bard", level)
 
 
 class Cleric(CharacterClass):
@@ -792,7 +792,7 @@ class Cleric(CharacterClass):
         if level >= 20:
             self.abilities.remove("DIVINE INTERVENTION")
             self.abilities.append("IMPROVED DIVINE INTERVENTION")
-        self.spells = cleric_magic_selection(cleric_slots(level))
+        self.spells = spell_queue("Cleric", level)
 
 
 class Druid(CharacterClass):
@@ -934,7 +934,7 @@ class Druid(CharacterClass):
             self.abilities.append("BEAST SPELLS")
         if level >= 20:
             self.abilities.append("ARCHDRUID")
-        self.spells = druid_magic_selection(druid_slots(level))
+        self.spells = spell_queue("Druid", level)
 
 
 class Fighter(CharacterClass):
@@ -944,7 +944,7 @@ class Fighter(CharacterClass):
         self.hit_die = diceroll(1, 10)  # Hit die is 1d8
         self.primary_ability = "Strength"  # primary ability is Strength
         self.saves = ["Strength", "Constitution"]  # Saving throws are Strength and Constitution
-        self.armorpro = ["Light Armor", "Medium Armor", "Heavy Armor", "Shields"]  # Proficient in Light, Medium Armor and Shields
+        self.armorpro = ["Light Armor", "Medium Armor", "Heavy Armor", "Shields"]
         self.weaponpro = ["Simple Weapons", "Martial Weapons"]
         self.toolpro = []
         self.spells = []
@@ -1010,48 +1010,60 @@ class Fighter(CharacterClass):
                 self.classpath = "Eldritch Knight"
 
 
-
-
 class Monk(CharacterClass):
     def __init__(self, level):
         super(Monk, self).__init__()
         self.name = 'Monk'
+        if level > 1:
+            self.abilities.append("")
 
 
 class Paladin(CharacterClass):
     def __init__(self, level):
         super(Paladin, self).__init__()
         self.name = 'Paladin'
+        if level > 1:
+            self.abilities.append("")
 
 
 class Ranger(CharacterClass):
     def __init__(self, level):
         super(Ranger, self).__init__()
         self.name = 'Ranger'
+        if level > 1:
+            self.abilities.append("")
 
 
 class Rogue(CharacterClass):
     def __init__(self, level):
         super(Rogue, self).__init__()
         self.name = 'Rogue'
+        if level > 1:
+            self.abilities.append("")
 
 
 class Sorcerer(CharacterClass):
     def __init__(self, level):
         super(Sorcerer, self).__init__()
         self.name = 'Sorcerer'
+        if level > 1:
+            self.abilities.append("")
 
 
 class Warlock(CharacterClass):
     def __init__(self, level):
         super(Warlock, self).__init__()
         self.name = 'Warlock'
+        if level > 1:
+            self.abilities.append("")
 
 
 class Wizard(CharacterClass):
     def __init__(self, level):
         super(Wizard, self).__init__()
         self.name = 'Wizard'
+        if level > 1:
+            self.abilities.append("")
 
 
 # Notes to yourself:  Add in Proficiency bonus for each level.

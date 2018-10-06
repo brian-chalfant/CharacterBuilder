@@ -233,9 +233,11 @@ def get_spells(user_class, level, **kwargs):
             for item in row:
                 rtn_list.append(item)
         x += set(rtn_list)
+        x.sort()
     # got dict?
     for i in range(len(x)):
         spell_dict[i+1] = x[i]
+    conn.close()
     return spell_dict
 
 
@@ -244,6 +246,7 @@ def get_spells(user_class, level, **kwargs):
 
 def spell_queue(user_class, level, **kwargs):
         slots = None
+        spells = []
         if user_class == "Bard":
             slots = bard_slots(level)
         elif user_class == "Cleric":
@@ -259,12 +262,16 @@ def spell_queue(user_class, level, **kwargs):
         elif user_class == "Wizard":
             slots = wizard_slots(level)
         for key, value in slots.items():
-            print(key, value)
             if value > 0:
+                print("Level", key)
                 x = get_spells(user_class, key, **kwargs)
-                for key in x:
-                    print(value)
-
-
-spell_queue("Bard", 2)
-
+                for xkey in x:
+                    print(xkey, x[xkey])
+                for i in range(value):
+                    item = str(input("Level " + str(key) + ": " + "Select number " + str(i+1)
+                                     + " of " + str(value) + ": "))
+                    try:
+                        spells.append(x[int(item)])
+                    except KeyError:
+                        break
+        return spells
