@@ -1125,8 +1125,40 @@ class Monk(CharacterClass):
     def __init__(self, level):
         super(Monk, self).__init__()
         self.name = 'Monk'
-        if level > 1:
-            self.abilities.append("")
+        self.hit_die = diceroll(1, 8)  # Hit die is 1d8
+        self.primary_ability = "Dexterity"  # primary ability is Dex
+        self.saves = ["Strength", "Dexterity"]  # Saving throws are Strength and Constitution
+        self.armorpro = []
+        self.weaponpro = ["Simple Weapons", "Shortswords"]
+        self.toolpro = ['One type of Artisan Tools', 'One Musical Instrument']
+        self.spells = []
+        self.spellcasting = False
+        self.spellcasting_ability = "Wisdom"
+        self.language = []
+        if level >= 1:
+            self.abilities.append("UNARMORED DEFENSE")
+            self.abilities.append("MARTIAL ARTS")
+        if level >= 2:
+            self.ki_points=2
+            self.abilities.append("FLURRY OF BLOWS")
+            self.abilities.append("PATIENT DEFENSE")
+            self.abilities.append("STEP OF TEH WIND")
+            self.abilities.append("UNARMORED MOVEMENT")
+        if level >= 3:
+            print("you must now choose your Monastic Tradition, you have the following options: \n"
+                  "1: Way of the Open Hand ('OPEN HAND TECHNIQUE', 'WHOLENESS OF BODY', 'TRANQUILITY') \n"
+                  "2: The Way of Shadow ('SHADOW ARTS', 'SHADOW STEP', 'CLOAK OF SHADOWS') \n"
+                  "3: Way of the Four Elements ('DISCIPLE OF THE ELEMENTS', 'ELEMENTAL DISCIPLINE', 'WAR MAGIC')")
+            a = int(input("Choose your Path: "))
+            if a == 1:
+                self.classpath = "Way of the Open Hand"
+                self.abilities.append("OPEN HAND TECHNIQUE")
+            elif a == 2:
+                self.classpath = "The Way of Shadow"
+                self.abilities.append("SHADOW ARTS")
+            elif a == 3:
+                self.classpath = "Way fo the Four Elements"
+                self.abilities.append("elemental disciplines")
 
 
 class Paladin(CharacterClass):
