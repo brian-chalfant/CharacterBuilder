@@ -242,7 +242,7 @@ def get_spells(user_class, level, **kwargs):
 
 
 # get Rogue Spells
-# print(get_spells("wizard", 2, school1='enchantment', school2='illusion'))
+#print(get_spells("wizard", 2, school='enchantment', school2='illusion'))
 
 def spell_queue(user_class, level, **kwargs):
         slots = None

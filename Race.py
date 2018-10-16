@@ -18,6 +18,7 @@ class Race:
         self.strength = initial_diceroll()
         self.language = ["Common"]
         self.cantrip = []
+        self.abilities = []
         if level is None:
             level = 1
         self.level = level
@@ -335,6 +336,7 @@ class Human(Race):
         self.name = 'Human'
         self.speed = 30
         self.language.append(str(choose_language()))
+        self.abilities = []
 
 
 # Start Tiefling --------------------------------------------------

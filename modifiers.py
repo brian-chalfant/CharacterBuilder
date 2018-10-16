@@ -245,6 +245,19 @@ def full_skill_list():
     return skill_list
 
 
+def ranger_skill_list():
+    skills = {
+        1: 'Animal Handling',
+        2: 'Athletics',
+        3: 'Insight',
+        4: 'Investigation',
+        5: 'Nature',
+        6: 'Perception',
+        7: 'Stealth',
+        8: 'Survival'
+    }
+
+
 def divine_domains():
 
     domains = {

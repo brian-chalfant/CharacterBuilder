@@ -985,7 +985,7 @@ class Fighter(CharacterClass):
             if (s == 8) or (r == 8):
                 self.survival_skill = True
 
-            for key, value in x.item():
+            for key, value in x.items():
                 print(key, value)
             print("Pick a fighting style:")
             a = int(input(": "))
@@ -1119,6 +1119,8 @@ class Fighter(CharacterClass):
         if level >= 20:
             self.abilities.remove("EXTRA ATTACK (2)")
             self.abilities.append("EXTRA ATTACK (3)")
+        if self.classpath == "Eldritch Knight" and level >= 3:
+            self.spells += spell_queue("Wizard", level, school='abjuration', school2='evocation')
 
 
 class Monk(CharacterClass):
@@ -1145,6 +1147,7 @@ class Monk(CharacterClass):
             self.abilities.append("STEP OF TEH WIND")
             self.abilities.append("UNARMORED MOVEMENT")
         if level >= 3:
+            self.abilities.append("DEFLECT MISSILES")
             print("you must now choose your Monastic Tradition, you have the following options: \n"
                   "1: Way of the Open Hand ('OPEN HAND TECHNIQUE', 'WHOLENESS OF BODY', 'TRANQUILITY') \n"
                   "2: The Way of Shadow ('SHADOW ARTS', 'SHADOW STEP', 'CLOAK OF SHADOWS') \n"
@@ -1159,22 +1162,267 @@ class Monk(CharacterClass):
             elif a == 3:
                 self.classpath = "Way fo the Four Elements"
                 self.abilities.append("elemental disciplines")
+        if level >= 4:
+            self.abilities.append("SLOW FALL")
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 5:
+            self.abilities.append("EXTRA ATTACK")
+            self.abilities.append("STUNNING STRIKE")
+        if level >= 6:
+            self.abilities.append("KI-EMPOWERED STRIKES")
+            if self.classpath == "Way of the Open Hand":
+                self.abilities.append("WHOLENESS OF BODY")
+            if self.classpath == "The Way of Shadow":
+                self.abilities.append("SHADOW STEP")
+            if self.classpath == "Way fo the Four Elements":
+                self.abilities.append("elemental disciplines 2")
+        if level >= 7:
+            self.abilities.append("EVASION")
+            self.abilities.append("STILLNESS OF MIND")
+        if level >= 8:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 9:
+            self.abilities.remove("UNARMORED MOVEMENT")
+            self.abilities.append("IMPROVED UNARMORED MOVEMENT")
+        if level >= 10:
+            self.abilities.append("PURITY OF BODY")
+        if level >= 11:
+            if self.classpath == "Way of the Open Hand":
+                self.abilities.append("TRANQUILITY")
+            if self.classpath == "The Way of Shadow":
+                self.abilities.append("CLOAK OF SHADOWS")
+            if self.classpath == "Way fo the Four Elements":
+                self.abilities.append("elemental disciplines 3")
+        if level >= 12:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 13:
+            self.abilities.append("TONGUE OF THE SUN AND MOON")
+        if level >= 14:
+            self.abilities.append("DIAMOND SOUL")
+        if level >= 15:
+            self.abilities.append("TIMELESS BODY")
+        if level >= 16:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 17:
+            if self.classpath == "Way of the Open Hand":
+                self.abilities.append("QUIVERING PALM")
+            if self.classpath == "The Way of Shadow":
+                self.abilities.append("OPPORTUNIST")
+            if self.classpath == "Way fo the Four Elements":
+                self.abilities.append("elemental disciplines 4")
+        if level >= 18:
+            self.abilities.append("EMPTY BODY")
+        if level >= 19:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 20:
+            self.abilities.append("PERFECT SELF")
 
 
 class Paladin(CharacterClass):
     def __init__(self, level):
         super(Paladin, self).__init__()
         self.name = 'Paladin'
-        if level > 1:
-            self.abilities.append("")
+        self.hit_die = diceroll(1, 10)  # Hit die is 1d8
+        self.primary_ability = "Strength"  # primary ability is Dex
+        self.saves = ["Wisdom", "Charisma"]  # Saving throws are Strength and Constitution
+        self.armorpro = ['All Armor', 'Shields']
+        self.weaponpro = ["Simple Weapons", "Martial Weapons"]
+        self.toolpro = []
+        self.spells = []
+        self.spellcasting = True
+        self.spellcasting_ability = "Charisma"
+        self.language = []
+
+        if level >= 1:
+            self.abilities.append("DIVINE SENSE")
+            self.abilities.append("LAY ON HANDS")
+        if level >= 2:
+            self.abilities.append("fighting style")
+            self.abilities.append("DIVINE SMITE")
+        if level >= 3:
+            self.abilities.append("DIVINE HEALTH")
+            print("you must now choose your Sacred Oath, you have the following options: \n"
+                  "1: Oath of Devotion ('AURA OF DEVOTION', 'PURITY OF SPIRIT', 'HOLY NIMBUS') \n"
+                  "2: Oath of the Ancients ('AURA OF WARDING', 'UNDYING SENTINEL', 'ELDER CHAMPION') \n"
+                  "3: Oath of Vengeance ('RELENTLESS AVENGER', 'SOUL OF VENGEANCE', 'AVENGING ANGEL')")
+            a = int(input("Choose your Path: "))
+            if a == 1:
+                self.classpath = "Oath of Devotion"
+                self.abilities.append("CHANNEL DIVINITY: SACRED WEAPON")
+                self.abilities.append("CHANNEL DIVINITY: TURN THE UNHOLY")
+            elif a == 2:
+                self.classpath = "Oath of the Ancients"
+                self.abilities.append("CHANNEL DIVINITY: NATURE'S WRATH")
+                self.abilities.append("CHANNEL DIVINITY: TURN THE FAITHLESS")
+            elif a == 3:
+                self.classpath = "Oath of Vengeance"
+                self.abilities.append("CHANNEL DIVINITY: ABJURE ENEMY")
+                self.abilities.append("CHANNEL DIVINITY: VOW OF ENMITY")
+        if level >= 4:
+            self.abilities.append("SLOW FALL")
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 5:
+            self.abilities.append("EXTRA ATTACK")
+        if level >= 6:
+            self.abilities.append("AURA OF PROTECTION")
+        if level >= 7:
+            if self.classpath == "Oath of Devotion":
+                self.abilities.append("AURA OF DEVOTION")
+            if self.classpath == "Oath to the Ancients":
+                self.abilities.append("AURA OF WARDING")
+            if self.classpath == "Oath of Vengeance":
+                self.abilities.append("RELENTLESS AVENGER")
+        if level >= 8:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 10:
+            self.abilities.append("AURA OF COURAGE")
+        if level >= 11:
+            self.abilities.remove("DIVINE SMITE")
+            self.abilities.append("IMPROVED DIVINE SMITE")
+        if level >= 12:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 14:
+            self.abilities.append("CLEANSING TOUCH")
+        if level >= 15:
+            if self.classpath == "Oath of Devotion":
+                self.abilities.append("PURITY OF SPIRIT")
+            if self.classpath == "Oath to the Ancients":
+                self.abilities.append("UNDYING SENTINEL")
+            if self.classpath == "Oath of Vengeance":
+                self.abilities.append("SOUL OF VENGEANCE")
+        if level >= 16:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 18:
+            self.abilities.remove("AURA OF PROTECTION")
+            self.abilities.append("IMPROVED AURA OF PROTECTION")
+            self.abilities.remove("AURA OF COURAGE")
+            self.abilities.append("IMPROVED AURA OF COURAGE")
+            if self.classpath == "Oath of Devotion":
+                self.abilities.remove("AURA OF DEVOTION")
+                self.abilities.append("IMPROVED AURA OF DEVOTION")
+            if self.classpath == "Oath to the Ancients":
+                self.abilities.remove("AURA OF WARDING")
+                self.abilities.append("IMPROVED AURA OF WARDING")
+        if level >= 19:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 20:
+            if self.classpath == "Oath of Devotion":
+                self.abilities.append("HOLY NIMBUS")
+            if self.classpath == "Oath to the Ancients":
+                self.abilities.append("ELDER CHAMPION")
+            if self.classpath == "Oath of Vengeance":
+                self.abilities.append("AVENGING ANGEL")
+        self.spells += spell_queue("Paladin", level)
 
 
 class Ranger(CharacterClass):
     def __init__(self, level):
         super(Ranger, self).__init__()
         self.name = 'Ranger'
-        if level > 1:
-            self.abilities.append("")
+        self.hit_die = diceroll(1, 10)  # Hit die is 1d8
+        self.primary_ability = "Dexterity"  # primary ability is Dex
+        self.saves = ["Strength", "Dexterity"]  # Saving throws are Strength and Constitution
+        self.armorpro = ['Light Armor', 'Medium Armor', 'Shields']
+        self.weaponpro = ["Simple Weapons", "Martial Weapons"]
+        self.toolpro = []
+        self.spells = []
+        self.spellcasting = True
+        self.spellcasting_ability = "Charisma"
+        self.language = []
+
+        if level >= 1:
+            print("pick two(2) skills from this list")
+            for key, value in ranger_skill_list().items():
+                print(key, value)
+            s = input("Enter one number:")
+            s = int(s)
+            r = input("Enter the second number:")
+            r = int(r)
+            t = input("Enter the third number:")
+            t = int(t)
+            if (s == 1) or (r == 1) or (t == 1):
+                self.acrobatics_skill = True
+
+            if (s == 2) or (r == 2) or (t == 2):
+                self.animal_handling_skill = True
+
+            if (s == 3) or (r == 3) or (t == 3):
+                self.athletics_skill = True
+
+            if (s == 4) or (r == 4) or (t == 4):
+                self.history_skill = True
+
+            if (s == 5) or (r == 5) or (t == 5):
+                self.insight_skill = True
+
+            if (s == 6) or (r == 6) or (t == 6):
+                self.intimidation_skill = True
+
+            if (s == 7) or (r == 7) or (t == 7):
+                self.perception_skill = True
+
+            if (s == 8) or (r == 8) or (t == 8):
+                self.survival_skill = True
 
 
 class Rogue(CharacterClass):
