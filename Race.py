@@ -181,6 +181,7 @@ class Genasi(Race):
         self.name = 'Genasi'
         self.speed = 30
         self.abilities = []
+        self.language.append("Primordial")
 
 
 class AirGenasi(Genasi):

@@ -220,6 +220,16 @@ def fighter_fighting_style():
     return style_list
 
 
+def ranger_fighting_style():
+    style_list = {
+        1: "Archery ( +2 Bonus to Ranged Attacks)",
+        2: "Defense ( +1 Bonus to AC)",
+        3: "Dueling ( +2 Bonus to Damage)",
+        6: "Two-Weapon Fighting ( Add Ability Modifier to Damage for Second Weapon)",
+        }
+    return style_list
+
+
 def full_skill_list():
 
     skill_list = {
@@ -256,6 +266,7 @@ def ranger_skill_list():
         7: 'Stealth',
         8: 'Survival'
     }
+    return skills
 
 
 def divine_domains():
@@ -271,6 +282,19 @@ def divine_domains():
         }
     return domains
 
+
+def druidic_lands():
+    druidic_lands = {
+        1: "Arctic",
+        2: "Coast",
+        3: "Desert",
+        4: "Forest",
+        5: "Grassland",
+        6: "Mountain",
+        7: "Swamp",
+        8: "Underdark"
+    }
+    return druidic_lands
 
 def circle_spells(land_type, level):
     if land_type == "Arctic":
@@ -337,3 +361,100 @@ def circle_spells(land_type, level):
             9: ["Cloudkill", "Insect Plague"]
         }
         return switcher.get(level)
+
+
+def enemy_types():
+    _enemy_types = {
+        1: 'Aberrations',
+        2: 'Beasts',
+        3: 'Celestials',
+        4: 'Constructs',
+        5: 'Dragons',
+        6: 'Elementals',
+        7: 'Fey',
+        8: 'Fiends',
+        9: 'Giants',
+        10: 'Monstrosities',
+        11: 'Oozes',
+        12: 'Plants',
+        13: 'Undead'
+        }
+    return _enemy_types
+
+def enemy_languages():
+    lang = {
+        'Celestials': 'Celestial',
+        'Dragons': 'Draconic',
+        'Elementals': 'Primoridal',
+        'Fey': 'Sylvan',
+        'Giants': 'Giant',
+        }
+    return lang
+
+
+def race_languages():
+    lang = {
+        'Aarakocra': 'Auran',
+        'Dragonborn': 'Draconic',
+        'Dwarf': 'Dwarven',
+        'Elf': 'Elvish',
+        'Genasi': 'Primordial',
+        'Gnome': 'Gnomish',
+        'Goliath': 'Giant',
+        'Half-Elf': 'Elvish',
+        'Half-Orc': 'Orc',
+        'Halfling': 'Halfling',
+        'Human': 'Common',
+        'Tiefling': 'Infernal'
+    }
+    return lang
+
+def list_races():
+    races = {
+        1: "Aarokocra",
+        2: "Dragonborn",
+        3: "Dwarf",
+        4: "Elf",
+        5: "Genasi",
+        6: "Gnome",
+        7: "Goliath",
+        8: "Half-Elf",
+        9: "Half-Orc",
+        10: "Halfling",
+        11: "Human",
+        12: "Tiefling"
+    }
+    return races
+
+
+def favored_enemy():
+    print("FAVORED ENEMY Selection")
+    print("Will you pick: \n 1: one enemy type \n 2: two races")
+    selection = int(input(":"))
+    rtn = []
+    if selection == 1:
+        for key, value in enemy_types().items():
+            print(key, ": ", value)
+        x = int(input("Choose One(1) enemy type"))
+        fav_enemy = enemy_types().get(x)
+        if fav_enemy in enemy_languages().keys():
+            rtn.append([fav_enemy, enemy_languages().get(fav_enemy)])
+        else:
+            rtn.append([fav_enemy, None])
+    if selection == 2:
+        for key, value in list_races().items():
+            print(key, ": ", value)
+        x = int(input("Choose the first Race"))
+        y = int(input("Choose the second Race"))
+        race1 = list_races().get(x)
+        race2 = list_races().get(y)
+        if race1 in race_languages().keys():
+            rtn.append([race1, race_languages().get(race1)])
+        else:
+            rtn.append(None)
+        if race2 in race_languages().keys():
+            rtn.append([race2, race_languages().get(race2)])
+        else:
+            rtn.append(None)
+    return rtn
+

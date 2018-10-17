@@ -811,19 +811,10 @@ class Druid(CharacterClass):
         self.spellcasting_ability = "Wisdom"
         self.language = ["Druidic"]
         print("Where did you become a druid")
-        druidic_lands = {
-            1: "Arctic",
-            2: "Coast",
-            3: "Desert",
-            4: "Forest",
-            5: "Grassland",
-            6: "Mountain",
-            7: "Swamp",
-            8: "Underdark"
-        }
-        for key, value in druidic_lands.items():
+        lands = druidic_lands()
+        for key, value in druidic_lands().items():
             print(key, ": ", value)
-        self.land_type = druidic_lands.pop(int(input("Enter a Number: ")))
+        self.land_type = lands.pop(int(input("Enter a Number: ")))
         print("pick two(2) skills from this list")
         for key, value in druid_skill_list().items():
             print(key, value)
@@ -1389,9 +1380,14 @@ class Ranger(CharacterClass):
         self.spellcasting = True
         self.spellcasting_ability = "Charisma"
         self.language = []
-
+        x = ranger_fighting_style()
+        lands = druidic_lands()
         if level >= 1:
-            print("pick two(2) skills from this list")
+            fav_enemy = favored_enemy()
+            for i in fav_enemy:
+                self.abilities.append("FAVORED ENEMY " + "(" + i[0] + ")")
+                self.language.append(i[1])
+            print("pick three(3) skills from this list")
             for key, value in ranger_skill_list().items():
                 print(key, value)
             s = input("Enter one number:")
@@ -1423,6 +1419,106 @@ class Ranger(CharacterClass):
 
             if (s == 8) or (r == 8) or (t == 8):
                 self.survival_skill = True
+            print("What land type are you familiar with?")
+
+            for key, value in lands.items():
+                print(key, ":", value)
+            selection = "NATURAL EXPLORER " + "(" + str(lands.pop(int(input("Enter a Number"))) + ")")
+            self.abilities.append(selection)
+        if level >= 2:
+            for key, value in x.items():
+                print(key, value)
+            print("Pick a fighting style:")
+            a = int(input(": "))
+            self.fighting_style = x.pop(a)
+            self.abilities.append("SPELLCASTING")
+        if level >= 3:
+            print("you must now choose your Ranger Archtype, you have the following options: \n"
+                  "1: Hunter ('HUNTER\'S PREY', 'DEFENSIVE TACTICS', 'MULTIATTACK') \n"
+                  "2: Beast Master ('RANGER\'S COMPANION', 'EXCEPTIONAL TRAINING', 'BESTIAL FURY') \n")
+            a = int(input("Choose your Path: "))
+            if a == 1:
+                self.classpath = "Hunter"
+                self.abilities.append("HUNTER\'S PREY")
+            elif a == 2:
+                self.classpath = "Beast Master"
+                self.abilities.append("RANGER\'s COMPANION")
+        if level >= 4:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 5:
+            self.abilities.append("EXTRA ATTACK")
+        if level >= 6:
+            self.abilities.append("FAVORED ENEMY 2 and addl language")
+        if level >= 7:
+            if self.classpath == "Hunter":
+                self.abilities.append("DEFENSIVE TACTICS")
+            elif self.classpath == "Beast Master":
+                self.abilities.append("EXCEPTIONAL TRAINING")
+        if level >= 8:
+            self.abilities.append("LAND\'S STRIDE")
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 10:
+            self.abilities.append("HIDE IN PLAIN SIGHT")
+            for key, value in lands.items():
+                print(key, ":", value)
+            selection = "NATURAL EXPLORER " + "(" + str(lands.pop(int(input("Enter a Number"))) + ")")
+            self.abilities.append(selection)
+        if level >= 11:
+            if self.classpath == "Hunter":
+                self.abilities.append("MULTIATTACK")
+            elif self.classpath == "Beast Master":
+                self.abilities.append("BESTIAL FURY")
+        if level >= 12:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 14:
+            self.abilities.append("FAVORED ENEMY 3 and addl language")
+        if level >= 15:
+            if self.classpath == "Hunter":
+                self.abilities.append("SUPERIOR HUNTER\'S DEFENSE")
+            elif self.classpath == "Beast Master":
+                self.abilities.append("SHARE SPELLS")
+        if level >= 16:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 18:
+            self.abilities.append("FERAL SENSES")
+        if level >= 19:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 20:
+            self.abilities.append("FOE SLAYER")
+
+
+
+
 
 
 class Rogue(CharacterClass):
