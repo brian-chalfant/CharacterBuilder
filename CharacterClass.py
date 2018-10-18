@@ -1132,7 +1132,7 @@ class Monk(CharacterClass):
             self.abilities.append("UNARMORED DEFENSE")
             self.abilities.append("MARTIAL ARTS")
         if level >= 2:
-            self.ki_points=2
+            self.ki_points = 2
             self.abilities.append("FLURRY OF BLOWS")
             self.abilities.append("PATIENT DEFENSE")
             self.abilities.append("STEP OF TEH WIND")
@@ -1517,16 +1517,193 @@ class Ranger(CharacterClass):
             self.abilities.append("FOE SLAYER")
 
 
-
-
-
-
 class Rogue(CharacterClass):
     def __init__(self, level):
         super(Rogue, self).__init__()
         self.name = 'Rogue'
-        if level > 1:
-            self.abilities.append("")
+        self.hit_die = diceroll(1, 8)  # Hit die is 1d8
+        self.primary_ability = "Dexterity"  # primary ability is Dex
+        self.saves = ["Dexterity", "Intelligence"]  # Saving throws are Strength and Constitution
+        self.armorpro = ['Light Armor']
+        self.weaponpro = ["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"]
+        self.toolpro = ["Thieves' Tools"]
+        self.spells = []
+        self.spellcasting = True
+        self.spellcasting_ability = "Charisma"
+        self.language = []
+        if level >= 1:
+            print("pick four(4) skills from this list")
+            for key, value in ranger_skill_list().items():
+                print(key, value)
+            s = input("Enter one number:")
+            s = int(s)
+            r = input("Enter the second number:")
+            r = int(r)
+            t = input("Enter the third number:")
+            t = int(t)
+            u = input("Enter the fourth number:")
+            u = int(u)
+            if (s == 1) or (r == 1) or (t == 1) or (u == 1):
+                self.acrobatics_skill = True
+
+            if (s == 2) or (r == 2) or (t == 2) or (u == 2):
+                self.athletics_skill = True
+
+            if (s == 3) or (r == 3) or (t == 3) or (u == 3):
+                self.deception_skill = True
+
+            if (s == 4) or (r == 4) or (t == 4) or (u == 4):
+                self.insight_skill = True
+
+            if (s == 5) or (r == 5) or (t == 5) or (u == 5):
+                self.intimidation_skill = True
+
+            if (s == 6) or (r == 6) or (t == 6) or (u == 6):
+                self.investigation_skill = True
+
+            if (s == 7) or (r == 7) or (t == 7) or (u == 7):
+                self.perception_skill = True
+
+            if (s == 8) or (r == 8) or (t == 8) or (u == 8):
+                self.performance_skill = True
+
+            if (s == 9) or (r == 9) or (t == 9) or (u == 9):
+                self.persuasion_skill = True
+
+            if (s == 10) or (r == 10) or (t == 10) or (u == 10):
+                self.sleight_of_hand_skill = True
+
+            if (s == 11) or (r == 11) or (t == 11) or (u == 11):
+                self.stealth_skill = True
+            self.abilities.append("EXPERTISE")
+            self.abilities.append("SNEAK ATTACK (1d6)")
+            self.language.append("THIEVES CANT")
+        if level >= 2:
+            self.abilities.append("CUNNING ACTION")
+        if level >= 3:
+            self.abilities.remove("SNEAK ATTACK (1d6)")
+            self.abilities.append("SNEAK ATTACK (2d6)")
+            print("you must now choose your Rogue Archtype, you have the following options: \n"
+                  "1: Thief ('FAST HANDS', 'SECOND-STORY WORK', 'SUPREME SNEAK') \n"
+                  "2: Assassin ('BONUS PROFICIENCIES', 'ASSASSINATE', 'INFILTRATION EXPERTISE') \n"
+                  "3: Arcane Trickster ('SPELLCASTING', 'MAGE HAND LEGERDEMAIN', 'MAGICAL AMBUSH')")
+
+            a = int(input("Choose your Path: "))
+            if a == 1:
+                self.classpath = "Thief"
+                self.abilities.append("FAST HANDS")
+                self.abilities.append("SECOND-STORY WORK")
+            elif a == 2:
+                self.classpath = "Assassin"
+                self.toolpro.append("Disguise Kit")
+                self.toolpro.append("Poisoner's Kit")
+                self.abilities.append("ASSASSINATE")
+            elif a == 3:
+                self.classpath = "Arcane Trickster"
+                self.abilities.append("SPELLCASTING")
+                self.abilities.append("MAGE HAND LEGERDEMAIN")
+        if level >= 4:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 5:
+            self.abilities.append("UNCANNY DODGE")
+            self.abilities.remove("SNEAK ATTACK (2d6)")
+            self.abilities.append("SNEAK ATTACK (3d6)")
+        if level >= 6:
+            self.abilities.remove("EXPERTISE")
+            self.abilities.append("IMPROVED EXPERTISE")
+        if level >= 7:
+            self.abilities.append("EVASION")
+            self.abilities.remove("SNEAK ATTACK (3d6)")
+            self.abilities.append("SNEAK ATTACK (4d6)")
+        if level >= 8:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 9:
+            self.abilities.remove("SNEAK ATTACK (4d6)")
+            self.abilities.append("SNEAK ATTACK (5d6)")
+            if self.classpath == "Thief":
+                self.abilities.append("SUPREME SNEAK")
+            elif self.classpath == "Assassin":
+                self.abilities.append("INFILTRATION EXPERTISE")
+            elif self.classpath == "Arcane Trickster":
+                self.abilities.append("MAGICAL AMBUSH")
+        if level >= 10:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 11:
+            self.abilities.append("RELIABLE TALENT")
+            self.abilities.remove("SNEAK ATTACK (5d6)")
+            self.abilities.append("SNEAK ATTACK (6d6)")
+        if level >= 12:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 13:
+            self.abilities.remove("SNEAK ATTACK (6d6)")
+            self.abilities.append("SNEAK ATTACK (7d6)")
+            if self.classpath == "Thief":
+                self.abilities.append("USE MAGIC DEVICE")
+            elif self.classpath == "Assassin":
+                self.abilities.append("IMPOSTER")
+            elif self.classpath == "Arcane Trickster":
+                self.abilities.append("VERSATILE TRICKSTER")
+        if level >= 14:
+            self.abilities.append("BLINDSENSE")
+        if level >= 15:
+            self.abilities.append("SLIPPERY MIND")
+            self.abilities.remove("SNEAK ATTACK (7d6)")
+            self.abilities.append("SNEAK ATTACK (8d6)")
+        if level >= 16:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 17:
+            self.abilities.remove("SNEAK ATTACK (8d6)")
+            self.abilities.append("SNEAK ATTACK (9d6)")
+            if self.classpath == "Thief":
+                self.abilities.append("THIEF'S REFLEXES")
+            elif self.classpath == "Assassin":
+                self.abilities.append("DEATH STRIKE")
+            elif self.classpath == "Arcane Trickster":
+                self.abilities.append("SPELL THIEF")
+        if level >= 18:
+            self.abilities.append("ELUSIVE")
+        if level >= 19:
+            self.abilities.remove("SNEAK ATTACK (9d6)")
+            self.abilities.append("SNEAK ATTACK (10d6)")
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 20:
+            self.abilities.append("STROKE OF LUCK")
 
 
 class Sorcerer(CharacterClass):

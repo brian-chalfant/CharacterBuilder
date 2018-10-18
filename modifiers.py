@@ -269,6 +269,23 @@ def ranger_skill_list():
     return skills
 
 
+def rogue_skill_list():
+    skills = {
+        1: 'Acrobatics',
+        2: 'Athletics',
+        3: 'Deception',
+        4: 'Insight',
+        5: 'Intimidation',
+        6: 'Investigation',
+        7: 'Perception',
+        8: 'Performance',
+        9: 'Persuasion',
+        10: 'Sleight of Hand',
+        11: 'Stealth'
+    }
+    return skills
+
+
 def divine_domains():
 
     domains = {

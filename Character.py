@@ -60,7 +60,22 @@ halfling_races = {
 
 _race = Race()
 # ----- MAIN PROGRAM -----------------
-print("Welcome to Character Creator.")
+print('     ___________')
+print('._____l_______l_____.')
+print('||_____/  |  \_____||')
+print('      /   |   \ ')
+print('     /    |    \                 WELCOME!')
+print('    /     |     \ ')
+print('   /      |      \ ')
+print('  /       |       \ ')
+print(' /        |        \               THE')
+print('|         |         |              D&D')
+print(' \        |        /            CHARACTER')
+print('   \      |      /               BUILDER')
+print('     \    |    / ')
+print('       \  |  /                 By CHALFEEZY')
+print('         \|/ ')
+print('          ` ')
 # Enter Character's Name
 character_name = str(input("Please Enter your character's name :"))
 user_level = int(input("What level is your character? (1-20): "))
