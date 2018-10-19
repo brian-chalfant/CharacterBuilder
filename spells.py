@@ -207,6 +207,32 @@ def wizard_slots(level):
     return slots.get(level)
 
 
+def rogue_slots(level):
+    slots = {
+        1: {0: 3, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        2: {0: 3, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        3: {0: 3, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        4: {0: 3, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        5: {0: 3, 1: 3, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        6: {0: 3, 1: 3, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        7: {0: 3, 1: 5, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        8: {0: 3, 1: 6, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        9: {0: 3, 1: 6, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        10: {0: 4, 1: 7, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        11: {0: 4, 1: 8, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        12: {0: 4, 1: 8, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        13: {0: 4, 1: 9, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        14: {0: 4, 1: 10, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        15: {0: 4, 1: 10, 2: 3, 3: 2, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        16: {0: 4, 1: 11, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        17: {0: 4, 1: 11, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        18: {0: 4, 1: 11, 2: 3, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        19: {0: 4, 1: 12, 2: 3, 3: 3, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+        20: {0: 4, 1: 13, 2: 3, 3: 3, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+    }
+    return slots.get(level)
+
+
 def get_spells(user_class, level, **kwargs):
     rtn_list = []
     spell_dict = {}
@@ -215,9 +241,14 @@ def get_spells(user_class, level, **kwargs):
     if 'school' in kwargs:
         x = []  # Pull Each School of Magic from the database that is listed in kwargs
         for key, value in kwargs.items():
-            c.execute(
-                "SELECT NAME FROM Spells WHERE {usc}_SPELL = 1 and LEVEL = {lvl} and SCHOOL = \"{sc}\" "
-                "ORDER BY NAME ASC".format(usc=user_class, lvl=level, sc=value))
+            if level == 0:
+                c.execute(
+                    "SELECT NAME FROM Spells WHERE {usc}_SPELL = 1 and LEVEL = {lvl}"
+                    " ORDER BY NAME ASC".format(usc=user_class, lvl=level))
+            else:
+                c.execute(
+                    "SELECT NAME FROM Spells WHERE {usc}_SPELL = 1 and LEVEL = {lvl} and SCHOOL = \"{sc}\" "
+                    "ORDER BY NAME ASC".format(usc=user_class, lvl=level, sc=value))
             spell_list = c.fetchall()
             for row in spell_list:
                 for item in row:
@@ -226,8 +257,8 @@ def get_spells(user_class, level, **kwargs):
         x.sort()
     else:  # no schools listed, pull from class and level only
         x = []
-        c.execute("SELECT NAME FROM Spells WHERE {usc}_SPELL = 1 and LEVEL = {lvl} "
-                  "ORDER BY NAME ASC".format(usc=user_class, lvl=level))
+        c.execute("SELECT NAME FROM Spells WHERE {usc}_SPELL = 1 and LEVEL = {lvl} ORDER BY NAME ASC"
+                  .format(usc=user_class, lvl=level))
         spell_list = c.fetchall()
         for row in spell_list:
             for item in row:
@@ -242,7 +273,7 @@ def get_spells(user_class, level, **kwargs):
 
 
 # get Rogue Spells
-#print(get_spells("wizard", 2, school='enchantment', school2='illusion'))
+# print(get_spells("wizard", 2, school='enchantment', school2='illusion'))
 
 def spell_queue(user_class, level, **kwargs):
         slots = None
@@ -261,6 +292,9 @@ def spell_queue(user_class, level, **kwargs):
             slots = sorcerer_slots(level)
         elif user_class == "Wizard":
             slots = wizard_slots(level)
+        elif user_class == "Rogue":
+            slots = rogue_slots(level)
+            user_class = "Wizard"
         for key, value in slots.items():
             if value > 0:
                 print("Level", key)

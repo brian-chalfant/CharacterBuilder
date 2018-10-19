@@ -157,6 +157,49 @@ def levelup_ability_increase():
     return ability_dict
 
 
+def draconic_lines():
+    lines = {
+        1: 'Black: Acid',
+        2: 'Blue: Lightning',
+        3: 'Brass: Fire',
+        4: 'Bronze: Copper',
+        5: 'Copper: Acid',
+        6: 'Gold: Fire',
+        7: 'Green: Poison',
+        8: 'Red: Fire',
+        9: 'Silver: Cold',
+        10: 'White: Cold'
+        }
+    return lines
+
+
+def metamagic():
+    meta = {
+        1: 'Careful Spell (Protect some creatures from spells full force)',
+        2: 'Distant Spell (Double Range)',
+        3: 'Empowered Spell (Damage Re-roll)',
+        4: 'Extended Spell (Double Duration)',
+        5: 'Heightened Spell (Saving Throw Disadvantage)',
+        6: 'Quickened Spell (Bonus Action)',
+        7: 'Subtle Spell (Remove Somatic or Verbal Components)',
+        8: 'Twinned Spell (Target Two Creatures)',
+    }
+    return meta
+
+
+def metamagic_names():
+    meta = {
+        1: 'Careful Spell',
+        2: 'Distant Spell',
+        3: 'Empowered Spell',
+        4: 'Extended Spell',
+        5: 'Heightened Spell',
+        6: 'Quickened Spell',
+        7: 'Subtle Spell',
+        8: 'Twinned Spell',
+    }
+    return meta
+
 def barbarian_skill_list():
     skill_list = {  # List options for Skill Proficiency
         1: "Animal Handling",
@@ -177,6 +220,18 @@ def cleric_skill_list():
         4: "Persuasion",
         5: "Religion"
     }
+    return skill_list
+
+
+def sorcerer_skill_list():
+    skill_list = {
+        1: 'Arcana',
+        2: 'Deception',
+        3: 'Insight',
+        4: 'Intimidation',
+        5: 'Persuasion',
+        6: 'Religion'
+        }
     return skill_list
 
 

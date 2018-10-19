@@ -2,6 +2,7 @@ from DiceRoll import initial_diceroll
 from random import randrange
 from magic import choose_wizard_cantrip
 from language import choose_language
+from modifiers import draconic_lines
 
 # character_name = input("Enter Character Name: ")
 # character_name = character_name.strip()
@@ -64,15 +65,13 @@ class Aarakocra(Race):
 class Dragonborn(Race):
     def __init__(self, level):
         super(Dragonborn, self).__init__()
-        ancestry = ("Black: Acid", "Blue: Lightning", "Brass: Fire", "Bronze: Lightning", "Copper: Acid", "Gold: Fire",
-                    "Green: Poison", "Red: Fire", "Silver: Cold", "White: Cold")
         self.name = 'Dragonborn'
         self.strength += 2
         self.charisma += 1
         self.speed = 30
         self.abilities = ["DRACONIC ANCESTRY", "DAMAGE RESISTANCE"]
-        for i in ancestry:
-            print(i)
+        for key, value in draconic_lines().items():
+            print(value)
         self.attacks = ["BREATH WEAPON," +
                         set_ancestry_weapon((input("Choose one type of dragon from the Draconic Ancestry table: ")))
                         ]

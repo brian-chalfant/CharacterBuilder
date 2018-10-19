@@ -1577,7 +1577,7 @@ class Rogue(CharacterClass):
                 self.stealth_skill = True
             self.abilities.append("EXPERTISE")
             self.abilities.append("SNEAK ATTACK (1d6)")
-            self.language.append("THIEVES CANT")
+            self.language.append("Thieves' Cant")
         if level >= 2:
             self.abilities.append("CUNNING ACTION")
         if level >= 3:
@@ -1704,14 +1704,153 @@ class Rogue(CharacterClass):
             self.charisma_addition += ability_dict.get(6)
         if level >= 20:
             self.abilities.append("STROKE OF LUCK")
+        if self.classpath == "Arcane Trickster":
+            self.spells = spell_queue("Rogue", level, school='enchantment', school2='illusion')
 
 
 class Sorcerer(CharacterClass):
     def __init__(self, level):
         super(Sorcerer, self).__init__()
         self.name = 'Sorcerer'
-        if level > 1:
-            self.abilities.append("")
+        self.hit_die = diceroll(1, 6)  # Hit die is 1d8
+        self.primary_ability = "Charisma"  # primary ability is Dex
+        self.saves = ["Constitution", "Charisma"]  # Saving throws are Strength and Constitution
+        self.armorpro = []
+        self.weaponpro = ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"]
+        self.toolpro = []
+        self.spells = []
+        self.spellcasting = True
+        self.spellcasting_ability = "Charisma"
+        self.language = []
+        self.meta = metamagic()
+        print("pick two(2) skills from this list")
+        for key, value in sorcerer_skill_list().items():
+            print(key, value)
+        s = input("Enter one number:")
+        s = int(s)
+        r = input("Enter the second number:")
+        r = int(r)
+        if (s == 1) or (r == 1):
+            self.arcana_skill = True
+
+        if (s == 2) or (r == 2):
+            self.deception_skill = True
+
+        if (s == 3) or (r == 3):
+            self.insight_skill = True
+
+        if (s == 4) or (r == 4):
+            self.intimidation_skill = True
+
+        if (s == 5) or (r == 5):
+            self.persuasion_skill = True
+
+        if (s == 6) or (r == 6):
+            self.religion_skill = True
+
+        if level >= 1:
+            self.abilities.append("SPELLCASTING")
+            print("you must now choose your Sorcerous Origin, you have the following options: \n"
+                  "1: Draconic Bloodline ('DRAGON ANCESTOR', 'DRACONIC RESILIENCE', 'ELEMENTAL AFFINITY') \n"
+                  "2: Wild Magic ('WILD MAGIC SURGE', 'TIDES OF CHAOS', 'BEND LUCK') \n")
+            a = int(input("Choose your Path: "))
+            if a == 1:
+                self.classpath = "Draconic Bloodline"
+                for key, value in draconic_lines().items():
+                    print(key, value)
+                a = int(input("Choose your Dragon Type:"))
+                self.dragontype = draconic_lines().get(a)
+                self.abilities.append("DRACONIC RESILIENCE")
+            elif a == 2:
+                self.classpath = "Wild Magic"
+                self.abilities.append("WILD MAGIC SURGE")
+        if level >= 2:
+            self.abilities.append("FONT OF MAGIC")
+        if level >= 3:
+            print("METAMAGIC SELECTION: Select two(2) abilities.")
+            for key, value in self.meta.items():
+                print(key, value)
+            for i in range(2):
+                a = int(input("Enter a number:"))
+                self.meta.pop(a)
+                name = 'METAMAGIC (' + str(metamagic_names().get(a)) + ')'
+                self.abilities.append(name)
+        if level >= 4:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 6:
+            if self.classpath == "Draconic Bloodline":
+                self.abilities.append("ELEMENTAL AFFINITY")
+            elif self.classpath == "Wild Magic":
+                self.abilities.append("BEND LUCK")
+        if level >= 8:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 10:
+            print("METAMAGIC SELECTION: Select one(1) abilities.")
+            for key, value in self.meta.items():
+                print(key, value)
+            for i in range(1):
+                a = int(input("Enter a number:"))
+                self.meta.pop(a)
+                name = 'METAMAGIC (' + str(metamagic_names().get(a)) + ')'
+                self.abilities.append(name)
+        if level >= 12:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 14:
+            if self.classpath == "Draconic Bloodline":
+                self.abilities.append("DRAGON WINGS")
+            elif self.classpath == "Wild Magic":
+                self.abilities.append("CONTROLLED CHAOS")
+        if level >= 16:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 17:
+            print("METAMAGIC SELECTION: Select one(1) abilities.")
+            for key, value in self.meta.items():
+                print(key, value)
+            for i in range(1):
+                a = int(input("Enter a number:"))
+                self.meta.pop(a)
+                name = 'METAMAGIC (' + str(metamagic_names().get(a)) + ')'
+                self.abilities.append(name)
+        if level >= 18:
+            if self.classpath == "Draconic Bloodline":
+                self.abilities.append("DRACONIC PRESENCE")
+            elif self.classpath == "Wild Magic":
+                self.abilities.append("SPELL BOMBARDMENT")
+        if level >= 19:
+            ability_dict = levelup_ability_increase()
+            self.strength_addition += ability_dict.get(1)
+            self.dexterity_addition += ability_dict.get(2)
+            self.constitution_addition += ability_dict.get(3)
+            self.intelligence_addition += ability_dict.get(4)
+            self.wisdom_addition += ability_dict.get(5)
+            self.charisma_addition += ability_dict.get(6)
+        if level >= 20:
+            self.abilities.append("SORCEROUS RESTORATION")
+        self.spells = spell_queue("Sorcerer", level)
 
 
 class Warlock(CharacterClass):
