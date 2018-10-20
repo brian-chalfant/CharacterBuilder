@@ -278,11 +278,12 @@ with open(home + '\\desktop\\output.txt', 'w') as outputfile:
         "abilities": user_class.abilities + user_race.abilities,
         "languages": user_race.language + user_class.language,
         "spells": user_class.spells + user_race.cantrip
-
-
-
-
     }
+    # Class Specific Entries
+    print(user_class.name)
+    if user_class.name == 'Warlock':
+        character_data['evocation'] = user_class.evocations
+
 #     for key, value in character_data.items():
 #         outputfile.write('%s:%s\n' % (key, value))
     for key, value in character_data.items():

@@ -1,7 +1,7 @@
 from DiceRoll import diceroll
 from modifiers import *
 from invocations import *
-from spells import spell_queue
+from spells import spell_queue, warlock_spell_queue
 from language import choose_language
 
 
@@ -1713,10 +1713,48 @@ class Warlock(CharacterClass):
                 self.abilities.append("PACT OF THE TOME")
         if level >= 4:
             self.ability_up()
-
-
-
-
+        if level >= 6:
+            if self.classpath == "The Archfey":
+                self.abilities.append("MISTY ESCAPE")
+            elif self.classpath == "The Fiend":
+                self.abilities.append("DARK ONE\'S OWN LUCK")
+            elif self.classpath == "The Great Old One":
+                self.abilities.append("ENTROPIC WARD")
+        if level >= 8:
+            self.ability_up()
+        if level >= 10:
+            if self.classpath == "The Archfey":
+                self.abilities.append("BEGUILING DEFENSES")
+            elif self.classpath == "The Fiend":
+                self.abilities.append("FIENDISH RESISTANCE")
+            elif self.classpath == "The Great Old One":
+                self.abilities.append("THOUGHT SHIELD")
+        if level >= 11:
+            self.abilities.append("MYSTIC ARCANUM (6th Level)")
+        if level >= 12:
+            self.ability_up()
+        if level >= 13:
+            self.abilities.append("MYSTIC ARCANUM (7th Level)")
+        if level >= 14:
+            if self.classpath == "The Archfey":
+                self.abilities.append("DARK DELIRIUM")
+            elif self.classpath == "The Fiend":
+                self.abilities.append("HURL THROUGH HELL")
+            elif self.classpath == "The Great Old One":
+                self.abilities.append("CREATE THRALL")
+        if level >= 15:
+            self.abilities.append("MYSTIC ARCANUM (8th Level)")
+        if level >= 16:
+            self.ability_up()
+        if level >= 17:
+            self.abilities.append("MYSTIC ARCANUM (9th Level)")
+        if level >= 19:
+            self.ability_up()
+        if level >= 20:
+            self.abilities.append("ELDRITCH MASTER")
+        self.evocations = evocation_cycling(warlock_slots(level))
+        self.spells = spell_queue("Warlock", level)
+        self.spells = warlock_spell_queue(level)
 
 class Wizard(CharacterClass):
     def __init__(self, level):

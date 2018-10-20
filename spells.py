@@ -1,6 +1,32 @@
 import sqlite3
 
 
+def warlock_slots(level):
+    slots = {
+        1: {'Known':2,'Level':1},
+        2: {'Known': 3, 'Level': 1},
+        3: {'Known': 4, 'Level': 2},
+        4: {'Known': 5, 'Level': 2},
+        5: {'Known': 6, 'Level': 3},
+        6: {'Known': 7, 'Level': 3},
+        7: {'Known': 8, 'Level': 4},
+        8: {'Known': 9, 'Level': 4},
+        9: {'Known': 10, 'Level': 5},
+        10: {'Known': 10, 'Level': 5},
+        11: {'Known': 11, 'Level': 5},
+        12: {'Known': 11, 'Level': 5},
+        13: {'Known': 12, 'Level': 5},
+        14: {'Known': 12, 'Level': 5},
+        15: {'Known': 13, 'Level': 5},
+        16: {'Known': 13, 'Level': 5},
+        17: {'Known': 14, 'Level': 5},
+        18: {'Known': 14, 'Level': 5},
+        19: {'Known': 15, 'Level': 5},
+        20: {'Known': 15, 'Level': 5}
+        }
+    return slots.get(level)
+
+
 def bard_slots(level):
     slots = {
         1: {0: 2, 1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
@@ -272,6 +298,43 @@ def get_spells(user_class, level, **kwargs):
     return spell_dict
 
 
+def get_warlock_spells(level):
+    rtn_list = []
+    spell_dict = {}
+    conn = sqlite3.connect('spells.db')
+    c = conn.cursor()
+    x = []
+    c.execute("SELECT NAME FROM Spells WHERE WARLOCK_SPELL = 1 and LEVEL <= {lvl} ORDER BY NAME ASC"
+              .format(lvl=level))
+    spell_list = c.fetchall()
+    x += set(spell_list)
+    x.sort()
+    for i in x:
+        for spell in i:
+            rtn_list.append(spell)
+    conn.close()
+    for i in range(len(rtn_list)):
+        spell_dict[i+1] = rtn_list[i]
+    return spell_dict
+
+
+def warlock_spell_queue(level, **kwargs):
+    spells = []
+    slots = warlock_slots(level)
+    number_known = slots.get('Known')
+    spell_level = slots.get('Level')
+    print(number_known, spell_level)
+    x = get_warlock_spells(spell_level)
+    for xkey in x:
+        print(xkey, x[xkey])
+    for i in range(number_known):
+        a = int(input("Choose spell number " + str(i) + " of " + str(number_known) + ": "))
+        spells.append(x[int(a)])
+    return spells
+
+
+
+
 # get Rogue Spells
 # print(get_spells("wizard", 2, school='enchantment', school2='illusion'))
 
@@ -292,6 +355,8 @@ def spell_queue(user_class, level, **kwargs):
             slots = sorcerer_slots(level)
         elif user_class == "Wizard":
             slots = wizard_slots(level)
+        elif user_class == "Warlock":
+            return get_warlock_spells(level)
         elif user_class == "Rogue":
             slots = rogue_slots(level)
             user_class = "Wizard"
