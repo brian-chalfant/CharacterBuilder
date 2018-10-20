@@ -1756,12 +1756,156 @@ class Warlock(CharacterClass):
         self.spells = spell_queue("Warlock", level)
         self.spells = warlock_spell_queue(level)
 
+
 class Wizard(CharacterClass):
     def __init__(self, level):
         super(Wizard, self).__init__()
         self.name = 'Wizard'
-        if level > 1:
-            self.abilities.append("")
+        self.hit_die = diceroll(1, 6)  # Hit die is 1d8
+        self.primary_ability = "Intelligence"  # primary ability is Dex
+        self.saves = ["Intelligence", "Wisdom"]  # Saving throws are Strength and Constitution
+        self.armorpro = []
+        self.weaponpro = ['Daggers', 'Darts', 'Slings', 'Quarterstaffs', 'Light Crossbows']
+        self.toolpro = []
+        self.spells = []
+        self.spellcasting = True
+        self.spellcasting_ability = "Intelligence"
+        self.language = []
+        x = magic_schools()
+        print("pick two(2) skills from this list")
+        for key, value in wizard_skill_list().items():
+            print(key, value)
+        s = input("Enter one number:")
+        s = int(s)
+        r = input("Enter the second number:")
+        r = int(r)
+        if (s == 1) or (r == 1):
+            self.arcana_skill = True
+
+        if (s == 2) or (r == 2):
+            self.history_skill = True
+
+        if (s == 3) or (r == 3):
+            self.insight_skill = True
+
+        if (s == 4) or (r == 4):
+            self.investigation_skill = True
+
+        if (s == 5) or (r == 5):
+            self.medicine_skill = True
+
+        if (s == 6) or (r == 6):
+            self.religion_skill = True
+
+        if level >= 1:
+            self.abilities.append("ARCANE RECOVERY")
+        if level >= 2:
+            print("you must now choose your Arcane Tradition, you have the following options:\n")
+            for key, value in x.items():
+                print(key, value)
+            a = int(input("Choose your Path: "))
+            if a == 1:
+                self.classpath = "Abjuration"
+                self.abilities.append("ABJURATION SAVANT")
+                self.abilities.append("ARCANE WARD")
+            elif a == 2:
+                self.classpath = "Conjuration"
+                self.abilities.append("CONJURATION SAVANT")
+                self.abilities.append("MINOR CONJURATION")
+            elif a == 3:
+                self.classpath = "Divination"
+                self.abilities.append("DIVINATION SAVANT")
+                self.abilities.append("PORTENT")
+            elif a == 4:
+                self.classpath = "Enchantment"
+                self.abilities.append("ENCHANTMENT SAVANT")
+                self.abilities.append("HYPNOTIC GAZE")
+            elif a == 5:
+                self.classpath = "Evocation"
+                self.abilities.append("EVOCATION SAVANT")
+                self.abilities.append("SCULPT SPELLS")
+            elif a == 6:
+                self.classpath = "Illusion"
+                self.abilities.append("ILLUSION SAVANT")
+                self.spells.append("Minor Illusion (Improved)")
+            elif a == 7:
+                self.classpath = "Necromancy"
+                self.abilities.append("NECROMANCY SAVANT")
+                self.abilities.append("GRIM HARVEST")
+            elif a == 8:
+                self.classpath = "Transmutation"
+                self.abilities.append("TRANSMUTATION SAVANT")
+                self.abilities.append("MINOR ALCHEMY")
+        if level >= 4:
+            self.ability_up()
+        if level >= 6:
+            if self.classpath == "Abjuration":
+                self.abilities.append("PROJECTED WARD")
+            elif self.classpath == "Conjuration":
+                self.abilities.append("BENIGN TRANSPOSITION")
+            elif self.classpath == "Divination":
+                self.abilities.append("EXPERT DIVINATION")
+            elif self.classpath == "Enchantment":
+                self.abilities.append("INSTINCTIVE CHARM")
+            elif self.classpath == "Evocation":
+                self.abilities.append("POTENT CANTRIP")
+            elif self.classpath == "Illusion":
+                self.abilities.append("MALLEABLE ILLUSIONS")
+            elif self.classpath == "Necromancy":
+                self.abilities.append("UNDEAD THRALLS")
+                self.spells.append("Animate Dead")
+            elif self.classpath == "Transmutation":
+                self.abilities.append("TRANSMUTER\'S STONE")
+        if level >= 8:
+            self.ability_up()
+        if level >= 10:
+            if self.classpath == "Abjuration":
+                self.abilities.append("IMPROVED ABJURATION")
+            elif self.classpath == "Conjuration":
+                self.abilities.append("FOCUSED CONJURATION")
+            elif self.classpath == "Divination":
+                self.abilities.append("THE THIRD EYE")
+            elif self.classpath == "Enchantment":
+                self.abilities.append("SPLIT ENCHANTMENT")
+            elif self.classpath == "Evocation":
+                self.abilities.append("EMPOWERED EVOCATION")
+            elif self.classpath == "Illusion":
+                self.abilities.append("ILLUSORY SELF")
+            elif self.classpath == "Necromancy":
+                self.abilities.append("INURED TO UNDEATH")
+            elif self.classpath == "Transmutation":
+                self.abilities.append("SHAPECHANGER")
+                self.spells.append("Polymorph")
+        if level >= 12:
+            self.ability_up()
+        if level >= 14:
+            if self.classpath == "Abjuration":
+                self.abilities.append("SPELL RESISTANCE")
+            elif self.classpath == "Conjuration":
+                self.abilities.append("DURABLE SUMMONS")
+            elif self.classpath == "Divination":
+                self.abilities.append("GREATER PORTENT")
+            elif self.classpath == "Enchantment":
+                self.abilities.append("ALTER MEMORIES")
+            elif self.classpath == "Evocation":
+                self.abilities.append("OVERCHANNEL")
+            elif self.classpath == "Illusion":
+                self.abilities.append("ILLUSORY REALITY")
+            elif self.classpath == "Necromancy":
+                self.abilities.append("COMMAND UNDEAD")
+            elif self.classpath == "Transmutation":
+                self.abilities.append("MASTER TRANSMUTER")
+        if level >= 16:
+            self.ability_up()
+        if level >= 18:
+            self.abilities.append("SPELL MASTERY")
+        if level >= 19:
+            self.ability_up()
+        if level >= 20:
+            self.abilities.append("SIGNATURE SPELLS")
+        self.spells = spell_queue("Wizard", level)
+
+
 
 
 # Notes to yourself:  Add in Proficiency bonus for each level.

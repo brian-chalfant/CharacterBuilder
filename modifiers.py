@@ -275,6 +275,32 @@ def warlock_skill_list():
     return skill_list
 
 
+def wizard_skill_list():
+    skill_list = {
+        1: "Arcana",
+        2: "History",
+        3: "Insight",
+        4: "Investigation",
+        5: "Medicine",
+        6: "Religion",
+    }
+    return skill_list
+
+
+def magic_schools():
+    schools = {
+        1: 'Abjuration',
+        2: 'Conjuration',
+        3: 'Divination',
+        4: 'Enchantment',
+        5: 'Evocation',
+        6: 'Illusion',
+        7: 'Necromancy',
+        8: 'Transmutation'
+    }
+    return schools
+
+
 def fighter_fighting_style():
     style_list = {
         1: "Archery ( +2 Bonus to Ranged Attacks)",

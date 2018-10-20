@@ -244,6 +244,7 @@ with open(home + '\\desktop\\output.txt', 'w') as outputfile:
         "race": user_race.name,
         "level": user_level,
         "class": user_class.name,
+        "classpath": user_class.classpath,
         "speed": user_race.speed + user_class.get_speed_addition(),
         "strength": user_race.get_strength() + user_class.get_strength_addition(),
         "wisdom": user_race.get_wisdom() + user_class.get_wisdom_addition(),
