@@ -1857,8 +1857,57 @@ class Warlock(CharacterClass):
     def __init__(self, level):
         super(Warlock, self).__init__()
         self.name = 'Warlock'
-        if level > 1:
-            self.abilities.append("")
+        self.hit_die = diceroll(1, 8)  # Hit die is 1d8
+        self.primary_ability = "Charisma"  # primary ability is Dex
+        self.saves = ["Wisdom", "Charisma"]  # Saving throws are Strength and Constitution
+        self.armorpro = ['Light Armor']
+        self.weaponpro = ["Simple Weapons"]
+        self.toolpro = []
+        self.spells = []
+        self.spellcasting = True
+        self.spellcasting_ability = "Charisma"
+        self.language = []
+        print("pick two(2) skills from this list")
+        for key, value in warlock_skill_list().items():
+            print(key, value)
+        s = input("Enter one number:")
+        s = int(s)
+        r = input("Enter the second number:")
+        r = int(r)
+        if (s == 1) or (r == 1):
+            self.history_skill = True
+
+        if (s == 2) or (r == 2):
+            self.intimidation_skill = True
+
+        if (s == 3) or (r == 3):
+            self.investigation_skill = True
+
+        if (s == 4) or (r == 4):
+            self.nature_skill = True
+
+        if (s == 5) or (r == 5):
+            self.religion_skill = True
+
+        if level >= 1:
+            self.abilities.append("expanded spell list")
+            print("you must now choose your Otherworldly Patron, you have the following options: \n"
+                  "1: The Archfey ('EXPANDED SPELL LIST', 'FEY PRESENCE', 'MISTY ESCAPE') \n"
+                  "2: The Fiend ('EXPANDED SPELL LIST', 'DARK ONE\'S BLESSING', 'DARK ONE\'S OWN LUCK') \n"
+                  "3: The Great Old One ('EXPANDED SPELL LIST', 'AWAKENED MIND', 'ENTROPIC WARD')")
+
+            a = int(input("Choose your Path: "))
+            if a == 1:
+                self.classpath = "The Archfey"
+                self.abilities.append("FEY PRESENCE")
+            elif a == 2:
+                self.classpath = "The Fiend"
+                self.abilities.append("DARK ONE\'S BLESSING")
+            elif a == 3:
+                self.classpath = "The Great Old One"
+                self.abilities.append("AWAKENED MIND")
+        if level >= 2:
+
 
 
 class Wizard(CharacterClass):

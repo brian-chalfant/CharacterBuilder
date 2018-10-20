@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/CharacterBuilder.iml" filepath="$PROJECT_DIR$/.idea/CharacterBuilder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../curling/.idea/curling.iml" filepath="$PROJECT_DIR$/../curling/.idea/curling.iml" />
       <module fileurl="file://$PROJECT_DIR$/../untitled/.idea/untitled.iml" filepath="$PROJECT_DIR$/../untitled/.idea/untitled.iml" />
     </modules>
   </component>

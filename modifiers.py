@@ -263,6 +263,18 @@ def fighter_skill_list():
         }
     return skill_list
 
+
+def warlock_skill_list():
+    skill_list = {  # List options for Skill Proficiency
+        1: "History",
+        2: "Intimidation",
+        3: "Investigation",
+        4: "Nature",
+        5: "Religion",
+        }
+    return skill_list
+
+
 def fighter_fighting_style():
     style_list = {
         1: "Archery ( +2 Bonus to Ranged Attacks)",

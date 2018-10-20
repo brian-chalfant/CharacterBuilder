@@ -309,3 +309,31 @@ def spell_queue(user_class, level, **kwargs):
                     except KeyError:
                         break
         return spells
+
+
+def get_invocations_name(level, **kwargs):
+    rtn_list = []
+    conn = sqlite3.connect('spells.db')
+    c = conn.cursor()
+    c.execute("SELECT name FROM Eldritch_Invocations WHERE level <= {lvl} ORDER BY name ASC"
+              .format(lvl=level))
+    spell_list = c.fetchall()
+    for row in spell_list:
+        for item in row:
+            rtn_list.append(item)
+    conn.close()
+    return rtn_list
+
+
+def get_invocation_description(name):
+    rtn_list = []
+    conn = sqlite3.connect('spells.db')
+    c = conn.cursor()
+    c.execute("SELECT description FROM Eldritch_Invocations WHERE name = \"{nm}\" ORDER BY name ASC"
+              .format(nm=name))
+    spell_list = c.fetchall()
+    for row in spell_list:
+        for item in row:
+            rtn_list.append(item)
+    conn.close()
+    return rtn_list
