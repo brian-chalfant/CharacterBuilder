@@ -1,4 +1,5 @@
 import sqlite3
+from modifiers import bcolors
 
 
 def warlock_slots(level):
@@ -323,16 +324,18 @@ def warlock_spell_queue(level, **kwargs):
     slots = warlock_slots(level)
     number_known = slots.get('Known')
     spell_level = slots.get('Level')
-    print(number_known, spell_level)
     x = get_warlock_spells(spell_level)
-    for xkey in x:
-        print(xkey, x[xkey])
-    for i in range(number_known):
-        a = int(input("Choose spell number " + str(i) + " of " + str(number_known) + ": "))
-        spells.append(x[int(a)])
+    count = 1
+    while len(spells) < number_known:
+        for xkey in x:
+            print(bcolors.HEADER,xkey, x[xkey])
+        a = int(input("Choose spell number " + str(count) + " of " + str(number_known) + ": "))
+        if x[int(a)] not in spells:
+            spells.append(x[int(a)])
+            count += 1
+        else:
+                print(bcolors.FAIL + "That spell is already been selected")
     return spells
-
-
 
 
 # get Rogue Spells

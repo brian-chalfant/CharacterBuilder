@@ -1697,9 +1697,9 @@ class Warlock(CharacterClass):
             self.abilities.append("ELDRITCH INVOCATIONS")
         if level >= 3:
             print("Your Otherworldly Patron bestowed a boon upon you, Choose one of the following: \n"
-                  "1: Pact of the Chain"
-                  "2: Pact of the Blade"
-                  "3: Pact of the Tome")
+                  "1: Pact of the Chain \n"
+                  "2: Pact of the Blade \n"
+                  "3: Pact of the Tome \n")
 
             a = int(input("You Select: "))
             if a == 1:
@@ -1752,7 +1752,7 @@ class Warlock(CharacterClass):
             self.ability_up()
         if level >= 20:
             self.abilities.append("ELDRITCH MASTER")
-        self.evocations = evocation_cycling(warlock_slots(level))
+        self.invocations = invocation_cycling(warlock_slots(level))
         self.spells = spell_queue("Warlock", level)
         self.spells = warlock_spell_queue(level)
 

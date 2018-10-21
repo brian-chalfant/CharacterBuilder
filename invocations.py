@@ -1,6 +1,12 @@
 from spells import get_invocations_name, get_invocation_description
 
 
+def num2word(number):
+    import inflect
+    x = inflect.engine()
+    return x.number_to_words(number)
+
+
 def warlock_slots(level):
     if level < 2:
         return 0
@@ -41,15 +47,14 @@ def get_description(name):
     return rtn
 
 
-def evocation_cycling(slots):
+def invocation_cycling(slots):
     slot = 0
     terminate = False
     invocations = []
     x = get_invocations_name(0)
-    while terminate != True and slot < slots:
-        print(x)
-        print('\n')
+    while terminate is not True and slot < slots:
         count = 1
+        print("ELDRITCH INVOCATIONS:  Please Select " + str(num2word(slots - slot).capitalize() + "(" + str(slots - slot) + ")") + " Invocation Spells")
         for i in x:
             print(str(count) + ": " + i)
             count += 1
@@ -68,5 +73,4 @@ def evocation_cycling(slots):
             continue
 
     return invocations
-
 

@@ -283,7 +283,7 @@ with open(home + '\\desktop\\output.txt', 'w') as outputfile:
     # Class Specific Entries
     print(user_class.name)
     if user_class.name == 'Warlock':
-        character_data['evocation'] = user_class.evocations
+        character_data['Eldritch Invocation Spells'] = user_class.invocations
 
 #     for key, value in character_data.items():
 #         outputfile.write('%s:%s\n' % (key, value))
