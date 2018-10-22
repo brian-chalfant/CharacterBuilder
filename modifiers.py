@@ -1,6 +1,7 @@
+import os
 
 
-class bcolors:
+class BColors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
@@ -9,6 +10,27 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
+
+def validate_choice(maximum, **kwargs):
+    valid = False
+    entered = 0
+    while valid is not True:
+        if 'message' in kwargs:
+            entered = int(input(BColors.UNDERLINE + kwargs.get('message')))
+        else:
+            entered = int(input(BColors.UNDERLINE + "Please enter a number:"))
+        if 1 <= entered <= maximum:
+            valid = True
+        else:
+            valid = False
+            print(BColors.FAIL + "WARNING, NOT A VALID NUMBER, TRY AGAIN")
+    print(BColors.ENDC)
+    return entered
+
+
+def clearscreen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def ability_modifiers(ability_score):
@@ -212,6 +234,7 @@ def metamagic_names():
     }
     return meta
 
+
 def barbarian_skill_list():
     skill_list = {  # List options for Skill Proficiency
         1: "Animal Handling",
@@ -270,9 +293,33 @@ def fighter_skill_list():
         4: "History",
         5: "Insight",
         6: "Intimidation",
-        8: "Perception",
-        9: "Survival"
+        7: "Perception",
+        8: "Survival"
         }
+    return skill_list
+
+
+def monk_skill_list():
+    skill_list = {
+        1: "Acrobatics",
+        2: "Athletics",
+        3: "History",
+        4: "Insight",
+        5: "Religion",
+        6: "Stealth"
+    }
+    return skill_list
+
+
+def paladin_skill_list():
+    skill_list = {
+        1: "Athletics",
+        2: "Insight",
+        3: "Intimidation",
+        4: "Medicine",
+        5: "Persuasion",
+        6: "Religion"
+    }
     return skill_list
 
 
@@ -406,7 +453,7 @@ def divine_domains():
 
 
 def druidic_lands():
-    druidic_lands = {
+    lands = {
         1: "Arctic",
         2: "Coast",
         3: "Desert",
@@ -416,7 +463,8 @@ def druidic_lands():
         7: "Swamp",
         8: "Underdark"
     }
-    return druidic_lands
+    return lands
+
 
 def circle_spells(land_type, level):
     if land_type == "Arctic":
@@ -503,6 +551,35 @@ def enemy_types():
         }
     return _enemy_types
 
+
+def full_languages():
+    languages = {
+        1: "Abyssal",
+        2: "Aquan",
+        3: "Auran",
+        4: "Celestial",
+        5: "Common",
+        6: "Deep Speech",
+        7: "Draconic",
+        8: "Druidic",
+        9: "Dwarvish",
+        10: "Elvish",
+        11: "Giant",
+        12: "Gnomish",
+        13: "Goblin",
+        14: "Gnoll",
+        15: "Halfling",
+        16: "Ignan",
+        17: "Infernal",
+        18: "Orc",
+        19: "Primordial",
+        20: "Sylvan",
+        21: "Terran",
+        22: "Undercommon"
+    }
+    return languages
+
+
 def enemy_languages():
     lang = {
         'Celestials': 'Celestial',
@@ -531,6 +608,7 @@ def race_languages():
     }
     return lang
 
+
 def list_races():
     races = {
         1: "Aarokocra",
@@ -549,34 +627,151 @@ def list_races():
     return races
 
 
-def favored_enemy():
+def favored_enemy(already_known: list):
+    clearscreen()
     print("FAVORED ENEMY Selection")
     print("Will you pick: \n 1: one enemy type \n 2: two races")
-    selection = int(input(":"))
+    selection = validate_choice(2)
     rtn = []
+    valid = False
+    fav_enemy = ''
     if selection == 1:
+        clearscreen()
         for key, value in enemy_types().items():
-            print(key, ": ", value)
-        x = int(input("Choose One(1) enemy type"))
-        fav_enemy = enemy_types().get(x)
+            print(key, value)
+        while valid is not True:
+            x = validate_choice(len(enemy_types().items()), message='Choose One(1) Enemy Type: ')
+            if str(enemy_types().get(x)) in already_known:
+                print(str(BColors.FAIL + enemy_types().get(x)))
+                print(str(BColors.FAIL + already_known[0]))
+                print(BColors.ENDC)
+                valid = False
+            else:
+                fav_enemy = enemy_types().get(x)
+                valid = True
         if fav_enemy in enemy_languages().keys():
             rtn.append([fav_enemy, enemy_languages().get(fav_enemy)])
         else:
             rtn.append([fav_enemy, None])
     if selection == 2:
+        clearscreen()
+        race1 = ''
+        race2 = ''
         for key, value in list_races().items():
-            print(key, ": ", value)
-        x = int(input("Choose the first Race"))
-        y = int(input("Choose the second Race"))
-        race1 = list_races().get(x)
-        race2 = list_races().get(y)
+            print(key, value)
+        while valid is not True:
+            x = validate_choice(len(list_races().items()), message='Choose the First Race: ')
+            y = validate_choice(len(list_races().items()), message='Choose the Second Race: ')
+            if (str(list_races().get(x)) or str(list_races().get(y))) in already_known:
+                print(str(BColors.FAIL + list_races().get(x) + list_races().get(y)))
+                print(str(BColors.FAIL + already_known[0]))
+                print(BColors.ENDC)
+                valid = False
+            else:
+                race1 = list_races().get(x)
+                race2 = list_races().get(y)
+                valid = True
         if race1 in race_languages().keys():
             rtn.append([race1, race_languages().get(race1)])
         else:
-            rtn.append(None)
+            rtn.append('No Language')
         if race2 in race_languages().keys():
             rtn.append([race2, race_languages().get(race2)])
         else:
-            rtn.append(None)
+            rtn.append('No Language')
     return rtn
 
+
+def splashscreen():
+    print('''
+     __          ________ _      _____ ____  __  __ ______                            
+ \ \        / /  ____| |    / ____/ __ \|  \/  |  ____|                           
+  \ \  /\  / /| |__  | |   | |   | |  | | \  / | |__                              
+   \ \/  \/ / |  __| | |   | |   | |  | | |\/| |  __|                             
+    \  /\  /  | |____| |___| |___| |__| | |  | | |____                            
+  ___\/__\/___|______|______\_____\____/|_|__|_|______| _____                     
+ |__   __/ __ \  |__   __| |  | |  ____| |  __ \  ___  |  __ \                    
+    | | | |  | |    | |  | |__| | |__    | |  | |( _ ) | |  | |                   
+    | | | |  | |    | |  |  __  |  __|   | |  | |/ _ \/\ |  | |                   
+    | | | |__| |    | |  | |  | | |____  | |__| | (_>  < |__| |                   
+   _|_|_ \____/     |_|  |_|__|_|______| |_____/_\___/\/_____/ _____              
+  / ____| |  | |   /\   |  __ \     /\   / ____|__   __|  ____|  __ \             
+ | |    | |__| |  /  \  | |__) |   /  \ | |       | |  | |__  | |__) |            
+ | |    |  __  | / /\ \ |  _  /   / /\ \| |       | |  |  __| |  _  /             
+ | |____| |  | |/ ____ \| | \ \  / ____ \ |____   | |  | |____| | \ \             
+  \_____|_|  |_/_/__ _\_\_| _\_\/_/____\_\_____|  |_|  |______|_|  \_\            
+ |  _ \| |  | |_   _| |    |  __ \|  ____|  __ \                                  
+ | |_) | |  | | | | | |    | |  | | |__  | |__) |                                 
+ |  _ <| |  | | | | | |    | |  | |  __| |  _  /                                  
+ | |_) | |__| |_| |_| |____| |__| | |____| | \ \                                  
+ |____/ \____/|_____|______|_____/|______|_|  \_\___ ______ ______ ________     __
+ |  _ \         / ____| |  | |   /\   | |    |  ____|  ____|  ____|___  /\ \   / /
+ | |_) |_   _  | |    | |__| |  /  \  | |    | |__  | |__  | |__     / /  \ \_/ / 
+ |  _ <| | | | | |    |  __  | / /\ \ | |    |  __| |  __| |  __|   / /    \   /  
+ | |_) | |_| | | |____| |  | |/ ____ \| |____| |    | |____| |____ / /__    | |   
+ |____/ \__, |  \_____|_|  |_/_/    \_\______|_|    |______|______/_____|   |_|   
+         __/ |                                                                    
+        |___/
+        ''')
+
+
+def dwarf_races():
+    races = {
+        1: "Hill Dwarf",
+        2: "Mountain Dwarf"
+    }
+    return races
+
+
+def elf_races():
+    races = {
+        1: "High Elf",
+        2: "Wood Elf",
+        3: "Eladrin",
+        4: "Drow Elf"
+    }
+    return races
+
+
+def genasi_races():
+    races = {
+        1: "Air Genasi",
+        2: "Earth Genasi",
+        3: "Fire Genasi",
+        4: "Water Genasi"
+        }
+    return races
+
+
+def gnome_races():
+    races = {
+        1: "Rock Gnome",
+        2: "Deep Gnome"
+    }
+    return races
+
+
+def halfling_races():
+    races = {
+        1: "Lightfoot Halfling",
+        2: "Stout Halfling"
+    }
+    return races
+
+
+def classes_list():
+    classes = {
+        1: "Barbarian",
+        2: "Bard",
+        3: "Cleric",
+        4: "Druid",
+        5: "Fighter",
+        6: "Monk",
+        7: "Paladin",
+        8: "Ranger",
+        9: "Rogue",
+        10: "Sorcerer",
+        11: "Warlock",
+        12: "Wizard"
+    }
+    return classes

@@ -1,215 +1,128 @@
 from Race import *
 from CharacterClass import *
 import os
-from modifiers import ability_modifiers
+from modifiers import ability_modifiers, clearscreen, splashscreen
 from pathlib import Path
 import json
-
-print('   __          ________ _      _____ ____  __  __ ______                            ')
-print('   \ \        / /  ____| |    / ____/ __ \|  \/  |  ____|                           ')
-print('    \ \  /\  / /| |__  | |   | |   | |  | | \  / | |__                              ')
-print('     \ \/  \/ / |  __| | |   | |   | |  | | |\/| |  __|                             ')
-print('      \  /\  /  | |____| |___| |___| |__| | |  | | |____                            ')
-print('    ___\/__\/___|______|______\_____\____/|_|__|_|______| _____                     ')
-print('   |__   __/ __ \  |__   __| |  | |  ____| |  __ \  ___  |  __ \                    ')
-print('      | | | |  | |    | |  | |__| | |__    | |  | |( _ ) | |  | |                   ')
-print('      | | | |  | |    | |  |  __  |  __|   | |  | |/ _ \/\ |  | |                   ')
-print('      | | | |__| |    | |  | |  | | |____  | |__| | (_>  < |__| |                   ')
-print('     _|_|_ \____/     |_|  |_|__|_|______| |_____/_\___/\/_____/ _____              ')
-print('    / ____| |  | |   /\   |  __ \     /\   / ____|__   __|  ____|  __ \             ')
-print('   | |    | |__| |  /  \  | |__) |   /  \ | |       | |  | |__  | |__) |            ')
-print('   | |    |  __  | / /\ \ |  _  /   / /\ \| |       | |  |  __| |  _  /             ')
-print('   | |____| |  | |/ ____ \| | \ \  / ____ \ |____   | |  | |____| | \ \             ')
-print('    \_____|_|  |_/_/__ _\_\_| _\_\/_/____\_\_____|  |_|  |______|_|  \_\            ')
-print('   |  _ \| |  | |_   _| |    |  __ \|  ____|  __ \                                  ')
-print('   | |_) | |  | | | | | |    | |  | | |__  | |__) |                                 ')
-print('   |  _ <| |  | | | | | |    | |  | |  __| |  _  /                                  ')
-print('   | |_) | |__| |_| |_| |____| |__| | |____| | \ \                                  ')
-print('   |____/ \____/|_____|______|_____/|______|_|  \_\___ ______ ______ ________     __')
-print('   |  _ \         / ____| |  | |   /\   | |    |  ____|  ____|  ____|___  /\ \   / /')
-print('   | |_) |_   _  | |    | |__| |  /  \  | |    | |__  | |__  | |__     / /  \ \_/ / ')
-print('   |  _ <| | | | | |    |  __  | / /\ \ | |    |  __| |  __| |  __|   / /    \   /  ')
-print('   | |_) | |_| | | |____| |  | |/ ____ \| |____| |    | |____| |____ / /__    | |   ')
-print('   |____/ \__, |  \_____|_|  |_/_/    \_\______|_|    |______|______/_____|   |_|   ')
-print('           __/ | ')
-
-
 home = str(Path.home())
-# clear screen method
 
 
-def clear():
-    os.system('cls')
-# list of races to display to the user
-
-
-list_races = {
-    1: "Aarokocra",
-    2: "Dragonborn",
-    3: "Dwarf",
-    4: "Elf",
-    5: "Genasi",
-    6: "Gnome",
-    7: "Goliath",
-    8: "Half-Elf",
-    9: "Half-Orc",
-    10: "Halfling",
-    11: "Human",
-    12: "Tiefling"
-}
-# dwarf sub-races
-dwarf_races = {
-    1: "Hill Dwarf",
-    2: "Mountain Dwarf"
-}
-# elf sub-races
-elf_races = {
-    1: "High Elf",
-    2: "Wood Elf",
-    3: "Eladrin",
-    4: "Drow Elf"
-}
-# genasi sub-races
-genasi_races = {
-    1: "Air Genasi",
-    2: "Earth Genasi",
-    3: "Fire Genasi",
-    4: "Water Genasi"
-}
-# gnome sub-races
-gnome_races = {
-    1: "Rock Gnome",
-    2: "Deep Gnome"
-    }
-
-# halfling sub-races
-halfling_races = {
-    1: "Lightfoot Halfling",
-    2: "Stout Halfling"
-}
-
+os.system('color F4')
+splashscreen()
+begin = (input("Press <ENTER> to Begin."))
+clearscreen()
 _race = Race()
 # ----- MAIN PROGRAM -----------------
 # Enter Character's Name
-character_name = str(input("Please Enter your character's name :"))
-user_level = int(input("What level is your character? (1-20): "))
+character_name = str(input(BColors.UNDERLINE + "Please Enter your character's name :"))
+clearscreen()
+valid = False
+user_level = 0
+while valid is not True:
+    user_level = validate_choice(20, message="What level is {} (1-20): ".format(character_name))
+    if 1 < user_level <= 20:
+        valid = True
+    else:
+        valid = False
 # List the main races available for the user and query for selection
-print("Please Choose a Race.")
-for key, value in list_races.items():
+print("What RACE is {}".format(character_name))
+for key, value in list_races().items():
     print(key, value)
-user_race = int(input("Enter a number:"))
+user_race = validate_choice(len(list_races().items()))
+
 
 # the user picked Dwarf, clear the screen and display Dwarf sub-races, query for selection
 if user_race == 3:
-    clear()
-    print("Please Choose a Race.")
-    for key, value in dwarf_races.items():
+    clearscreen()
+    print("Please Choose a Subrace.")
+    for key, value in dwarf_races().items():
         print(key, value)
-    user_race = (int(input("Enter a number:")))
+    user_race = validate_choice(len(dwarf_races().items()))
     if user_race == 1:
-        _race = HillDwarf(user_level)
+        _race = HillDwarf()
     else:
-        _race = MountainDwarf(user_level)
+        _race = MountainDwarf()
 
 # the user picked Elf, clear the screen and display elf sub-races, query for selection
 elif user_race == 4:
-    clear()
-    print("Please Choose a Race.")
-    for key, value in elf_races.items():
+    clearscreen()
+    print("Please Choose a Subrace.")
+    for key, value in elf_races().items():
         print(key, value)
-    user_race = (int(input("Enter a number:")))
+    user_race = validate_choice(len(elf_races().items()))
     if user_race == 1:
-        _race = HighElf(user_level)
+        _race = HighElf()
     elif user_race == 2:
-        _race = WoodElf(user_level)
+        _race = WoodElf()
     elif user_race == 3:
-        _race = Eladrin(user_level)
+        _race = Eladrin()
     else:
         _race = DrowElf(user_level)
 
 # the user picked Genasi, clear the screen and display genasi sub-races, query for selection
 elif user_race == 5:
-    clear()
-    print("Please Choose a Race.")
-    for key, value in genasi_races.items():
+    clearscreen()
+    print("Please Choose a Subrace.")
+    for key, value in genasi_races().items():
         print(key, value)
-    user_race = (int(input("Enter a number:")))
+    user_race = validate_choice(len(genasi_races().items()))
     if user_race == 1:
-        _race = AirGenasi(user_level)
+        _race = AirGenasi()
     elif user_race == 2:
-        _race = EarthGenasi(user_level)
+        _race = EarthGenasi()
     elif user_race == 3:
-        _race = FireGenasi(user_level)
+        _race = FireGenasi()
     else:
-        _race = WaterGenasi(user_level)
+        _race = WaterGenasi()
 
 elif user_race == 6:
-    clear()
-    print("Please Choose a Race.")
-    for key, value in gnome_races.items():
+    clearscreen()
+    print("Please Choose a Subrace.")
+    for key, value in gnome_races().items():
         print(key, value)
-    user_race = (int(input("Enter a number")))
+    user_race = validate_choice(len(gnome_races().items()))
     if user_race == 1:
-        _race = RockGnome(user_level)
+        _race = RockGnome()
     elif user_race == 2:
-        _race = DeepGnome(user_level)
+        _race = DeepGnome()
 
 
 # the user picked Halfling, clear teh screen and display genasi sub-races, query for selection
 elif user_race == 10:
-    clear()
-    print("Please Choose a Race.")
-    for key, value in halfling_races.items():
+    clearscreen()
+    print("Please Choose a Subrace.")
+    for key, value in halfling_races().items():
         print(key, value)
-    user_race = (int(input("Enter a number:")))
+    user_race = validate_choice(len(halfling_races().items()))
     if user_race == 1:
-        _race = LightfootHalfling(user_level)
+        _race = LightfootHalfling()
     else:
-        _race = StoutHalfling(user_level)
+        _race = StoutHalfling()
 
 # the user pick a main race that does not have sub-races.  assign appropriate race to the _race variable.
 else:
     if user_race == 1:
-        _race = Aarakocra(user_level)
+        _race = Aarakocra()
     elif user_race == 2:
-        _race = Dragonborn(user_level)
+        _race = Dragonborn(character_name)
     elif user_race == 7:
-        _race = Goliath(user_level)
+        _race = Goliath()
     elif user_race == 8:
-        _race = HalfElf(user_level)
+        _race = HalfElf()
     elif user_race == 9:
-        _race = HalfOrc(user_level)
+        _race = HalfOrc()
     elif user_race == 11:
-        _race = Human(user_level)
+        _race = Human()
     elif user_race == 12:
-        _race = Tiefling(user_level)
-# This shouldn't happen.  if it does tell the user that there was a problem.
-    else:
-        print("Error, Please Try Again")
-
+        _race = Tiefling()
 
 # -------------BEGIN CLASS SELECTION --------------------
-clear()
-print("What Class is", character_name + "?")
+clearscreen()
+print("What CLASS is {}?".format(character_name))
 
-classes_list = {
-    1: "Barbarian",
-    2: "Bard",
-    3: "Cleric",
-    4: "Druid",
-    5: "Fighter",
-    6: "Monk",
-    7: "Paladin",
-    8: "Ranger",
-    9: "Rogue",
-    10: "Sorcerer",
-    11: "Warlock",
-    12: "Wizard"
-}
-
-for key, value in classes_list.items():
+for key, value in classes_list().items():
     print(key, value)
-_class = int(input("Enter a number: "))
+_class = validate_choice(len(classes_list().items()))
 if _class == 1:
     _class = Barbarian(user_level)
 elif _class == 2:
@@ -290,5 +203,5 @@ with open(home + '\\desktop\\output.txt', 'w') as outputfile:
     for key, value in character_data.items():
         print(key.capitalize(), ":", value)
 
-with open('data.json','w') as outfile:
+with open('data.json', 'w') as outfile:
     json.dump(character_data, outfile)

@@ -1,6 +1,7 @@
 from spells import get_invocations_name, get_invocation_description
 
 
+
 def num2word(number):
     import inflect
     x = inflect.engine()

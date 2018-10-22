@@ -1,8 +1,8 @@
 from DiceRoll import initial_diceroll
 from random import randrange
-from magic import choose_wizard_cantrip
+from spells import single_spell_select
 from language import choose_language
-from modifiers import draconic_lines
+from modifiers import draconic_lines, clearscreen, validate_choice
 
 # character_name = input("Enter Character Name: ")
 # character_name = character_name.strip()
@@ -20,6 +20,14 @@ class Race:
         self.language = ["Common"]
         self.cantrip = []
         self.abilities = []
+        self.speed = 25
+        self.size = 'Medium'
+        self.height = 0
+        self.weight = 0
+        self.eyes = ''
+        self.skin = ''
+        self.hair = ''
+
         if level is None:
             level = 1
         self.level = level
@@ -46,7 +54,7 @@ class Race:
 
 
 class Aarakocra(Race):
-    def __init__(self, level):
+    def __init__(self):
         super(Aarakocra, self).__init__()
         self.name = 'Aarakocra'
         self.dexterity += 1
@@ -63,38 +71,28 @@ class Aarakocra(Race):
 
 # Start Dragonborn --------------------------------------------------
 class Dragonborn(Race):
-    def __init__(self, level):
+    def __init__(self, character_name):
         super(Dragonborn, self).__init__()
         self.name = 'Dragonborn'
         self.strength += 2
         self.charisma += 1
         self.speed = 30
         self.abilities = ["DRACONIC ANCESTRY", "DAMAGE RESISTANCE"]
+        clearscreen()
+        print("What type of Dragonborn is {}".format(character_name))
         for key, value in draconic_lines().items():
             print(value)
-        self.attacks = ["BREATH WEAPON," +
-                        set_ancestry_weapon((input("Choose one type of dragon from the Draconic Ancestry table: ")))
-                        ]
+        x = validate_choice(draconic_lines().items())
+        if x <= 5:
+            xtype = "5 by 30 ft. line (Dex Save)"
+        else:
+            xtype = "15 ft. Cone (Dex Save)"
+        self.attacks = ["BREATH WEAPON" + xtype]
         self.language.append("Draconic")
 
-
-def set_ancestry_weapon(dragontype):
-    switcher = {
-        "Black": "5 by 30 ft. line (Dex Save)",
-        "Blue": "5 by 30 ft. line (Dex Save)",
-        "Brass": "5 by 30 ft. line (Dex Save)",
-        "Bronze": "5 by 30 ft. line (Dex Save)",
-        "Copper": "15 ft. Cone (Dex Save)",
-        "Gold": "15 ft. Cone (Dex Save)",
-        "Green": "15 ft. Cone (Dex Save)",
-        "Red": "15 ft. Cone (Dex Save)",
-        "Silver": "15 ft. Cone (Dex Save)",
-        "White": "15 ft. Cone (Dex Save)"
-    }
-    return switcher.get(dragontype.title())
-
-
 # Start Dwarf --------------------------------------------------
+
+
 class Dwarf(Race):
     def __init__(self):
         super(Dwarf, self).__init__()
@@ -105,7 +103,7 @@ class Dwarf(Race):
 
 
 class HillDwarf(Dwarf):
-    def __init__(self, level):
+    def __init__(self):
         super(HillDwarf, self).__init__()
         self.wisdom += 1
         self.abilities.append("DWARVEN TOUGHNESS")
@@ -113,7 +111,7 @@ class HillDwarf(Dwarf):
 
 
 class MountainDwarf(Dwarf):
-    def __init__(self, level):
+    def __init__(self):
         super(MountainDwarf, self).__init__()
         self.strength += 2
         self.abilities.append("DWARVEN ARMOUR TRAINING")
@@ -132,17 +130,19 @@ class Elf(Race):
 
 
 class HighElf(Elf):
-    def __init__(self, level):
+    def __init__(self):
         super(HighElf, self).__init__()
         self.intelligence += 1
         self.name = 'High Elf'
         self.magic = True
-        self.cantrip = [str(choose_wizard_cantrip())]
-        self.language.append(str(choose_language()))
+        x = single_spell_select('Wizard', 0)
+        self.cantrip = [x]
+        clearscreen()
+        self.language.append(str(choose_language(self.language)))
 
 
 class WoodElf(Elf):
-    def __init__(self, level):
+    def __init__(self):
         super(WoodElf, self).__init__()
         self.wisdom += 1
         self.name = 'Wood Elf'
@@ -150,7 +150,7 @@ class WoodElf(Elf):
 
 
 class Eladrin(Elf):
-    def __init__(self, level):
+    def __init__(self):
         super(Eladrin, self).__init__()
         self.intelligence += 1
         self.name = 'Eladrin'
@@ -165,9 +165,9 @@ class DrowElf(Elf):
         self.abilities = ["SUPERIOR DARKVISION", "DROW MAGIC", "DROW WEAPON TRAINING", "SUNLIGHT SENSITIVITY"]
         self.magic = True
         self.cantrip = ["DANCING LIGHTS"]
-        if self.level > 3:
+        if level > 3:
             self.cantrip.append("FAIRIE FIRE")
-        elif self.level > 5:
+        elif level > 5:
             self.cantrip.append("FAIRIE FIRE")
             self.cantrip.append("DARKNESS")
 
@@ -184,7 +184,7 @@ class Genasi(Race):
 
 
 class AirGenasi(Genasi):
-    def __init__(self, level):
+    def __init__(self):
         super(AirGenasi, self).__init__()
         self.dexterity += 1
         self.name = 'Air Genasi'
@@ -195,7 +195,7 @@ class AirGenasi(Genasi):
 
 
 class EarthGenasi(Genasi):
-    def __init__(self, level):
+    def __init__(self):
         super(EarthGenasi, self).__init__()
         self.strength += 1
         self.name = 'Earth Genasi'
@@ -206,7 +206,7 @@ class EarthGenasi(Genasi):
 
 
 class FireGenasi(Genasi):
-    def __init__(self, level):
+    def __init__(self):
         super(FireGenasi, self).__init__()
         self.intelligence += 1
         self.name = 'Fire Genasi'
@@ -218,7 +218,7 @@ class FireGenasi(Genasi):
 
 
 class WaterGenasi(Genasi):
-    def __init__(self, level):
+    def __init__(self):
         super(WaterGenasi, self).__init__()
         self.wisdom += 1
         self.name = 'Water Genasi'
@@ -242,7 +242,7 @@ class Gnome(Race):
 
 
 class RockGnome(Gnome):
-    def __init__(self, level):
+    def __init__(self):
         super(RockGnome, self).__init__()
         self.constitution += 1
         self.name = 'Rock Gnome'
@@ -251,7 +251,7 @@ class RockGnome(Gnome):
 
 
 class DeepGnome(Gnome):
-    def __init__(self, level):
+    def __init__(self):
         super(DeepGnome, self).__init__()
         self.dexterity += 1
         self.name = 'Deep Gnome'
@@ -262,7 +262,7 @@ class DeepGnome(Gnome):
 
 # Start Goliath --------------------------------------------------
 class Goliath(Race):
-    def __init__(self, level):
+    def __init__(self):
         super(Goliath, self).__init__()
         self.strength += 2
         self.constitution += 1
@@ -274,19 +274,20 @@ class Goliath(Race):
 
 # Start Half-Elf --------------------------------------------------
 class HalfElf(Race):
-    def __init__(self, level):
+    def __init__(self):
         super(HalfElf, self).__init__()
         self.charisma += 2
         self.name = 'Half-Elf'
         self.speed = 30
         self.abilities = ["DARKVISION", "FEY ANCESTRY", "SKILL VERSATILITY"]
         self.language.append("Elvish")
-        self.language.append(str(choose_language()))
+        clearscreen()
+        self.language.append(str(choose_language(self.language)))
 
 
 # Start HalfOrc --------------------------------------------------
 class HalfOrc(Race):
-    def __init__(self, level):
+    def __init__(self):
         super(HalfOrc, self).__init__()
         self.strength += 2
         self.strength += 1
@@ -298,7 +299,7 @@ class HalfOrc(Race):
 
 # Start Halfling --------------------------------------------------
 class Halfling(Race):
-    def __init__(self, level):
+    def __init__(self):
         super(Halfling, self).__init__()
         self.dexterity += 2
         self.name = 'Halfling'
@@ -308,7 +309,7 @@ class Halfling(Race):
 
 
 class LightfootHalfling(Halfling):
-    def __init__(self, level):
+    def __init__(self):
         super(LightfootHalfling, self).__init__()
         self.charisma += 1
         self.name = 'Lightfoot Halfling'
@@ -316,7 +317,7 @@ class LightfootHalfling(Halfling):
 
 
 class StoutHalfling(Halfling):
-    def __init__(self, level):
+    def __init__(self):
         super(StoutHalfling, self).__init__()
         self.constitution += 1
         self.name = 'Stout Halfling'
@@ -325,7 +326,7 @@ class StoutHalfling(Halfling):
 
 # Start Human --------------------------------------------------
 class Human(Race):
-    def __init__(self, level):
+    def __init__(self):
         super(Human, self).__init__()
         self.constitution += 1
         self.charisma += 1
@@ -335,13 +336,13 @@ class Human(Race):
         self.strength += 1
         self.name = 'Human'
         self.speed = 30
-        self.language.append(str(choose_language()))
+        self.language.append(str(choose_language(self.language)))
         self.abilities = []
 
 
 # Start Tiefling --------------------------------------------------
 class Tiefling(Race):
-    def __init__(self, level):
+    def __init__(self):
         super(Tiefling, self).__init__()
         self.intelligence += 1
         self.charisma += 2

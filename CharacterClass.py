@@ -36,6 +36,7 @@ class CharacterClass:
         self.abilities = []
         self.language = []
         self.spells = []
+        self.classpath = ''
 
     def get_athletics(self):
         return self.athletics_skill
@@ -124,12 +125,15 @@ class CharacterClass:
         self.wisdom_addition += ability_dict.get(5)
         self.charisma_addition += ability_dict.get(6)
 
+    def get_classpath(self):
+        return self.classpath
+
 
 class Barbarian(CharacterClass):
     def __init__(self, level):  # initiate
         super(Barbarian, self).__init__()
         self.name = 'Barbarian'  # class name
-        self.hit_die = diceroll(1, 12)  # Hit die is 1d12
+        self.hit_die = '1d12'  # Hit die is 1d12
         self.primary_ability = "Strength"  # primary ability is Strength
         self.saves = ["Strength", "Constitution"]  # Saving throws are Strength and Constitution
         self.armorpro = ["Light Armor", "Medium Armor", "Shields"]  # Proficient in Light, Medium Armor and Shields
@@ -139,10 +143,15 @@ class Barbarian(CharacterClass):
         print("pick two(2) skills from this list")
         for key, value in barbarian_skill_list().items():
             print(key, value)
-        s = input("Enter one number:")
-        s = int(s)
-        r = input("Enter the second number:")
-        r = int(r)
+        valid = False
+        while valid is not True:
+            s = validate_choice(len(barbarian_skill_list().items()))
+            r = validate_choice(len(barbarian_skill_list().items()))
+            if r == s:
+                valid = False
+            else:
+                valid = True
+
         if (s == 1) or (r == 1):
             self.animal_handling_skill = True
 
@@ -171,7 +180,7 @@ class Barbarian(CharacterClass):
             print("you must now choose your primal path, you have the following options: \n"
                   "1: Path of the Berzerker ('FRENZY', 'MINDLESS RAGE', 'INTIMIDATING PRESENCE') \n"
                   "2: Path of the Totem Warrior ('TOTEM SPIRIT', 'ASPECT OF THE BEAST', 'SPIRIT WALKER')")
-            a = int(input("Choose your Path: "))
+            a = validate_choice(2, message='Choose Your Path: ')
             if a == 1:
                 self.classpath = "Berzerker"
                 self.abilities.append("FRENZY")
@@ -179,13 +188,7 @@ class Barbarian(CharacterClass):
                 self.classpath = "Totem"
                 self.abilities.append("SPIRIT SEEKER")
         if level >= 4:  # First Stat Increase
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
         if level >= 5:
             self.abilities.append("EXTRA ATTACK")
             if self.armor != 'Heavy':
@@ -200,13 +203,7 @@ class Barbarian(CharacterClass):
         if level >= 7:
             self.abilities.append("FERAL INSTINCT")
         if level >= 8:  # Second Stat Increase
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
         if level >= 9:
             self.abilities.append("BRUTAL CRITICAL")
         if level >= 10:
@@ -216,43 +213,22 @@ class Barbarian(CharacterClass):
                 self.abilities.append("SPIRIT WALKER")
         if level >= 11:
             self.abilities.append("RELENTLESS RAGE")
-        if level >= 12:  # Third Stat Increase
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+        if level >= 12:
+                self.ability_up()
         if level >= 16:
             if self.classpath == "Totem":
                 self.abilities.append("TOTEMIC ATTUNEMENT")
         if level >= 15:
             self.abilities.append("PERSISTANT RAGE")
         if level >= 16:  # Fourth Stat Increase
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
         if level >= 18:
             self.abilities.append("INDOMITABLE MIGHT")
         if level >= 19:  # Fifth Stat Increase
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
         if level == 20:
             self.strength_addition += 4
             self.constitution_addition += 4
-
-    def get_classpath(self):
-        return self.classpath
 
 
 class Bard(CharacterClass):
@@ -269,13 +245,25 @@ class Bard(CharacterClass):
         self.spellcasting_ability = "Charisma"
         self.language = []
         # assign equipment in here somewhere
-        self.skill_list = full_skill_list()
-        for key, value in self.skill_list.items():
-            print(key, value)
-        print("Please Choose 3 Skill Proficiencies:")
-        skill_1 = int(input("Skill 1: "))
-        skill_2 = int(input("Skill 2: "))
-        skill_3 = int(input("Skill 3: "))
+        valid = False
+        while valid is not True:
+            self.skill_list = full_skill_list()
+            clearscreen()
+            for key, value in self.skill_list.items():
+                print(key, value)
+            print("Please Choose 3 Skill Proficiencies:")
+            answers = []
+            skill_1 = validate_choice(len(self.skill_list.items()), message='Skill 1:')
+            answers.append(skill_1)
+            skill_2 = validate_choice(len(self.skill_list.items()), message='Skill 2:')
+            answers.append(skill_2)
+            skill_3 = validate_choice(len(self.skill_list.items()), message='Skill 3:')
+            answers.append(skill_3)
+            if len(set(answers)) < 3:
+                valid = False
+            else:
+                valid = True
+
         if (skill_1 == 1) or (skill_2 == 1) or (skill_3 == 1):
             self.athletics_skill = True
             self.skill_list.pop(1)
@@ -343,16 +331,28 @@ class Bard(CharacterClass):
             print("you must now choose your Bard College, you have the following options: \n"
                   "1: College of Lore ('CUTTING WORDS', 'ADDITIONAL MAGICAL SECRETS', 'PEERLESS SKILL') \n"
                   "2: College of Valor ('BONUS PROFICIENCIES', 'COMBAT INSPIRATION', 'EXTRA ATTACK')")
-            a = int(input("Choose your Path: "))
+            a = validate_choice(2, message='Choose Your Path')
             if a == 1:
                 self.classpath = "Lore"
                 self.abilities.append("CUTTING WORDS")
                 #  Bonus Proficiencies
-                print(self.skill_list)
+            valid = False
+            while valid is not True:
+                for key, value in self.skill_list.items():
+                    print(key, value)
                 print("Please Choose 3 Additional Skill Proficiencies:")
-                skill_1 = int(input("Skill 1: "))
-                skill_2 = int(input("Skill 2: "))
-                skill_3 = int(input("Skill 3: "))
+                answers = []
+                skill_1 = validate_choice(len(self.skill_list.items()), message='Skill 1:')
+                answers.append(skill_1)
+                skill_2 = validate_choice(len(self.skill_list.items()), message='Skill 2:')
+                answers.append(skill_2)
+                skill_3 = validate_choice(len(self.skill_list.items()), message='Skill 3:')
+                answers.append(skill_3)
+                if len(set(answers)) < 3:
+                    valid = False
+                else:
+                    valid = True
+
                 if (skill_1 == 1) or (skill_2 == 1) or (skill_3 == 1):
                     self.athletics_skill = True
                     self.skill_list.pop(1)
@@ -414,13 +414,7 @@ class Bard(CharacterClass):
                 self.armorpro.append("Shields")
                 self.armorpro.append("Martial Weapons")
         if level >= 4:
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
         if level >= 5:
             self.abilities.remove("BARDIC INSPIRATION (1d6)")
             self.abilities.append("BARDIC INSPIRATION (1d8)")
@@ -428,17 +422,11 @@ class Bard(CharacterClass):
         if level >= 6:
             self.abilities.append("COUNTERCHARM")
             if self.classpath == "Lore":
-                self.abilities.append("********MORE SPELLS*********")
+                self.abilities.append("********more spells*********")
             else:
                 self.abilities.append("EXTRA ATTACK")
         if level >= 8:
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
         if level >= 9:
             self.abilities.remove("SONG OF REST (1d6)")
             self.abilities.append("SONG OF REST (1d8)")
@@ -447,20 +435,14 @@ class Bard(CharacterClass):
             self.abilities.remove("BARDIC INSPIRATION (1d8)")
             self.abilities.append("BARDIC INSPIRATION (1d10)")
             self.abilities.append("EXPERTISE 2")
-            self.abilities.append("****MAGICAL SECRETS ****")
+            self.abilities.append("****magical secrets ****")
         if level >= 12:
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
         if level >= 13:
             self.abilities.remove("SONG OF REST (1d8)")
             self.abilities.append("SONG OF REST (1d10)")
         if level >= 14:
-            self.abilities.append("*****MAGICAL SECRETS 2*****")
+            self.abilities.append("*****magical secrets 2*****")
             if self.classpath == "Lore":
                 self.abilities.append("PEERLESS SKILL")
             else:
@@ -469,26 +451,14 @@ class Bard(CharacterClass):
             self.abilities.remove("BARDIC INSPIRATION (1d10)")
             self.abilities.append("BARDIC INSPIRATION (1d12)")
         if level >= 16:
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
         if level >= 17:
             self.abilities.remove("SONG OF REST (1d10)")
             self.abilities.append("SONG OF REST (1d12)")
         if level >= 18:
-            self.abilities.append("*****MAGICAL SECRETS 3*****")
+            self.abilities.append("*****magical secrets 3*****")
         if level >= 19:
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
         if level >= 20:
             self.abilities.append("SUPERIOR INSPIRATION")
         self.spells = spell_queue("Bard", level)
@@ -498,7 +468,7 @@ class Cleric(CharacterClass):
     def __init__(self, level):
         super(Cleric, self).__init__()
         self.name = 'Cleric'
-        self.hit_die = diceroll(1, 8)  # Hit die is 1d8
+        self.hit_die = '1d8'  # Hit die is 1d8
         self.primary_ability = "Wisdom"  # primary ability is Strength
         self.saves = ["Wisdom", "Charisma"]  # Saving throws are Strength and Constitution
         self.armorpro = ["Light Armor", "Medium Armor", "Shields"]  # Proficient in Light, Medium Armor and Shields
@@ -508,14 +478,19 @@ class Cleric(CharacterClass):
         self.spellcasting = True
         self.spellcasting_ability = "Wisdom"
         self.language = []
-
+        clearscreen()
         print("pick two(2) skills from this list")
         for key, value in cleric_skill_list().items():
             print(key, value)
-        s = input("Enter one number:")
-        s = int(s)
-        r = input("Enter the second number:")
-        r = int(r)
+        valid = False
+        while valid is not True:
+            s = validate_choice(len(cleric_skill_list().items()), message='Skill 1: ')
+            r = validate_choice(len(cleric_skill_list().items()), message='Skill 2: ')
+            if r == s:
+                valid = False
+            else:
+                valid = True
+
         if (s == 1) or (r == 1):
             self.history_skill = True
 
@@ -533,25 +508,32 @@ class Cleric(CharacterClass):
         # Start Level Stuff
 
         if level >= 1:
-            print("Choose one of the following Divine Domains:")
-            print(divine_domains())
-            selection = int(input(": "))
+            clearscreen()
+            for key, value in divine_domains().items():
+                print(key, value)
+            selection = validate_choice(divine_domains().items(), message='Choose a Divine Domain')
             self.classpath = divine_domains().get(selection)
             self.magic = True
 
             if self.classpath == "Knowledge Domain":
                 self.spells.append("Command")
                 self.spells.append("Identify")
-                self.language.append(choose_language())
-                self.language.append(choose_language())
+                self.language.append(choose_language(self.language))
+                self.language.append(choose_language(self.language))
                 knowledge_domain_skills = {1: "Arcana", 2: "History", 3: "Nature", 4: "Religion"}
                 print("pick two(2) skills from this list")
+                clearscreen()
                 for key, value in knowledge_domain_skills.items():
                     print(key, value)
-                s = input("Enter one number:")
-                s = int(s)
-                r = input("Enter the second number:")
-                r = int(r)
+                valid = False
+                while valid is not True:
+                    s = validate_choice(len(knowledge_domain_skills().items()), message='Skill 1: ')
+                    r = validate_choice(len(knowledge_domain_skills().items()), message='Skill 2: ')
+                    if r == s:
+                        valid = False
+                    else:
+                        valid = True
+
                 if (s == 1) or (r == 1):
                     self.arcana_skill = True
 
@@ -638,13 +620,7 @@ class Cleric(CharacterClass):
                 self.spells.append("Spiritual Weapon")
 
         if level >= 4:
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
 
         if level >= 5:
             self.abilities.append("DESTROY UNDEAD 1/2")
@@ -704,14 +680,7 @@ class Cleric(CharacterClass):
         if level >= 8:
             self.abilities.remove("DESTROY UNDEAD 1/2")
             self.abilities.append("DESTROY UNDEAD 1")
-
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
             if self.classpath == "Knowledge Domain":
                 self.abilities.append("POTENT SPELLCASTING")
 
@@ -741,26 +710,14 @@ class Cleric(CharacterClass):
             self.abilities.append("DESTROY UNDEAD 2")
 
         if level >= 12:
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
 
         if level >= 14:
             self.abilities.remove("DESTROY UNDEAD 2")
             self.abilities.append("DESTROY UNDEAD 3")
 
         if level >= 16:
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
 
         if level >= 17:
             self.abilities.remove("DESTROY UNDEAD 3")
@@ -791,13 +748,7 @@ class Cleric(CharacterClass):
             self.abilities.append("CHANNEL DIVINITY 3/REST")
 
         if level >= 19:
-            ability_dict = levelup_ability_increase()
-            self.strength_addition += ability_dict.get(1)
-            self.dexterity_addition += ability_dict.get(2)
-            self.constitution_addition += ability_dict.get(3)
-            self.intelligence_addition += ability_dict.get(4)
-            self.wisdom_addition += ability_dict.get(5)
-            self.charisma_addition += ability_dict.get(6)
+            self.ability_up()
 
         if level >= 20:
             self.abilities.remove("DIVINE INTERVENTION")
@@ -809,7 +760,7 @@ class Druid(CharacterClass):
     def __init__(self, level):
         super(Druid, self).__init__()
         self.name = 'Druid'
-        self.hit_die = diceroll(1, 8)  # Hit die is 1d8
+        self.hit_die = '1d8'  # Hit die is 1d8
         self.primary_ability = "Wisdom"  # primary ability is Strength
         self.saves = ["Intelligence", "Wisdom"]  # Saving throws are Strength and Constitution
         self.armorpro = ["Light Armor", "Medium Armor", "Shields"]  # Proficient in Light, Medium Armor and Shields
@@ -820,18 +771,25 @@ class Druid(CharacterClass):
         self.spellcasting = True
         self.spellcasting_ability = "Wisdom"
         self.language = ["Druidic"]
-        print("Where did you become a druid")
+        clearscreen()
+        print("Where did you become a Druid?:")
         lands = druidic_lands()
         for key, value in druidic_lands().items():
-            print(key, ": ", value)
-        self.land_type = lands.pop(int(input("Enter a Number: ")))
+            print(key,value)
+        self.land_type = lands.pop(validate_choice(len(druidic_lands().items())), message='Choose a Land Type: ')
+        clearscreen()
         print("pick two(2) skills from this list")
         for key, value in druid_skill_list().items():
             print(key, value)
-        s = input("Enter one number:")
-        s = int(s)
-        r = input("Enter the second number:")
-        r = int(r)
+        valid = False
+        while valid is not True:
+            s = validate_choice(len(druid_skill_list().items()), message='Skill 1: ')
+            r = validate_choice(len(druid_skill_list().items()), message='Skill 2: ')
+            if r == s:
+                valid = False
+            else:
+                valid = True
+
         if (s == 1) or (r == 1):
             self.arcana_skill = True
 
@@ -859,10 +817,11 @@ class Druid(CharacterClass):
         if level >= 1:
             self.abilities.append("WILD SHAPE (1/4)")
         if level >= 2:
+            clearscreen()
             print("you must now choose your Druid Circle, you have the following options: \n"
                   "1: Circle of the Land ('NATURAL RECOVERY', 'CIRCLE SPELLS', 'LANDS STRIDE') \n"
                   "2: Circle of the Moon ('COMBAT WILD SHAPE', 'CIRCLE FORMS', 'PRIMAL STRIKE')")
-            a = int(input("Choose your Path: "))
+            a = validate_choice(2, message='Choose Your Path: ')
             if a == 1:
                 self.classpath = "Circle of the Land"
                 self.abilities.append("BONUS CANTRIP")
@@ -918,7 +877,7 @@ class Fighter(CharacterClass):
     def __init__(self, level):
         super(Fighter, self).__init__()
         self.name = 'Fighter'
-        self.hit_die = diceroll(1, 10)  # Hit die is 1d8
+        self.hit_die = '1d10'  # Hit die is 1d8
         self.primary_ability = "Strength"  # primary ability is Strength
         self.saves = ["Strength", "Constitution"]  # Saving throws are Strength and Constitution
         self.armorpro = ["Light Armor", "Medium Armor", "Heavy Armor", "Shields"]
@@ -931,13 +890,19 @@ class Fighter(CharacterClass):
         x = fighter_fighting_style()
         if level >= 1:
             self.abilities.append("SECOND WIND")
+            clearscreen()
             print("pick two(2) skills from this list")
             for key, value in fighter_skill_list().items():
                 print(key, value)
-            s = input("Enter one number:")
-            s = int(s)
-            r = input("Enter the second number:")
-            r = int(r)
+            valid = False
+            while valid is not True:
+                s = validate_choice(len(fighter_skill_list().items()), message='Skill 1: ')
+                r = validate_choice(len(fighter_skill_list().items()), message='Skill 2: ')
+                if r == s:
+                    valid = False
+                else:
+                    valid = True
+
             if (s == 1) or (r == 1):
                 self.acrobatics_skill = True
 
@@ -962,19 +927,22 @@ class Fighter(CharacterClass):
             if (s == 8) or (r == 8):
                 self.survival_skill = True
 
+            clearscreen()
+            print("Fighting Styles:")
             for key, value in x.items():
                 print(key, value)
-            print("Pick a fighting style:")
-            a = int(input(": "))
+
+            a = validate_choice(len(x.items()), message="Choose a Fighting Style: ")
             self.fighting_style = x.pop(a)
         if level >= 2:
             self.abilities.append("ACTION SURGE")
         if level >= 3:
+            clearscreen()
             print("you must now choose your Martial Archtype, you have the following options: \n"
                   "1: Champion ('IMPROVED CRITICAL', 'REMARKABLE ATHLETE', 'ADDITIONAL FIGHTING STYLE') \n"
                   "2: Battle Master ('COMBAT SUPERIORITY', 'STUDENT OF WAR', 'KNOW YOUR ENEMY') \n"
                   "3: Eldritch Knight ('SPELLCASTING', 'WEAPON BOND', 'WAR MAGIC')")
-            a = int(input("Choose your Path: "))
+            a = validate_choice(3, message='Choose Your Path: ')
             if a == 1:
                 self.classpath = "Champion"
                 self.abilities.append("IMPROVED CRITICAL")
@@ -1008,10 +976,10 @@ class Fighter(CharacterClass):
             self.abilities.append("INDOMITABLE")
         if level >= 10:
             if self.classpath == "Champion":
+                clearscreen()
                 for key, value in x.item():
                     print(key, value)
-                print("Pick a fighting style:")
-                a = int(input(": "))
+                a = validate_choice(len(x.items()), message='Choose an Additional Fighting Style: ')
                 self.fighting_style += x.pop(a)
             elif self.classpath == "Battle Master":
                 self.superiority_die_type = 'd10'
@@ -1062,7 +1030,7 @@ class Monk(CharacterClass):
     def __init__(self, level):
         super(Monk, self).__init__()
         self.name = 'Monk'
-        self.hit_die = diceroll(1, 8)  # Hit die is 1d8
+        self.hit_die = '1d8'  # Hit die is 1d8
         self.primary_ability = "Dexterity"  # primary ability is Dex
         self.saves = ["Strength", "Dexterity"]  # Saving throws are Strength and Constitution
         self.armorpro = []
@@ -1072,6 +1040,35 @@ class Monk(CharacterClass):
         self.spellcasting = False
         self.spellcasting_ability = "Wisdom"
         self.language = []
+        clearscreen()
+        for key, value in monk_skill_list().items():
+            print(key, value)
+        valid = False
+        while valid is not True:
+            s = validate_choice(len(monk_skill_list().items()))
+            r = validate_choice(len(monk_skill_list().items()))
+            if r == s:
+                valid = False
+            else:
+                valid = True
+
+        if (s == 1) or (r == 1):
+            self.acrobatics_skill = True
+
+        if (s == 2) or (r == 2):
+            self.athletics_skill = True
+
+        if (s == 3) or (r == 3):
+            self.history_skill = True
+
+        if (s == 4) or (r == 4):
+            self.insight_skill = True
+
+        if (s == 5) or (r == 5):
+            self.religion_skill = True
+
+        if (s == 6) or (r == 6):
+            self.stealth_skill = True
         if level >= 1:
             self.abilities.append("UNARMORED DEFENSE")
             self.abilities.append("MARTIAL ARTS")
@@ -1083,11 +1080,12 @@ class Monk(CharacterClass):
             self.abilities.append("UNARMORED MOVEMENT")
         if level >= 3:
             self.abilities.append("DEFLECT MISSILES")
+            clearscreen()
             print("you must now choose your Monastic Tradition, you have the following options: \n"
                   "1: Way of the Open Hand ('OPEN HAND TECHNIQUE', 'WHOLENESS OF BODY', 'TRANQUILITY') \n"
                   "2: The Way of Shadow ('SHADOW ARTS', 'SHADOW STEP', 'CLOAK OF SHADOWS') \n"
                   "3: Way of the Four Elements ('DISCIPLE OF THE ELEMENTS', 'ELEMENTAL DISCIPLINE', 'WAR MAGIC')")
-            a = int(input("Choose your Path: "))
+            a = validate_choice(3, message='Choose Your Path:')
             if a == 1:
                 self.classpath = "Way of the Open Hand"
                 self.abilities.append("OPEN HAND TECHNIQUE")
@@ -1167,6 +1165,35 @@ class Paladin(CharacterClass):
         self.spellcasting = True
         self.spellcasting_ability = "Charisma"
         self.language = []
+        clearscreen()
+        for key, value in paladin_skill_list().items():
+            print(key, value)
+        valid = False
+        while valid is not True:
+            s = validate_choice(len(paladin_skill_list().items()))
+            r = validate_choice(len(paladin_skill_list().items()))
+            if r == s:
+                valid = False
+            else:
+                valid = True
+
+        if (s == 1) or (r == 1):
+            self.athletics_skill = True
+
+        if (s == 2) or (r == 2):
+            self.insight_skill = True
+
+        if (s == 3) or (r == 3):
+            self.intimidation_skill = True
+
+        if (s == 4) or (r == 4):
+            self.medicine_skill = True
+
+        if (s == 5) or (r == 5):
+            self.persuasion_skill = True
+
+        if (s == 6) or (r == 6):
+            self.religion_skill = True
 
         if level >= 1:
             self.abilities.append("DIVINE SENSE")
@@ -1176,11 +1203,12 @@ class Paladin(CharacterClass):
             self.abilities.append("DIVINE SMITE")
         if level >= 3:
             self.abilities.append("DIVINE HEALTH")
+            clearscreen()
             print("you must now choose your Sacred Oath, you have the following options: \n"
                   "1: Oath of Devotion ('AURA OF DEVOTION', 'PURITY OF SPIRIT', 'HOLY NIMBUS') \n"
                   "2: Oath of the Ancients ('AURA OF WARDING', 'UNDYING SENTINEL', 'ELDER CHAMPION') \n"
                   "3: Oath of Vengeance ('RELENTLESS AVENGER', 'SOUL OF VENGEANCE', 'AVENGING ANGEL')")
-            a = int(input("Choose your Path: "))
+            a = validate_choice(3, message='Choose Your Path')
             if a == 1:
                 self.classpath = "Oath of Devotion"
                 self.abilities.append("CHANNEL DIVINITY: SACRED WEAPON")
@@ -1253,7 +1281,7 @@ class Ranger(CharacterClass):
     def __init__(self, level):
         super(Ranger, self).__init__()
         self.name = 'Ranger'
-        self.hit_die = diceroll(1, 10)  # Hit die is 1d8
+        self.hit_die = '1d10'  # Hit die is 1d8
         self.primary_ability = "Dexterity"  # primary ability is Dex
         self.saves = ["Strength", "Dexterity"]  # Saving throws are Strength and Constitution
         self.armorpro = ['Light Armor', 'Medium Armor', 'Shields']
@@ -1266,60 +1294,73 @@ class Ranger(CharacterClass):
         x = ranger_fighting_style()
         lands = druidic_lands()
         if level >= 1:
-            fav_enemy = favored_enemy()
+            fav_enemy = favored_enemy(['Pidgeons'])
             for i in fav_enemy:
                 self.abilities.append("FAVORED ENEMY " + "(" + i[0] + ")")
                 self.language.append(i[1])
-            print("pick three(3) skills from this list")
-            for key, value in ranger_skill_list().items():
-                print(key, value)
-            s = input("Enter one number:")
-            s = int(s)
-            r = input("Enter the second number:")
-            r = int(r)
-            t = input("Enter the third number:")
-            t = int(t)
-            if (s == 1) or (r == 1) or (t == 1):
+            clearscreen()
+            valid = False
+            while valid is not True:
+                self.skill_list = full_skill_list()
+                for key, value in self.skill_list.items():
+                    print(key, value)
+                print("Please Choose 3 Skill Proficiencies:")
+                answers = []
+                skill_1 = validate_choice(len(self.skill_list.items()), message='Skill 1:')
+                answers.append(skill_1)
+                skill_2 = validate_choice(len(self.skill_list.items()), message='Skill 2:')
+                answers.append(skill_2)
+                skill_3 = validate_choice(len(self.skill_list.items()), message='Skill 3:')
+                answers.append(skill_3)
+                if len(set(answers)) < 3:
+                    valid = False
+                else:
+                    valid = True
+
+            if (skill_1 == 1) or (skill_2 == 1) or (skill_3 == 1):
                 self.acrobatics_skill = True
 
-            if (s == 2) or (r == 2) or (t == 2):
+            if (skill_1 == 2) or (skill_2 == 2) or (skill_3 == 2):
                 self.animal_handling_skill = True
 
-            if (s == 3) or (r == 3) or (t == 3):
+            if (skill_1 == 3) or (skill_2 == 3) or (skill_3 == 3):
                 self.athletics_skill = True
 
-            if (s == 4) or (r == 4) or (t == 4):
+            if (skill_1 == 4) or (skill_2 == 4) or (skill_3 == 4):
                 self.history_skill = True
 
-            if (s == 5) or (r == 5) or (t == 5):
+            if (skill_1 == 5) or (skill_2 == 5) or (skill_3 == 5):
                 self.insight_skill = True
 
-            if (s == 6) or (r == 6) or (t == 6):
+            if (skill_1 == 6) or (skill_2 == 6) or (skill_3 == 6):
                 self.intimidation_skill = True
 
-            if (s == 7) or (r == 7) or (t == 7):
+            if (skill_1 == 7) or (skill_2 == 7) or (skill_3 == 7):
                 self.perception_skill = True
 
-            if (s == 8) or (r == 8) or (t == 8):
+            if (skill_1 == 8) or (skill_2 == 8) or (skill_3 == 8):
                 self.survival_skill = True
-            print("What land type are you familiar with?")
 
+            clearscreen()
+            print("What land type are you familiar with?")
             for key, value in lands.items():
-                print(key, ":", value)
-            selection = "NATURAL EXPLORER " + "(" + str(lands.pop(int(input("Enter a Number"))) + ")")
+                print(key, value)
+            selection = "NATURAL EXPLORER " + "(" + str(lands.pop(validate_choice(
+                                                    len(lands.items()), message='Choose a Land Type: ')) + ")")
             self.abilities.append(selection)
         if level >= 2:
+            clearscreen()
             for key, value in x.items():
                 print(key, value)
-            print("Pick a fighting style:")
-            a = int(input(": "))
+            a = validate_choice(len(x.items()), message='Choose a Fighting Style: ')
             self.fighting_style = x.pop(a)
             self.abilities.append("SPELLCASTING")
         if level >= 3:
+            clearscreen()
             print("you must now choose your Ranger Archtype, you have the following options: \n"
                   "1: Hunter ('HUNTER\'S PREY', 'DEFENSIVE TACTICS', 'MULTIATTACK') \n"
                   "2: Beast Master ('RANGER\'S COMPANION', 'EXCEPTIONAL TRAINING', 'BESTIAL FURY') \n")
-            a = int(input("Choose your Path: "))
+            a = validate_choice(2, message='Choose Your Path')
             if a == 1:
                 self.classpath = "Hunter"
                 self.abilities.append("HUNTER\'S PREY")
@@ -1331,7 +1372,10 @@ class Ranger(CharacterClass):
         if level >= 5:
             self.abilities.append("EXTRA ATTACK")
         if level >= 6:
-            self.abilities.append("FAVORED ENEMY 2 and addl language")
+            fav_enemy = favored_enemy(fav_enemy)
+            for i in fav_enemy:
+                self.abilities.append("FAVORED ENEMY " + "(" + i[0] + ")")
+                self.language.append(i[1])
         if level >= 7:
             if self.classpath == "Hunter":
                 self.abilities.append("DEFENSIVE TACTICS")
@@ -1354,7 +1398,10 @@ class Ranger(CharacterClass):
         if level >= 12:
             self.ability_up()
         if level >= 14:
-            self.abilities.append("FAVORED ENEMY 3 and addl language")
+            fav_enemy = favored_enemy(fav_enemy)
+            for i in fav_enemy:
+                self.abilities.append("FAVORED ENEMY " + "(" + i[0] + ")")
+                self.language.append(i[1])
         if level >= 15:
             if self.classpath == "Hunter":
                 self.abilities.append("SUPERIOR HUNTER\'S DEFENSE")
