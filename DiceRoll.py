@@ -46,7 +46,7 @@ def stat_selection(classname, highest):
     clearscreen()
     print('Values are sorted highest first, as a {classname}, \n ' 
           'your highest stat should be {highest}\n'
-          .format(classname=BColors.HEADER + classname + BColors.ENDC, highest=BColors.HEADER + highest))
+          .format(classname=BColors.HEADER + classname + BColors.ENDC, highest=BColors.HEADER + highest + BColors.ENDC))
     print(BColors.ENDC)
     yesno = {1: 'Re-Assign', 2: 'Save'}
 

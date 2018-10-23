@@ -276,8 +276,6 @@ class Bard(CharacterClass):
         valid = False
         while valid is not True:
             self.skill_list = full_skill_list()
-            print(type(self.skill_list))
-
             clearscreen()
             for key, value in self.skill_list.items():
                 print(key, value)
@@ -382,61 +380,64 @@ class Bard(CharacterClass):
                     valid = False
                 else:
                     valid = True
-
-                if (skill_1 == 1) or (skill_2 == 1) or (skill_3 == 1):
-                    self.athletics_skill = True
-                    self.skill_list.pop(1)
-                if (skill_1 == 2) or (skill_2 == 2) or (skill_3 == 2):
-                    self.acrobatics_skill = True
-                    self.skill_list.pop(2)
-                if (skill_1 == 3) or (skill_2 == 3) or (skill_3 == 3):
-                    self.sleight_of_hand_skill = True
-                    self.skill_list.pop(3)
-                if (skill_1 == 4) or (skill_2 == 4) or (skill_3 == 4):
-                    self.stealth_skill = True
-                    self.skill_list.pop(4)
-                if (skill_1 == 5) or (skill_2 == 5) or (skill_3 == 5):
-                    self.arcana_skill = True
-                    self.skill_list.pop(5)
-                if (skill_1 == 6) or (skill_2 == 6) or (skill_3 == 6):
-                    self.history_skill = True
-                    self.skill_list.pop(6)
-                if (skill_1 == 7) or (skill_2 == 7) or (skill_3 == 7):
-                    self.investigation_skill = True
-                    self.skill_list.pop(7)
-                if (skill_1 == 8) or (skill_2 == 8) or (skill_3 == 8):
-                    self.nature_skill = True
-                    self.skill_list.pop(8)
-                if (skill_1 == 9) or (skill_2 == 9) or (skill_3 == 9):
-                    self.religion_skill = True
-                    self.skill_list.pop(9)
-                if (skill_1 == 10) or (skill_2 == 10) or (skill_3 == 10):
-                    self.animal_handling_skill = True
-                    self.skill_list.pop(10)
-                if (skill_1 == 11) or (skill_2 == 11) or (skill_3 == 11):
-                    self.insight_skill = True
-                    self.skill_list.pop(11)
-                if (skill_1 == 12) or (skill_2 == 12) or (skill_3 == 12):
-                    self.medicine_skill = True
-                    self.skill_list.pop(12)
-                if (skill_1 == 13) or (skill_2 == 13) or (skill_3 == 13):
-                    self.perception_skill = True
-                    self.skill_list.pop(13)
-                if (skill_1 == 14) or (skill_2 == 14) or (skill_3 == 14):
-                    self.survival_skill = True
-                    self.skill_list.pop(14)
-                if (skill_1 == 15) or (skill_2 == 15) or (skill_3 == 15):
-                    self.deception_skill = True
-                    self.skill_list.pop(15)
-                if (skill_1 == 16) or (skill_2 == 16) or (skill_3 == 16):
-                    self.intimidation_skill = True
-                    self.skill_list.pop(16)
-                if (skill_1 == 17) or (skill_2 == 17) or (skill_3 == 17):
-                    self.performance_skill = True
-                    self.skill_list.pop(17)
-                if (skill_1 == 18) or (skill_2 == 18) or (skill_3 == 18):
-                    self.persuasion_skill = True
-                    self.skill_list.pop(18)
+                try:
+                    if (skill_1 == 1) or (skill_2 == 1) or (skill_3 == 1):
+                        self.athletics_skill = True
+                        self.skill_list.pop(1)
+                    if (skill_1 == 2) or (skill_2 == 2) or (skill_3 == 2):
+                        self.acrobatics_skill = True
+                        self.skill_list.pop(2)
+                    if (skill_1 == 3) or (skill_2 == 3) or (skill_3 == 3):
+                        self.sleight_of_hand_skill = True
+                        self.skill_list.pop(3)
+                    if (skill_1 == 4) or (skill_2 == 4) or (skill_3 == 4):
+                        self.stealth_skill = True
+                        self.skill_list.pop(4)
+                    if (skill_1 == 5) or (skill_2 == 5) or (skill_3 == 5):
+                        self.arcana_skill = True
+                        self.skill_list.pop(5)
+                    if (skill_1 == 6) or (skill_2 == 6) or (skill_3 == 6):
+                        self.history_skill = True
+                        self.skill_list.pop(6)
+                    if (skill_1 == 7) or (skill_2 == 7) or (skill_3 == 7):
+                        self.investigation_skill = True
+                        self.skill_list.pop(7)
+                    if (skill_1 == 8) or (skill_2 == 8) or (skill_3 == 8):
+                        self.nature_skill = True
+                        self.skill_list.pop(8)
+                    if (skill_1 == 9) or (skill_2 == 9) or (skill_3 == 9):
+                        self.religion_skill = True
+                        self.skill_list.pop(9)
+                    if (skill_1 == 10) or (skill_2 == 10) or (skill_3 == 10):
+                        self.animal_handling_skill = True
+                        self.skill_list.pop(10)
+                    if (skill_1 == 11) or (skill_2 == 11) or (skill_3 == 11):
+                        self.insight_skill = True
+                        self.skill_list.pop(11)
+                    if (skill_1 == 12) or (skill_2 == 12) or (skill_3 == 12):
+                        self.medicine_skill = True
+                        self.skill_list.pop(12)
+                    if (skill_1 == 13) or (skill_2 == 13) or (skill_3 == 13):
+                        self.perception_skill = True
+                        self.skill_list.pop(13)
+                    if (skill_1 == 14) or (skill_2 == 14) or (skill_3 == 14):
+                        self.survival_skill = True
+                        self.skill_list.pop(14)
+                    if (skill_1 == 15) or (skill_2 == 15) or (skill_3 == 15):
+                        self.deception_skill = True
+                        self.skill_list.pop(15)
+                    if (skill_1 == 16) or (skill_2 == 16) or (skill_3 == 16):
+                        self.intimidation_skill = True
+                        self.skill_list.pop(16)
+                    if (skill_1 == 17) or (skill_2 == 17) or (skill_3 == 17):
+                        self.performance_skill = True
+                        self.skill_list.pop(17)
+                    if (skill_1 == 18) or (skill_2 == 18) or (skill_3 == 18):
+                        self.persuasion_skill = True
+                        self.skill_list.pop(18)
+                except KeyError:
+                    valid = False
+                    print('YOUR SELECTIONS WERE INVALID PLEASE TRY AGAIN')
             else:
                 self.classpath = "Valor"
                 self.abilities.append("COMBAT INSPIRATION")
@@ -444,7 +445,7 @@ class Bard(CharacterClass):
                 self.armorpro.append("Shields")
                 self.armorpro.append("Martial Weapons")
         if level >= 4:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 5:
             self.abilities.remove("BARDIC INSPIRATION (1d6)")
             self.abilities.append("BARDIC INSPIRATION (1d8)")
@@ -456,7 +457,7 @@ class Bard(CharacterClass):
             else:
                 self.abilities.append("EXTRA ATTACK")
         if level >= 8:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 9:
             self.abilities.remove("SONG OF REST (1d6)")
             self.abilities.append("SONG OF REST (1d8)")
@@ -467,7 +468,7 @@ class Bard(CharacterClass):
             self.abilities.append("EXPERTISE 2")
             self.abilities.append("****magical secrets ****")
         if level >= 12:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 13:
             self.abilities.remove("SONG OF REST (1d8)")
             self.abilities.append("SONG OF REST (1d10)")
@@ -481,14 +482,14 @@ class Bard(CharacterClass):
             self.abilities.remove("BARDIC INSPIRATION (1d10)")
             self.abilities.append("BARDIC INSPIRATION (1d12)")
         if level >= 16:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 17:
             self.abilities.remove("SONG OF REST (1d10)")
             self.abilities.append("SONG OF REST (1d12)")
         if level >= 18:
             self.abilities.append("*****magical secrets 3*****")
         if level >= 19:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 20:
             self.abilities.append("SUPERIOR INSPIRATION")
         self.spells = spell_queue("Bard", level)
@@ -651,7 +652,7 @@ class Cleric(CharacterClass):
                 self.spells.append("Spiritual Weapon")
 
         if level >= 4:
-            self.ability_up()
+            self.ability_up(self.statblock)
 
         if level >= 5:
             self.abilities.append("DESTROY UNDEAD 1/2")
@@ -711,7 +712,7 @@ class Cleric(CharacterClass):
         if level >= 8:
             self.abilities.remove("DESTROY UNDEAD 1/2")
             self.abilities.append("DESTROY UNDEAD 1")
-            self.ability_up()
+            self.ability_up(self.statblock)
             if self.classpath == "Knowledge Domain":
                 self.abilities.append("POTENT SPELLCASTING")
 
@@ -741,14 +742,14 @@ class Cleric(CharacterClass):
             self.abilities.append("DESTROY UNDEAD 2")
 
         if level >= 12:
-            self.ability_up()
+            self.ability_up(self.statblock)
 
         if level >= 14:
             self.abilities.remove("DESTROY UNDEAD 2")
             self.abilities.append("DESTROY UNDEAD 3")
 
         if level >= 16:
-            self.ability_up()
+            self.ability_up(self.statblock)
 
         if level >= 17:
             self.abilities.remove("DESTROY UNDEAD 3")
@@ -779,7 +780,7 @@ class Cleric(CharacterClass):
             self.abilities.append("CHANNEL DIVINITY 3/REST")
 
         if level >= 19:
-            self.ability_up()
+            self.ability_up(self.statblock)
 
         if level >= 20:
             self.abilities.remove("DIVINE INTERVENTION")
@@ -807,7 +808,7 @@ class Druid(CharacterClass):
         print("Where did you become a Druid?:")
         lands = druidic_lands()
         for key, value in druidic_lands().items():
-            print(key,value)
+            print(key, value)
         self.land_type = lands.pop(validate_choice(len(druidic_lands().items()), message='Choose a Land Type: '))
         clearscreen()
         print("pick two(2) skills from this list")
@@ -867,7 +868,7 @@ class Druid(CharacterClass):
         if level >= 4:
             self.abilities.remove("WILD SHAPE (1/4)")
             self.abilities.append("WILD SHAPE (1/2)")
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 6:
             if self.classpath == "Circle of the Land":
                 self.abilities.append("LAND\'S STRIDE")
@@ -879,7 +880,7 @@ class Druid(CharacterClass):
         if level >= 8:
             self.abilities.remove("WILD SHAPE (1/2)")
             self.abilities.append("WILD SHAPE (1)")
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 9:
             if self.classpath == "Circle of the Land":
                 self.spells += circle_spells(self.land_type, 9)
@@ -889,14 +890,14 @@ class Druid(CharacterClass):
             else:
                 self.abilities.append("ELEMENTAL WILD SHAPE")
         if level >= 12:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 14:
             if self.classpath == "Circle of the Land":
                 self.abilities.append("NATURE\'S SANCTUARY")
             else:
                 self.abilities.append("THOUSAND FORMS")
         if level >= 16:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 18:
             self.abilities.append("TIMELESS BODY")
             self.abilities.append("BEAST SPELLS")
@@ -990,11 +991,11 @@ class Fighter(CharacterClass):
                 self.abilities.append("SPELLCASTING")
                 self.abilities.append("WEAPON BOND")
         if level >= 4:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 5:
             self.abilities.append("EXTRA ATTACK")
         if level >= 6:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 7:
             if self.classpath == "Champion":
                 self.abilities.append("REMARKABLE ATHLETE")
@@ -1004,7 +1005,7 @@ class Fighter(CharacterClass):
             elif self.classpath == "Eldritch Knight":
                 self.abilities.append("WAR MAGIC")
         if level >= 8:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 9:
             self.abilities.append("INDOMITABLE")
         if level >= 10:
@@ -1022,12 +1023,12 @@ class Fighter(CharacterClass):
             self.abilities.remove("EXTRA ATTACK")
             self.abilities.append("EXTRA ATTACK (2)")
         if level >= 12:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 13:
             self.abilities.remove("INDOMITABLE")
             self.abilities.append("INDOMITABLE (2)")
         if level >= 14:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 15:
             if self.classpath == "Champion":
                 self.abilities.remove("IMPROVED CRITICAL")
@@ -1038,7 +1039,7 @@ class Fighter(CharacterClass):
             elif self.classpath == "Eldritch Knight":
                 self.abilities.append("ARCANE CHARGE")
         if level >= 16:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 17:
             self.abilities.remove("ACTION SURGE")
             self.abilities.append("ACTION SURGE (2)")
@@ -1051,7 +1052,7 @@ class Fighter(CharacterClass):
                 self.abilities.remove("WAR MAGIC")
                 self.abilities.append("IMPROVED WAR MAGIC")
         if level >= 19:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 20:
             self.abilities.remove("EXTRA ATTACK (2)")
             self.abilities.append("EXTRA ATTACK (3)")
@@ -1131,7 +1132,7 @@ class Monk(CharacterClass):
                 self.abilities.append("elemental disciplines")
         if level >= 4:
             self.abilities.append("SLOW FALL")
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 5:
             self.abilities.append("EXTRA ATTACK")
             self.abilities.append("STUNNING STRIKE")
@@ -1147,7 +1148,7 @@ class Monk(CharacterClass):
             self.abilities.append("EVASION")
             self.abilities.append("STILLNESS OF MIND")
         if level >= 8:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 9:
             self.abilities.remove("UNARMORED MOVEMENT")
             self.abilities.append("IMPROVED UNARMORED MOVEMENT")
@@ -1161,7 +1162,7 @@ class Monk(CharacterClass):
             if self.classpath == "Way fo the Four Elements":
                 self.abilities.append("elemental disciplines 3")
         if level >= 12:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 13:
             self.abilities.append("TONGUE OF THE SUN AND MOON")
         if level >= 14:
@@ -1169,7 +1170,7 @@ class Monk(CharacterClass):
         if level >= 15:
             self.abilities.append("TIMELESS BODY")
         if level >= 16:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 17:
             if self.classpath == "Way of the Open Hand":
                 self.abilities.append("QUIVERING PALM")
@@ -1180,7 +1181,7 @@ class Monk(CharacterClass):
         if level >= 18:
             self.abilities.append("EMPTY BODY")
         if level >= 19:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 20:
             self.abilities.append("PERFECT SELF")
 
@@ -1257,7 +1258,7 @@ class Paladin(CharacterClass):
                 self.abilities.append("CHANNEL DIVINITY: ABJURE ENEMY")
                 self.abilities.append("CHANNEL DIVINITY: VOW OF ENMITY")
         if level >= 4:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 5:
             self.abilities.append("EXTRA ATTACK")
         if level >= 6:
@@ -1270,14 +1271,14 @@ class Paladin(CharacterClass):
             if self.classpath == "Oath of Vengeance":
                 self.abilities.append("RELENTLESS AVENGER")
         if level >= 8:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 10:
             self.abilities.append("AURA OF COURAGE")
         if level >= 11:
             self.abilities.remove("DIVINE SMITE")
             self.abilities.append("IMPROVED DIVINE SMITE")
         if level >= 12:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 14:
             self.abilities.append("CLEANSING TOUCH")
         if level >= 15:
@@ -1288,7 +1289,7 @@ class Paladin(CharacterClass):
             if self.classpath == "Oath of Vengeance":
                 self.abilities.append("SOUL OF VENGEANCE")
         if level >= 16:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 18:
             self.abilities.remove("AURA OF PROTECTION")
             self.abilities.append("IMPROVED AURA OF PROTECTION")
@@ -1301,7 +1302,7 @@ class Paladin(CharacterClass):
                 self.abilities.remove("AURA OF WARDING")
                 self.abilities.append("IMPROVED AURA OF WARDING")
         if level >= 19:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 20:
             if self.classpath == "Oath of Devotion":
                 self.abilities.append("HOLY NIMBUS")
@@ -1407,7 +1408,7 @@ class Ranger(CharacterClass):
                 self.classpath = "Beast Master"
                 self.abilities.append("RANGER\'s COMPANION")
         if level >= 4:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 5:
             self.abilities.append("EXTRA ATTACK")
         if level >= 6:
@@ -1423,7 +1424,7 @@ class Ranger(CharacterClass):
                 self.abilities.append("EXCEPTIONAL TRAINING")
         if level >= 8:
             self.abilities.append("LAND\'S STRIDE")
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 10:
             self.abilities.append("HIDE IN PLAIN SIGHT")
             for key, value in lands.items():
@@ -1437,7 +1438,7 @@ class Ranger(CharacterClass):
             elif self.classpath == "Beast Master":
                 self.abilities.append("BESTIAL FURY")
         if level >= 12:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 14:
             fav_enemy = favored_enemy(fav_enemy)
             for i in fav_enemy:
@@ -1450,11 +1451,11 @@ class Ranger(CharacterClass):
             elif self.classpath == "Beast Master":
                 self.abilities.append("SHARE SPELLS")
         if level >= 16:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 18:
             self.abilities.append("FERAL SENSES")
         if level >= 19:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 20:
             self.abilities.append("FOE SLAYER")
 
@@ -1558,7 +1559,7 @@ class Rogue(CharacterClass):
                 self.abilities.append("SPELLCASTING")
                 self.abilities.append("MAGE HAND LEGERDEMAIN")
         if level >= 4:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 5:
             self.abilities.append("UNCANNY DODGE")
             self.abilities.remove("SNEAK ATTACK (2d6)")
@@ -1571,7 +1572,7 @@ class Rogue(CharacterClass):
             self.abilities.remove("SNEAK ATTACK (3d6)")
             self.abilities.append("SNEAK ATTACK (4d6)")
         if level >= 8:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 9:
             self.abilities.remove("SNEAK ATTACK (4d6)")
             self.abilities.append("SNEAK ATTACK (5d6)")
@@ -1582,13 +1583,13 @@ class Rogue(CharacterClass):
             elif self.classpath == "Arcane Trickster":
                 self.abilities.append("MAGICAL AMBUSH")
         if level >= 10:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 11:
             self.abilities.append("RELIABLE TALENT")
             self.abilities.remove("SNEAK ATTACK (5d6)")
             self.abilities.append("SNEAK ATTACK (6d6)")
         if level >= 12:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 13:
             self.abilities.remove("SNEAK ATTACK (6d6)")
             self.abilities.append("SNEAK ATTACK (7d6)")
@@ -1605,7 +1606,7 @@ class Rogue(CharacterClass):
             self.abilities.remove("SNEAK ATTACK (7d6)")
             self.abilities.append("SNEAK ATTACK (8d6)")
         if level >= 16:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 17:
             self.abilities.remove("SNEAK ATTACK (8d6)")
             self.abilities.append("SNEAK ATTACK (9d6)")
@@ -1620,7 +1621,7 @@ class Rogue(CharacterClass):
         if level >= 19:
             self.abilities.remove("SNEAK ATTACK (9d6)")
             self.abilities.append("SNEAK ATTACK (10d6)")
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 20:
             self.abilities.append("STROKE OF LUCK")
         if self.classpath == "Arcane Trickster":
@@ -1704,14 +1705,14 @@ class Sorcerer(CharacterClass):
                 name = 'METAMAGIC (' + str(metamagic_names().get(a)) + ')'
                 self.abilities.append(name)
         if level >= 4:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 6:
             if self.classpath == "Draconic Bloodline":
                 self.abilities.append("ELEMENTAL AFFINITY")
             elif self.classpath == "Wild Magic":
                 self.abilities.append("BEND LUCK")
         if level >= 8:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 10:
             print("METAMAGIC SELECTION: Select one(1) abilities.")
             for key, value in self.meta.items():
@@ -1722,14 +1723,14 @@ class Sorcerer(CharacterClass):
                 name = 'METAMAGIC (' + str(metamagic_names().get(a)) + ')'
                 self.abilities.append(name)
         if level >= 12:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 14:
             if self.classpath == "Draconic Bloodline":
                 self.abilities.append("DRAGON WINGS")
             elif self.classpath == "Wild Magic":
                 self.abilities.append("CONTROLLED CHAOS")
         if level >= 16:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 17:
             print("METAMAGIC SELECTION: Select one(1) abilities.")
             for key, value in self.meta.items():
@@ -1745,7 +1746,7 @@ class Sorcerer(CharacterClass):
             elif self.classpath == "Wild Magic":
                 self.abilities.append("SPELL BOMBARDMENT")
         if level >= 19:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 20:
             self.abilities.append("SORCEROUS RESTORATION")
         self.spells = spell_queue("Sorcerer", level)
@@ -1829,7 +1830,7 @@ class Warlock(CharacterClass):
                 self.pact = "Pact of the Tome"
                 self.abilities.append("PACT OF THE TOME")
         if level >= 4:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 6:
             if self.classpath == "The Archfey":
                 self.abilities.append("MISTY ESCAPE")
@@ -1838,7 +1839,7 @@ class Warlock(CharacterClass):
             elif self.classpath == "The Great Old One":
                 self.abilities.append("ENTROPIC WARD")
         if level >= 8:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 10:
             if self.classpath == "The Archfey":
                 self.abilities.append("BEGUILING DEFENSES")
@@ -1849,7 +1850,7 @@ class Warlock(CharacterClass):
         if level >= 11:
             self.abilities.append("MYSTIC ARCANUM (6th Level)")
         if level >= 12:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 13:
             self.abilities.append("MYSTIC ARCANUM (7th Level)")
         if level >= 14:
@@ -1862,11 +1863,11 @@ class Warlock(CharacterClass):
         if level >= 15:
             self.abilities.append("MYSTIC ARCANUM (8th Level)")
         if level >= 16:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 17:
             self.abilities.append("MYSTIC ARCANUM (9th Level)")
         if level >= 19:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 20:
             self.abilities.append("ELDRITCH MASTER")
         self.invocations = invocation_cycling(warlock_slots(level))
@@ -1961,7 +1962,7 @@ class Wizard(CharacterClass):
                 self.abilities.append("TRANSMUTATION SAVANT")
                 self.abilities.append("MINOR ALCHEMY")
         if level >= 4:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 6:
             if self.classpath == "Abjuration":
                 self.abilities.append("PROJECTED WARD")
@@ -1981,7 +1982,7 @@ class Wizard(CharacterClass):
             elif self.classpath == "Transmutation":
                 self.abilities.append("TRANSMUTER\'S STONE")
         if level >= 8:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 10:
             if self.classpath == "Abjuration":
                 self.abilities.append("IMPROVED ABJURATION")
@@ -2001,7 +2002,7 @@ class Wizard(CharacterClass):
                 self.abilities.append("SHAPECHANGER")
                 self.spells.append("Polymorph")
         if level >= 12:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 14:
             if self.classpath == "Abjuration":
                 self.abilities.append("SPELL RESISTANCE")
@@ -2020,16 +2021,14 @@ class Wizard(CharacterClass):
             elif self.classpath == "Transmutation":
                 self.abilities.append("MASTER TRANSMUTER")
         if level >= 16:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 18:
             self.abilities.append("SPELL MASTERY")
         if level >= 19:
-            self.ability_up()
+            self.ability_up(self.statblock)
         if level >= 20:
             self.abilities.append("SIGNATURE SPELLS")
         self.spells = spell_queue("Wizard", level)
-
-
 
 
 # Notes to yourself:  Add in Proficiency bonus for each level.

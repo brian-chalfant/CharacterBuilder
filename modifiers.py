@@ -38,7 +38,7 @@ def validate_choice(maximum, **kwargs):
 
 
 def clearscreen():
-    print('\n')
+    print(BColors.ENDC + '\n')
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
