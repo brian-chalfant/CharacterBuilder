@@ -370,12 +370,18 @@ def spell_queue(user_class, level, **kwargs):
                 for xkey in x:
                     print(xkey, x[xkey])
                 for i in range(value):
-                    item = str(input("Level " + str(key) + ": " + "Select number " + str(i+1)
-                                     + " of " + str(value) + ": "))
-                    try:
-                        spells.append(x[int(item)])
-                    except KeyError:
-                        break
+                    valid = False
+                    while valid is not True:
+                        item = str(validate_choice(len(x), message="Level " + str(key) + ": " + "Select number " + str(i+1)
+                                         + " of " + str(value) + ": "))
+                        if x[int(item)] in spells:
+                            valid = False
+                            print(BColors.FAIL + "You already have that Spell, Pick Another.")
+                            print(BColors.ENDC)
+                        else:
+                            spells.append(x[int(item)])
+                            valid = True
+
         return spells
 
 
@@ -384,7 +390,7 @@ def single_spell_select(user_class, spell_level):
     x = get_spells(user_class, spell_level)
     for xkey in x:
         print(xkey, x[xkey])
-    item = str(validate_choice(x))
+    item = str(validate_choice(len(x)))
     try:
         spells.append(x[int(item)])
     except KeyError:

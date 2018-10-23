@@ -1,8 +1,10 @@
-from DiceRoll import initial_diceroll
 from random import randrange
-from spells import single_spell_select
+
+from DiceRoll import initial_diceroll
 from language import choose_language
 from modifiers import draconic_lines, clearscreen, validate_choice
+from spells import single_spell_select
+
 
 # character_name = input("Enter Character Name: ")
 # character_name = character_name.strip()
@@ -11,12 +13,12 @@ from modifiers import draconic_lines, clearscreen, validate_choice
 
 class Race:
     def __init__(self, level=None):
-        self.intelligence = initial_diceroll()
-        self.dexterity = initial_diceroll()
-        self.wisdom = initial_diceroll()
-        self.charisma = initial_diceroll()
-        self.constitution = initial_diceroll()
-        self.strength = initial_diceroll()
+        self.intelligence = 0
+        self.dexterity = 0
+        self.wisdom = 0
+        self.charisma = 0
+        self.constitution = 0
+        self.strength = 0
         self.language = ["Common"]
         self.cantrip = []
         self.abilities = []
@@ -81,8 +83,8 @@ class Dragonborn(Race):
         clearscreen()
         print("What type of Dragonborn is {}".format(character_name))
         for key, value in draconic_lines().items():
-            print(value)
-        x = validate_choice(draconic_lines().items())
+            print(key, value)
+        x = validate_choice(len(draconic_lines().items()))
         if x <= 5:
             xtype = "5 by 30 ft. line (Dex Save)"
         else:

@@ -6,5 +6,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="untitled" />
     <orderEntry type="module" module-name="curling" />
+    <orderEntry type="module" module-name="Tomahto" />
   </component>
 </module>

@@ -1,9 +1,11 @@
-from Race import *
-from CharacterClass import *
-import os
-from modifiers import ability_modifiers, clearscreen, splashscreen
-from pathlib import Path
 import json
+import os
+from pathlib import Path
+
+from CharacterClass import *
+from Race import *
+from modifiers import ability_modifiers, clearscreen, splashscreen
+
 home = str(Path.home())
 
 
@@ -14,13 +16,20 @@ clearscreen()
 _race = Race()
 # ----- MAIN PROGRAM -----------------
 # Enter Character's Name
-character_name = str(input(BColors.UNDERLINE + "Please Enter your character's name :"))
+valid = False
+while valid is not True:
+    character_name = str(input(BColors.UNDERLINE + "Please Enter your character's name :"))
+    if character_name.isalpha():
+        valid = True
+    else:
+        print(BColors.FAIL + "Invalid Name")
+        print(BColors.ENDC)
 clearscreen()
 valid = False
 user_level = 0
 while valid is not True:
     user_level = validate_choice(20, message="What level is {} (1-20): ".format(character_name))
-    if 1 < user_level <= 20:
+    if 1 <= user_level <= 20:
         valid = True
     else:
         valid = False
@@ -124,29 +133,29 @@ for key, value in classes_list().items():
     print(key, value)
 _class = validate_choice(len(classes_list().items()))
 if _class == 1:
-    _class = Barbarian(user_level)
+    _class = Barbarian(user_level, character_name)
 elif _class == 2:
-    _class = Bard(user_level)
+    _class = Bard(user_level, character_name)
 elif _class == 3:
-    _class = Cleric(user_level)
+    _class = Cleric(user_level, character_name)
 elif _class == 4:
-    _class = Druid(user_level)
+    _class = Druid(user_level, character_name)
 elif _class == 5:
-    _class = Fighter(user_level)
+    _class = Fighter(user_level, character_name)
 elif _class == 6:
-    _class = Monk(user_level)
+    _class = Monk(user_level, character_name)
 elif _class == 7:
-    _class = Paladin(user_level)
+    _class = Paladin(user_level, character_name)
 elif _class == 8:
-    _class = Ranger(user_level)
+    _class = Ranger(user_level, character_name)
 elif _class == 9:
-    _class = Rogue(user_level)
+    _class = Rogue(user_level, character_name)
 elif _class == 10:
-    _class = Sorcerer(user_level)
+    _class = Sorcerer(user_level, character_name)
 elif _class == 11:
-    _class = Warlock(user_level)
+    _class = Warlock(user_level, character_name)
 elif _class == 12:
-    _class = Wizard(user_level)
+    _class = Wizard(user_level, character_name)
 
 user_race = _race
 user_class = _class

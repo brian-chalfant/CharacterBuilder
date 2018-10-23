@@ -9,6 +9,6 @@ def choose_language(known_languages):
             print(key, value)
         else:
             continue
-    x = validate_choice(full_languages().items())
+    x = validate_choice(len(full_languages().items()))
     return full_languages().get(x)
 

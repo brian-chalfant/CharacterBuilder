@@ -16,20 +16,29 @@ def validate_choice(maximum, **kwargs):
     valid = False
     entered = 0
     while valid is not True:
-        if 'message' in kwargs:
-            entered = int(input(BColors.UNDERLINE + kwargs.get('message')))
-        else:
-            entered = int(input(BColors.UNDERLINE + "Please enter a number:"))
-        if 1 <= entered <= maximum:
-            valid = True
-        else:
+        try:
+            if 'message' in kwargs:
+                entered = input(BColors.UNDERLINE + kwargs.get('message'))
+            else:
+                entered = input(BColors.UNDERLINE + "Please enter a number:")
+            x = int(entered)
+            if entered == '':
+                valid = False
+                print(BColors.FAIL + "THIS IS A REQUIRED FIELD, PLEASE TRY AGAIN")
+            elif 1 <= int(entered) <= maximum:
+                valid = True
+            else:
+                valid = False
+                print(BColors.FAIL + "WARNING, NOT A VALID NUMBER, TRY AGAIN")
+        except ValueError:
+            print(BColors.FAIL + 'ENTER A VALID NUMBER')
             valid = False
-            print(BColors.FAIL + "WARNING, NOT A VALID NUMBER, TRY AGAIN")
     print(BColors.ENDC)
-    return entered
+    return int(entered)
 
 
 def clearscreen():
+    print('\n')
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
@@ -136,7 +145,8 @@ def primary_abilities():
     return primary_abilities_list
 
 
-def levelup_ability_increase():
+def levelup_ability_increase(statblock):
+    print(BColors.UNDERLINE + str(statblock) + BColors.ENDC)
     strength_addition = 0
     dexterity_addition = 0
     constitution_addition = 0
@@ -593,7 +603,7 @@ def enemy_languages():
 
 def race_languages():
     lang = {
-        'Aarakocra': 'Auran',
+        'Aarokocra': 'Auran',
         'Dragonborn': 'Draconic',
         'Dwarf': 'Dwarven',
         'Elf': 'Elvish',
@@ -652,7 +662,7 @@ def favored_enemy(already_known: list):
         if fav_enemy in enemy_languages().keys():
             rtn.append([fav_enemy, enemy_languages().get(fav_enemy)])
         else:
-            rtn.append([fav_enemy, None])
+            rtn.append([fav_enemy, 'No Language'])
     if selection == 2:
         clearscreen()
         race1 = ''
@@ -673,12 +683,18 @@ def favored_enemy(already_known: list):
                 valid = True
         if race1 in race_languages().keys():
             rtn.append([race1, race_languages().get(race1)])
+            print(rtn)
         else:
-            rtn.append('No Language')
+            rtn.append([race1, 'No Language'])
+            print('else1')
+            print(rtn)
         if race2 in race_languages().keys():
             rtn.append([race2, race_languages().get(race2)])
+            print(rtn)
         else:
-            rtn.append('No Language')
+            rtn.append([race1, 'No Language'])
+            print('else2')
+            print(rtn)
     return rtn
 
 
