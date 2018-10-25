@@ -1,10 +1,11 @@
 import json
 import os
 from pathlib import Path
-
+from backgrounds import Background
 from CharacterClass import *
 from Race import *
 from modifiers import ability_modifiers, clearscreen, splashscreen
+from write_backgrounds import read_background_names, read_backgrounds
 
 home = str(Path.home())
 
@@ -159,6 +160,12 @@ elif _class == 12:
 
 user_race = _race
 user_class = _class
+for key, value in read_background_names().items():
+    print(key, value)
+back_choice = validate_choice(len(read_background_names().items()), message='Choose a Background')
+print(read_background_names().get(back_choice))
+user_background = Background(read_background_names().get(back_choice))
+
 with open(home + '\\desktop\\output.txt', 'w') as outputfile:
     character_data = {
 
