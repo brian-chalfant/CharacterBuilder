@@ -101,7 +101,7 @@ def write_background():
 
 
 def read_backgrounds(name):
-    data = ['NAME', 'SKILLPROF', 'LANGUAGES', 'TOOLS', 'FEATURE', 'EQUIPMENT', 'PERSTRAIT1', 'PERSTRAIT2',
+    data = ['NAME', 'SKILLPROF', 'LANGUAGES', 'TOOLS', 'EQUIPMENT', 'FEATURE', 'FEATDESC', 'PERSTRAIT1', 'PERSTRAIT2',
                     'PERSTRAIT3', 'PERSTRAIT4', 'PERSTRAIT5', 'PERSTRAIT6', 'PERSTRAIT7', 'PERSTRAIT8', 'IDEAL1',
                     'IDEAL2', 'IDEAL3', 'IDEAL4', 'IDEAL5', 'IDEAL6', 'BOND1', 'BOND2', 'BOND3', 'BOND4',
                     'BOND5', 'BOND6', 'FLAW1', 'FLAW2', 'FLAW3', 'FLAW4', 'FLAW5', 'FLAW6']

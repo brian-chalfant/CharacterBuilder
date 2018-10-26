@@ -1,4 +1,5 @@
 from write_backgrounds import read_backgrounds
+from modifiers import validate_choice
 
 
 class Background:
@@ -9,37 +10,63 @@ class Background:
         self.skillpro = x.get('SKILLPROF')
         self.language = x.get('LANGUAGES')
         self.toolpro = x.get('LANGUAGES')
-        self.personalitytraits = []
+        self.personalitytraits = {}
         for i in range(1, 9):
-            self.personalitytraits.append(x.get('PERSTRAIT' + str(i)))
-        self.ideals = []
+            self.personalitytraits[i] = x.get('PERSTRAIT' + str(i))
+        self.ideals = {}
         for i in range(1, 7):
-            self.ideals.append(x.get('IDEAL' + str(i)))
-        self.bonds = []
+            self.ideals[i] = x.get('IDEAL' + str(i))
+        self.bonds = {}
         for i in range(1, 7):
-            self.bonds.append(x.get('BOND' + str(i)))
-        self.flaws = []
+            self.bonds[i] = x.get('BOND' + str(i))
+        self.flaws = {}
         for i in range(1, 7):
-            self.flaws.append(x.get('FLAW' + str(i)))
+            self.flaws[i] = x.get('FLAW' + str(i))
 
     def print_personality_traits(self):
-        for i in range(len(self.personalitytraits)):
-            print(str(i + 1) + ": " + self.personalitytraits[i])
+        for key, value in self.personalitytraits.items():
+            print(key, value)
+        return self.personalitytraits
 
     def print_ideals(self):
-        for i in range(len(self.ideals)):
-            print(str(i + 1) + ": " + self.ideals[i])
+        for key, value in self.ideals.items():
+            print(key, value)
+        return self.ideals
 
     def print_bonds(self):
-        for i in range(len(self.bonds)):
-            print(str(i + 1) + ": " + self.bonds[i])
+        for key, value in self.bonds.items():
+            print(key, value)
+        return self.bonds
 
     def print_flaws(self):
-        for i in range(len(self.flaws)):
-            print(str(i + 1) + ": " + self.flaws[i])
+        for key, value in self.flaws.items():
+            print(key, value)
+        return self.flaws
+
+    def process_selection(self, argument):
+        complete = False
+        rtnlist = []
+        if len(argument) > 6:
+            while complete is False:
+                a = argument
+                x = validate_choice(len(argument), message='Select Traits (1 of 2)')
+                rtnlist.append(a.get(x))
+                y = validate_choice(len(argument), message='Select Traits (2 of 2)')
+                rtnlist.append(a.get(y))
+                if x == y:
+                    complete = False
+                else:
+                    complete = True
+        else:
+            a = argument
+            x = validate_choice(len(argument), message='Select one trait')
+            rtnlist.append(a[x-1])
+        print(rtnlist)
 
 
-    def process_selection(self,argument):
-        argument()
 
+b = Background('Acolyte')
 
+x = b.process_selection(b.print_personality_traits())
+
+print(x)
