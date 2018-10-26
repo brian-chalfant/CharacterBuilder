@@ -13,6 +13,7 @@ from spells import single_spell_select
 
 class Race:
     def __init__(self, level=None):
+        self.name = ''
         self.intelligence = 0
         self.dexterity = 0
         self.wisdom = 0

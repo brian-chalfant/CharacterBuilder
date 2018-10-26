@@ -23,6 +23,7 @@ from language import choose_language
 class CharacterClass:
     def __init__(self, character_name):
         self.char_name = character_name
+        self.name = ''
         self.statblock = {}
         self.athletics_skill = False
         self.acrobatics_skill = False
@@ -48,6 +49,7 @@ class CharacterClass:
         self.intelligence_addition = 0
         self.wisdom_addition = 0
         self.charisma_addition = 0
+        self.classpath = ''
         self.armor = 'None'
         self.speed_addition = 0
         self.abilities = []

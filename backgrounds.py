@@ -64,9 +64,9 @@ class Background:
         print(rtnlist)
 
 
+if __name__ == '__main__':
+    b = Background('Acolyte')
 
-b = Background('Acolyte')
+    x = b.process_selection(b.print_personality_traits())
 
-x = b.process_selection(b.print_personality_traits())
-
-print(x)
+    print(x)
