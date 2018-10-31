@@ -267,7 +267,10 @@ def generate_character():
             "persuasion_skill": newcharacter.character_class.persuasion_skill,
             "abilities": newcharacter.character_class.abilities + newcharacter.race.abilities,
             "languages": newcharacter.race.language + newcharacter.character_class.language,
-            "spells": newcharacter.character_class.spells + newcharacter.race.cantrip
+            "spells": newcharacter.character_class.spells + newcharacter.race.cantrip,
+            'armor_pro': newcharacter.character_class.armorpro,
+            'weapon_pro': newcharacter.character_class.weaponpro
+
         }
         # Class Specific Entries
         print(newcharacter.character_class.name)
@@ -282,12 +285,6 @@ def generate_character():
     with open('data.json', 'w') as outfile:
         json.dump(character_data, outfile)
 
-    import trml2pdf
-
-    rml = outfile  # Use your favorite templating laguage here to create the RML string
-    output = '/tmp/output.pdf'
-
-    trml2pdf.go(rml, outputFileName=output)
 
 if __name__ == '__main__':
     generate_character()
