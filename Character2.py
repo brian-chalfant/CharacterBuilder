@@ -282,7 +282,7 @@ def generate_character():
         for key, value in character_data.items():
             print(key.capitalize(), ":", value)
 
-    with open('data.json', 'w') as outfile:
+    with open(home + '..\data.json', 'w') as outfile:
         json.dump(character_data, outfile)
 
 
