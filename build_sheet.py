@@ -16,7 +16,7 @@ def build_sheet(character_data: dict):
                                                                 ) + '          |    |  \  >  _ </\ |    |  \ ' + '\n'
         lines += 'Background:__' + str(character_data.get('klass')) + ('_' * (int((width/2)) -
                                                                          int(len(character_data.get('klass'))) - 13)
-                                                                ) + '          |    `   \/  <_\ \/ |    `   \\' + '\n'
+                                                                ) + '          |  __`   \/  <_\ \/ |  __`   \\' + '\n'
         lines += 'Alignment:__' + str(character_data.get('alignment')) + ('_' * (int((width/2)) -
                                                                          int(len(character_data.get('alignment'))) - 12)
                                                                 ) + '         /_______  /\_____\ \/_______  /' + '\n'
@@ -30,7 +30,7 @@ def build_sheet(character_data: dict):
             character_data.get('probonus'))
         lines += '| Passive Wisdom (Perception)    [{}] |  +-Hit Points--------------------------+ \n'.format(
             character_data.get('passive_perception'))
-        lines += '+-------------------------------------+  | Maximum: {}                         | \n'.format(
+        lines += '+-Stat Block -------------------------+  | Maximum: {}                         | \n'.format(
             character_data.get('hp_maximum'))
         lines += '|[{}] STRENGTH               [{:02}] [{}] |  | Modifier: {}                        | \n'.format(
             character_data.get('str_save'), character_data.get('strength'), character_data.get('strength_mod'),
@@ -45,7 +45,7 @@ def build_sheet(character_data: dict):
             character_data.get('wis_save'), character_data.get('wisdom'), character_data.get('wisdom_mod'))
         lines += '|[{}] CHARISMA               [{:02}] [{}] |  | Failures                [ ] [ ] [ ] | \n'.format(
             character_data.get('cha_save'), character_data.get('charisma'), character_data.get('charisma_mod'))
-        lines += '+-------------------------------------+  +-------------------------------------+ \n'
+        lines += '+-Skills------------------------------+  +-------------------------------------+ \n'
         lines += '| Acrobatics (Dex)           [{}] [{}] |  +-Other Proficiencies & Languages-----+ \n'.format(
             character_data.get('acrobatics_skill'), character_data.get('acrobatics_mod'))
         lines += '| Animal Handling (Wis)      [{}] [{}] |  |{:37}| \n'.format(
@@ -90,9 +90,43 @@ def build_sheet(character_data: dict):
         lines += '| Religion (Int)             [{}] [{}] |  |{:37}| \n'.format(
             character_data.get('religion_skill'), character_data.get('religion_mod'),
             character_data.get('proficiencies')[13])
-        lines += '| Sleight of Hand (Dex)      [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('sleight_of_hand_skill'), character_data.get('sleight_of_hand_mod'),
+        lines += '| Religion (Int)             [{}] [{}] |  |{:37}| \n'.format(
+            character_data.get('religion_skill'), character_data.get('religion_mod'),
             character_data.get('proficiencies')[14])
+        lines += '| Stealth (Dex)              [{}] [{}] |  |{:37}| \n'.format(
+            character_data.get('stealth_skill'), character_data.get('stealth_mod'),
+            character_data.get('proficiencies')[15])
+        lines += '| Survival (Wis)             [{}] [{}] |  |{:37}| \n'.format(
+            character_data.get('survival_skill'), character_data.get('survival_mod'),
+            character_data.get('proficiencies')[16])
+        lines += '|                                     |  |{:37}| \n'.format(character_data.get('proficiencies')[17])
+        lines += '+-Currency-+-Treasure-----------------+  |{:37}| \n'.format(character_data.get('proficiencies')[18])
+        lines += '| CP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[18])
+        lines += '| SP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[18])
+        lines += '| EP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[18])
+        lines += '| GP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[18])
+        lines += '| PP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[18])
+        lines += '+-Attack--------+-HIT+-Damage/Typ-----+-Properties--------------------+-Weight-+ \n'
+        lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('prim_weap_name'),
+                                                           character_data.get('prim_weap_hit'),
+                                                           character_data.get('prim_weap_dmg'),
+                                                           character_data.get('prim_weap_properties'),
+                                                           character_data.get('prim_weap_weight'))
+        lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('second_weap_name'),
+                                                           character_data.get('second_weap_hit'),
+                                                           character_data.get('second_weap_dmg'),
+                                                           character_data.get('second_weap_properties'),
+                                                           character_data.get('second_weap_weight'))
+        lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('third_weap_name'),
+                                                           character_data.get('third_weap_hit'),
+                                                           character_data.get('third_weap_dmg'),
+                                                           character_data.get('third_weap_properties'),
+                                                           character_data.get('third_weap_weight'))
+        lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('fourth_weap_name'),
+                                                           character_data.get('fourth_weap_hit'),
+                                                           character_data.get('fourth_weap_dmg'),
+                                                           character_data.get('fourth_weap_properties'),
+                                                           character_data.get('fourth_weap_weight'))
         print(lines)
         outfile.writelines(lines)
 
@@ -132,7 +166,7 @@ if __name__ == '__main__':
                  'charisma_mod': '+4',
                  'cha_save': 'X',
                  'proficiencies': ['ARMOR:', '-Light Armor', '-Medium Armor', '-Shields', 'WEAPONS:', '-Simple Weapons', '-Martial Weapons',
-                                   '-Crossbows', '-Daggers', 'LANGUAGE:', '-Abyssal', '-Orcish','','','','','','','', ],
+                                   '-Crossbows', '-Daggers','TOOLS:', 'Artisan Tools', 'LANGUAGE:', '-Abyssal', '-Orcish','','','','','','','', ],
                  'acrobatics_skill': 'X',
                  'acrobatics_mod': '+3',
                  'animal_handling_skill': ' ',
@@ -165,4 +199,34 @@ if __name__ == '__main__':
                  'religion_mod': '+2',
                  'sleight_of_hand_skill': ' ',
                  'sleight_of_hand_mod': '+2',
+                 'stealth_skill': ' ',
+                 'stealth_mod': '+2',
+                 'survival_skill': ' ',
+                 'survival_mod': '+2',
+                 'currency_cp': 20,
+                 'currency_sp': 20,
+                 'currency_ep': 20,
+                 'currency_gp': 20,
+                 'currency_pp': 20,
+                 'prim_weap_name': 'Greataxe',
+                 'prim_weap_hit': '+5',
+                 'prim_weap_dmg': '1d12+3 Slashing',
+                 'prim_weap_properties': 'Martial, Heavy, Two-Handed',
+                 'prim_weap_weight': '3lbs',
+                 'second_weap_name': 'Handaxe',
+                 'second_weap_hit': '+5',
+                 'second_weap_dmg': '1d6+3 Slashing',
+                 'second_weap_properties': 'Light, Thrown, Range (20/60)',
+                 'second_weap_weight': '2lbs',
+                 'third_weap_name': 'Javelin',
+                 'third_weap_hit': '+5',
+                 'third_weap_dmg': '1d6+3 Piercing',
+                 'third_weap_properties': 'Thrown, Range (30/120)',
+                 'third_weap_weight': '8lbs',
+                 'fourth_weap_name': 'Unarmed Strike',
+                 'fourth_weap_hit': '+5',
+                 'fourth_weap_dmg': '4 Bludgeoning',
+                 'fourth_weap_properties': '',
+                 'fourth_weap_weight': '',
+                 
                  })
