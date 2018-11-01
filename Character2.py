@@ -220,6 +220,7 @@ def generate_character():
             "name": newcharacter.name,
             "race": newcharacter.race.name,
             "level": newcharacter.level,
+            "xp": exp(newcharacter.level),
             "class": newcharacter.character_class.name,
             "classpath": newcharacter.character_class.classpath,
             "speed": newcharacter.race.speed + newcharacter.character_class.get_speed_addition(),

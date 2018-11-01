@@ -127,8 +127,25 @@ def build_sheet(character_data: dict):
                                                            character_data.get('fourth_weap_dmg'),
                                                            character_data.get('fourth_weap_properties'),
                                                            character_data.get('fourth_weap_weight'))
+
         print(lines)
         outfile.writelines(lines)
+
+
+def text_format(text, width=78):
+    a = text.split()
+    print(a)
+    b = ''
+    for i in a:
+        if len(i + b) < width:
+            b += " " + i
+        else:
+            yield b
+            b = '' + i
+    return b
+
+for i in text_format('As an example, say you had some outer variable nested within p_decorate you would expect this to throw an error since it no longer exists (its non-local to func_wrapper) when func_wrapper is called and tries to use this variable, but it wont since the enclosing namespace is "remembered"'):
+    print(i)
 
 
 if __name__ == '__main__':
@@ -228,5 +245,5 @@ if __name__ == '__main__':
                  'fourth_weap_dmg': '4 Bludgeoning',
                  'fourth_weap_properties': '',
                  'fourth_weap_weight': '',
-                 
+                 'abilities': ["RAGE", "UNARMORED DEFENSE", "FLIGHT"]
                  })
