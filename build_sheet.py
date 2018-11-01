@@ -127,25 +127,30 @@ def build_sheet(character_data: dict):
                                                            character_data.get('fourth_weap_dmg'),
                                                            character_data.get('fourth_weap_properties'),
                                                            character_data.get('fourth_weap_weight'))
-
+        lines += '+-Features---------------------------------------------------------------------+'
         print(lines)
+        for i in text_format(character_data.get('abilities')):
+            print(i)
         outfile.writelines(lines)
 
 
-def text_format(text, width=78):
-    a = text.split()
+def text_format(textlist, width=78):
+    a = textlist
     print(a)
     b = ''
     for i in a:
         if len(i + b) < width:
             b += " " + i
         else:
-            yield b
+            yield decorater(b)
             b = '' + i
-    return b
+    return decorater(b)
 
-for i in text_format('As an example, say you had some outer variable nested within p_decorate you would expect this to throw an error since it no longer exists (its non-local to func_wrapper) when func_wrapper is called and tries to use this variable, but it wont since the enclosing namespace is "remembered"'):
-    print(i)
+
+def decorater(linetext):
+    a = '|{:78}|'.format(linetext)
+    return a
+
 
 
 if __name__ == '__main__':
