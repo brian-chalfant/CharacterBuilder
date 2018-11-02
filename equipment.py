@@ -21,7 +21,7 @@ def display_menu(type, gold):
 
 def money(value):
     print(value.strip('cp'))
-    
+
 
 
 
