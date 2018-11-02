@@ -127,28 +127,30 @@ def build_sheet(character_data: dict):
                                                            character_data.get('fourth_weap_dmg'),
                                                            character_data.get('fourth_weap_properties'),
                                                            character_data.get('fourth_weap_weight'))
-        lines += '+-Features---------------------------------------------------------------------+'
+        lines += '+-Features---------------------------------------------------------------------+ \n'
         print(lines)
         for i in text_format(character_data.get('abilities')):
-            print(i)
+            lines += i
+        lines += '+-Spells-----------------------------------------------------------------------+ \n'
+        for i in text_format(character_data.get('spells')):
+            lines += i
         outfile.writelines(lines)
 
 
 def text_format(textlist, width=78):
     a = textlist
-    print(a)
     b = ''
     for i in a:
         if len(i + b) < width:
-            b += " " + i
+            b += i + ", "
         else:
             yield decorater(b)
-            b = '' + i
+            b = '' + i + ", "
     return decorater(b)
 
 
 def decorater(linetext):
-    a = '|{:78}|'.format(linetext)
+    a = '|{:78}| \n'.format(linetext)
     return a
 
 
@@ -250,5 +252,6 @@ if __name__ == '__main__':
                  'fourth_weap_dmg': '4 Bludgeoning',
                  'fourth_weap_properties': '',
                  'fourth_weap_weight': '',
-                 'abilities': ["RAGE", "UNARMORED DEFENSE", "FLIGHT"]
+                 'abilities': ['COMBAT WILD SHAPE', 'CIRCLE FORMS', 'PRIMAL STRIKE', 'WILD SHAPE (1)', 'ELEMENTAL WILD SHAPE', 'THOUSAND FORMS', 'TIMELESS BODY', 'BEAST SPELLS', 'DRACONIC ANCESTRY', 'DAMAGE RESISTANCE'],
+                 'spells': ['Acid Splash', 'Blade Ward', 'Chill Touch', 'Dancing Lights', 'Alarm', 'Burning Hands', 'Charm Person', 'Chromatic Orb', 'Alter Self', 'Arcane Lock', 'Blindness Deafness', 'Animate Dead', 'Bestow Curse', 'Blink', 'Arcane Eye']
                  })
