@@ -4,7 +4,7 @@ import sqlite3
 def build_sheet(character_data: dict):
     width = 80
     filename = character_data.get('name') + '-' + character_data.get('race') + " " + character_data.get('klass')
-    with open('characters\\' + filename, 'w') as outfile:
+    with open('characters\\' + filename, 'w', encoding='utf-16') as outfile:
 
         lines = str()
         lines += 'Name:__' + str(character_data.get('name')) + ('_' * (int((width/2)) -
@@ -132,14 +132,17 @@ def build_sheet(character_data: dict):
         lines += '+-Features---------------------------------------------------------------------+ \n'
         for i in character_data.get('abilities'):
             x = read_features(i)
-            lines += string_decorater('*' + ('-' *76) + '* \n')
+            lines += string_decorater('*' + ('-' *76) + '*') + '\n'
             for j in string_format(x):
                 lines += j + '\n'
         lines += '+-Spells-----------------------------------------------------------------------+ \n'
-        for i in text_format(character_data.get('spells')):
-            lines += i
+        for i in character_data.get('spells'):
+            x = read_spells(i)
+            lines += string_decorater('*' + ('-' *76) + '*') + '\n'
+            for j in string_format(x):
+                lines += j + '\n'
         print(lines)
-#        outfile.writelines(lines)
+        outfile.writelines(lines)
 
 
 def text_format(textlist, width=78):
@@ -190,6 +193,20 @@ def read_features(name):
         return name + ": " + x[0][0]
     except IndexError:
         print(name + 'Spell not in database')
+
+def read_spells(name):
+    conn = sqlite3.connect('CharacterBuilder.db')
+    cur = conn.cursor()
+
+    cur.execute('SELECT description FROM spells WHERE NAME = \"{na}\"'.format(na=name))
+
+    x = cur.fetchall()
+    conn.close()
+
+    try:
+        return name + ": " + x[0][0]
+    except:
+        print( name  +  ': nope')
 
 
 if __name__ == '__main__':
@@ -290,5 +307,5 @@ if __name__ == '__main__':
                  'fourth_weap_properties': '',
                  'fourth_weap_weight': '',
                  'abilities': ['COMBAT WILD SHAPE', 'CIRCLE FORMS', 'PRIMAL STRIKE', 'WILD SHAPE (CR 1 OR BELOW)', 'ELEMENTAL WILD SHAPE', 'THOUSAND FORMS', 'TIMELESS BODY', 'BEAST SPELLS', 'DAMAGE RESISTANCE'],
-                 'spells': ['Acid Splash', 'Blade Ward', 'Chill Touch', 'Dancing Lights', 'Alarm', 'Burning Hands', 'Charm Person', 'Chromatic Orb', 'Alter Self', 'Arcane Lock', 'Blindness Deafness', 'Animate Dead', 'Bestow Curse', 'Blink', 'Arcane Eye']
+                 'spells': ['Acid Splash', 'Blade Ward', 'Chill Touch', 'Dancing Lights', 'Alarm', 'Burning Hands', 'Charm Person', 'Chromatic Orb', 'Alter Self', 'Arcane Lock', 'Blindness/Deafness', 'Animate Dead', 'Bestow Curse', 'Blink', 'Arcane Eye']
                  })
