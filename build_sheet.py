@@ -1,3 +1,5 @@
+import sqlite3
+
 
 def build_sheet(character_data: dict):
     width = 80
@@ -128,13 +130,16 @@ def build_sheet(character_data: dict):
                                                            character_data.get('fourth_weap_properties'),
                                                            character_data.get('fourth_weap_weight'))
         lines += '+-Features---------------------------------------------------------------------+ \n'
-        for i in text_format(character_data.get('abilities')):
-            lines += i
+        for i in character_data.get('abilities'):
+            x = read_features(i)
+            lines += string_decorater('*' + ('-' *76) + '* \n')
+            for j in string_format(x):
+                lines += j + '\n'
         lines += '+-Spells-----------------------------------------------------------------------+ \n'
         for i in text_format(character_data.get('spells')):
             lines += i
         print(lines)
-        outfile.writelines(lines)
+#        outfile.writelines(lines)
 
 
 def text_format(textlist, width=78):
@@ -149,10 +154,42 @@ def text_format(textlist, width=78):
     return decorater(b)
 
 
+def string_format(text, width=78):
+    a = text.split()
+    b = ''
+    for i in a:
+        if len(i + b) < width:
+            b += i + " "
+        else:
+            yield string_decorater(b)
+            b = '' + i + " "
+    return string_decorater(b)
+
+
+def string_decorater(linetext):
+    a = '|{:78}|'.format(linetext)
+    return a
+
+
 def decorater(linetext):
     a = '|{:78}| \n'.format(linetext)
     return a
 
+
+def read_features(name):
+    conn = sqlite3.connect('CharacterBuilder.db')
+    cur = conn.cursor()
+
+    cur.execute('SELECT description FROM features WHERE NAME = \"{na}\"'.format(na=name))
+
+    x = cur.fetchall()
+    conn.close()
+
+    try:
+        print(x[0][0])
+        return name + ": " + x[0][0]
+    except IndexError:
+        print(name + 'Spell not in database')
 
 
 if __name__ == '__main__':
@@ -252,6 +289,6 @@ if __name__ == '__main__':
                  'fourth_weap_dmg': '4 Bludgeoning',
                  'fourth_weap_properties': '',
                  'fourth_weap_weight': '',
-                 'abilities': ['COMBAT WILD SHAPE', 'CIRCLE FORMS', 'PRIMAL STRIKE', 'WILD SHAPE (1)', 'ELEMENTAL WILD SHAPE', 'THOUSAND FORMS', 'TIMELESS BODY', 'BEAST SPELLS', 'DRACONIC ANCESTRY', 'DAMAGE RESISTANCE'],
+                 'abilities': ['COMBAT WILD SHAPE', 'CIRCLE FORMS', 'PRIMAL STRIKE', 'WILD SHAPE (CR 1 OR BELOW)', 'ELEMENTAL WILD SHAPE', 'THOUSAND FORMS', 'TIMELESS BODY', 'BEAST SPELLS', 'DAMAGE RESISTANCE'],
                  'spells': ['Acid Splash', 'Blade Ward', 'Chill Touch', 'Dancing Lights', 'Alarm', 'Burning Hands', 'Charm Person', 'Chromatic Orb', 'Alter Self', 'Arcane Lock', 'Blindness Deafness', 'Animate Dead', 'Bestow Curse', 'Blink', 'Arcane Eye']
                  })

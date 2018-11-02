@@ -80,7 +80,7 @@ class Dragonborn(Race):
         self.strength += 2
         self.charisma += 1
         self.speed = 30
-        self.abilities = ["DRACONIC ANCESTRY", "DAMAGE RESISTANCE"]
+        self.abilities = ["DAMAGE RESISTANCE"]
         clearscreen()
         print("What type of Dragonborn is {}".format(character_name))
         for key, value in draconic_lines().items():

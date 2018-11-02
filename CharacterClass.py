@@ -850,7 +850,7 @@ class Druid(CharacterClass):
             self.survival_skill = True
 
         if level >= 1:
-            self.abilities.append("WILD SHAPE (1/4)")
+            self.abilities.append("WILD SHAPE (CR 1/4 OR BELOW, NO FLYING OR SWIM SPEED)")
         if level >= 2:
             clearscreen()
             print("you must now choose your Druid Circle, you have the following options: \n"
@@ -868,8 +868,8 @@ class Druid(CharacterClass):
             if self.classpath == "Circle of the Land":
                 self.spells += circle_spells(self.land_type, 3)
         if level >= 4:
-            self.abilities.remove("WILD SHAPE (1/4)")
-            self.abilities.append("WILD SHAPE (1/2)")
+            self.abilities.remove("WILD SHAPE (CR 1/4 OR BELOW, NO FLYING OR SWIM SPEED)")
+            self.abilities.append("WILD SHAPE (CR 1/2 OR BELOW, NO FLYING SPEED)")
             self.ability_up(self.statblock)
         if level >= 6:
             if self.classpath == "Circle of the Land":
@@ -880,8 +880,8 @@ class Druid(CharacterClass):
             if self.classpath == "Circle of the Land":
                 self.spells += circle_spells(self.land_type, 7)
         if level >= 8:
-            self.abilities.remove("WILD SHAPE (1/2)")
-            self.abilities.append("WILD SHAPE (1)")
+            self.abilities.remove("WILD SHAPE (CR 1/2 OR BELOW, NO FLYING SPEED)")
+            self.abilities.append("WILD SHAPE (CR 1 OR BELOW)")
             self.ability_up(self.statblock)
         if level >= 9:
             if self.classpath == "Circle of the Land":

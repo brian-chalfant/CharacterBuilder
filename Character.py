@@ -20,7 +20,7 @@ class Character:
     def __init__(self, name, level, race, characterclass, background):
         self.name = name
         self.level = level
-        self.race = Race
+        self.race = race
         self.character_class = characterclass
         self.background = background
         self.equipment = []
@@ -283,7 +283,7 @@ def generate_character():
         for key, value in character_data.items():
             print(key.capitalize(), ":", value)
 
-    with open(home + 'data.json', 'w') as outfile:
+    with open('characters\\data.json', 'w') as outfile:
         json.dump(character_data, outfile)
 
 
