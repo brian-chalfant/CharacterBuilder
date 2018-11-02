@@ -76,7 +76,7 @@ def write_background():
     print(data)
     with open('data.json', 'w') as outfile:
         json.dump(data, outfile)
-    conn = sqlite3.connect('background.db')
+    conn = sqlite3.connect('CharacterBuilder.db')
     cur = conn.cursor()
 
     cur.execute('INSERT INTO backgrounds (NAME, SKILLPROF, LANGUAGES, TOOLS, EQUIPMENT, FEATURE, FEATDESC, '
@@ -106,7 +106,7 @@ def read_backgrounds(name):
                     'IDEAL2', 'IDEAL3', 'IDEAL4', 'IDEAL5', 'IDEAL6', 'BOND1', 'BOND2', 'BOND3', 'BOND4',
                     'BOND5', 'BOND6', 'FLAW1', 'FLAW2', 'FLAW3', 'FLAW4', 'FLAW5', 'FLAW6']
     rtndict = {}
-    conn = sqlite3.connect('background.db')
+    conn = sqlite3.connect('CharacterBuilder.db')
     cur = conn.cursor()
 
     cur.execute('SELECT * FROM backgrounds WHERE NAME = \"{na}\"'.format(na=name))
@@ -121,7 +121,7 @@ def read_backgrounds(name):
 
 def read_background_names():
     rtndict = {}
-    conn = sqlite3.connect('background.db')
+    conn = sqlite3.connect('CharacterBuilder.db')
     cur = conn.cursor()
 
     cur.execute('SELECT NAME FROM backgrounds')

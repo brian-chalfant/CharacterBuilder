@@ -263,7 +263,7 @@ def rogue_slots(level):
 def get_spells(user_class, level, **kwargs):
     rtn_list = []
     spell_dict = {}
-    conn = sqlite3.connect('spells.db')
+    conn = sqlite3.connect('CharacterBuilder.db')
     c = conn.cursor()
     if 'school' in kwargs:
         x = []  # Pull Each School of Magic from the database that is listed in kwargs
@@ -302,7 +302,7 @@ def get_spells(user_class, level, **kwargs):
 def get_warlock_spells(level):
     rtn_list = []
     spell_dict = {}
-    conn = sqlite3.connect('spells.db')
+    conn = sqlite3.connect('CharacterBuilder.db')
     c = conn.cursor()
     x = []
     c.execute("SELECT NAME FROM Spells WHERE WARLOCK_SPELL = 1 and LEVEL <= {lvl} ORDER BY NAME ASC"
@@ -400,7 +400,7 @@ def single_spell_select(user_class, spell_level):
 
 def get_invocations_name(level, **kwargs):
     rtn_list = []
-    conn = sqlite3.connect('spells.db')
+    conn = sqlite3.connect('CharacterBuilder.db')
     c = conn.cursor()
     c.execute("SELECT name FROM Eldritch_Invocations WHERE level <= {lvl} ORDER BY name ASC"
               .format(lvl=level))
@@ -414,7 +414,7 @@ def get_invocations_name(level, **kwargs):
 
 def get_invocation_description(name):
     rtn_list = []
-    conn = sqlite3.connect('spells.db')
+    conn = sqlite3.connect('CharacterBuilder.db')
     c = conn.cursor()
     c.execute("SELECT description FROM Eldritch_Invocations WHERE name = \"{nm}\" ORDER BY name ASC"
               .format(nm=name))

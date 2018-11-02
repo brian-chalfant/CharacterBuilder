@@ -2,7 +2,7 @@
 def build_sheet(character_data: dict):
     width = 80
     filename = character_data.get('name') + '-' + character_data.get('race') + " " + character_data.get('klass')
-    with open(filename, 'w') as outfile:
+    with open('characters\\' + filename, 'w') as outfile:
 
         lines = str()
         lines += 'Name:__' + str(character_data.get('name')) + ('_' * (int((width/2)) -
@@ -128,12 +128,12 @@ def build_sheet(character_data: dict):
                                                            character_data.get('fourth_weap_properties'),
                                                            character_data.get('fourth_weap_weight'))
         lines += '+-Features---------------------------------------------------------------------+ \n'
-        print(lines)
         for i in text_format(character_data.get('abilities')):
             lines += i
         lines += '+-Spells-----------------------------------------------------------------------+ \n'
         for i in text_format(character_data.get('spells')):
             lines += i
+        print(lines)
         outfile.writelines(lines)
 
 
@@ -156,9 +156,9 @@ def decorater(linetext):
 
 
 if __name__ == '__main__':
-    build_sheet({'name': 'Kaelen',
-                 'race': 'Orc',
-                 'klass': 'Bard',
+    build_sheet({'name': 'Salem',
+                 'race': 'Half-Elf',
+                 'klass': 'Wizard',
                  'background': 'Acolyte',
                  'alignment': 'Chaotic Neutral',
                  'level': '3',

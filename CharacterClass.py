@@ -351,10 +351,10 @@ class Bard(CharacterClass):
         # Start Level stuff
 
         if level >= 1:
-            self.abilities.append("BARDIC INSPIRATION (1d6)")
+            self.abilities.append("BARDIC INSPIRATION (D6)")
         if level >= 2:
             self.abilities.append("JACK OF ALL TRADES")
-            self.abilities.append("SONG OF REST (1d6)")
+            self.abilities.append("SONG OF REST (D6)")
         if level >= 3:
             self.abilities.append("EXPERTISE")
             # Level 3 Choose your class path, either Path of the Berzerker or Path of the Totem Warrior
@@ -449,8 +449,8 @@ class Bard(CharacterClass):
         if level >= 4:
             self.ability_up(self.statblock)
         if level >= 5:
-            self.abilities.remove("BARDIC INSPIRATION (1d6)")
-            self.abilities.append("BARDIC INSPIRATION (1d8)")
+            self.abilities.remove("BARDIC INSPIRATION (D6)")
+            self.abilities.append("BARDIC INSPIRATION (D8)")
             self.abilities.append("FONT OF INSPIRATION")
         if level >= 6:
             self.abilities.append("COUNTERCHARM")
@@ -461,19 +461,19 @@ class Bard(CharacterClass):
         if level >= 8:
             self.ability_up(self.statblock)
         if level >= 9:
-            self.abilities.remove("SONG OF REST (1d6)")
-            self.abilities.append("SONG OF REST (1d8)")
+            self.abilities.remove("SONG OF REST (D6)")
+            self.abilities.append("SONG OF REST (D8)")
 
         if level >= 10:
-            self.abilities.remove("BARDIC INSPIRATION (1d8)")
-            self.abilities.append("BARDIC INSPIRATION (1d10)")
+            self.abilities.remove("BARDIC INSPIRATION (D8)")
+            self.abilities.append("BARDIC INSPIRATION (D10)")
             self.abilities.append("EXPERTISE 2")
             self.abilities.append("****magical secrets ****")
         if level >= 12:
             self.ability_up(self.statblock)
         if level >= 13:
-            self.abilities.remove("SONG OF REST (1d8)")
-            self.abilities.append("SONG OF REST (1d10)")
+            self.abilities.remove("SONG OF REST (D8)")
+            self.abilities.append("SONG OF REST (D10)")
         if level >= 14:
             self.abilities.append("*****magical secrets 2*****")
             if self.classpath == "Lore":
@@ -481,13 +481,13 @@ class Bard(CharacterClass):
             else:
                 self.abilities.append("BATTLE MAGIC")
         if level >= 15:
-            self.abilities.remove("BARDIC INSPIRATION (1d10)")
-            self.abilities.append("BARDIC INSPIRATION (1d12)")
+            self.abilities.remove("BARDIC INSPIRATION (D10)")
+            self.abilities.append("BARDIC INSPIRATION (D12)")
         if level >= 16:
             self.ability_up(self.statblock)
         if level >= 17:
-            self.abilities.remove("SONG OF REST (1d10)")
-            self.abilities.append("SONG OF REST (1d12)")
+            self.abilities.remove("SONG OF REST (D10)")
+            self.abilities.append("SONG OF REST (D12)")
         if level >= 18:
             self.abilities.append("*****magical secrets 3*****")
         if level >= 19:
@@ -1533,12 +1533,12 @@ class Rogue(CharacterClass):
             if (skill_1 == 11) or (skill_2 == 11) or (skill_3 == 11) or (skill_4 == 11):
                 self.stealth_skill = True
             self.abilities.append("EXPERTISE")
-            self.abilities.append("SNEAK ATTACK (1d6)")
+            self.abilities.append("SNEAK ATTACK (D6)")
             self.language.append("Thieves' Cant")
         if level >= 2:
             self.abilities.append("CUNNING ACTION")
         if level >= 3:
-            self.abilities.remove("SNEAK ATTACK (1d6)")
+            self.abilities.remove("SNEAK ATTACK (D6)")
             self.abilities.append("SNEAK ATTACK (2d6)")
             clearscreen()
             print("you must now choose your Rogue Archtype, you have the following options: \n"
