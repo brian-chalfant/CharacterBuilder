@@ -1,4 +1,5 @@
 from DiceRoll import diceroll, stat_selection
+from equipment import tool, artisan_tools, musical_instruments
 from modifiers import *
 from invocations import *
 from spells import spell_queue, warlock_spell_queue
@@ -25,6 +26,7 @@ class CharacterClass:
         self.char_name = character_name
         self.name = ''
         self.statblock = {}
+        self.hit_die = 6
         self.athletics_skill = False
         self.acrobatics_skill = False
         self.sleight_of_hand_skill = False
@@ -52,10 +54,15 @@ class CharacterClass:
         self.classpath = ''
         self.armor = 'None'
         self.speed_addition = 0
+        self.saves = []
         self.abilities = []
         self.language = []
         self.spells = []
         self.classpath = ''
+        self.armorpro = []
+        self.weaponpro = []
+        self.toolpro = []
+        self.wealth = 0
 
     def get_athletics(self):
         return self.athletics_skill
@@ -155,7 +162,7 @@ class Barbarian(CharacterClass):
     def __init__(self, level, character_name):  # initiate
         super(Barbarian, self).__init__(character_name=character_name)
         self.name = 'Barbarian'  # class name
-        self.hit_die = '1d12'  # Hit die is 1d12
+        self.hit_die = 12  # Hit die is 1d12
         self.primary_ability = "Strength"  # primary ability is Strength
         self.statblock = stat_selection(self.name, self.primary_ability)
         # self.strength_addition = self.statblock.get('Strength')
@@ -169,6 +176,7 @@ class Barbarian(CharacterClass):
         self.weaponpro = ["Simple Weapons", "Martial Weapons"]  # Proficient in Simple and Martial Weapons
         self.toolpro = []
         self.language = []
+        self.wealth = (diceroll(2, 4) * 10)
         print(BColors.ENDC + "pick two(2) skills from this list")
         for key, value in barbarian_skill_list().items():
             print(key, value)
@@ -264,16 +272,18 @@ class Bard(CharacterClass):
     def __init__(self, level, character_name):
         super(Bard, self).__init__(character_name=character_name)
         self.name = 'Bard'
-        self.hit_die = diceroll(1, 8)  # Hit die is 1d8
+        self.hit_die = 8  # Hit die is 1d8
         self.primary_ability = "Charisma"  # primary ability is Strength
         self.statblock = stat_selection(self.name, self.primary_ability)
         self.saves = ["Dexterity", "Charisma"]  # Saving throws are Strength and Constitution
         self.armorpro = ["Light Armor"]  # Proficient in Light, Medium Armor and Shields
         self.weaponpro = ["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"]
-        self.toolpro = []  # any three musical instruments
+        for i in range(3):
+            self.toolpro.append(tool(musical_instruments())[0])
         self.spellcasting = True
         self.spellcasting_ability = "Charisma"
         self.language = []
+        self.wealth = (diceroll(5, 4) * 10)
         # assign equipment in here somewhere
         valid = False
         while valid is not True:
@@ -289,7 +299,7 @@ class Bard(CharacterClass):
             answers.append(skill_2)
             skill_3 = validate_choice(len(full_skill_list().items()), message='Skill 3:')
             answers.append(skill_3)
-            if len(set(answers)) < 3:
+            if len(set(answers)) < 2:
                 valid = False
             else:
                 valid = True
@@ -445,7 +455,7 @@ class Bard(CharacterClass):
                 self.abilities.append("COMBAT INSPIRATION")
                 self.armorpro.append("Medium Armor")
                 self.armorpro.append("Shields")
-                self.armorpro.append("Martial Weapons")
+                self.weaponpro.append("Martial Weapons")
         if level >= 4:
             self.ability_up(self.statblock)
         if level >= 5:
@@ -501,7 +511,7 @@ class Cleric(CharacterClass):
     def __init__(self, level, character_name):
         super(Cleric, self).__init__(character_name=character_name)
         self.name = 'Cleric'
-        self.hit_die = '1d8'  # Hit die is 1d8
+        self.hit_die = 8  # Hit die is 1d8
         self.primary_ability = "Wisdom"  # primary ability is Strength
         self.statblock = stat_selection(self.name, self.primary_ability)
         self.saves = ["Wisdom", "Charisma"]  # Saving throws are Strength and Constitution
@@ -512,6 +522,7 @@ class Cleric(CharacterClass):
         self.spellcasting = True
         self.spellcasting_ability = "Wisdom"
         self.language = []
+        self.wealth = (diceroll(5, 4) * 10)
         clearscreen()
         print("pick two(2) skills from this list")
         for key, value in cleric_skill_list().items():
@@ -794,7 +805,7 @@ class Druid(CharacterClass):
     def __init__(self, level, character_name):
         super(Druid, self).__init__(character_name=character_name)
         self.name = 'Druid'
-        self.hit_die = '1d8'  # Hit die is 1d8
+        self.hit_die = 8  # Hit die is 1d8
         self.primary_ability = "Wisdom"  # primary ability is Strength
         self.statblock = stat_selection(self.name, self.primary_ability)
         self.saves = ["Intelligence", "Wisdom"]  # Saving throws are Strength and Constitution
@@ -806,6 +817,7 @@ class Druid(CharacterClass):
         self.spellcasting = True
         self.spellcasting_ability = "Wisdom"
         self.language = ["Druidic"]
+        self.wealth = (diceroll(2, 4) * 10)
         clearscreen()
         print("Where did you become a Druid?:")
         lands = druidic_lands()
@@ -912,7 +924,7 @@ class Fighter(CharacterClass):
     def __init__(self, level, character_name):
         super(Fighter, self).__init__(character_name=character_name)
         self.name = 'Fighter'
-        self.hit_die = '1d10'  # Hit die is 1d8
+        self.hit_die = 10  # Hit die is 1d8
         self.primary_ability = "Strength"  # primary ability is Strength
         self.statblock = stat_selection(self.name, self.primary_ability)
         self.saves = ["Strength", "Constitution"]  # Saving throws are Strength and Constitution
@@ -923,6 +935,7 @@ class Fighter(CharacterClass):
         self.spellcasting = False
         self.spellcasting_ability = "Wisdom"
         self.language = []
+        self.wealth = (diceroll(5, 4) * 10)
         x = fighter_fighting_style()
         if level >= 1:
             self.abilities.append("SECOND WIND")
@@ -1013,7 +1026,7 @@ class Fighter(CharacterClass):
         if level >= 10:
             if self.classpath == "Champion":
                 clearscreen()
-                for key, value in x.item():
+                for key, value in x.items():
                     print(key, value)
                 a = validate_choice(len(x.items()), message='Choose an Additional Fighting Style: ')
                 self.fighting_style += x.pop(a)
@@ -1066,17 +1079,19 @@ class Monk(CharacterClass):
     def __init__(self, level, character_name):
         super(Monk, self).__init__(character_name=character_name)
         self.name = 'Monk'
-        self.hit_die = '1d8'  # Hit die is 1d8
+        self.hit_die = 8  # Hit die is 1d8
         self.primary_ability = "Dexterity"  # primary ability is Dex
         self.statblock = stat_selection(self.name, self.primary_ability)
         self.saves = ["Strength", "Dexterity"]  # Saving throws are Strength and Constitution
         self.armorpro = []
         self.weaponpro = ["Simple Weapons", "Shortswords"]
-        self.toolpro = ['One type of Artisan Tools', 'One Musical Instrument']
+        self.toolpro.append(tool(artisan_tools())[0])
+        self.toolpro.append(tool(musical_instruments())[0])
         self.spells = []
         self.spellcasting = False
         self.spellcasting_ability = "Wisdom"
         self.language = []
+        self.wealth = diceroll(5,4)
         clearscreen()
         for key, value in monk_skill_list().items():
             print(key, value)
@@ -1192,7 +1207,7 @@ class Paladin(CharacterClass):
     def __init__(self, level, character_name):
         super(Paladin, self).__init__(character_name=character_name)
         self.name = 'Paladin'
-        self.hit_die = diceroll(1, 10)  # Hit die is 1d8
+        self.hit_die = 10  # Hit die is 1d8
         self.primary_ability = "Strength"  # primary ability is Dex
         self.statblock = stat_selection(self.name, self.primary_ability)
         self.saves = ["Wisdom", "Charisma"]  # Saving throws are Strength and Constitution
@@ -1203,6 +1218,7 @@ class Paladin(CharacterClass):
         self.spellcasting = True
         self.spellcasting_ability = "Charisma"
         self.language = []
+        self.wealth = (diceroll(5, 4) * 10)
         clearscreen()
         for key, value in paladin_skill_list().items():
             print(key, value)
@@ -1319,7 +1335,7 @@ class Ranger(CharacterClass):
     def __init__(self, level, character_name):
         super(Ranger, self).__init__(character_name=character_name)
         self.name = 'Ranger'
-        self.hit_die = '1d10'  # Hit die is 1d8
+        self.hit_die = 10  # Hit die is 1d8
         self.primary_ability = "Dexterity"  # primary ability is Dex
         self.statblock = stat_selection(self.name, self.primary_ability)
         self.saves = ["Strength", "Dexterity"]  # Saving throws are Strength and Constitution
@@ -1330,6 +1346,7 @@ class Ranger(CharacterClass):
         self.spellcasting = True
         self.spellcasting_ability = "Charisma"
         self.language = []
+        self.wealth = (diceroll(5, 4) * 10)
         x = ranger_fighting_style()
         lands = druidic_lands()
         if level >= 1:
@@ -1354,7 +1371,7 @@ class Ranger(CharacterClass):
                 answers.append(skill_2)
                 skill_3 = validate_choice(len(self.skill_list.items()), message='Skill 3:')
                 answers.append(skill_3)
-                if len(set(answers)) < 3:
+                if len(set(answers)) < 2:
                     valid = False
                 else:
                     valid = True
@@ -1466,7 +1483,7 @@ class Rogue(CharacterClass):
     def __init__(self, level, character_name):
         super(Rogue, self).__init__(character_name=character_name)
         self.name = 'Rogue'
-        self.hit_die = '1d8'  # Hit die is 1d8
+        self.hit_die = 8  # Hit die is 1d8
         self.primary_ability = "Dexterity"  # primary ability is Dex
         self.statblock = stat_selection(self.name, self.primary_ability)
         self.saves = ["Dexterity", "Intelligence"]  # Saving throws are Strength and Constitution
@@ -1477,6 +1494,7 @@ class Rogue(CharacterClass):
         self.spellcasting = True
         self.spellcasting_ability = "Charisma"
         self.language = []
+        self.wealth = (diceroll(4, 4) * 10)
         if level >= 1:
             clearscreen()
             print("pick four(4) skills from this list")
@@ -1495,7 +1513,8 @@ class Rogue(CharacterClass):
                 answers.append(skill_3)
                 skill_4 = validate_choice(len(rogue_skill_list().items()), message='Skill 4:')
                 answers.append(skill_3)
-                if len(set(answers)) < 4:
+                print(len(set(answers)))
+                if len(set(answers)) < 3:
                     valid = False
                 else:
                     valid = True
@@ -1634,7 +1653,7 @@ class Sorcerer(CharacterClass):
     def __init__(self, level, character_name):
         super(Sorcerer, self).__init__(character_name=character_name)
         self.name = 'Sorcerer'
-        self.hit_die = '1d6'  # Hit die is 1d8
+        self.hit_die = 6  # Hit die is 1d8
         self.primary_ability = "Charisma"  # primary ability is Dex
         self.statblock = stat_selection(self.name, self.primary_ability)
         self.saves = ["Constitution", "Charisma"]  # Saving throws are Strength and Constitution
@@ -1645,6 +1664,7 @@ class Sorcerer(CharacterClass):
         self.spellcasting = True
         self.spellcasting_ability = "Charisma"
         self.language = []
+        self.wealth = (diceroll(3, 4) * 10)
         self.meta = metamagic()
         clearscreen()
         print("pick two(2) skills from this list")
@@ -1758,7 +1778,7 @@ class Warlock(CharacterClass):
     def __init__(self, level, character_name):
         super(Warlock, self).__init__(character_name=character_name)
         self.name = 'Warlock'
-        self.hit_die = '1d8'  # Hit die is 1d8
+        self.hit_die = 8  # Hit die is 1d8
         self.primary_ability = "Charisma"  # primary ability is Dex
         self.statblock = stat_selection(self.name, self.primary_ability)
         self.saves = ["Wisdom", "Charisma"]  # Saving throws are Strength and Constitution
@@ -1769,6 +1789,7 @@ class Warlock(CharacterClass):
         self.spellcasting = True
         self.spellcasting_ability = "Charisma"
         self.language = []
+        self.wealth = (diceroll(4, 4) * 10)
         print("pick two(2) skills from this list")
         for key, value in warlock_skill_list().items():
             print(key, value)
@@ -1881,7 +1902,7 @@ class Wizard(CharacterClass):
     def __init__(self, level, character_name):
         super(Wizard, self).__init__(character_name=character_name)
         self.name = 'Wizard'
-        self.hit_die = '1d6'  # Hit die is 1d8
+        self.hit_die = 6  # Hit die is 1d8
         self.primary_ability = "Intelligence"  # primary ability is Dex
         self.statblock = stat_selection(self.name, self.primary_ability)
         self.saves = ["Intelligence", "Wisdom"]  # Saving throws are Strength and Constitution
@@ -1892,6 +1913,7 @@ class Wizard(CharacterClass):
         self.spellcasting = True
         self.spellcasting_ability = "Intelligence"
         self.language = []
+        self.wealth = (diceroll(4, 4) * 10)
         x = magic_schools()
         print("pick two(2) skills from this list")
         for key, value in wizard_skill_list().items():

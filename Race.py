@@ -21,6 +21,7 @@ class Race:
         self.constitution = 0
         self.strength = 0
         self.language = ["Common"]
+        self.weaponpro = []
         self.cantrip = []
         self.abilities = []
         self.speed = 25
@@ -102,6 +103,7 @@ class Dwarf(Race):
         self.constitution += 2
         self.abilities = ["DARKVISION", "DWARVEN RESILIENCE", "DWARVEN COMBAT TRAINING", "STONECUNNING"]
         self.language.append("Dwarvish")
+        self.weaponpro = ['Battleaxe', 'Handaxe', 'Light hammer', 'Warhammer']
         self.speed = 25
 
 

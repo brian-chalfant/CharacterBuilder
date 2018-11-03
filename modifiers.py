@@ -18,9 +18,9 @@ def validate_choice(maximum, **kwargs):
     while valid is not True:
         try:
             if 'message' in kwargs:
-                entered = input(BColors.UNDERLINE + kwargs.get('message'))
+                entered = input(BColors.UNDERLINE + kwargs.get('message') + BColors.ENDC)
             else:
-                entered = input(BColors.UNDERLINE + "Please enter a number:")
+                entered = input(BColors.UNDERLINE + "Please enter a number:" + BColors.ENDC)
             x = int(entered)
             if entered == '':
                 valid = False
@@ -105,6 +105,19 @@ def exp(level):
     }
     return exp_points.get(level)
 
+def alignment():
+    alignments = {
+        1: 'Lawful Good',
+        2: 'Lawful Neutral',
+        3: 'Lawful Evil',
+        4: 'Neutral Good',
+        5: 'Neutral Neutral',
+        6: 'Neutral Evil',
+        7: 'Chaotic Good',
+        8: 'Chaotic Neutral',
+        9: 'Chaotic Evil'
+    }
+    return alignments
 
 def proficiency(level):
     pro_bonus = {
@@ -791,3 +804,16 @@ def classes_list():
         12: "Wizard"
     }
     return classes
+
+
+def saving_throws(lst):
+    saves = {'Strength': ' ', 'Dexterity': ' ', 'Constitution': ' ', 'Wisdom': ' ', 'Intelligence': ' ', 'Charisma': ' '}
+    for i in lst:
+        saves[i] = "X"
+    return saves
+
+
+if __name__ == '__main__':
+
+    x = saving_throws(["Intelligence", "Wisdom"])
+    print(x)

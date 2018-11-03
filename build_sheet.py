@@ -7,23 +7,23 @@ def build_sheet(character_data: dict):
     with open('characters\\' + filename, 'w', encoding='utf-16') as outfile:
 
         lines = str()
-        lines += 'Name:__' + str(character_data.get('name')) + ('_' * (int((width/2)) -
+        lines += 'Name:> ' + str(character_data.get('name')) + (' ' * (int((width/2)) -
                                                                        int(len(character_data.get('name'))) - 7)
                                                                 ) + '         ________     ____   ________   ' + '\n'
-        lines += 'Race:__' + str(character_data.get('race')) + ('_' * (int((width/2)) -
+        lines += 'Race:> ' + str(character_data.get('race')) + (' ' * (int((width/2)) -
                                                                        int(len(character_data.get('race'))) - 7)
                                                                 ) + '         \______ \   /  _ \  \______ \  ' + '\n'
-        lines += 'Class:__' + str(character_data.get('klass')) + ('_' * (int((width/2)) -
+        lines += 'Class:> ' + str(character_data.get('klass')) + (' ' * (int((width/2)) -
                                                                          int(len(character_data.get('klass'))) - 8)
                                                                 ) + '          |    |  \  >  _ </\ |    |  \ ' + '\n'
-        lines += 'Background:__' + str(character_data.get('klass')) + ('_' * (int((width/2)) -
+        lines += 'Background:> ' + str(character_data.get('klass')) + (' ' * (int((width/2)) -
                                                                          int(len(character_data.get('klass'))) - 13)
                                                                 ) + '          |  __`   \/  <_\ \/ |  __`   \\' + '\n'
-        lines += 'Alignment:__' + str(character_data.get('alignment')) + ('_' * (int((width/2)) -
+        lines += 'Alignment:> ' + str(character_data.get('alignment')) + (' ' * (int((width/2)) -
                                                                          int(len(character_data.get('alignment'))) - 12)
                                                                 ) + '         /_______  /\_____\ \/_______  /' + '\n'
-        lines += 'Level & XP:__Level ' + str(character_data.get('level')) + "____" + str(character_data.get('xp')) + \
-                 ('_' * (int((width/2)) - (int(len(character_data.get('level'))) + int(len(character_data.get('xp')))
+        lines += 'Level & XP:> Level ' + str(character_data.get('level')) + "    " + str(character_data.get('xp')) + \
+                 (' ' * (int((width/2)) - (int(len(character_data.get('level'))) + int(len(character_data.get('xp')))
                                            + 23))) + '                 \/        \/        \/ ' + '\n'
         lines += '+-------------------------------------+  +-AC-------+ +-Ini------+ +-Speed-----+' + '\n'
         lines += '| Inspiration                    [  ] |  |   {}     | |     {}   | |    {}     | \n'.format(
@@ -103,11 +103,11 @@ def build_sheet(character_data: dict):
             character_data.get('proficiencies')[16])
         lines += '|                                     |  |{:37}| \n'.format(character_data.get('proficiencies')[17])
         lines += '+-Currency-+-Treasure-----------------+  |{:37}| \n'.format(character_data.get('proficiencies')[18])
-        lines += '| CP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[18])
-        lines += '| SP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[18])
-        lines += '| EP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[18])
-        lines += '| GP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[18])
-        lines += '| PP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[18])
+        lines += '| CP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[19])
+        lines += '| SP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[20])
+        lines += '| EP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[21])
+        lines += '| GP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[22])
+        lines += '| PP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[23])
         lines += '+-Attack--------+-HIT+-Damage/Typ-----+-Properties--------------------+-Weight-+ \n'
         lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('prim_weap_name'),
                                                            character_data.get('prim_weap_hit'),
@@ -132,15 +132,17 @@ def build_sheet(character_data: dict):
         lines += '+-Features---------------------------------------------------------------------+ \n'
         for i in character_data.get('abilities'):
             x = read_features(i)
-            lines += string_decorater('*' + ('-' *76) + '*') + '\n'
+
             for j in string_format(x):
                 lines += j + '\n'
+            lines += string_decorater('*' + ('-' * 76) + '*') + '\n'
         lines += '+-Spells-----------------------------------------------------------------------+ \n'
         for i in character_data.get('spells'):
             x = read_spells(i)
-            lines += string_decorater('*' + ('-' *76) + '*') + '\n'
+
             for j in string_format(x):
                 lines += j + '\n'
+            lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
         print(lines)
         outfile.writelines(lines)
 
@@ -166,7 +168,7 @@ def string_format(text, width=78):
         else:
             yield string_decorater(b)
             b = '' + i + " "
-    return string_decorater(b)
+    yield string_decorater(b)
 
 
 def string_decorater(linetext):
@@ -198,13 +200,17 @@ def read_spells(name):
     conn = sqlite3.connect('CharacterBuilder.db')
     cur = conn.cursor()
 
-    cur.execute('SELECT description FROM spells WHERE NAME = \"{na}\"'.format(na=name))
+    cur.execute('SELECT description, level FROM spells WHERE NAME = \"{na}\"'.format(na=name))
 
     x = cur.fetchall()
     conn.close()
 
     try:
-        return name + ": " + x[0][0]
+        if x[0][1] == 0:
+            prompt_string = " (Cantrip): "
+        else:
+            prompt_string = " (Level " + str(x[0][1]) + " Spell): "
+        return name + prompt_string + x[0][0]
     except:
         print( name  +  ': nope')
 
