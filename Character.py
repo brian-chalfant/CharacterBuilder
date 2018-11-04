@@ -6,6 +6,7 @@ from CharacterClass import *
 from Race import *
 from modifiers import ability_modifiers, clearscreen, splashscreen
 from write_backgrounds import read_background_names, read_backgrounds
+from equipment import *
 
 home = str(Path.home())
 
@@ -24,6 +25,7 @@ class Character:
         self.character_class = characterclass
         self.background = background
         self.equipment = []
+        self.weapons = []
         self.sex = ''
 
 # ----- MAIN PROGRAM -----------------
@@ -247,7 +249,10 @@ def generate_character():
         for i in range(hm):
             proficiencies.append('')
     print(proficiencies)
-    
+
+    newcharacter.equipment = starting_equipment(newcharacter.character_class.name, newcharacter.background.name,
+                                                proficiencies)
+
     #Skill Transform
     def skill_transform(skill):
         if skill is False:
@@ -275,6 +280,19 @@ def generate_character():
     newcharacter.character_class.performance_skill = skill_transform(newcharacter.character_class.performance_skill)
     newcharacter.character_class.persuasion_skill = skill_transform(newcharacter.character_class.persuasion_skill)
 
+    # WEAPONIZE
+    weps = {}
+    count = 0
+    for i in newcharacter.equipment:
+        if simple_melee_weapons().get(i):
+            weps['name'] = i
+            weps['cost'] = simple_melee_weapons().get(i).get('Cost')
+            weps['damage'] = simple_melee_weapons().get(i).get('Damage')
+            weps['weight'] = simple_melee_weapons().get(i).get('Weight')
+            weps['properties'] = simple_melee_weapons().get(i).get('Properties')
+            newcharacter.weapons.append(weps)
+            print(weps)
+            print('<weps')
 
     with open(home + '\\desktop\\output.txt', 'w') as outputfile:
         character_data = {
@@ -396,6 +414,23 @@ def generate_character():
             'wealth': newcharacter.character_class.wealth,
 
         }
+        count = 0
+        for i in range(len(newcharacter.weapons)):
+            print(newcharacter.weapons[count].get('name'))
+            character_data['wep'+str(count) + '_name'] = newcharacter.weapons[count].get('name')
+            character_data['wep'+str(count) + '_damage'] = newcharacter.weapons[count].get('damage')
+            character_data['wep'+str(count) + '_hit'] = "%+d" % ((ability_modifiers(newcharacter.race.get_strength() +
+                                              newcharacter.character_class.get_strength_addition())) +
+                                                        proficiency(newcharacter.level))
+            character_data['wep'+str(count) + '_weight'] = newcharacter.weapons[count].get('weight')
+            character_data['wep'+str(count) + '_properties'] = newcharacter.weapons[count].get('properties')
+        # 'prim_weap_name': 'Greataxe',
+        #              'prim_weap_hit': '+5',
+        #              'prim_weap_dmg': '1d12+3 Slashing',
+        #              'prim_weap_properties': 'Martial, Heavy, Two-Handed',
+        #              'prim_weap_weight': '3lbs',
+
+
         # build_sheet({'name': 'Salem',x
         #              'race': 'Half-Elf',x
         #              'klass': 'Wizard',x

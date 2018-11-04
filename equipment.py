@@ -3,7 +3,7 @@ from modifiers import validate_choice, clearscreen
 
 
 
-def starting_equipment(klass, background, race, proficiencies):
+def starting_equipment(klass, background, proficiencies):
     clearscreen()
     print('Choose Starting Equipment for your Class:' + str(klass))
     equipment_list = []
@@ -66,7 +66,7 @@ def starting_equipment(klass, background, race, proficiencies):
         equipment_list.append("Dagger")
 # CLERIC
     if klass == "Cleric":
-        if "Warhammer" in proficiencies:
+        if "-Warhammer" in proficiencies:
             print('1: A Mace')
             print('2: A Warhammer')
             a = validate_choice(2)
@@ -77,7 +77,7 @@ def starting_equipment(klass, background, race, proficiencies):
         else:
             equipment_list.append("Mace")
         clearscreen()
-        if "Heavy Armor" in proficiencies:
+        if "-Heavy Armor" in proficiencies:
             print('1: Scale Mail')
             print('2: Leather Armor')
             print('3: Chain Mail')
@@ -93,7 +93,7 @@ def starting_equipment(klass, background, race, proficiencies):
             print('2: Leather Armor')
             a = validate_choice(2)
             if a == 1:
-                equipment_list.append('Medium Scale Maili Armor')
+                equipment_list.append('Medium Scale Mail Armor')
             if a == 2:
                 equipment_list.append('Light Leather Armor')
         clearscreen()
@@ -162,6 +162,7 @@ def starting_equipment(klass, background, race, proficiencies):
         print("3: Two Martial Melee Weapons")
         print("4: Two Martial Ranged Weapons")
         print("5: A Martial Ranged and A Martial Melee Weapon")
+        a = validate_choice(5)
         if a == 1:
             equipment_list.append("Metal Shield")
             x = martial_ranged_names()
@@ -239,6 +240,7 @@ def starting_equipment(klass, background, race, proficiencies):
         print("3: Two Martial Melee Weapons")
         print("4: Two Martial Ranged Weapons")
         print("5: A Martial Ranged and A Martial Melee Weapon")
+        a = validate_choice(5)
         if a == 1:
             equipment_list.append("Metal Shield")
             x = martial_ranged_names()
@@ -451,6 +453,7 @@ def starting_equipment(klass, background, race, proficiencies):
             for i in packs().get("Scholar's Pack"):
                 equipment_list.append(i)
         equipment_list.append("Spellbook")
+# ACOLYTE
     if background == "Acolyte":
         equipment_list.append("Holy Symbol")
         equipment_list.append("Prayer Book or Prayer Wheel")
@@ -458,10 +461,95 @@ def starting_equipment(klass, background, race, proficiencies):
         equipment_list.append("vestments")
         equipment_list.append("Set of Common Clothes")
         equipment_list.append("Pouch containing 15gp")
+# CHARLATAN
     if background == "Charlatan":
         equipment_list.append("Set of Fine Clothes")
         equipment_list.append("Disguise Kit")
-    print(equipment_list)
+        print("1: Ten Stoppered Bottles Filled with Colored liquid")
+        print("2: A Set of Weighted Dice")
+        print("3: A Deck of Marked Cards")
+        print("4: A Signet Ring of an Imaginary Duke")
+        a = validate_choice(4)
+        if a == 1:
+            equipment_list.append("Ten Stoppered Bottles Filled with Colored Liquid")
+        if a == 2:
+            equipment_list.append("Set of Weighted Dice")
+        if a == 3:
+            equipment_list.append("Deck of Marked Cards")
+        if a == 4:
+            equipment_list.append("Signet Ring of an Imaginary Duke")
+        equipment_list.append("Poucn containing 15gp")
+# CRIMINAL
+    if background == "Criminal / Spy":
+        equipment_list.append("Crowbar")
+        equipment_list.append("Set of Dark Common Clothes including a Hood")
+        equipment_list.append("a pouch containing 15gp")
+# ENTERTAINER
+    if background == "Entertainer":
+        x = musical_instruments_names()
+        equipment_list.append(x)
+        equipment_list.append("Favor of an Admirer")
+        equipment_list.append("Costume")
+        equipment_list.append("a pouch containing 15gp")
+# GUILD ARTISAN
+    if background == "Guild Artisan":
+        x = artisan_tools_names()
+        equipment_list.append(x)
+        equipment_list.append("A Letter of Introduction from your Guild")
+        equipment_list.append("A Set of Traveler's Clothes")
+        equipment_list.append("a pouch containing 15gp")
+# HERMIT
+    if background == "Hermit":
+        equipment_list.append("A scroll case stuffed full of notes from your studies or prayers")
+        equipment_list.append("A Winter Blanket")
+        equipment_list.append("Set of Common Clothes")
+        equipment_list.append("An Herbalism Kit")
+        equipment_list.append("5gp")
+# NOBLE
+    if background == "Noble":
+        equipment_list.append("Set of Fine Clothes")
+        equipment_list.append("Signet Ring")
+        equipment_list.append("Scroll of Pedigree")
+        equipment_list.append("Purse containing 25gp")
+# OUTLANDER
+    if background == "Outlander":
+        equipment_list.append("Staff")
+        equipment_list.append("Hunting Trap")
+        equipment_list.append("Trophy from an animal you killed")
+        equipment_list.append("Set of Traveler's Clothes")
+        equipment_list.append("Pouch containing 10gp")
+# SAGE
+    if background == "Sage":
+        equipment_list.append("Bottle of Black Ink")
+        equipment_list.append("Quill")
+        equipment_list.append("Small Knife")
+        equipment_list.append("Letter from a dead colleague posing a question you have not yet been able to answer")
+        equipment_list.append("Set of Common Clothes")
+        equipment_list.append("Pouch containing 10gp")
+# SAILOR
+    if (background == "Sailor") or (background == "Pirate"):
+        equipment_list.append("Club")
+        equipment_list.append("50 Feet of Silk Rope")
+        equipment_list.append("Lucky Charm")
+        equipment_list.append("Set of Common Clothes")
+        equipment_list.append("Pouch containing 10gp")
+# SOLDIER
+    if background == "Soldier":
+        equipment_list.append("Insignia of Rank")
+        equipment_list.append("A trophy taken from a fallen enemy")
+        equipment_list.append("A set of bone dice or deck of cards")
+        equipment_list.append("A set of Common Clothes")
+        equipment_list.append("Pouch containing 10gp")
+# URCHIN
+    if background == "Urchin":
+        equipment_list.append("Small Knife")
+        equipment_list.append("Map of the city you grew up in")
+        equipment_list.append("Pet Mouse")
+        equipment_list.append("Token to remember your parents by")
+        equipment_list.append("Set of Common Clothes")
+        equipment_list.append("Pouch containing 10gp")
+
+    return equipment_list
 
 
 
@@ -481,7 +569,7 @@ def simple_melee_names():
     }
     for key, value in names.items():
         print(key, value)
-    a = validate_choice(names.items())
+    a = validate_choice(len(names.items()))
     return names.get(a)
 
 
@@ -642,6 +730,34 @@ def armor():
     }
     return arm
 
+
+def artisan_tools_names():
+    names = {
+        1: "Alchemist's Supplies",
+        2: "Brewer's Supplies",
+        3: "Calligrapher's Tools",
+        4: "Carpenter's Tools",
+        5: "Cartographer's Tools",
+        6: "Cobbler's Tools",
+        7: "Cook's Utensils",
+        8: "Glassblower's Tools",
+        9: "Jeweler's Tools",
+        10: "Leatherworker's Tool",
+        11: "Mason's Tools",
+        12: "Painter's Supplies",
+        13: "Potter's Tools",
+        14: "Smith's Tools",
+        15: "Tinker's Tools",
+        16: "Weaver's Tools",
+        17: "Woodcarver's Tools"
+
+    }
+    for key, value in names.items():
+        print(key, value)
+    a = validate_choice(names.items())
+    return names.get(a)
+
+
 def artisan_tools():
     artisan_tool_list = {
 
@@ -754,4 +870,16 @@ def tool(selection):
 
 if __name__ == '__main__':
 
-    starting_equipment("Barbarian")
+    x = starting_equipment("Cleric", "Sailor", ["ARMOR:", "-Light Armor", "-Medium Armor", "-Shields", "WEAPONS:", "-Warhammer", "TOOLS:", "LANGUAGES:", "-Abyssal", "-Aquan", "-Common", "-Aarakocra", "-Auran", "", "", "", "", "", "", "", "", "", ""] )
+    weps = {}
+    weplist = []
+    count = 0
+    for i in x:
+        if simple_melee_weapons().get(i):
+            weps['name'] = i
+            weps['cost'] = simple_melee_weapons().get(i).get('Cost')
+            weps['damage'] = simple_melee_weapons().get(i).get('Damage')
+            weps['weight'] = simple_melee_weapons().get(i).get('Weight')
+            weps['properties'] = simple_melee_weapons().get(i).get('Properties')
+            weplist.append(weps)
+
