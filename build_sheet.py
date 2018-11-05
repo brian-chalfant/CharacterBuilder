@@ -3,7 +3,7 @@ import sqlite3
 
 def build_sheet(character_data: dict):
     width = 80
-    filename = character_data.get('name') + '-' + character_data.get('race') + " " + character_data.get('klass' + '.txt')
+    filename = character_data.get('name') + '-' + character_data.get('race') + " " + character_data.get('klass') + '.txt'
     with open('characters\\' + filename, 'w', encoding='utf-16') as outfile:
 
         lines = str()
