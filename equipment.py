@@ -603,7 +603,7 @@ def simple_ranged_names():
     }
     for key, value in names.items():
         print(key, value)
-    a = validate_choice(names.items())
+    a = validate_choice(len(names.items()))
     return names.get(a)
 
 
@@ -681,7 +681,7 @@ def martial_ranged_names():
     }
     for key, value in names.items():
         print(key, value)
-    a = validate_choice(names.items())
+    a = validate_choice(len(names.items()))
     return names.get(a)
 
 def martial_ranged_weapons():
@@ -713,7 +713,7 @@ def armor_names():
     }
     for key, value in names.items():
         print(key, value)
-    a = validate_choice(names.items())
+    a = validate_choice(len(names.items()))
     return names.get(a)
 
 
@@ -754,7 +754,7 @@ def artisan_tools_names():
     }
     for key, value in names.items():
         print(key, value)
-    a = validate_choice(names.items())
+    a = validate_choice(len(names.items()))
     return names.get(a)
 
 

@@ -281,19 +281,58 @@ def generate_character():
     newcharacter.character_class.persuasion_skill = skill_transform(newcharacter.character_class.persuasion_skill)
 
     # WEAPONIZE
-    weps = {}
+
     count = 0
     for i in newcharacter.equipment:
         if simple_melee_weapons().get(i):
-            weps['name'] = i
+            weps = {}
+            weps['name'] = i + ' C' + str(count)
             weps['cost'] = simple_melee_weapons().get(i).get('Cost')
             weps['damage'] = simple_melee_weapons().get(i).get('Damage')
             weps['weight'] = simple_melee_weapons().get(i).get('Weight')
             weps['properties'] = simple_melee_weapons().get(i).get('Properties')
             newcharacter.weapons.append(weps)
+            print('newcharacter.weapons:')
+            print(newcharacter.weapons)
             print(weps)
-            print('<weps')
-
+            print('<1weps')
+        elif simple_ranged_weapons().get(i):
+            weps = {}
+            weps['name'] = i + ' C' + str(count)
+            weps['cost'] = simple_ranged_weapons().get(i).get('Cost')
+            weps['damage'] = simple_ranged_weapons().get(i).get('Damage')
+            weps['weight'] = simple_ranged_weapons().get(i).get('Weight')
+            weps['properties'] = simple_ranged_weapons().get(i).get('Properties')
+            newcharacter.weapons.append(weps)
+            print('newcharacter.weapons:')
+            print(newcharacter.weapons)
+            print(weps)
+            print('<2weps')
+        elif martial_melee_weapons().get(i):
+            weps = {}
+            weps['name'] = i + ' C' + str(count)
+            weps['cost'] = martial_melee_weapons().get(i).get('Cost')
+            weps['damage'] = martial_melee_weapons().get(i).get('Damage')
+            weps['weight'] = martial_melee_weapons().get(i).get('Weight')
+            weps['properties'] = martial_melee_weapons().get(i).get('Properties')
+            newcharacter.weapons.append(weps)
+            print('newcharacter.weapons:')
+            print(newcharacter.weapons)
+            print(weps)
+            print('<3weps')
+        elif martial_ranged_weapons().get(i):
+            weps = {}
+            weps['name'] = i + ' C' + str(count)
+            weps['cost'] = martial_ranged_weapons().get(i).get('Cost')
+            weps['damage'] = martial_ranged_weapons().get(i).get('Damage')
+            weps['weight'] = martial_ranged_weapons().get(i).get('Weight')
+            weps['properties'] = martial_ranged_weapons().get(i).get('Properties')
+            newcharacter.weapons.append(weps)
+            print('newcharacter.weapons:')
+            print(newcharacter.weapons)
+            print(weps)
+            print('<4weps')
+        count += 1
     with open(home + '\\desktop\\output.txt', 'w') as outputfile:
         character_data = {
 
@@ -415,7 +454,8 @@ def generate_character():
 
         }
         count = 0
-        for i in range(len(newcharacter.weapons)):
+        newcharacter.weapons = set(newcharacter.weapons)
+        for i in newcharacter.weapons:
             print(newcharacter.weapons[count].get('name'))
             character_data['wep'+str(count) + '_name'] = newcharacter.weapons[count].get('name')
             character_data['wep'+str(count) + '_damage'] = newcharacter.weapons[count].get('damage')
@@ -424,6 +464,7 @@ def generate_character():
                                                         proficiency(newcharacter.level))
             character_data['wep'+str(count) + '_weight'] = newcharacter.weapons[count].get('weight')
             character_data['wep'+str(count) + '_properties'] = newcharacter.weapons[count].get('properties')
+            count += 1
         # 'prim_weap_name': 'Greataxe',
         #              'prim_weap_hit': '+5',
         #              'prim_weap_dmg': '1d12+3 Slashing',
