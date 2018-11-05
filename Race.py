@@ -63,7 +63,7 @@ class Aarakocra(Race):
         self.name = 'Aarakocra'
         self.dexterity += 1
         self.wisdom += 1
-        self.abilities = ["FLIGHT"]
+        self.abilities = []
         self.attacks = ["TALONS, 1d4 Slashing"]
         self.language.append("Aarakocra")
         self.language.append("Auran")

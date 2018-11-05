@@ -23,8 +23,9 @@ def build_sheet(character_data: dict):
                                                                          int(len(character_data.get('alignment'))) - 12)
                                                                 ) + '         /_______  /\_____\ \/_______  /' + '\n'
         lines += 'Level & XP:> Level ' + str(character_data.get('level')) + "    " + str(character_data.get('xp')) + \
-                 (' ' * (int((width/2)) - (int(len(character_data.get('level'))) + int(len(character_data.get('xp')))
-                                           + 23))) + '                 \/        \/        \/ ' + '\n'
+                 (' ' * (int((width/2)) - (int(len(str(character_data.get('level')))) +
+                                           character_data.get('xp') +
+                                           23))) + '                 \/        \/        \/ ' + '\n'
         lines += '+-------------------------------------+  +-AC-------+ +-Ini------+ +-Speed-----+' + '\n'
         lines += '| Inspiration                    [  ] |  |   {}     | |     {}   | |    {}     | \n'.format(
             character_data.get('ac'), character_data.get('initiative'), character_data.get('speed'))
@@ -46,105 +47,251 @@ def build_sheet(character_data: dict):
         lines += '|[{}] WISDOM                 [{:02}] [{}] |  | Successes               [ ] [ ] [ ] | \n'.format(
             character_data.get('wis_save'), character_data.get('wisdom'), character_data.get('wisdom_mod'))
         lines += '|[{}] CHARISMA               [{:02}] [{}] |  | Failures                [ ] [ ] [ ] | \n'.format(
-            character_data.get('cha_save'), character_data.get('charisma'), character_data.get('charisma_mod'))
+            character_data.get('char_save'), character_data.get('charisma'), character_data.get('charisma_mod'))
         lines += '+-Skills------------------------------+  +-------------------------------------+ \n'
         lines += '| Acrobatics (Dex)           [{}] [{}] |  +-Other Proficiencies & Languages-----+ \n'.format(
             character_data.get('acrobatics_skill'), character_data.get('acrobatics_mod'))
-        lines += '| Animal Handling (Wis)      [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('animal_handling_skill'), character_data.get('animal_handling_mod'),
-            character_data.get('proficiencies')[0])
-        lines += '| Arcana (Int)               [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('arcana_skill'), character_data.get('arcana_mod'),
-            character_data.get('proficiencies')[1])
-        lines += '| Athletics (Str)            [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('athletics_skill'), character_data.get('athletics_mod'),
-            character_data.get('proficiencies')[2])
-        lines += '| Deception (Cha)            [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('deception_skill'), character_data.get('deception_mod'),
-            character_data.get('proficiencies')[3])
-        lines += '| History (Int)              [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('history_skill'), character_data.get('history_mod'),
-            character_data.get('proficiencies')[4])
-        lines += '| Insight (Wis)              [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('insight_skill'), character_data.get('insight_mod'),
-            character_data.get('proficiencies')[5])
-        lines += '| Intimidation (Cha)         [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('intimidation_skill'), character_data.get('intimidation_mod'),
-            character_data.get('proficiencies')[6])
-        lines += '| Investigation (Int)        [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('investigation_skill'), character_data.get('investigation_mod'),
-            character_data.get('proficiencies')[7])
-        lines += '| Medicine (Wis)             [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('medicine_skill'), character_data.get('medicine_mod'),
-            character_data.get('proficiencies')[8])
-        lines += '| Nature (Int)               [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('nature_skill'), character_data.get('nature_mod'),
-            character_data.get('proficiencies')[9])
-        lines += '| Perception (Wis)           [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('perception_skill'), character_data.get('perception_mod'),
-            character_data.get('proficiencies')[10])
-        lines += '| Performance (Cha)          [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('performance_skill'), character_data.get('performance_mod'),
-            character_data.get('proficiencies')[11])
-        lines += '| Persuasion (Cha)           [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('persuasion_skill'), character_data.get('persuasion_mod'),
-            character_data.get('proficiencies')[12])
-        lines += '| Religion (Int)             [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('religion_skill'), character_data.get('religion_mod'),
-            character_data.get('proficiencies')[13])
-        lines += '| Religion (Int)             [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('religion_skill'), character_data.get('religion_mod'),
-            character_data.get('proficiencies')[14])
-        lines += '| Stealth (Dex)              [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('stealth_skill'), character_data.get('stealth_mod'),
-            character_data.get('proficiencies')[15])
-        lines += '| Survival (Wis)             [{}] [{}] |  |{:37}| \n'.format(
-            character_data.get('survival_skill'), character_data.get('survival_mod'),
-            character_data.get('proficiencies')[16])
-        lines += '|                                     |  |{:37}| \n'.format(character_data.get('proficiencies')[17])
-        lines += '+-Currency-+-Treasure-----------------+  |{:37}| \n'.format(character_data.get('proficiencies')[18])
-        lines += '| CP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[19])
-        lines += '| SP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[20])
-        lines += '| EP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[21])
-        lines += '| GP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[22])
-        lines += '| PP [{}]  |                          |  |{:37}| \n'.format(character_data.get('currency_cp'),character_data.get('proficiencies')[23])
+        try:
+            lines += '| Animal Handling (Wis)      [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('animal_handling_skill'), character_data.get('animal_handling_mod'),
+                character_data.get('proficiencies')[0])
+        except IndexError:
+            lines += '| Animal Handling (Wis)      [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('animal_handling_skill'), character_data.get('animal_handling_mod'),
+                " ")
+        try:
+            lines += '| Arcana (Int)               [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('arcana_skill'), character_data.get('arcana_mod'),
+                character_data.get('proficiencies')[1])
+        except IndexError:
+            lines += '| Arcana (Int)               [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('arcana_skill'), character_data.get('arcana_mod'),
+                " ")
+        try:
+            lines += '| Athletics (Str)            [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('athletics_skill'), character_data.get('athletics_mod'),
+                character_data.get('proficiencies')[2])
+        except IndexError:
+            lines += '| Athletics (Str)            [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('athletics_skill'), character_data.get('athletics_mod'),
+                " ")
+        try:
+            lines += '| Deception (Cha)            [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('deception_skill'), character_data.get('deception_mod'),
+                character_data.get('proficiencies')[3])
+        except IndexError:
+            lines += '| Athletics (Str)            [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('athletics_skill'), character_data.get('athletics_mod'),
+                " ")
+        try:
+            lines += '| History (Int)              [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('history_skill'), character_data.get('history_mod'),
+                character_data.get('proficiencies')[4])
+        except IndexError:
+            lines += '| History (Int)              [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('history_skill'), character_data.get('history_mod'),
+                character_data.get('proficiencies')[4])
+        try:
+            lines += '| Insight (Wis)              [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('insight_skill'), character_data.get('insight_mod'),
+                character_data.get('proficiencies')[5])
+        except IndexError:
+            lines += '| Insight (Wis)              [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('insight_skill'), character_data.get('insight_mod'),
+                " ")
+        try:
+            lines += '| Intimidation (Cha)         [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('intimidation_skill'), character_data.get('intimidation_mod'),
+                character_data.get('proficiencies')[6])
+        except IndexError:
+            lines += '| Insight (Wis)              [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('insight_skill'), character_data.get('insight_mod'),
+                " ")
+        try:
+            lines += '| Investigation (Int)        [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('investigation_skill'), character_data.get('investigation_mod'),
+                character_data.get('proficiencies')[7])
+        except IndexError:
+            lines += '| Investigation (Int)        [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('investigation_skill'), character_data.get('investigation_mod'),
+                " ")
+        try:
+            lines += '| Medicine (Wis)             [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('medicine_skill'), character_data.get('medicine_mod'),
+                character_data.get('proficiencies')[8])
+        except IndexError:
+            lines += '| Medicine (Wis)             [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('medicine_skill'), character_data.get('medicine_mod'),
+                " ")
+        try:
+            lines += '| Nature (Int)               [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('nature_skill'), character_data.get('nature_mod'),
+                character_data.get('proficiencies')[9])
+        except IndexError:
+            lines += '| Nature (Int)               [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('nature_skill'), character_data.get('nature_mod'),
+                " ")
+        try:
+            lines += '| Perception (Wis)           [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('perception_skill'), character_data.get('perception_mod'),
+                character_data.get('proficiencies')[10])
+        except IndexError:
+            lines += '| Perception (Wis)           [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('perception_skill'), character_data.get('perception_mod'),
+                " ")
+        try:
+            lines += '| Performance (Cha)          [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('performance_skill'), character_data.get('performance_mod'),
+                character_data.get('proficiencies')[11])
+        except IndexError:
+            lines += '| Performance (Cha)          [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('performance_skill'), character_data.get('performance_mod'),
+                " ")
+        try:
+            lines += '| Persuasion (Cha)           [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('persuasion_skill'), character_data.get('persuasion_mod'),
+                character_data.get('proficiencies')[12])
+        except IndexError:
+            lines += '| Persuasion (Cha)           [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('persuasion_skill'), character_data.get('persuasion_mod'),
+                " ")
+        try:
+            lines += '| Religion (Int)             [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('religion_skill'), character_data.get('religion_mod'),
+                character_data.get('proficiencies')[13])
+        except IndexError:
+            lines += '| Religion (Int)             [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('religion_skill'), character_data.get('religion_mod'),
+                " ")
+        try:
+            lines += '| Religion (Int)             [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('religion_skill'), character_data.get('religion_mod'),
+                character_data.get('proficiencies')[14])
+        except IndexError:
+            lines += '| Religion (Int)             [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('religion_skill'), character_data.get('religion_mod'),
+                " ")
+        try:
+            lines += '| Stealth (Dex)              [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('stealth_skill'), character_data.get('stealth_mod'),
+                character_data.get('proficiencies')[15])
+        except IndexError:
+            lines += '| Stealth (Dex)              [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('stealth_skill'), character_data.get('stealth_mod'),
+                " ")
+        try:
+            lines += '| Survival (Wis)             [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('survival_skill'), character_data.get('survival_mod'),
+                character_data.get('proficiencies')[16])
+        except IndexError:
+            lines += '| Survival (Wis)             [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('survival_skill'), character_data.get('survival_mod'),
+                " ")
+        try:
+            lines += '|                                     |  |{:37}| \n'.format(
+                character_data.get('proficiencies')[17])
+        except IndexError:
+            lines += '|                                     |  |{:37}| \n'.format(" ")
+        try:
+            lines += '+-Currency-+-Treasure-----------------+  |{:37}| \n'.format(
+                character_data.get('proficiencies')[18])
+        except IndexError:
+            lines += '+-Currency-+-Treasure-----------------+  |{:37}| \n'.format(" ")
+        try:
+            lines += '| CP [  ]  |                          |  |{:37}| \n'.format(
+                character_data.get('proficiencies')[19])
+        except IndexError:
+            lines += '| CP [  ]  |                          |  |{:37}| \n'.format(" ")
+        try:
+            lines += '| SP [  ]  |                          |  |{:37}| \n'.format(
+                character_data.get('proficiencies')[20])
+        except IndexError:
+            lines += '| SP [  ]  |                          |  |{:37}| \n'.format(" ")
+        try:
+            lines += '| EP [  ]  |                          |  |{:37}| \n'.format(
+                character_data.get('proficiencies')[21])
+        except IndexError:
+            lines += '| EP [  ]  |                          |  |{:37}| \n'.format(
+                " ")
+        try:
+            lines += '| GP [{}]  |                          |  |{:37}| \n'.format(
+                character_data.get('starting_gp'),character_data.get('proficiencies')[22])
+        except IndexError:
+            lines += '| GP [{}]  |                          |  |{:37}| \n'.format(
+                character_data.get('starting_gp'), " ")
+        try:
+            lines += '| PP [  ]  |                          |  |{:37}| \n'.format(
+                character_data.get('proficiencies')[23])
+        except IndexError:
+            lines += '| PP [  ]  |                          |  |{:37}| \n'.format(
+                " ")
         lines += '+-Attack--------+-HIT+-Damage/Typ-----+-Properties--------------------+-Weight-+ \n'
-        lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('prim_weap_name'),
-                                                           character_data.get('prim_weap_hit'),
-                                                           character_data.get('prim_weap_dmg'),
-                                                           character_data.get('prim_weap_properties'),
-                                                           character_data.get('prim_weap_weight'))
-        lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('second_weap_name'),
-                                                           character_data.get('second_weap_hit'),
-                                                           character_data.get('second_weap_dmg'),
-                                                           character_data.get('second_weap_properties'),
-                                                           character_data.get('second_weap_weight'))
-        lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('third_weap_name'),
-                                                           character_data.get('third_weap_hit'),
-                                                           character_data.get('third_weap_dmg'),
-                                                           character_data.get('third_weap_properties'),
-                                                           character_data.get('third_weap_weight'))
-        lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('fourth_weap_name'),
-                                                           character_data.get('fourth_weap_hit'),
-                                                           character_data.get('fourth_weap_dmg'),
-                                                           character_data.get('fourth_weap_properties'),
-                                                           character_data.get('fourth_weap_weight'))
+        if 'wep0_name' in character_data:
+            lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('wep0_name'),
+                                                                 character_data.get('wep0_hit'),
+                                                                 character_data.get('wep0_damage'),
+                                                                 character_data.get('wep0_properties'),
+                                                                 character_data.get('wep0_weight'))
+        if 'wep1_name' in character_data:
+            lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('wep1_name'),
+                                                               character_data.get('wep1_hit'),
+                                                               character_data.get('wep1_damage'),
+                                                               character_data.get('wep1_properties'),
+                                                               character_data.get('wep1_weight'))
+        if 'wep2_name' in character_data:
+            lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('wep2_name'),
+                                                               character_data.get('wep2_hit'),
+                                                               character_data.get('wep2_damage'),
+                                                               character_data.get('wep2_properties'),
+                                                               character_data.get('wep2_weight'))
+        if 'wep3_name' in character_data:
+            lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('wep3_name'),
+                                                               character_data.get('wep3_hit'),
+                                                               character_data.get('wep3_damage'),
+                                                               character_data.get('wep3_properties'),
+                                                               character_data.get('wep3_weight'))
         lines += '+-Features---------------------------------------------------------------------+ \n'
         for i in character_data.get('abilities'):
-            x = read_features(i)
+            try:
+                x = read_features(i)
+                for j in string_format(x):
+                    lines += j + '\n'
+                lines += string_decorater('*' + ('-' * 76) + '*') + '\n'
+            except AttributeError:
+                x = str(i) + '' \
+                             ': No Data Available (FEATURE)'
+                for j in string_format(x):
+                    lines += j + '\n'
+                lines += string_decorater('*' + ('-' * 76) + '*') + '\n'
 
-            for j in string_format(x):
-                lines += j + '\n'
-            lines += string_decorater('*' + ('-' * 76) + '*') + '\n'
+
         lines += '+-Spells-----------------------------------------------------------------------+ \n'
         for i in character_data.get('spells'):
-            x = read_spells(i)
-
-            for j in string_format(x):
-                lines += j + '\n'
-            lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
+            try:
+                x = read_spells(i)
+                for j in string_format(x):
+                    lines += j + '\n'
+                lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
+            except AttributeError:
+                x = str(i) + ": No Data Available (SPELL)"
+                for j in string_format(x):
+                    lines += j + '\n'
+                lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
+        if character_data.get('klass') == 'Warlock':
+            for i in character_data.get('Eldritch Invocation Spells'):
+                try:
+                    x = read_spells(i)
+                    for j in string_format(x):
+                        lines += j + '\n'
+                    lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
+                except AttributeError:
+                    x = str(i) + ': No Data Available (INVOCATION'
+                    for j in string_format(x):
+                        lines += j + '\n'
+                    lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
         print(lines)
         outfile.writelines(lines)
+
 
 
 def text_format(textlist, width=78):
@@ -222,7 +369,8 @@ if __name__ == '__main__':
                  'background': 'Acolyte',
                  'alignment': 'Chaotic Neutral',
                  'level': '3',
-                 'xp': '17000',
+                 'xp': 17000,
+                 'starting_gp': '110',
                  'ac': '12',
                  'initiative': '+1',
                  'speed': '25',
@@ -292,26 +440,26 @@ if __name__ == '__main__':
                  'currency_ep': 20,
                  'currency_gp': 20,
                  'currency_pp': 20,
-                 'prim_weap_name': 'Greataxe',
-                 'prim_weap_hit': '+5',
-                 'prim_weap_dmg': '1d12+3 Slashing',
-                 'prim_weap_properties': 'Martial, Heavy, Two-Handed',
-                 'prim_weap_weight': '3lbs',
-                 'second_weap_name': 'Handaxe',
-                 'second_weap_hit': '+5',
-                 'second_weap_dmg': '1d6+3 Slashing',
-                 'second_weap_properties': 'Light, Thrown, Range (20/60)',
-                 'second_weap_weight': '2lbs',
-                 'third_weap_name': 'Javelin',
-                 'third_weap_hit': '+5',
-                 'third_weap_dmg': '1d6+3 Piercing',
-                 'third_weap_properties': 'Thrown, Range (30/120)',
-                 'third_weap_weight': '8lbs',
-                 'fourth_weap_name': 'Unarmed Strike',
-                 'fourth_weap_hit': '+5',
-                 'fourth_weap_dmg': '4 Bludgeoning',
-                 'fourth_weap_properties': '',
-                 'fourth_weap_weight': '',
+                 'wep0_name': 'Greataxe',
+                 'wep0_hit': '+5',
+                 'wep0_damage': '1d12+3 Slashing',
+                 'wep0_properties': 'Martial, Heavy, Two-Handed',
+                 'wep0_weight': '3lbs',
+                 'wep1_name': 'Handaxe',
+                 'wep1_weap_hit': '+5',
+                 'wep1_weap_damage': '1d6+3 Slashing',
+                 'wep1_properties': 'Light, Thrown, Range (20/60)',
+                 'wep1_weight': '2lbs',
+                 'wep2_name': 'Javelin',
+                 'wep2_hit': '+5',
+                 'wep2_damage': '1d6+3 Piercing',
+                 'wep2_properties': 'Thrown, Range (30/120)',
+                 'wep2_weight': '8lbs',
+                 'wep3_name': 'Unarmed Strike',
+                 'wep3_hit': '+5',
+                 'wep3_damage': '4 Bludgeoning',
+                 'wep3_properties': '',
+                 'wep3_weight': '',
                  'abilities': ['COMBAT WILD SHAPE', 'CIRCLE FORMS', 'PRIMAL STRIKE', 'WILD SHAPE (CR 1 OR BELOW)', 'ELEMENTAL WILD SHAPE', 'THOUSAND FORMS', 'TIMELESS BODY', 'BEAST SPELLS', 'DAMAGE RESISTANCE'],
                  'spells': ['Acid Splash', 'Blade Ward', 'Chill Touch', 'Dancing Lights', 'Alarm', 'Burning Hands', 'Charm Person', 'Chromatic Orb', 'Alter Self', 'Arcane Lock', 'Blindness/Deafness', 'Animate Dead', 'Bestow Curse', 'Blink', 'Arcane Eye']
                  })

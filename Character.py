@@ -4,6 +4,7 @@ from pathlib import Path
 from backgrounds import Background
 from CharacterClass import *
 from Race import *
+from build_sheet import build_sheet
 from modifiers import ability_modifiers, clearscreen, splashscreen
 from write_backgrounds import read_background_names, read_backgrounds
 from equipment import *
@@ -286,52 +287,64 @@ def generate_character():
     for i in newcharacter.equipment:
         if simple_melee_weapons().get(i):
             weps = {}
-            weps['name'] = i + ' C' + str(count)
+            weps['name'] = i
             weps['cost'] = simple_melee_weapons().get(i).get('Cost')
             weps['damage'] = simple_melee_weapons().get(i).get('Damage')
             weps['weight'] = simple_melee_weapons().get(i).get('Weight')
             weps['properties'] = simple_melee_weapons().get(i).get('Properties')
-            newcharacter.weapons.append(weps)
-            print('newcharacter.weapons:')
-            print(newcharacter.weapons)
-            print(weps)
-            print('<1weps')
+            if in_sheath(i, newcharacter.weapons):
+                pass
+            else:
+                newcharacter.weapons.append(weps)
+                print('newcharacter.weapons:')
+                print(newcharacter.weapons)
+                print(weps)
+                print('<1weps')
         elif simple_ranged_weapons().get(i):
             weps = {}
-            weps['name'] = i + ' C' + str(count)
+            weps['name'] = i
             weps['cost'] = simple_ranged_weapons().get(i).get('Cost')
             weps['damage'] = simple_ranged_weapons().get(i).get('Damage')
             weps['weight'] = simple_ranged_weapons().get(i).get('Weight')
             weps['properties'] = simple_ranged_weapons().get(i).get('Properties')
-            newcharacter.weapons.append(weps)
-            print('newcharacter.weapons:')
-            print(newcharacter.weapons)
-            print(weps)
-            print('<2weps')
+            if in_sheath(i, newcharacter.weapons):
+                pass
+            else:
+                newcharacter.weapons.append(weps)
+                print('newcharacter.weapons:')
+                print(newcharacter.weapons)
+                print(weps)
+                print('<2weps')
         elif martial_melee_weapons().get(i):
             weps = {}
-            weps['name'] = i + ' C' + str(count)
+            weps['name'] = i
             weps['cost'] = martial_melee_weapons().get(i).get('Cost')
             weps['damage'] = martial_melee_weapons().get(i).get('Damage')
             weps['weight'] = martial_melee_weapons().get(i).get('Weight')
             weps['properties'] = martial_melee_weapons().get(i).get('Properties')
-            newcharacter.weapons.append(weps)
-            print('newcharacter.weapons:')
-            print(newcharacter.weapons)
-            print(weps)
-            print('<3weps')
+            if in_sheath(i, newcharacter.weapons):
+                pass
+            else:
+                newcharacter.weapons.append(weps)
+                print('newcharacter.weapons:')
+                print(newcharacter.weapons)
+                print(weps)
+                print('<3weps')
         elif martial_ranged_weapons().get(i):
             weps = {}
-            weps['name'] = i + ' C' + str(count)
+            weps['name'] = i
             weps['cost'] = martial_ranged_weapons().get(i).get('Cost')
             weps['damage'] = martial_ranged_weapons().get(i).get('Damage')
             weps['weight'] = martial_ranged_weapons().get(i).get('Weight')
             weps['properties'] = martial_ranged_weapons().get(i).get('Properties')
-            newcharacter.weapons.append(weps)
-            print('newcharacter.weapons:')
-            print(newcharacter.weapons)
-            print(weps)
-            print('<4weps')
+            if in_sheath(i, newcharacter.weapons):
+                pass
+            else:
+                newcharacter.weapons.append(weps)
+                print('newcharacter.weapons:')
+                print(newcharacter.weapons)
+                print(weps)
+                print('<4weps')
         count += 1
     with open(home + '\\desktop\\output.txt', 'w') as outputfile:
         character_data = {
@@ -353,10 +366,11 @@ def generate_character():
                                                newcharacter.character_class.get_dexterity_addition()) + 10),
             'initiative': ability_modifiers(newcharacter.race.get_dexterity() +
                                                newcharacter.character_class.get_dexterity_addition()),
+            'starting_gp': str(newcharacter.character_class.wealth),
             "speed": newcharacter.race.speed + newcharacter.character_class.get_speed_addition(),
             'probonus': proficiency(newcharacter.level),
             "hp_maximum": hpmax,
-            "hp_mod": "+" + str(ability_modifiers(newcharacter.race.get_constitution() +
+            "hp_modifier": "+" + str(ability_modifiers(newcharacter.race.get_constitution() +
                                                   newcharacter.character_class.get_constitution_addition())),
             "hit_dice": "1d" + str(newcharacter.character_class.hit_die),
             "strength": newcharacter.race.get_strength() +
@@ -454,16 +468,15 @@ def generate_character():
 
         }
         count = 0
-        newcharacter.weapons = set(newcharacter.weapons)
         for i in newcharacter.weapons:
             print(newcharacter.weapons[count].get('name'))
-            character_data['wep'+str(count) + '_name'] = newcharacter.weapons[count].get('name')
-            character_data['wep'+str(count) + '_damage'] = newcharacter.weapons[count].get('damage')
-            character_data['wep'+str(count) + '_hit'] = "%+d" % ((ability_modifiers(newcharacter.race.get_strength() +
+            character_data['wep'+str(count) + '_name'] = str(newcharacter.weapons[count].get('name'))
+            character_data['wep'+str(count) + '_damage'] = str(newcharacter.weapons[count].get('damage'))
+            character_data['wep'+str(count) + '_hit'] = str(((ability_modifiers(newcharacter.race.get_strength() +
                                               newcharacter.character_class.get_strength_addition())) +
-                                                        proficiency(newcharacter.level))
-            character_data['wep'+str(count) + '_weight'] = newcharacter.weapons[count].get('weight')
-            character_data['wep'+str(count) + '_properties'] = newcharacter.weapons[count].get('properties')
+                                                        proficiency(newcharacter.level)))
+            character_data['wep'+str(count) + '_weight'] = str(newcharacter.weapons[count].get('weight'))
+            character_data['wep'+str(count) + '_properties'] = str(newcharacter.weapons[count].get('properties'))
             count += 1
         # 'prim_weap_name': 'Greataxe',
         #              'prim_weap_hit': '+5',
@@ -589,6 +602,8 @@ def generate_character():
 
     with open('characters\\data.json', 'w') as outfile:
         json.dump(character_data, outfile)
+
+    build_sheet(character_data)
 
 
 if __name__ == '__main__':
