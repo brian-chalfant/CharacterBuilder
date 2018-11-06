@@ -25,7 +25,8 @@ class Race:
         self.cantrip = []
         self.abilities = []
         self.speed = 25
-        self.size = 'Medium'
+        #Looks
+        self.age = 0
         self.height = 0
         self.weight = 0
         self.eyes = ''
@@ -68,9 +69,13 @@ class Aarakocra(Race):
         self.language.append("Aarakocra")
         self.language.append("Auran")
         self.speed = 25
-        self.height = randrange(45, 57)
-        self.weight = randrange(80, 100)
-        self.size = "Medium"
+        self.age = [3, 30]
+        self.height = [53, 60]
+        self.weight = [80, 100]
+        self.skin = []
+        self.hair = ['Blue', 'Green','Red', 'Orange', 'Yellow', 'Brown', 'Gray']
+        self.eyes = ['Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+
 
 
 # Start Dragonborn --------------------------------------------------
@@ -81,6 +86,12 @@ class Dragonborn(Race):
         self.strength += 2
         self.charisma += 1
         self.speed = 30
+        self.age = [15, 80]
+        self.height = [66, 96]
+        self.weight = [220, 280]
+        self.skin = ['Brass', 'Bronze', 'Scarlet', 'Rust', 'Gold', 'Copper-Green']
+        self.hair = []
+        self.eyes = ['Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
         self.abilities = ["DAMAGE RESISTANCE"]
         clearscreen()
         print("What type of Dragonborn is {}".format(character_name))
@@ -105,6 +116,12 @@ class Dwarf(Race):
         self.language.append("Dwarvish")
         self.weaponpro = ['Battleaxe', 'Handaxe', 'Light hammer', 'Warhammer']
         self.speed = 25
+        self.age = [50, 350]
+        self.height = [48, 60]
+        self.weight = [110, 170]
+        self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony']
+        self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
+        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
 
 class HillDwarf(Dwarf):
@@ -132,7 +149,12 @@ class Elf(Race):
         self.abilities = ["FEY ANCESTRY", "TRANCE"]
         self.language.append("Elvish")
         self.speed = 30
-
+        self.age = [100, 750]
+        self.height = [60, 86]
+        self.weight = [110, 170]
+        self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
+        self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
+        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
 class HighElf(Elf):
     def __init__(self):
@@ -186,7 +208,12 @@ class Genasi(Race):
         self.speed = 30
         self.abilities = []
         self.language.append("Primordial")
-
+        self.age = [15, 120]
+        self.height = [60, 80]
+        self.weight = [110, 170]
+        self.skin = []
+        self.hair = []
+        self.eyes = []
 
 class AirGenasi(Genasi):
     def __init__(self):
@@ -196,8 +223,10 @@ class AirGenasi(Genasi):
         self.abilities.append("UNENDING BREATH")
         self.abilities.append("MINGLE WITH THE WIND")
         self.magic = True
-        self.cantrip = ["LEVITATE"]
-
+        self.cantrip = ["Levitate"]
+        self.skin = ['Light Blue', 'Cerulean','Cobalt']
+        self.hair = ['Midnight Blue', 'Electric Blue', 'Azure']
+        self.eyes = ['Silver-Blue', 'Midnight Blue', 'Violet-Blue']
 
 class EarthGenasi(Genasi):
     def __init__(self):
@@ -207,8 +236,10 @@ class EarthGenasi(Genasi):
         self.abilities.append("EARTH WALK")
         self.abilities.append("MERGE WITH STONE")
         self.magic = True
-        self.cantrip = ["PASS WITHOUT TRACE"]
-
+        self.cantrip = ["Pass without Trace"]
+        self.skin = ['Smooth Black Metallic', 'Polished Gold', 'Dull Iron', 'Rusted Copper', 'Shining White Gemstone']
+        self.hair = ['Dusty Brown', 'Muddy Hide', 'Waves of Smooth Copper']
+        self.eyes = ['Diamond', 'Tiger\'s Eye', 'Rose Quartz']
 
 class FireGenasi(Genasi):
     def __init__(self):
@@ -219,8 +250,10 @@ class FireGenasi(Genasi):
         self.abilities.append("FIRE RESISTANCE")
         self.abilities.append("REACH THE BLAZE")
         self.magic = True
-        self.cantrip = ["PRODUCE FLAME"]
-
+        self.cantrip = ["Produce Flame"]
+        self.skin = ['Flaming Red', 'Coal Black', 'Ash Gray', 'White Hot', 'Oxidising Blue']
+        self.hair = ['Red Flames', 'Blue Flames', 'White Flames', 'Black Flames']
+        self.eyes = ['White', 'Scarlet', 'Azure', 'Midnight']
 
 class WaterGenasi(Genasi):
     def __init__(self):
@@ -232,8 +265,10 @@ class WaterGenasi(Genasi):
         self.abilities.append("SWIM")
         self.abilities.append("CALL TO THE WAVE")
         self.magic = True
-        self.cantrip = ["SHAPE WATER"]
-
+        self.cantrip = ["Shape Water"]
+        self.skin = ['Aqua Blue', 'Aqua Green', 'Pale White', 'Midnight Black', 'Ash Gray']
+        self.hair = ['Seafoam Green', 'Dark Green', 'Emerald', 'Azure', 'Sky Blue']
+        self.eyes = ['White', 'Cyan', 'Mint', 'Midnight']
 
 # Start Gnome --------------------------------------------------
 class Gnome(Race):
@@ -244,7 +279,12 @@ class Gnome(Race):
         self.speed = 25
         self.abilities = ["DARKVISION", "GNOME CUNNING"]
         self.language.append("Gnomish")
-
+        self.age = [40, 450]
+        self.height = [36, 48]
+        self.weight = [30, 60]
+        self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
+        self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
+        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
 class RockGnome(Gnome):
     def __init__(self):
@@ -275,7 +315,12 @@ class Goliath(Race):
         self.speed = 30
         self.abilities = ["NATURAL ATHLETE", "STONE'S ENDURANCE", "POWERFUL BUILD", "MOUNTAIN BORN"]
         self.language.append("Giant")
-
+        self.age = [15, 80]
+        self.height = [84, 96]
+        self.weight = [280, 340]
+        self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
+        self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
+        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
 # Start Half-Elf --------------------------------------------------
 class HalfElf(Race):
@@ -285,6 +330,12 @@ class HalfElf(Race):
         self.name = 'Half-Elf'
         self.speed = 30
         self.abilities = ["DARKVISION", "FEY ANCESTRY", "SKILL VERSATILITY"]
+        self.age = [20, 180]
+        self.height = [60, 76]
+        self.weight = [120, 200]
+        self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
+        self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
+        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
         self.language.append("Elvish")
         clearscreen()
         self.language.append(str(choose_language(self.language)))
@@ -300,7 +351,12 @@ class HalfOrc(Race):
         self.speed = 30
         self.abilities = ["DARKVISION", "MENACING", "RELENTLESS ENDURANCE", "SAVAGE ATTACKS"]
         self.language.append("Orc")
-
+        self.age = [14, 75]
+        self.height = [60, 86]
+        self.weight = [120, 220]
+        self.skin = ['Pale Gray', 'Scarlet', 'Ash', 'Pickle', 'Emerald', 'Dark Green', 'Midnight Blue']
+        self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
+        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
 # Start Halfling --------------------------------------------------
 class Halfling(Race):
@@ -311,7 +367,12 @@ class Halfling(Race):
         self.speed = 25
         self.abilities = ["LUCKY", "BRAVE", "HALFLING NIMBLENESS"]
         self.language.append("Halfling")
-
+        self.age = [20, 160]
+        self.height = [28, 38]
+        self.weight = [30, 50]
+        self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
+        self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
+        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
 class LightfootHalfling(Halfling):
     def __init__(self):
@@ -341,6 +402,12 @@ class Human(Race):
         self.strength += 1
         self.name = 'Human'
         self.speed = 30
+        self.age = [20, 80]
+        self.height = [48, 80]
+        self.weight = [90, 200]
+        self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony',]
+        self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
+        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
         self.language.append(str(choose_language(self.language)))
         self.abilities = []
 
@@ -353,6 +420,12 @@ class Tiefling(Race):
         self.charisma += 2
         self.name = 'Tiefling'
         self.speed = 30
+        self.age = [20, 80]
+        self.height = [48, 80]
+        self.weight = [90, 200]
+        self.skin = ['Pink', 'Scarlet', 'Blood']
+        self.hair = ['Violet', 'Midnight Blue', 'Azure', 'Wildfire', 'Blonde']
+        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
         self.abilities = ["DARKVISION", "HELLISH RESISTANCE", "INFERNAL LEGACY"]
         self.magic = True
         self.cantrip = ["THAUMATURGY"]

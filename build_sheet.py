@@ -13,19 +13,32 @@ def build_sheet(character_data: dict):
         lines += 'Race:> ' + str(character_data.get('race')) + (' ' * (int((width/2)) -
                                                                        int(len(character_data.get('race'))) - 7)
                                                                 ) + '         \______ \   /  _ \  \______ \  ' + '\n'
-        lines += 'Class:> ' + str(character_data.get('klass')) + (' ' * (int((width/2)) -
-                                                                         int(len(character_data.get('klass'))) - 8)
+        lines += 'Class:> ' + str(character_data.get('klass')) + "  (" + str(character_data.get('classpath')) + ")" + (' ' * (int((width/2)) -
+                                                                         int(len(character_data.get('klass')) +
+                                                                             len(character_data.get('classpath'))) - 12)
                                                                 ) + '          |    |  \  >  _ </\ |    |  \ ' + '\n'
-        lines += 'Background:> ' + str(character_data.get('klass')) + (' ' * (int((width/2)) -
-                                                                         int(len(character_data.get('klass'))) - 13)
+        lines += 'Background:> ' + str(character_data.get('background')) + (' ' * (int((width/2)) -
+                                                                         int(len(character_data.get('background'))) - 13)
                                                                 ) + '          |  __`   \/  <_\ \/ |  __`   \\' + '\n'
         lines += 'Alignment:> ' + str(character_data.get('alignment')) + (' ' * (int((width/2)) -
                                                                          int(len(character_data.get('alignment'))) - 12)
                                                                 ) + '         /_______  /\_____\ \/_______  /' + '\n'
         lines += 'Level & XP:> Level ' + str(character_data.get('level')) + "    " + str(character_data.get('xp')) + \
                  (' ' * (int((width/2)) - (int(len(str(character_data.get('level')))) +
-                                           character_data.get('xp') +
+                                           len(str(character_data.get('xp'))) +
                                            23))) + '                 \/        \/        \/ ' + '\n'
+        # CHARACTER SECTION
+
+        lines += '+-Age--+-Height-+-Weight-+  +-Eyes---------+-Skin-----------+-Hair-------------+ \n'
+        lines += '|{:6}|{:8}|{:8}|  |{:14}|{:16}|{:18}| \n'.format(character_data.get('age'),
+                                                                character_data.get('height'),
+                                                                character_data.get('weight'),
+                                                                character_data.get('eyes'),
+                                                                character_data.get('skin'),
+                                                                character_data.get('hair'))
+        lines += '+-Personality Traits-----------------------------------------------------------+ \n'
+        for i in character_data.get('pers_trait1'):
+            string_format(i)
         lines += '+-------------------------------------+  +-AC-------+ +-Ini------+ +-Speed-----+' + '\n'
         lines += '| Inspiration                    [  ] |  |   {}     | |     {}   | |    {}     | \n'.format(
             character_data.get('ac'), character_data.get('initiative'), character_data.get('speed'))
@@ -250,6 +263,8 @@ def build_sheet(character_data: dict):
                                                                character_data.get('wep3_damage'),
                                                                character_data.get('wep3_properties'),
                                                                character_data.get('wep3_weight'))
+
+
         lines += '+-Features---------------------------------------------------------------------+ \n'
         for i in character_data.get('abilities'):
             try:
@@ -358,14 +373,15 @@ def read_spells(name):
         else:
             prompt_string = " (Level " + str(x[0][1]) + " Spell): "
         return name + prompt_string + x[0][0]
-    except:
-        print( name  +  ': nope')
+    except IndexError:
+        print(str(name) + ': nope')
 
 
 if __name__ == '__main__':
     build_sheet({'name': 'Salem',
                  'race': 'Half-Elf',
                  'klass': 'Wizard',
+                 'classpath': 'Evocation',
                  'background': 'Acolyte',
                  'alignment': 'Chaotic Neutral',
                  'level': '3',

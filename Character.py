@@ -5,6 +5,7 @@ from backgrounds import Background
 from CharacterClass import *
 from Race import *
 from build_sheet import build_sheet
+from looks import looks
 from modifiers import ability_modifiers, clearscreen, splashscreen
 from write_backgrounds import read_background_names, read_backgrounds
 from equipment import *
@@ -133,8 +134,9 @@ def race_selection(character_name, user_level):
         elif user_race == 12:
             _race = Tiefling()
 
-    return _race
+    _race = looks(_race)
 
+    return _race
 #  _____ _
 # /  __ \ |
 # | /  \/ | __ _ ___ ___
@@ -351,6 +353,12 @@ def generate_character():
 
             "name": newcharacter.name,
             "race": newcharacter.race.name,
+            'age': newcharacter.race.age,
+            'height': newcharacter.race.height,
+            'weight': newcharacter.race.weight,
+            'skin': newcharacter.race.skin,
+            'hair': newcharacter.race.hair,
+            'eyes': newcharacter.race.eyes,
             "level": newcharacter.level,
             "xp": exp(newcharacter.level),
             "klass": newcharacter.character_class.name,

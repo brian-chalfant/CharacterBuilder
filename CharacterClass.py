@@ -477,7 +477,6 @@ class Bard(CharacterClass):
         if level >= 10:
             self.abilities.remove("BARDIC INSPIRATION (D8)")
             self.abilities.append("BARDIC INSPIRATION (D10)")
-            self.abilities.append("EXPERTISE 2")
             self.abilities.append("****magical secrets ****")
         if level >= 12:
             self.ability_up(self.statblock)
@@ -628,7 +627,7 @@ class Cleric(CharacterClass):
                 self.weaponpro.append("Martial Weapons")
                 self.abilities.append("WAR PRIEST")
         if level >= 2:
-            self.abilities.append("CHANNEL DIVINITY 1/REST")
+            self.abilities.append("CHANNEL DIVINITY (1/REST)")
             if self.classpath == "Knowledge Domain":
                 self.abilities.append("KNOWLEDGE OF THE AGES")
                 self.spells.append("Augury")
@@ -640,7 +639,7 @@ class Cleric(CharacterClass):
                 self.spells.append("Spiritual Weapon")
 
             elif self.classpath == "Light Domain":
-                self.abilities.append("RADIANCE OF THE DAWN")
+                self.abilities.append("CHANNEL DIVINITY: RADIANCE OF THE DAWN")
                 self.spells.append("Flaming Sphere")
                 self.spells.append("Scorching Ray")
 
@@ -660,7 +659,7 @@ class Cleric(CharacterClass):
                 self.spells.append("Pass Without Trace")
 
             elif self.classpath == "War Domain":
-                self.abilities.append("GUIDED STRIKE")
+                self.abilities.append("CHANNEL DIVINITY: GUIDED STRIKE")
                 self.spells.append("Magic Weapon")
                 self.spells.append("Spiritual Weapon")
 
@@ -668,7 +667,7 @@ class Cleric(CharacterClass):
             self.ability_up(self.statblock)
 
         if level >= 5:
-            self.abilities.append("DESTROY UNDEAD 1/2")
+            self.abilities.append("DESTROY UNDEAD (CR 1/2 OR BELOW)")
             if self.classpath == "Knowledge Domain":
                 self.spells.append("Nondetection")
                 self.spells.append("Speak with Dead")
@@ -698,8 +697,8 @@ class Cleric(CharacterClass):
                 self.spells.append("Spirit Guardian")
 
         if level >= 6:
-            self.abilities.remove("CHANNEL DIVINITY 1/REST")
-            self.abilities.append("CHANNEL DIVINITY 2/REST")
+            self.abilities.remove("CHANNEL DIVINITY (1/REST)")
+            self.abilities.append("CHANNEL DIVINITY (2/REST)")
             if self.classpath == "Knowledge Domain":
                 self.abilities.append("READ THOUGHTS")
 
@@ -707,7 +706,7 @@ class Cleric(CharacterClass):
                 self.abilities.append("BLESSED HEALER")
 
             elif self.classpath == "Light Domain":
-                self.abilities.remove("WARDING FLAME")
+                self.abilities.remove("WARDING FLARE")
                 self.abilities.append("IMPROVED FLARE")
 
             elif self.classpath == "Nature Domain":
@@ -720,11 +719,11 @@ class Cleric(CharacterClass):
                 self.abilities.append("CLOAK OF SHADOWS")
 
             elif self.classpath == "War Domain":
-                self.abilities.append("WAR GOD\'S BLESSING")
+                self.abilities.append("CHANNEL DIVINITY: WAR GOD\'S BLESSING")
 
         if level >= 8:
-            self.abilities.remove("DESTROY UNDEAD 1/2")
-            self.abilities.append("DESTROY UNDEAD 1")
+            self.abilities.remove("DESTROY UNDEAD (CR 1/2 OR BELOW)")
+            self.abilities.append("DESTROY UNDEAD (CR 1 OR BELOW)")
             self.ability_up(self.statblock)
             if self.classpath == "Knowledge Domain":
                 self.abilities.append("POTENT SPELLCASTING")
@@ -751,22 +750,22 @@ class Cleric(CharacterClass):
             self.abilities.append("DIVINE INTERVENTION")
 
         if level >= 11:
-            self.abilities.remove("DESTROY UNDEAD 1")
-            self.abilities.append("DESTROY UNDEAD 2")
+            self.abilities.remove("DESTROY UNDEAD (CR 1 OR BELOW)")
+            self.abilities.append("DESTROY UNDEAD (CR 2 OR BELOW)")
 
         if level >= 12:
             self.ability_up(self.statblock)
 
         if level >= 14:
-            self.abilities.remove("DESTROY UNDEAD 2")
-            self.abilities.append("DESTROY UNDEAD 3")
+            self.abilities.remove("DESTROY UNDEAD (CR 2 OR BELOW)")
+            self.abilities.append("DESTROY UNDEAD (CR 3 OR BELOW)")
 
         if level >= 16:
             self.ability_up(self.statblock)
 
         if level >= 17:
-            self.abilities.remove("DESTROY UNDEAD 3")
-            self.abilities.append("DESTROY UNDEAD 4")
+            self.abilities.remove("DESTROY UNDEAD (CR 3 OR BELOW)")
+            self.abilities.append("DESTROY UNDEAD (CR 4 OR BELOW)")
             if self.classpath == "Knowledge Domain":
                 self.abilities.append("VISIONS OF THE PAST")
 
@@ -789,15 +788,15 @@ class Cleric(CharacterClass):
             elif self.classpath == "War Domain":
                 self.abilities.append("AVATAR OF BATTLE")
         if level >= 18:
-            self.abilities.remove("CHANNEL DIVINITY 2/REST")
-            self.abilities.append("CHANNEL DIVINITY 3/REST")
+            self.abilities.remove("CHANNEL DIVINITY (2/REST)")
+            self.abilities.append("CHANNEL DIVINITY (3/REST)")
 
         if level >= 19:
             self.ability_up(self.statblock)
 
         if level >= 20:
             self.abilities.remove("DIVINE INTERVENTION")
-            self.abilities.append("IMPROVED DIVINE INTERVENTION")
+            self.abilities.append("DIVINE INTERVENTION IMPROVEMENT")
         self.spells = spell_queue("Cleric", level)
 
 
