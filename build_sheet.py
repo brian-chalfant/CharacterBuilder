@@ -29,16 +29,32 @@ def build_sheet(character_data: dict):
                                            23))) + '                 \/        \/        \/ ' + '\n'
         # CHARACTER SECTION
 
-        lines += '+-Age--+-Height-+-Weight-+  +-Eyes---------+-Skin-----------+-Hair-------------+ \n'
+        lines += '+-Age--+-Height-+-Weight-+--+-Eyes---------+-Skin-----------+-Hair-------------+ \n'
         lines += '|{:6}|{:8}|{:8}|  |{:14}|{:16}|{:18}| \n'.format(character_data.get('age'),
                                                                 character_data.get('height'),
                                                                 character_data.get('weight'),
                                                                 character_data.get('eyes'),
                                                                 character_data.get('skin'),
                                                                 character_data.get('hair'))
+        lines += '+------+--------+--------+--+--------------+----------------+------------------+ \n'
         lines += '+-Personality Traits-----------------------------------------------------------+ \n'
-        for i in character_data.get('pers_trait1'):
-            string_format(i)
+        for j in string_format(character_data.get('pers_trait1')):
+            lines += j + '\n'
+        for j in string_format(character_data.get('pers_trait2')):
+            lines += j + '\n'
+        lines += '+------------------------------------------------------------------------------+ \n'
+        lines += '+-Ideals-----------------------------------------------------------------------+ \n'
+        for j in string_format(character_data.get('ideals')):
+            lines += j + '\n'
+        lines += '+------------------------------------------------------------------------------+ \n'
+        lines += '+-Bonds-----------------------------------------------------------------------+ \n'
+        for j in string_format(character_data.get('bonds')):
+            lines += j + '\n'
+        lines += '+------------------------------------------------------------------------------+ \n'
+        lines += '+-Flaws-----------------------------------------------------------------------+ \n'
+        for j in string_format(character_data.get('flaws')):
+            lines += j + '\n'
+        lines += '+------------------------------------------------------------------------------+ \n'
         lines += '+-------------------------------------+  +-AC-------+ +-Ini------+ +-Speed-----+' + '\n'
         lines += '| Inspiration                    [  ] |  |   {}     | |     {}   | |    {}     | \n'.format(
             character_data.get('ac'), character_data.get('initiative'), character_data.get('speed'))
@@ -211,32 +227,32 @@ def build_sheet(character_data: dict):
         except IndexError:
             lines += '+-Currency-+-Treasure-----------------+  |{:37}| \n'.format(" ")
         try:
-            lines += '| CP [  ]  |                          |  |{:37}| \n'.format(
+            lines += '| CP [   ] |                          |  |{:37}| \n'.format(
                 character_data.get('proficiencies')[19])
         except IndexError:
-            lines += '| CP [  ]  |                          |  |{:37}| \n'.format(" ")
+            lines += '| CP [   ] |                          |  |{:37}| \n'.format(" ")
         try:
-            lines += '| SP [  ]  |                          |  |{:37}| \n'.format(
+            lines += '| SP [   ] |                          |  |{:37}| \n'.format(
                 character_data.get('proficiencies')[20])
         except IndexError:
-            lines += '| SP [  ]  |                          |  |{:37}| \n'.format(" ")
+            lines += '| SP [   ] |                          |  |{:37}| \n'.format(" ")
         try:
-            lines += '| EP [  ]  |                          |  |{:37}| \n'.format(
+            lines += '| EP [   ] |                          |  |{:37}| \n'.format(
                 character_data.get('proficiencies')[21])
         except IndexError:
-            lines += '| EP [  ]  |                          |  |{:37}| \n'.format(
+            lines += '| EP [   ] |                          |  |{:37}| \n'.format(
                 " ")
         try:
-            lines += '| GP [{}]  |                          |  |{:37}| \n'.format(
+            lines += '| GP [{}] |                          |  |{:37}| \n'.format(
                 character_data.get('starting_gp'),character_data.get('proficiencies')[22])
         except IndexError:
-            lines += '| GP [{}]  |                          |  |{:37}| \n'.format(
+            lines += '| GP [{} ] |                          |  |{:37}| \n'.format(
                 character_data.get('starting_gp'), " ")
         try:
-            lines += '| PP [  ]  |                          |  |{:37}| \n'.format(
+            lines += '| PP [   ] |                          |  |{:37}| \n'.format(
                 character_data.get('proficiencies')[23])
         except IndexError:
-            lines += '| PP [  ]  |                          |  |{:37}| \n'.format(
+            lines += '| PP [   ] |                          |  |{:37}| \n'.format(
                 " ")
         lines += '+-Attack--------+-HIT+-Damage/Typ-----+-Properties--------------------+-Weight-+ \n'
         if 'wep0_name' in character_data:
@@ -378,104 +394,4 @@ def read_spells(name):
 
 
 if __name__ == '__main__':
-    build_sheet({'name': 'Salem',
-                 'race': 'Half-Elf',
-                 'klass': 'Wizard',
-                 'classpath': 'Evocation',
-                 'background': 'Acolyte',
-                 'alignment': 'Chaotic Neutral',
-                 'level': '3',
-                 'xp': 17000,
-                 'starting_gp': '110',
-                 'ac': '12',
-                 'initiative': '+1',
-                 'speed': '25',
-                 'probonus': '+3',
-                 'passive_perception': '12',
-                 'hp_maximum': '24',
-                 'hp_modifier': '+4',
-                 'hit_dice': '1d10',
-                 'strength': 9,
-                 'strength_mod': '+2',
-                 'str_save': ' ',
-                 'dexterity': 15,
-                 'dexterity_mod': '+3',
-                 'dex_save': ' ',
-                 'constitution': 11,
-                 'constitution_mod': '+1',
-                 'con_save': ' ',
-                 'intelligence': 11,
-                 'intelligence_mod': '-1',
-                 'int_save': 'X',
-                 'wisdom': 10,
-                 'wisdom_mod': '+2',
-                 'wis_save': ' ',
-                 'charisma': 12,
-                 'charisma_mod': '+4',
-                 'cha_save': 'X',
-                 'proficiencies': ['ARMOR:', '-Light Armor', '-Medium Armor', '-Shields', 'WEAPONS:', '-Simple Weapons', '-Martial Weapons',
-                                   '-Crossbows', '-Daggers','TOOLS:', 'Artisan Tools', 'LANGUAGE:', '-Abyssal', '-Orcish','','','','','','','', ],
-                 'acrobatics_skill': 'X',
-                 'acrobatics_mod': '+3',
-                 'animal_handling_skill': ' ',
-                 'animal_handling_mod': '+2',
-                 'arcana_skill': 'X',
-                 'arcana_mod': '+3',
-                 'athletics_skill': 'X',
-                 'athletics_mod': '+3',
-                 'deception_skill': ' ',
-                 'deception_mod': '+3',
-                 'history_skill': ' ',
-                 'history_mod': '+3',
-                 'insight_skill': 'X',
-                 'insight_mod': '+3',
-                 'intimidation_skill': 'X',
-                 'intimidation_mod': '+3',
-                 'investigation_skill': ' ',
-                 'investigation_mod': '+1',
-                 'medicine_skill': ' ',
-                 'medicine_mod': '+1',
-                 'nature_skill': ' ',
-                 'nature_mod': '+1',
-                 'perception_skill': ' ',
-                 'perception_mod': '+1',
-                 'performance_skill': 'X',
-                 'performance_mod': '+4',
-                 'persuasion_skill': ' ',
-                 'persuasion_mod': '+2',
-                 'religion_skill': ' ',
-                 'religion_mod': '+2',
-                 'sleight_of_hand_skill': ' ',
-                 'sleight_of_hand_mod': '+2',
-                 'stealth_skill': ' ',
-                 'stealth_mod': '+2',
-                 'survival_skill': ' ',
-                 'survival_mod': '+2',
-                 'currency_cp': 20,
-                 'currency_sp': 20,
-                 'currency_ep': 20,
-                 'currency_gp': 20,
-                 'currency_pp': 20,
-                 'wep0_name': 'Greataxe',
-                 'wep0_hit': '+5',
-                 'wep0_damage': '1d12+3 Slashing',
-                 'wep0_properties': 'Martial, Heavy, Two-Handed',
-                 'wep0_weight': '3lbs',
-                 'wep1_name': 'Handaxe',
-                 'wep1_weap_hit': '+5',
-                 'wep1_weap_damage': '1d6+3 Slashing',
-                 'wep1_properties': 'Light, Thrown, Range (20/60)',
-                 'wep1_weight': '2lbs',
-                 'wep2_name': 'Javelin',
-                 'wep2_hit': '+5',
-                 'wep2_damage': '1d6+3 Piercing',
-                 'wep2_properties': 'Thrown, Range (30/120)',
-                 'wep2_weight': '8lbs',
-                 'wep3_name': 'Unarmed Strike',
-                 'wep3_hit': '+5',
-                 'wep3_damage': '4 Bludgeoning',
-                 'wep3_properties': '',
-                 'wep3_weight': '',
-                 'abilities': ['COMBAT WILD SHAPE', 'CIRCLE FORMS', 'PRIMAL STRIKE', 'WILD SHAPE (CR 1 OR BELOW)', 'ELEMENTAL WILD SHAPE', 'THOUSAND FORMS', 'TIMELESS BODY', 'BEAST SPELLS', 'DAMAGE RESISTANCE'],
-                 'spells': ['Acid Splash', 'Blade Ward', 'Chill Touch', 'Dancing Lights', 'Alarm', 'Burning Hands', 'Charm Person', 'Chromatic Orb', 'Alter Self', 'Arcane Lock', 'Blindness/Deafness', 'Animate Dead', 'Bestow Curse', 'Blink', 'Arcane Eye']
-                 })
+    build_sheet({"name": "Hill", "race": "Deep Gnome", "age": 3, "height": 2, "weight": 3, "skin": "Ty", "hair": "T", "eyes": "ty", "level": 3, "xp": 900, "klass": "Paladin", "background": "Charlatan", "pers_trait1": "Flattery is my preferred trick for getting what I want.", "pers_trait2": "I have a joke for every occasion, especially occasions where humor is inappropriate.", "ideals": "Creativity. I never run the same con twice. (Chaotic)", "bonds": "I owe everything to my mentor\u2014a horrible person who's probably rotting in jail somewhere.", "flaws": "I'm convinced that no one could ever fool me the way I fool others.", "alignment": "Lawful Neutral", "classpath": "Oath of Vengeance", "ac": 14, "initiative": 4, "starting_gp": "120", "speed": 25, "probonus": '+2', "hp_maximum": 27, "hp_modifier": "+1", "hit_dice": "1d10", "strength": 18, "str_save": " ", "wisdom": 12, "wis_save": "X", "dexterity": 18, "dex_save": " ", "constitution": 13, "con_save": " ", "charisma": 11, "char_save": "X", "intelligence": 14, "int_save": " ", "strength_mod": "+4", "wisdom_mod": "+1", "dexterity_mod": "+4", "constitution_mod": "+1", "charisma_mod": "+0", "intelligence_mod": "+2", "athletics_skill": "X", "athletics_mod": "+4", "acrobatics_skill": " ", "acrobatics_mod": "+4", "sleight_of_hand_skill": " ", "sleight_of_hand_mod": "+4", "stealth_skill": " ", "stealth_mod": "+4", "arcana_skill": " ", "arcana_mod": "+2", "history_skill": " ", "history_mod": "+2", "investigation_skill": " ", "investigation_mod": "+2", "nature_skill": " ", "nature_mod": "+2", "religion_skill": " ", "religion_mod": "+2", "animal_handling_skill": " ", "animal_handling_mod": "+1", "insight_skill": "X", "insight_mod": "+1", "medicine_skill": " ", "medicine_mod": "+1", "perception_skill": " ", "perception_mod": "+1", "survival_skill": " ", "survival_mod": "+1", "deception_skill": " ", "deception_mod": "+0", "intimidation_skill": " ", "intimidation_mod": "+0", "performance_skill": " ", "performance_mod": "+0", "persuasion_skill": " ", "persuasion_mod": "+0", "passive_perception": 11, "abilities": ["DIVINE SENSE", "LAY ON HANDS", "fighting style", "DIVINE SMITE", "DIVINE HEALTH", "CHANNEL DIVINITY: ABJURE ENEMY", "CHANNEL DIVINITY: VOW OF ENMITY", "DARKVISION", "GNOME CUNNING", "SUPERIOR DARKVISION", "STONE CAMOUFLAGE"], "languages": ["Common", "Gnomish", "Undercommon"], "spells": ["Command", "Compelled Duel", "Cure Wounds"], "armor_pro": ["All Armor", "Shields"], "weapon_pro": ["Simple Weapons", "Martial Weapons"], "proficiencies": ["ARMOR:", "-All Armor", "-Shields", "WEAPONS:", "-Simple Weapons", "-Martial Weapons", "TOOLS:", "LANGUAGES:", "-Common", "-Gnomish", "-Undercommon", "", "", "", "", "", "", "", "", "", "", "", ""], "wealth": 120, "wep0_name": "Crossbow, hand", "wep0_damage": "1d6 Piercing", "wep0_hit": "6", "wep0_weight": "3lbs", "wep0_properties": "Ammunition (range 30/120), Light, Loading", "wep1_name": "Mace", "wep1_damage": "1d6 Bludgeoning", "wep1_hit": "6", "wep1_weight": "4lbs", "wep1_properties": " "})
