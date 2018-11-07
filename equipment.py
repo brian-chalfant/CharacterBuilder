@@ -875,8 +875,9 @@ def in_sheath(name, list):
         if name in list[count].get('name'):
             return True
         else:
-            return False
+            pass
         count += 1
+    return False
 
 if __name__ == '__main__':
 
@@ -893,6 +894,6 @@ if __name__ == '__main__':
     #         weps['properties'] = simple_melee_weapons().get(i).get('Properties')
     #         weplist.append(weps)
 
-    x = in_sheath('Javelin', [{'name': 'Greataxe', 'cost': '5sp', 'damage': '1d6 Piercing', 'weight': 2, 'properties': 'Thrown(range 30/120)'}] )
+    x = in_sheath('Dagger', [{'name': 'Rapier', 'cost': '25gp', 'damage': '1d8 Piercing', 'weight': '2 lbs', 'properties': 'Finesse'}, {'name': 'Dagger', 'cost': '2gp', 'damage': '1d4 Piercing', 'weight': '1lb', 'properties': 'Light, Finesse, Thrown(range 20/60)'}, {'name': 'Dagger', 'cost': '2gp', 'damage': '1d4 Piercing', 'weight': '1lb', 'properties': 'Light, Finesse, Thrown(range 20/60)'}, {'name': 'Club', 'cost': '1sp', 'damage': '1d4 Bludgeoning', 'weight': '2 lbs', 'properties': 'Light'}])
 
     print(x)
