@@ -1,4 +1,5 @@
 import os
+import sqlite3
 
 
 class BColors:
@@ -156,6 +157,16 @@ def primary_abilities():
         6: "Charisma"
         }
     return primary_abilities_list
+
+
+def make_a_dict(lst):
+    count = 1
+    rtndict = {}
+    for i in range(len(lst)):
+        rtndict[count] = lst[i]
+        count += 1
+    return rtndict
+
 
 
 def levelup_ability_increase(statblock):
@@ -489,6 +500,56 @@ def druidic_lands():
     return lands
 
 
+def hunter_prey_options():
+    hp = {
+        1: '''Colossus Slayer: Your tenacity can wear down the most potent foes. When you hit a creature with a weapon
+           attack, the creature takes an extra 1d8 damage if it\'s below its hit point maximum.
+           You can deal this extra damage only once per turn.''',
+        2: '''Giant Killer: When a Large or larger creature within 5 feet of you hits or misses you with an attack, 
+           you can use your reaction to attack that creature immediately after its attack, 
+           provided that you can see the creature.''',
+        3: '''Horde Breaker: Once on each of your turns when you make a weapon attack, you can make another 
+           attack with the same weapon against a different creature that is within 5 feet of the 
+           original target and within range of your weapon.'''
+    }
+    return hp
+
+
+def defensive_tactics_options():
+    dt = {
+        1: '''Escape the Horde: Opportunity attacks against you are made with disadvantage.''',
+        2: '''Multiattack Defense: When a creature hits you with an attack, you gain a +4 bonus to AC against 
+              all subsequent attacks made by that creature for the rest of the turn.''',
+        3: '''Steel Will: You have advantage on saving throws against being frightened.'''
+    }
+    return dt
+
+
+def multiattack_options():
+    dt = {
+        1: '''Volley: You can use your action to make a ranged attack against any number of creatures within 
+              10 feet of a point you can see within your weapon's range. You must have ammunition for each target, 
+              as normal, and you make a separate attack roll for each target.''',
+        2: '''Whirlwind Attack: You can use your action to make a melee attack against any number of creatures 
+              within 5 feet of you, with a separate attack roll for each target''',
+    }
+    return dt
+
+
+def superior_hunters_defense_options():
+    dt = {
+        1: '''Evasion: When you are subjected to an effect, such as a red dragon’s fiery breath or a 
+              lightning bolt spell, that allows you to make a Dexterity saving throw to take only 
+              half damage, you instead take no damage if you succeed on a saving throw, and only 
+              half damage if you fail''',
+        2: '''Stand Against the Tide: When a hostile creature misses you with a melee attack, 
+              you can use your reaction to force that creature to repeat the same attack against another 
+              creature (other than itself) of your choice.''',
+        3: '''Uncanny Dodge: When an attacker that you can see hits you with an attack, you can use your 
+              reaction to halve the attack's damage against you.'''
+    }
+    return dt
+
 def circle_spells(land_type, level):
     if land_type == "Arctic":
         switcher = {
@@ -649,6 +710,31 @@ def list_races():
     }
     return races
 
+
+def get_maneuvers():
+    rtn_list = []
+    conn = sqlite3.connect('CharacterBuilder.db')
+    c = conn.cursor()
+    c.execute("SELECT name FROM maneuvers ORDER BY name ASC")
+    spell_list = c.fetchall()
+    for row in spell_list:
+        for item in row:
+            rtn_list.append(item)
+    conn.close()
+    return make_a_dict(rtn_list)
+
+
+def get_maneuvers_desc(name):
+    rtn_list = []
+    conn = sqlite3.connect('CharacterBuilder.db')
+    c = conn.cursor()
+    c.execute("SELECT desc FROM maneuvers WHERE name = \"{na}\" ORDER BY name ASC".format(na=name))
+    spell_list = c.fetchall()
+    for row in spell_list:
+        for item in row:
+            rtn_list.append(item)
+    conn.close()
+    return rtn_list
 
 def favored_enemy(already_known: list):
     clearscreen()
@@ -815,5 +901,9 @@ def saving_throws(lst):
 
 if __name__ == '__main__':
 
-    x = saving_throws(["Intelligence", "Wisdom"])
-    print(x)
+    x = get_maneuvers()
+    for key, value in x.items():
+        print(key, value)
+
+    y = get_maneuvers_desc('Parry')
+    print(y[0])

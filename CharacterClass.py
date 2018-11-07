@@ -865,7 +865,7 @@ class Druid(CharacterClass):
         if level >= 2:
             clearscreen()
             print("you must now choose your Druid Circle, you have the following options: \n"
-                  "1: Circle of the Land ('NATURAL RECOVERY', 'CIRCLE SPELLS', 'LANDS STRIDE') \n"
+                  "1: Circle of the Land ('NATURAL RECOVERY', 'CIRCLE SPELLS 1', 'LANDS STRIDE') \n"
                   "2: Circle of the Moon ('COMBAT WILD SHAPE', 'CIRCLE FORMS', 'PRIMAL STRIKE')")
             a = validate_choice(2, message='Choose Your Path: ')
             if a == 1:
@@ -935,6 +935,8 @@ class Fighter(CharacterClass):
         self.spellcasting_ability = "Wisdom"
         self.language = []
         self.wealth = (diceroll(5, 4) * 10)
+        self.maneuver = []
+        manu = get_maneuvers()
         x = fighter_fighting_style()
         if level >= 1:
             self.abilities.append("SECOND WIND")
@@ -983,7 +985,7 @@ class Fighter(CharacterClass):
             a = validate_choice(len(x.items()), message="Choose a Fighting Style: ")
             self.fighting_style = x.pop(a)
         if level >= 2:
-            self.abilities.append("ACTION SURGE")
+            self.abilities.append("ACTION SURGE (1 USE)")
         if level >= 3:
             clearscreen()
             print("you must now choose your Martial Archtype, you have the following options: \n"
@@ -996,10 +998,21 @@ class Fighter(CharacterClass):
                 self.abilities.append("IMPROVED CRITICAL")
             elif a == 2:
                 self.classpath = "Battle Master"
-                self.abilities.append("COMBAT SUPERIORITY")
+
                 self.superiority_die = 4
                 self.superiority_die_type = 'd8'
-                #  choose Maneuvers
+                i = 0
+                while i < 3:
+                    print('Select Combat Superiority:')
+                    for key, value in manu.items():
+                        print(key, value)
+                    a = validate_choice(len(get_maneuvers().items()), message='Choose one Maneuver ({} of {}'.format(i+1, 3))
+                    try:
+                        del manu[a]
+                    except KeyError:
+                        pass
+                    self.maneuver = get_maneuvers().get(a)
+                    i += 1
             elif a == 3:
                 self.classpath = "Eldritch Knight"
                 self.abilities.append("SPELLCASTING")
@@ -1015,6 +1028,18 @@ class Fighter(CharacterClass):
                 self.abilities.append("REMARKABLE ATHLETE")
             elif self.classpath == "Battle Master":
                 self.abilities.append("KNOW YOUR ENEMY")
+                i = 0
+                while i < 2:
+                    print('Select Combat Superiority:')
+                    for key, value in manu.items():
+                        print(key, value)
+                    a = validate_choice(len(get_maneuvers().items()), message='Choose one Maneuver ({} of {}'.format(i+1, 2))
+                    try:
+                        del manu[a]
+                    except KeyError:
+                        pass
+                    self.maneuver = get_maneuvers().get(a)
+                    i += 1
                 self.superiority_die += 1
             elif self.classpath == "Eldritch Knight":
                 self.abilities.append("WAR MAGIC")
@@ -1030,6 +1055,18 @@ class Fighter(CharacterClass):
                 a = validate_choice(len(x.items()), message='Choose an Additional Fighting Style: ')
                 self.fighting_style += x.pop(a)
             elif self.classpath == "Battle Master":
+                i = 0
+                while i < 2:
+                    print('Select Combat Superiority:')
+                    for key, value in manu.items():
+                        print(key, value)
+                    a = validate_choice(len(get_maneuvers().items()), message='Choose one Maneuver ({} of {}'.format(i+1, 2))
+                    try:
+                        del manu[a]
+                    except KeyError:
+                        pass
+                    self.maneuver = get_maneuvers().get(a)
+                    i += 1
                 self.superiority_die_type = 'd10'
             elif self.classpath == "Eldritch Knight":
                 self.abilities.append("ELDRITCH STRIKE")
@@ -1048,6 +1085,18 @@ class Fighter(CharacterClass):
                 self.abilities.remove("IMPROVED CRITICAL")
                 self.abilities.append("SUPERIOR CRITICAL")
             elif self.classpath == "Battle Master":
+                i = 0
+                while i < 2:
+                    print('Select Combat Superiority:')
+                    for key, value in manu.items():
+                        print(key, value)
+                    a = validate_choice(len(get_maneuvers().items()), message='Choose one Maneuver ({} of {}'.format(i+1, 2))
+                    try:
+                        del manu[a]
+                    except KeyError:
+                        pass
+                    self.maneuver = get_maneuvers().get(a)
+                    i += 1
                 self.superiority_die += 1
                 self.abilities.append("RELENTLESS")
             elif self.classpath == "Eldritch Knight":
@@ -1055,8 +1104,8 @@ class Fighter(CharacterClass):
         if level >= 16:
             self.ability_up(self.statblock)
         if level >= 17:
-            self.abilities.remove("ACTION SURGE")
-            self.abilities.append("ACTION SURGE (2)")
+            self.abilities.remove("ACTION SURGE (1 USE)")
+            self.abilities.append("ACTION SURGE (2 USES)")
             self.abilities.remove("INDOMITABLE (2)")
             self.abilities.append("INDOMITABLE (3)")
         if level >= 18:
@@ -1153,7 +1202,7 @@ class Monk(CharacterClass):
             self.abilities.append("EXTRA ATTACK")
             self.abilities.append("STUNNING STRIKE")
         if level >= 6:
-            self.abilities.append("KI-EMPOWERED STRIKES")
+            self.abilities.append("KI EMPOWERED STRIKES")
             if self.classpath == "Way of the Open Hand":
                 self.abilities.append("WHOLENESS OF BODY")
             if self.classpath == "The Way of Shadow":
@@ -1421,7 +1470,15 @@ class Ranger(CharacterClass):
             a = validate_choice(2, message='Choose Your Path')
             if a == 1:
                 self.classpath = "Hunter"
-                self.abilities.append("HUNTER\'S PREY")
+                for key, value in hunter_prey_options().items():
+                    print(key, value)
+                a = validate_choice(len(hunter_prey_options().items()), message='Choose a Hunter\'s Prey Option')
+                if a == 1:
+                    self.abilities.append("HUNTER'S PREY: COLOSSUS SLAYER")
+                if a == 2:
+                    self.abilities.append("HUNTER'S PREY: GIANT KILLER")
+                if a == 3:
+                    self.abilities.append("HUNTER'S PREY: HORDE BREAKER")
             elif a == 2:
                 self.classpath = "Beast Master"
                 self.abilities.append("RANGER\'s COMPANION")
@@ -1437,7 +1494,16 @@ class Ranger(CharacterClass):
                     self.language.append(i[1])
         if level >= 7:
             if self.classpath == "Hunter":
-                self.abilities.append("DEFENSIVE TACTICS")
+                for key, value in defensive_tactics_options().items():
+                    print(key, value)
+                a = validate_choice(len(defensive_tactics_options().items()),
+                                    message='Choose a Defensive Tactic\'s Option')
+                if a == 1:
+                    self.abilities.append("DEFENSIVE TACTICS: ESCAPE THE HORDE")
+                if a == 2:
+                    self.abilities.append("DEFENSIVE TACTICS: MULTIATTACK DEFENSE")
+                if a == 3:
+                    self.abilities.append("DEFENSIVE TACTICS: STEEL WILL")
             elif self.classpath == "Beast Master":
                 self.abilities.append("EXCEPTIONAL TRAINING")
         if level >= 8:
@@ -1452,7 +1518,14 @@ class Ranger(CharacterClass):
             self.abilities.append(selection)
         if level >= 11:
             if self.classpath == "Hunter":
-                self.abilities.append("MULTIATTACK")
+                for key, value in multiattack_options().items():
+                    print(key, value)
+                a = validate_choice(len(multiattack_options().items()),
+                                    message='Choose a Multi-Attack Option')
+                if a == 1:
+                    self.abilities.append("MULTIATTACK: VOLLEY")
+                if a == 2:
+                    self.abilities.append("MULTIATTACK: WHIRLWIND ATTACK")
             elif self.classpath == "Beast Master":
                 self.abilities.append("BESTIAL FURY")
         if level >= 12:
@@ -1465,7 +1538,16 @@ class Ranger(CharacterClass):
                     self.language.append(i[1])
         if level >= 15:
             if self.classpath == "Hunter":
-                self.abilities.append("SUPERIOR HUNTER\'S DEFENSE")
+                for key, value in superior_hunters_defense_options().items():
+                    print(key, value)
+                a = validate_choice(len(superior_hunters_defense_options().items()),
+                                    message='Choose a Superior Hunter\'s Defense Option')
+                if a == 1:
+                    self.abilities.append("SUPERIOR HUNTER'S DEFENSE: EVASION")
+                if a == 2:
+                    self.abilities.append("SUPERIOR HUNTER'S DEFENSE: STAND AGAINST THE TIDE")
+                if a == 3:
+                    self.abilities.append("SUPERIOR HUNTER'S DEFENSE: UNCANNY DODGE")
             elif self.classpath == "Beast Master":
                 self.abilities.append("SHARE SPELLS")
         if level >= 16:
@@ -1698,6 +1780,8 @@ class Sorcerer(CharacterClass):
 
         if level >= 1:
             self.abilities.append("SPELLCASTING")
+            self.abilities.append("FLEXIBLE CASTING: CREATING SPELL SLOTS")
+            self.abilities.append("FLEXIBLE CASTING: CONVERTING SPELL SLOT")
             clearscreen()
             print("you must now choose your Sorcerous Origin, you have the following options: \n"
                   "1: Draconic Bloodline ('DRAGON ANCESTOR', 'DRACONIC RESILIENCE', 'ELEMENTAL AFFINITY') \n"

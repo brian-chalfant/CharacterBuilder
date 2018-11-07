@@ -1,4 +1,5 @@
 import sqlite3
+from modifiers import get_maneuvers_desc
 
 
 def build_sheet(character_data: dict):
@@ -294,7 +295,18 @@ def build_sheet(character_data: dict):
                 for j in string_format(x):
                     lines += j + '\n'
                 lines += string_decorater('*' + ('-' * 76) + '*') + '\n'
-
+        if character_data.get('klass') == 'Fighter':
+                try:
+                    for i in character_data.get('maneuver'):
+                        for j in string_format(str(character_data.get('maneuver').upper()) + ": " +
+                                               str(get_maneuvers_desc(character_data.get('maneuver'))[0])):
+                            lines += j + '\n'
+                        lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
+                except AttributeError:
+                    x = str(i) + ': No Data Available (MANEUVER)'
+                    for j in string_format(x):
+                        lines += j + '\n'
+                    lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
 
         lines += '+-Spells-----------------------------------------------------------------------+ \n'
         for i in character_data.get('spells'):
