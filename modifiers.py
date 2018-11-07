@@ -710,6 +710,29 @@ def list_races():
     }
     return races
 
+def get_elemental_disciplines(level):
+    rtn_list = []
+    conn = sqlite3.connect('CharacterBuilder.db')
+    c = conn.cursor()
+    c.execute("SELECT name FROM elementaldisciplines WHERE level=\"{lvl}\" ORDER BY name ASC".format(lvl=level))
+    spell_list = c.fetchall()
+    for row in spell_list:
+        for item in row:
+            rtn_list.append(item)
+    conn.close()
+    return make_a_dict(rtn_list)
+
+def get_elemental_disciplines_desc(name):
+    rtn_list = []
+    conn = sqlite3.connect('CharacterBuilder.db')
+    c = conn.cursor()
+    c.execute("SELECT desc FROM elementaldisciplines WHERE name = \"{na}\"".format(na=name))
+    spell_list = c.fetchall()
+    for row in spell_list:
+        for item in row:
+            rtn_list.append(item)
+    conn.close()
+    return rtn_list
 
 def get_maneuvers():
     rtn_list = []

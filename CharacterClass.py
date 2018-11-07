@@ -1140,6 +1140,7 @@ class Monk(CharacterClass):
         self.spellcasting_ability = "Wisdom"
         self.language = []
         self.wealth = diceroll(5,4)
+        self.elemental_discipline = []
         clearscreen()
         for key, value in monk_skill_list().items():
             print(key, value)
@@ -1176,8 +1177,8 @@ class Monk(CharacterClass):
             self.ki_points = 2
             self.abilities.append("FLURRY OF BLOWS")
             self.abilities.append("PATIENT DEFENSE")
-            self.abilities.append("STEP OF TEH WIND")
-            self.abilities.append("UNARMORED MOVEMENT")
+            self.abilities.append("STEP OF THE WIND")
+            self.abilities.append("UNARMORED MOVEMENT 1")
         if level >= 3:
             self.abilities.append("DEFLECT MISSILES")
             clearscreen()
@@ -1194,7 +1195,19 @@ class Monk(CharacterClass):
                 self.abilities.append("SHADOW ARTS")
             elif a == 3:
                 self.classpath = "Way fo the Four Elements"
-                self.abilities.append("elemental disciplines")
+                x = get_elemental_disciplines(3)
+                done = False
+                while done is False:
+                    for key, value in x.items():
+                        print(key, value)
+                    a = validate_choice(len(x.items()), message='Pick an Elemental Discipline')
+                    print(get_elemental_disciplines_desc(x.get(a))[0])
+                    y = input('Confirm Selection (y/n):')
+                    if y.lower() == ('n' or 'no'):
+                        continue
+                    else:
+                        self.elemental_discipline.append (x.get(a))
+                        done = True
         if level >= 4:
             self.abilities.append("SLOW FALL")
             self.ability_up(self.statblock)
@@ -1208,15 +1221,27 @@ class Monk(CharacterClass):
             if self.classpath == "The Way of Shadow":
                 self.abilities.append("SHADOW STEP")
             if self.classpath == "Way fo the Four Elements":
-                self.abilities.append("elemental disciplines 2")
+                x = get_elemental_disciplines(6)
+                done = False
+                while done is False:
+                    for key, value in x.items():
+                        print(key, value)
+                    a = validate_choice(len(x.items()), message='Pick an Elemental Discipline')
+                    print(get_elemental_disciplines_desc(x.get(a))[0])
+                    y = input('Confirm Selection (y/n):')
+                    if y.lower() == ('n' or 'no'):
+                        continue
+                    else:
+                        self.elemental_discipline.append (x.get(a))
+                        done = True
         if level >= 7:
             self.abilities.append("EVASION")
             self.abilities.append("STILLNESS OF MIND")
         if level >= 8:
             self.ability_up(self.statblock)
         if level >= 9:
-            self.abilities.remove("UNARMORED MOVEMENT")
-            self.abilities.append("IMPROVED UNARMORED MOVEMENT")
+            self.abilities.remove("UNARMORED MOVEMENT 1")
+            self.abilities.append("UNARMORED MOVEMENT 2")
         if level >= 10:
             self.abilities.append("PURITY OF BODY")
         if level >= 11:
@@ -1225,7 +1250,19 @@ class Monk(CharacterClass):
             if self.classpath == "The Way of Shadow":
                 self.abilities.append("CLOAK OF SHADOWS")
             if self.classpath == "Way fo the Four Elements":
-                self.abilities.append("elemental disciplines 3")
+                x = get_elemental_disciplines(11)
+                done = False
+                while done is False:
+                    for key, value in x.items():
+                        print(key, value)
+                    a = validate_choice(len(x.items()), message='Pick an Elemental Discipline')
+                    print(get_elemental_disciplines_desc(x.get(a))[0])
+                    y = input('Confirm Selection (y/n):')
+                    if y.lower() == ('n' or 'no'):
+                        continue
+                    else:
+                        self.elemental_discipline.append (x.get(a))
+                        done = True
         if level >= 12:
             self.ability_up(self.statblock)
         if level >= 13:
@@ -1242,7 +1279,19 @@ class Monk(CharacterClass):
             if self.classpath == "The Way of Shadow":
                 self.abilities.append("OPPORTUNIST")
             if self.classpath == "Way fo the Four Elements":
-                self.abilities.append("elemental disciplines 4")
+                x = get_elemental_disciplines(11)
+                done = False
+                while done is False:
+                    for key, value in x.items():
+                        print(key, value)
+                    a = validate_choice(len(x.items()), message='Pick an Elemental Discipline')
+                    print(get_elemental_disciplines_desc(x.get(a))[0])
+                    y = input('Confirm Selection (y/n):')
+                    if y.lower() == ('n' or 'no'):
+                        continue
+                    else:
+                        self.elemental_discipline.append (x.get(a))
+                        done = True
         if level >= 18:
             self.abilities.append("EMPTY BODY")
         if level >= 19:

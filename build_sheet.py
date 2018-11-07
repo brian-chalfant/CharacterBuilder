@@ -1,5 +1,5 @@
 import sqlite3
-from modifiers import get_maneuvers_desc
+from modifiers import get_maneuvers_desc, get_elemental_disciplines_desc
 
 
 def build_sheet(character_data: dict):
@@ -307,31 +307,46 @@ def build_sheet(character_data: dict):
                     for j in string_format(x):
                         lines += j + '\n'
                     lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
-
-        lines += '+-Spells-----------------------------------------------------------------------+ \n'
-        for i in character_data.get('spells'):
-            try:
-                x = read_spells(i)
-                for j in string_format(x):
-                    lines += j + '\n'
-                lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
-            except AttributeError:
-                x = str(i) + ": No Data Available (SPELL)"
-                for j in string_format(x):
-                    lines += j + '\n'
-                lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
-        if character_data.get('klass') == 'Warlock':
-            for i in character_data.get('Eldritch Invocation Spells'):
+        if character_data.get('klass') == 'Monk':
+                try:
+                    for i in character_data.get('elemental_discipline'):
+                        print(get_elemental_disciplines_desc(i))
+                        for j in string_format(str(i) + ": " +
+                                               str(get_elemental_disciplines_desc(i)[0])):
+                            lines += j + '\n'
+                        lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
+                except AttributeError as e:
+                    x = str(i) + ': No Data Available (ELEMENTAL DISCIPLINE)' + str(e)
+                    for j in string_format(x):
+                        lines += j + '\n'
+                    lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
+        if character_data.get('spells'):
+            lines += '+-Spells-----------------------------------------------------------------------+ \n'
+            for i in character_data.get('spells'):
                 try:
                     x = read_spells(i)
                     for j in string_format(x):
                         lines += j + '\n'
                     lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
                 except AttributeError:
-                    x = str(i) + ': No Data Available (INVOCATION'
+                    x = str(i) + ": No Data Available (SPELL)"
                     for j in string_format(x):
                         lines += j + '\n'
                     lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
+            if character_data.get('klass') == 'Warlock':
+                for i in character_data.get('Eldritch Invocation Spells'):
+                    try:
+                        x = read_spells(i)
+                        for j in string_format(x):
+                            lines += j + '\n'
+                        lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
+                    except AttributeError:
+                        x = str(i) + ': No Data Available (INVOCATION'
+                        for j in string_format(x):
+                            lines += j + '\n'
+                        lines += string_decorater('*' + (' - ' * 25) + '*') + '\n'
+        lines += '|                                                                   D&DCB 2018 | \n'
+        lines += '+------------------------------------------------------------------------------+'
         print(lines)
         outfile.writelines(lines)
 

@@ -576,18 +576,18 @@ def simple_melee_names():
 def simple_melee_weapons():
 
     simple_melee_weapons_list = {
-        "Club":  {"Cost": "1sp", "Damage": "1d4 Bludgeoning", "Weight": '2lbs', "Properties":  "Light"},
+        "Club":  {"Cost": "1sp", "Damage": "1d4 Bludgeoning", "Weight": '2 lbs', "Properties":  "Light"},
         "Dagger": {"Cost": "2gp", "Damage": "1d4 Piercing", "Weight": '1lb', "Properties":  "Light, Finesse, "
                                                                                         "Thrown(range 20/60)"},
-        "Greatclub": {"Cost": "2sp", "Damage": "1d8 Bludgeoning", "Weight": '10lbs', "Properties":  "Two-Handed"},
-        "Handaxe": {"Cost": "5gp", "Damage": "1d6 Slashing", "Weight": '2lbs', "Properties":  "Light, Thrown(range 20/60"},
-        "Javelin": {"Cost": "5sp", "Damage": "1d6 Piercing", "Weight": '2lbs', "Properties":  "Thrown(range 30/120)"},
-        "Light Hammer": {"Cost": "2gp", "Damage": "1d4 Bludgeoning", "Weight": '2lbs', "Properties":  "Light, "
+        "Greatclub": {"Cost": "2sp", "Damage": "1d8 Bludgeoning", "Weight": '10 lbs', "Properties":  "Two-Handed"},
+        "Handaxe": {"Cost": "5gp", "Damage": "1d6 Slashing", "Weight": '2 lbs', "Properties":  "Light, Thrown(range 20/60"},
+        "Javelin": {"Cost": "5sp", "Damage": "1d6 Piercing", "Weight": '2 lbs', "Properties":  "Thrown(range 30/120)"},
+        "Light Hammer": {"Cost": "2gp", "Damage": "1d4 Bludgeoning", "Weight": '2 lbs', "Properties":  "Light, "
                                                                                                  "Thrown(range 20/60)"},
-        "Mace": {"Cost": "5gp", "Damage": "1d6 Bludgeoning", "Weight": '4lbs', "Properties":  " "},
-        "Quarterstaff": {"Cost": "2sp", "Damage": "1d6 Bludgeoning", "Weight": '4lbs', "Properties":  "Versatile(1d8)"},
-        "Sickle": {"Cost": "1gp", "Damage": "1d4 Slashing", "Weight": '2lbs', "Properties":  "Light"},
-        "Spear": {"Cost": "1gp", "Damage": "1d6 Piercing", "Weight": '3lbs', "Properties":
+        "Mace": {"Cost": "5gp", "Damage": "1d6 Bludgeoning", "Weight": '4 lbs', "Properties":  " "},
+        "Quarterstaff": {"Cost": "2sp", "Damage": "1d6 Bludgeoning", "Weight": '4 lbs', "Properties":  "Versatile(1d8)"},
+        "Sickle": {"Cost": "1gp", "Damage": "1d4 Slashing", "Weight": '2 lbs', "Properties":  "Light"},
+        "Spear": {"Cost": "1gp", "Damage": "1d6 Piercing", "Weight": '3 lbs', "Properties":
                                                                         "Thrown(range 20/60), Versatile(1d8)"}}
 
     return simple_melee_weapons_list
@@ -609,12 +609,12 @@ def simple_ranged_names():
 
 def simple_ranged_weapons():
     simple_ranged_weapons_list = {
-        "Crossbow, light": {"Cost": "25gp", "Damage": "1d8 Piercing", "Weight": '5lbs', "Properties":  "Ammunition, "
+        "Crossbow, light": {"Cost": "25gp", "Damage": "1d8 Piercing", "Weight": '5 lbs', "Properties":  "Ammunition, "
                                                       "(range 80/320), Loading, Two-Handed"},
-        "Dart": {"Cost": "5cp", "Damage": "1d4 Piercing", "Weight": '1/4lbs', "Properties":  "Finesse, Thrown(20/60)"},
-        "Shortbow": {"Cost": "25gp", "Damage": "1d6 Piercing", "Weight": '2lbs', "Properties":  "Ammunition, (range 80/320),"
+        "Dart": {"Cost": "5cp", "Damage": "1d4 Piercing", "Weight": '1/4 lbs', "Properties":  "Finesse, Thrown(20/60)"},
+        "Shortbow": {"Cost": "25gp", "Damage": "1d6 Piercing", "Weight": '2 lbs', "Properties":  "Ammunition, (range 80/320),"
                                                                                            " Two-Handed"},
-        "Sling": {"Cost": "1sp", "Damage": "1d4 Bludgeoning", "Weight": '0lbs', "Properties":
+        "Sling": {"Cost": "1sp", "Damage": "1d4 Bludgeoning", "Weight": '0 lbs', "Properties":
                                                                               "Ammunition, (range 30/120)"}}
     return simple_ranged_weapons_list
 
@@ -647,25 +647,25 @@ def martial_melee_names():
 
 def martial_melee_weapons():
     martial_melee_weapons_list = {
-        "Battleaxe": {"Cost": "10gp", "Damage": "1d8 Slashing", "Weight": '4lbs', "Properties":  "Versatile(1d10)"},
-        "Flail": {"Cost": "10gp", "Damage": "1d8 Bludgeoning", "Weight": '2lbs', "Properties":  " "},
-        "Glaive": {"Cost": "20gp", "Damage": "1d10 Slashing", "Weight": '6lbs', "Properties":  "Heavy, Reach, Two-handed"},
-        "Greataxe": {"Cost": "30gp", "Damage": "1d12 Slashing", "Weight": '6lbs', "Properties":  "Reach, Special"},
-        "Greatsword": {"Cost": "50gp", "Damage": "2d6 Slashing", "Weight": '6lbs', "Properties":  "Heavy, Two-handed"},
-        "Halberd": {"Cost": "20gp", "Damage": "1d10 Slashing", "Weight": '6lbs', "Properties":  "Heavy, Reach, Two-handed"},
-        "Lance": {"Cost": "10gp", "Damage": "1d12 Piercing", "Weight": '6lbs', "Properties":  "Reach, Special"},
-        "Longsword": {"Cost": "15gp", "Damage": "1d8 Slashing", "Weight": '3lbs', "Properties":  "Versatile(1d10)"},
-        "Maul": {"Cost": "10gp", "Damage": "2d6 Bludgeoning", "Weight": '10lbs', "Properties":  "Heavy, Two-handed"},
-        "Morningstar": {"Cost": "15gp", "Damage": "1d8 Piercing", "Weight": '4lbs', "Properties":  " "},
-        "Pike": {"Cost": "5gp", "Damage": "1d10 Piercing", "Weight": '18lbs', "Properties":  "Heavy, Reach, Two-handed"},
-        "Rapier": {"Cost": "25gp", "Damage": "1d8 Piercing", "Weight": '2lbs', "Properties": "Finesse"},
-        "Scimitar": {"Cost": "25gp", "Damage": "1d6 Slashing", "Weight": '3lbs', "Properties": "Light, Finesse"},
-        "Shortsword": {"Cost": "10gp", "Damage": "1d6 Piercing", "Weight": '2lbs', "Properties": "Light, Finesse"},
-        "Trident": {"Cost": "5gp", "Damage": "1d6 Piercing", "Weight": '4lbs', "Properties": "Thrown (range 20/60), "
+        "Battleaxe": {"Cost": "10gp", "Damage": "1d8 Slashing", "Weight": '4 lbs', "Properties":  "Versatile(1d10)"},
+        "Flail": {"Cost": "10gp", "Damage": "1d8 Bludgeoning", "Weight": '2 lbs', "Properties":  " "},
+        "Glaive": {"Cost": "20gp", "Damage": "1d10 Slashing", "Weight": '6 lbs', "Properties":  "Heavy, Reach, Two-handed"},
+        "Greataxe": {"Cost": "30gp", "Damage": "1d12 Slashing", "Weight": '6 lbs', "Properties":  "Reach, Special"},
+        "Greatsword": {"Cost": "50gp", "Damage": "2d6 Slashing", "Weight": '6 lbs', "Properties":  "Heavy, Two-handed"},
+        "Halberd": {"Cost": "20gp", "Damage": "1d10 Slashing", "Weight": '6 lbs', "Properties":  "Heavy, Reach, Two-handed"},
+        "Lance": {"Cost": "10gp", "Damage": "1d12 Piercing", "Weight": '6 lbs', "Properties":  "Reach, Special"},
+        "Longsword": {"Cost": "15gp", "Damage": "1d8 Slashing", "Weight": '3 lbs', "Properties":  "Versatile(1d10)"},
+        "Maul": {"Cost": "10gp", "Damage": "2d6 Bludgeoning", "Weight": '10 lbs', "Properties":  "Heavy, Two-handed"},
+        "Morningstar": {"Cost": "15gp", "Damage": "1d8 Piercing", "Weight": '4 lbs', "Properties":  " "},
+        "Pike": {"Cost": "5gp", "Damage": "1d10 Piercing", "Weight": '18 lbs', "Properties":  "Heavy, Reach, Two-handed"},
+        "Rapier": {"Cost": "25gp", "Damage": "1d8 Piercing", "Weight": '2 lbs', "Properties": "Finesse"},
+        "Scimitar": {"Cost": "25gp", "Damage": "1d6 Slashing", "Weight": '3 lbs', "Properties": "Light, Finesse"},
+        "Shortsword": {"Cost": "10gp", "Damage": "1d6 Piercing", "Weight": '2 lbs', "Properties": "Light, Finesse"},
+        "Trident": {"Cost": "5gp", "Damage": "1d6 Piercing", "Weight": '4 lbs', "Properties": "Thrown (range 20/60), "
                                                                                         "Versatile(1d8)"},
-        "War Pick": {"Cost": "5gp", "Damage": "1d8 Piercing", "Weight": '2lbs', "Properties": " "},
-        "Warhammer": {"Cost": "15gp", "Damage": "1d8 Bludgeoning", "Weight": '2lbs', "Properties": "Versatile(1d8)"},
-        "Whip": {"Cost": "2gp", "Damage": "1d4 Slashing", "Weight": '3lbs', "Properties": "Finesse, Reach"},
+        "War Pick": {"Cost": "5gp", "Damage": "1d8 Piercing", "Weight": '2 lbs', "Properties": " "},
+        "Warhammer": {"Cost": "15gp", "Damage": "1d8 Bludgeoning", "Weight": '2 lbs', "Properties": "Versatile(1d8)"},
+        "Whip": {"Cost": "2gp", "Damage": "1d4 Slashing", "Weight": '3 lbs', "Properties": "Finesse, Reach"},
         }
     return martial_melee_weapons_list
 
@@ -686,15 +686,15 @@ def martial_ranged_names():
 
 def martial_ranged_weapons():
     martial_ranged_weapons_list = {
-        "Blowgun": {"Cost": "10gp", "Damage": "1 Piercing", "Weight": '1lbs', "Properties": "Ammunition (range 25/100), "
+        "Blowgun": {"Cost": "10gp", "Damage": "1 Piercing", "Weight": '1 lbs', "Properties": "Ammunition (range 25/100), "
                                                                                        "Loading"},
-        "Crossbow, hand": {"Cost": "75gp", "Damage": "1d6 Piercing", "Weight": '3lbs', "Properties":
+        "Crossbow, hand": {"Cost": "75gp", "Damage": "1d6 Piercing", "Weight": '3 lbs', "Properties":
                                                      "Ammunition (range 30/120), Light, Loading"},
-        "Crossbow, heavy": {"Cost": "50gp", "Damage": "1d10 Piercing", "Weight": '18lbs', "Properties":
+        "Crossbow, heavy": {"Cost": "50gp", "Damage": "1d10 Piercing", "Weight": '18 lbs', "Properties":
                                             "Ammunition (range 100/400), Heavy, Loading, Two-handed"},
-        "Longbow": {"Cost": "50gp", "Damage": "1d8 Piercing", "Weight": '2lbs', "Properties":
+        "Longbow": {"Cost": "50gp", "Damage": "1d8 Piercing", "Weight": '2 lbs', "Properties":
                                               "Ammunition (range 150/600), Heavy, Two-handed"},
-        "Net": {"Cost": "1gp", "Damage": '0', "Weight": 'lbs', "Properties": "Special, Thrown (range 5/15)"},
+        "Net": {"Cost": "1gp", "Damage": '0', "Weight": '0 lbs', "Properties": "Special, Thrown (range 5/15)"},
     }
     return martial_ranged_weapons_list
 
@@ -719,14 +719,14 @@ def armor_names():
 
 def armor():
     arm = {
-        "Light Padded Armor": {"Cost": "5gp", "AC": 11, "Weight": "8lbs", "STR-REQ": 0},
-        "Light Leather Armor": {"Cost": "10gp", "AC": 11, "Weight": "10lbs", "STR-REQ": 0},
-        "Light Studded Leather Armor": {"Cost": "45gp", "AC": 12, "Weight": "13lbs", "STR-REQ": 0},
-        "Medium Hide Armor": {"Cost": "10gp", "AC": 12, "Weight": "12lbs", "STR-REQ": 0},
-        "Medium Chain Shirt Armor": {"Cost": "50gp", "AC": 13, "Weight": "13lbs", "STR-REQ": 0},
-        "Medium Scale Mail Armor": {"Cost": "50gp", "AC": 11, "Weight": "10lbs", "STR-REQ": 0},
-        "Heavy Ring Mail Armor": {"Cost": "30gp", "AC": 14, "Weight": "40lbs", "STR-REQ": 0},
-        "Heavy Chain Mail Armor": {"Cost": "75gp", "AC": 16, "Weight": "40lbs", "STR-REQ": 13}
+        "Light Padded Armor": {"Cost": "5gp", "AC": 11, "Weight": "8 lbs", "STR-REQ": 0},
+        "Light Leather Armor": {"Cost": "10gp", "AC": 11, "Weight": "10 lbs", "STR-REQ": 0},
+        "Light Studded Leather Armor": {"Cost": "45gp", "AC": 12, "Weight": "13 lbs", "STR-REQ": 0},
+        "Medium Hide Armor": {"Cost": "10gp", "AC": 12, "Weight": "12 lbs", "STR-REQ": 0},
+        "Medium Chain Shirt Armor": {"Cost": "50gp", "AC": 13, "Weight": "13 lbs", "STR-REQ": 0},
+        "Medium Scale Mail Armor": {"Cost": "50gp", "AC": 11, "Weight": "10 lbs", "STR-REQ": 0},
+        "Heavy Ring Mail Armor": {"Cost": "30gp", "AC": 14, "Weight": "40 lbs", "STR-REQ": 0},
+        "Heavy Chain Mail Armor": {"Cost": "75gp", "AC": 16, "Weight": "40 lbs", "STR-REQ": 13}
     }
     return arm
 

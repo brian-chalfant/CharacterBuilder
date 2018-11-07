@@ -604,6 +604,8 @@ def generate_character():
             character_data['Eldritch Invocation Spells'] = newcharacter.character_class.invocations
         if newcharacter.character_class.name == 'Fighter':
             character_data['maneuver'] = newcharacter.character_class.maneuver
+        if newcharacter.character_class.name == 'Monk':
+            character_data['elemental_discipline'] = newcharacter.character_class.elemental_discipline
 
     #     for key, value in character_data.items():
     #         outputfile.write('%s:%s\n' % (key, value))

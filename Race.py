@@ -121,7 +121,7 @@ class Dwarf(Race):
         self.weight = [110, 170]
         self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony']
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
-        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+        self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
 
 class HillDwarf(Dwarf):
@@ -248,7 +248,7 @@ class FireGenasi(Genasi):
         self.name = 'Fire Genasi'
         self.abilities.append("DARKVISION")
         self.abilities.append("FIRE RESISTANCE")
-        self.abilities.append("REACH THE BLAZE")
+        self.abilities.append("REACH TO THE BLAZE")
         self.magic = True
         self.cantrip = ["Produce Flame"]
         self.skin = ['Flaming Red', 'Coal Black', 'Ash Gray', 'White Hot', 'Oxidising Blue']
@@ -284,7 +284,7 @@ class Gnome(Race):
         self.weight = [30, 60]
         self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
-        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+        self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
 class RockGnome(Gnome):
     def __init__(self):
@@ -320,7 +320,7 @@ class Goliath(Race):
         self.weight = [280, 340]
         self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
-        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+        self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
 # Start Half-Elf --------------------------------------------------
 class HalfElf(Race):
@@ -335,7 +335,7 @@ class HalfElf(Race):
         self.weight = [120, 200]
         self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
-        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+        self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
         self.language.append("Elvish")
         clearscreen()
         self.language.append(str(choose_language(self.language)))
@@ -356,7 +356,7 @@ class HalfOrc(Race):
         self.weight = [120, 220]
         self.skin = ['Pale Gray', 'Scarlet', 'Ash', 'Pickle', 'Emerald', 'Dark Green', 'Midnight Blue']
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
-        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+        self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
 # Start Halfling --------------------------------------------------
 class Halfling(Race):
@@ -372,7 +372,7 @@ class Halfling(Race):
         self.weight = [30, 50]
         self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
-        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+        self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
 class LightfootHalfling(Halfling):
     def __init__(self):
@@ -407,7 +407,7 @@ class Human(Race):
         self.weight = [90, 200]
         self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony',]
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
-        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+        self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
         self.language.append(str(choose_language(self.language)))
         self.abilities = []
 
@@ -425,8 +425,8 @@ class Tiefling(Race):
         self.weight = [90, 200]
         self.skin = ['Pink', 'Scarlet', 'Blood']
         self.hair = ['Violet', 'Midnight Blue', 'Azure', 'Wildfire', 'Blonde']
-        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+        self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
         self.abilities = ["DARKVISION", "HELLISH RESISTANCE", "INFERNAL LEGACY"]
         self.magic = True
-        self.cantrip = ["THAUMATURGY"]
+        self.cantrip = ["Thaumaturgy"]
         self.language.append("Infernal")
