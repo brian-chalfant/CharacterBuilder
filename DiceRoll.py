@@ -6,7 +6,7 @@ def initial_diceroll():
 
     a = []
     for i in range(4):
-        a.append(randrange(1,7))
+        a.append(randrange(1, 7))
     a.sort()
     total = a[1] + a[2] + a[3]
     return total
@@ -21,9 +21,8 @@ def diceroll(number_of_dice, number_of_sides):
 
 
 def stat_selection(classname, highest):
-    abilities = primary_abilities()
+    # abilities = primary_abilities()
     yesno = {1: 'Re-roll', 2: 'Save'}
-    begin = input("Press Enter to Roll 4d6 for Stats")
     roll = []
     reroll = True
     complete = False
@@ -87,4 +86,3 @@ def stat_selection(classname, highest):
             print('ENTER A VALID NUMBER')
             complete = False
     return rtndict
-

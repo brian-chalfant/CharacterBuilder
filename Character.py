@@ -1,13 +1,12 @@
-import json
-import os
+
 from pathlib import Path
 from backgrounds import Background
 from CharacterClass import *
 from Race import *
 from build_sheet import build_sheet
 from looks import looks
-from modifiers import ability_modifiers, clearscreen, splashscreen
-from write_backgrounds import read_background_names, read_backgrounds
+from modifiers import ability_modifiers, splashscreen
+from write_backgrounds import read_background_names
 from equipment import *
 
 home = str(Path.home())
@@ -198,10 +197,12 @@ def background_selection():
 
 
 def generate_character():
+    character_name = 'Default Name'  # Default
+    user_level = 1   # Default
     valid = False
     while valid is not True:
         character_name = str(input(BColors.UNDERLINE + "Please Enter your character's name :"))
-        if character_name.isalpha():
+        if valid_name(character_name):
             valid = True
         else:
             print(BColors.FAIL + "Invalid Name")
@@ -220,18 +221,21 @@ def generate_character():
     print(newcharacter.character_class.name)
     # Passive Perception
     if newcharacter.character_class.perception_skill:
-        passive_perc = 10 + proficiency(newcharacter.level) + ability_modifiers(newcharacter.race.get_wisdom() +
-                            newcharacter.character_class.get_wisdom_addition())
+        passive_perc = 10 + proficiency(newcharacter.level) + \
+                       ability_modifiers(newcharacter.race.get_wisdom() +
+                                         newcharacter.character_class.get_wisdom_addition())
     else:
         passive_perc = 10 + ability_modifiers(newcharacter.race.get_wisdom() +
-                            newcharacter.character_class.get_wisdom_addition())
+                                              newcharacter.character_class.get_wisdom_addition())
     # HP_MAX
-    hpmax = newcharacter.character_class.hit_die + (ability_modifiers(newcharacter.race.get_constitution() + newcharacter.character_class.get_constitution_addition())) + (diceroll(newcharacter.level, newcharacter.character_class.hit_die))
+    hpmax = newcharacter.character_class.hit_die + \
+        (ability_modifiers(newcharacter.race.get_constitution() +
+                           newcharacter.character_class.get_constitution_addition())) + \
+        (diceroll(newcharacter.level, newcharacter.character_class.hit_die))
     # SAVING THROWS
     throws = saving_throws(newcharacter.character_class.saves)
     # PROFICIENCIES
-    proficiencies = []
-    proficiencies.append('ARMOR:')
+    proficiencies = list(['ARMOR:'])
     for i in newcharacter.character_class.armorpro:
         proficiencies.append(("-" + i))
     proficiencies.append('WEAPONS:')
@@ -256,7 +260,7 @@ def generate_character():
     newcharacter.equipment = starting_equipment(newcharacter.character_class.name, newcharacter.background.name,
                                                 proficiencies)
 
-    #Skill Transform
+    # Skill Transform
     def skill_transform(skill):
         if skill is False:
             skill = " "
@@ -266,14 +270,16 @@ def generate_character():
 
     newcharacter.character_class.athletics_skill = skill_transform(newcharacter.character_class.athletics_skill)
     newcharacter.character_class.acrobatics_skill = skill_transform(newcharacter.character_class.acrobatics_skill)
-    newcharacter.character_class.sleight_of_hand_skill = skill_transform(newcharacter.character_class.sleight_of_hand_skill)
+    newcharacter.character_class.sleight_of_hand_skill = \
+        skill_transform(newcharacter.character_class.sleight_of_hand_skill)
     newcharacter.character_class.stealth_skill = skill_transform(newcharacter.character_class.stealth_skill)
     newcharacter.character_class.arcana_skill = skill_transform(newcharacter.character_class.arcana_skill)
     newcharacter.character_class.history_skill = skill_transform(newcharacter.character_class.history_skill)
     newcharacter.character_class.investigation_skill = skill_transform(newcharacter.character_class.investigation_skill)
     newcharacter.character_class.nature_skill = skill_transform(newcharacter.character_class.nature_skill)
     newcharacter.character_class.religion_skill = skill_transform(newcharacter.character_class.religion_skill)
-    newcharacter.character_class.animal_handling_skill = skill_transform(newcharacter.character_class.animal_handling_skill)
+    newcharacter.character_class.animal_handling_skill = \
+        skill_transform(newcharacter.character_class.animal_handling_skill)
     newcharacter.character_class.insight_skill = skill_transform(newcharacter.character_class.insight_skill)
     newcharacter.character_class.medicine_skill = skill_transform(newcharacter.character_class.medicine_skill)
     newcharacter.character_class.perception_skill = skill_transform(newcharacter.character_class.perception_skill)
@@ -288,7 +294,7 @@ def generate_character():
     count = 0
     for i in newcharacter.equipment:
         if simple_melee_weapons().get(i):
-            weps = {}
+            weps = dict()
             weps['name'] = i
             weps['cost'] = simple_melee_weapons().get(i).get('Cost')
             weps['damage'] = simple_melee_weapons().get(i).get('Damage')
@@ -303,7 +309,7 @@ def generate_character():
                 print(weps)
                 print('<1weps')
         elif simple_ranged_weapons().get(i):
-            weps = {}
+            weps = dict()
             weps['name'] = i
             weps['cost'] = simple_ranged_weapons().get(i).get('Cost')
             weps['damage'] = simple_ranged_weapons().get(i).get('Damage')
@@ -318,7 +324,7 @@ def generate_character():
                 print(weps)
                 print('<2weps')
         elif martial_melee_weapons().get(i):
-            weps = {}
+            weps = dict()
             weps['name'] = i
             weps['cost'] = martial_melee_weapons().get(i).get('Cost')
             weps['damage'] = martial_melee_weapons().get(i).get('Damage')
@@ -333,7 +339,7 @@ def generate_character():
                 print(weps)
                 print('<3weps')
         elif martial_ranged_weapons().get(i):
-            weps = {}
+            weps = dict()
             weps['name'] = i
             weps['cost'] = martial_ranged_weapons().get(i).get('Cost')
             weps['damage'] = martial_ranged_weapons().get(i).get('Damage')
@@ -348,7 +354,7 @@ def generate_character():
                 print(weps)
                 print('<4weps')
         count += 1
-    with open(home + '\\desktop\\output.txt', 'w') as outputfile:
+
         character_data = {
 
             "name": newcharacter.name,
@@ -371,15 +377,15 @@ def generate_character():
             'alignment': newcharacter.background.alignment,
             "classpath": newcharacter.character_class.classpath,
             'ac': (ability_modifiers(newcharacter.race.get_dexterity() +
-                                               newcharacter.character_class.get_dexterity_addition()) + 10),
+                                     newcharacter.character_class.get_dexterity_addition()) + 10),
             'initiative': ability_modifiers(newcharacter.race.get_dexterity() +
-                                               newcharacter.character_class.get_dexterity_addition()),
+                                            newcharacter.character_class.get_dexterity_addition()),
             'starting_gp': str(newcharacter.character_class.wealth),
             "speed": newcharacter.race.speed + newcharacter.character_class.get_speed_addition(),
             'probonus': proficiency(newcharacter.level),
             "hp_maximum": hpmax,
             "hp_modifier": "+" + str(ability_modifiers(newcharacter.race.get_constitution() +
-                                                  newcharacter.character_class.get_constitution_addition())),
+                                     newcharacter.character_class.get_constitution_addition())),
             "hit_dice": "1d" + str(newcharacter.character_class.hit_die),
             "strength": newcharacter.race.get_strength() +
             newcharacter.character_class.get_strength_addition(),
@@ -400,71 +406,71 @@ def generate_character():
             newcharacter.character_class.get_intelligence_addition(),
             'int_save': throws.get('Intelligence'),
             "strength_mod": "%+d" % (ability_modifiers(newcharacter.race.get_strength() +
-                                              newcharacter.character_class.get_strength_addition())),
-            "wisdom_mod": "%+d" %(ability_modifiers(newcharacter.race.get_wisdom() +
-                                            newcharacter.character_class.get_wisdom_addition())),
-            "dexterity_mod": "%+d" %(ability_modifiers(newcharacter.race.get_dexterity() +
-                                               newcharacter.character_class.get_dexterity_addition())),
-            "constitution_mod": "%+d" %(ability_modifiers(newcharacter.race.get_constitution() +
-                                                  newcharacter.character_class.get_constitution_addition())),
-            "charisma_mod": "%+d" %(ability_modifiers(newcharacter.race.get_charisma() +
-                                              newcharacter.character_class.get_charisma_addition())),
-            "intelligence_mod": "%+d" %(ability_modifiers(newcharacter.race.get_intelligence() +
-                                                  newcharacter.character_class.get_intelligence_addition())),
+                                                       newcharacter.character_class.get_strength_addition())),
+            "wisdom_mod": "%+d" % (ability_modifiers(newcharacter.race.get_wisdom() +
+                                                     newcharacter.character_class.get_wisdom_addition())),
+            "dexterity_mod": "%+d" % (ability_modifiers(newcharacter.race.get_dexterity() +
+                                                        newcharacter.character_class.get_dexterity_addition())),
+            "constitution_mod": "%+d" % (ability_modifiers(newcharacter.race.get_constitution() +
+                                                           newcharacter.character_class.get_constitution_addition())),
+            "charisma_mod": "%+d" % (ability_modifiers(newcharacter.race.get_charisma() +
+                                                       newcharacter.character_class.get_charisma_addition())),
+            "intelligence_mod": "%+d" % (ability_modifiers(newcharacter.race.get_intelligence() +
+                                                           newcharacter.character_class.get_intelligence_addition())),
             "athletics_skill": newcharacter.character_class.athletics_skill,
-            "athletics_mod": "%+d" %(ability_modifiers(newcharacter.race.get_strength() +
-                                              newcharacter.character_class.get_strength_addition())),
+            "athletics_mod": "%+d" % (ability_modifiers(newcharacter.race.get_strength() +
+                                                        newcharacter.character_class.get_strength_addition())),
             "acrobatics_skill": newcharacter.character_class.acrobatics_skill,
-            "acrobatics_mod": "%+d" %(ability_modifiers(newcharacter.race.get_dexterity() +
-                                               newcharacter.character_class.get_dexterity_addition())),
+            "acrobatics_mod": "%+d" % (ability_modifiers(newcharacter.race.get_dexterity() +
+                                                         newcharacter.character_class.get_dexterity_addition())),
             "sleight_of_hand_skill": newcharacter.character_class.sleight_of_hand_skill,
-            "sleight_of_hand_mod": "%+d" %(ability_modifiers(newcharacter.race.get_dexterity() +
-                                               newcharacter.character_class.get_dexterity_addition())),
+            "sleight_of_hand_mod": "%+d" % (ability_modifiers(newcharacter.race.get_dexterity() +
+                                                              newcharacter.character_class.get_dexterity_addition())),
             "stealth_skill": newcharacter.character_class.stealth_skill,
-            "stealth_mod": "%+d" %(ability_modifiers(newcharacter.race.get_dexterity() +
-                                               newcharacter.character_class.get_dexterity_addition())),
+            "stealth_mod": "%+d" % (ability_modifiers(newcharacter.race.get_dexterity() +
+                                                      newcharacter.character_class.get_dexterity_addition())),
             "arcana_skill": newcharacter.character_class.arcana_skill,
-            "arcana_mod": "%+d" %(ability_modifiers(newcharacter.race.get_intelligence() +
-                                                  newcharacter.character_class.get_intelligence_addition())),
+            "arcana_mod": "%+d" % (ability_modifiers(newcharacter.race.get_intelligence() +
+                                                     newcharacter.character_class.get_intelligence_addition())),
             "history_skill": newcharacter.character_class.history_skill,
-            "history_mod": "%+d" %(ability_modifiers(newcharacter.race.get_intelligence() +
-                                                  newcharacter.character_class.get_intelligence_addition())),
+            "history_mod": "%+d" % (ability_modifiers(newcharacter.race.get_intelligence() +
+                                                      newcharacter.character_class.get_intelligence_addition())),
             "investigation_skill": newcharacter.character_class.investigation_skill,
-            "investigation_mod": "%+d" %(ability_modifiers(newcharacter.race.get_intelligence() +
-                                                  newcharacter.character_class.get_intelligence_addition())),
+            "investigation_mod": "%+d" % (ability_modifiers(newcharacter.race.get_intelligence() +
+                                                            newcharacter.character_class.get_intelligence_addition())),
             "nature_skill": newcharacter.character_class.nature_skill,
-            "nature_mod": "%+d" %(ability_modifiers(newcharacter.race.get_intelligence() +
-                                                  newcharacter.character_class.get_intelligence_addition())),
+            "nature_mod": "%+d" % (ability_modifiers(newcharacter.race.get_intelligence() +
+                                                     newcharacter.character_class.get_intelligence_addition())),
             "religion_skill": newcharacter.character_class.religion_skill,
-            "religion_mod": "%+d" %(ability_modifiers(newcharacter.race.get_intelligence() +
-                                                  newcharacter.character_class.get_intelligence_addition())),
+            "religion_mod": "%+d" % (ability_modifiers(newcharacter.race.get_intelligence() +
+                                                       newcharacter.character_class.get_intelligence_addition())),
             "animal_handling_skill": newcharacter.character_class.animal_handling_skill,
-            "animal_handling_mod": "%+d" %(ability_modifiers(newcharacter.race.get_wisdom() +
-                                            newcharacter.character_class.get_wisdom_addition())),
+            "animal_handling_mod": "%+d" % (ability_modifiers(newcharacter.race.get_wisdom() +
+                                                              newcharacter.character_class.get_wisdom_addition())),
             "insight_skill": newcharacter.character_class.insight_skill,
-            "insight_mod": "%+d" %(ability_modifiers(newcharacter.race.get_wisdom() +
-                                            newcharacter.character_class.get_wisdom_addition())),
+            "insight_mod": "%+d" % (ability_modifiers(newcharacter.race.get_wisdom() +
+                                                      newcharacter.character_class.get_wisdom_addition())),
             "medicine_skill": newcharacter.character_class.medicine_skill,
-            "medicine_mod": "%+d" %(ability_modifiers(newcharacter.race.get_wisdom() +
-                                            newcharacter.character_class.get_wisdom_addition())),
+            "medicine_mod": "%+d" % (ability_modifiers(newcharacter.race.get_wisdom() +
+                                                       newcharacter.character_class.get_wisdom_addition())),
             "perception_skill": newcharacter.character_class.perception_skill,
-            "perception_mod": "%+d" %(ability_modifiers(newcharacter.race.get_wisdom() +
-                                            newcharacter.character_class.get_wisdom_addition())),
+            "perception_mod": "%+d" % (ability_modifiers(newcharacter.race.get_wisdom() +
+                                                         newcharacter.character_class.get_wisdom_addition())),
             "survival_skill": newcharacter.character_class.survival_skill,
-            "survival_mod": "%+d" %(ability_modifiers(newcharacter.race.get_wisdom() +
-                                            newcharacter.character_class.get_wisdom_addition())),
+            "survival_mod": "%+d" % (ability_modifiers(newcharacter.race.get_wisdom() +
+                                                       newcharacter.character_class.get_wisdom_addition())),
             "deception_skill": newcharacter.character_class.deception_skill,
-            "deception_mod": "%+d" %(ability_modifiers(newcharacter.race.get_charisma() +
-                                              newcharacter.character_class.get_charisma_addition())),
+            "deception_mod": "%+d" % (ability_modifiers(newcharacter.race.get_charisma() +
+                                                        newcharacter.character_class.get_charisma_addition())),
             "intimidation_skill": newcharacter.character_class.intimidation_skill,
-            "intimidation_mod": "%+d" %(ability_modifiers(newcharacter.race.get_charisma() +
-                                              newcharacter.character_class.get_charisma_addition())),
+            "intimidation_mod": "%+d" % (ability_modifiers(newcharacter.race.get_charisma() +
+                                                           newcharacter.character_class.get_charisma_addition())),
             "performance_skill": newcharacter.character_class.performance_skill,
-            "performance_mod": "%+d" %(ability_modifiers(newcharacter.race.get_charisma() +
-                                              newcharacter.character_class.get_charisma_addition())),
+            "performance_mod": "%+d" % (ability_modifiers(newcharacter.race.get_charisma() +
+                                                          newcharacter.character_class.get_charisma_addition())),
             "persuasion_skill": newcharacter.character_class.persuasion_skill,
-            "persuasion_mod": "%+d" %(ability_modifiers(newcharacter.race.get_charisma() +
-                                              newcharacter.character_class.get_charisma_addition())),
+            "persuasion_mod": "%+d" % (ability_modifiers(newcharacter.race.get_charisma() +
+                                                         newcharacter.character_class.get_charisma_addition())),
             "passive_perception": passive_perc,
             "abilities": newcharacter.character_class.abilities + newcharacter.race.abilities,
             "languages": newcharacter.race.language + newcharacter.character_class.language,
@@ -476,128 +482,17 @@ def generate_character():
 
         }
         count = 0
-        for i in newcharacter.weapons:
+        for _ in newcharacter.weapons:
             print(newcharacter.weapons[count].get('name'))
             character_data['wep'+str(count) + '_name'] = str(newcharacter.weapons[count].get('name'))
             character_data['wep'+str(count) + '_damage'] = str(newcharacter.weapons[count].get('damage'))
             character_data['wep'+str(count) + '_hit'] = str(((ability_modifiers(newcharacter.race.get_strength() +
-                                              newcharacter.character_class.get_strength_addition())) +
-                                                        proficiency(newcharacter.level)))
+                                                              newcharacter.character_class.get_strength_addition())) +
+                                                            proficiency(newcharacter.level)))
             character_data['wep'+str(count) + '_weight'] = str(newcharacter.weapons[count].get('weight'))
             character_data['wep'+str(count) + '_properties'] = str(newcharacter.weapons[count].get('properties'))
             count += 1
-        # 'prim_weap_name': 'Greataxe',
-        #              'prim_weap_hit': '+5',
-        #              'prim_weap_dmg': '1d12+3 Slashing',
-        #              'prim_weap_properties': 'Martial, Heavy, Two-Handed',
-        #              'prim_weap_weight': '3lbs',
 
-
-        # build_sheet({'name': 'Salem',x
-        #              'race': 'Half-Elf',x
-        #              'klass': 'Wizard',x
-        #              'background': 'Acolyte',x
-        #              'alignment': 'Chaotic Neutral',x
-        #              'level': '3',x
-        #              'xp': '17000',x
-        #              'ac': '12',x
-        #              'initiative': '+1',x
-        #              'speed': '25',x
-        #              'probonus': '+3',x
-        #              'passive_perception': '12',x
-        #              'hp_maximum': '24',x
-        #              'hp_modifier': '+4',x
-        #              'hit_dice': '1d10',x
-        #              'strength': 9,x
-        #              'strength_mod': '+2',x
-        #              'str_save': ' ',x
-        #              'dexterity': 15,x
-        #              'dexterity_mod': '+3',x
-        #              'dex_save': ' ',x
-        #              'constitution': 11,x
-        #              'constitution_mod': '+1',x
-        #              'con_save': ' ',x
-        #              'intelligence': 11,x
-        #              'intelligence_mod': '-1',x
-        #              'int_save': 'X',x
-        #              'wisdom': 10,x
-        #              'wisdom_mod': '+2',x
-        #              'wis_save': ' ',x
-        #              'charisma': 12,x
-        #              'charisma_mod': '+4',x
-        #              'cha_save': 'X',
-        #              'proficiencies': ['ARMOR:', '-Light Armor', '-Medium Armor', '-Shields', 'WEAPONS:',
-        #                                '-Simple Weapons', '-Martial Weapons',
-        #                                '-Crossbows', '-Daggers', 'TOOLS:', 'Artisan Tools', 'LANGUAGE:', '-Abyssal',
-        #                                '-Orcish', '', '', '', '', '', '', '', ],x
-        #              'acrobatics_skill': 'X',x
-        #              'acrobatics_mod': '+3',x
-        #              'animal_handling_skill': ' ',x
-        #              'animal_handling_mod': '+2',x
-        #              'arcana_skill': 'X',x
-        #              'arcana_mod': '+3',x
-        #              'athletics_skill': 'X',x
-        #              'athletics_mod': '+3',x
-        #              'deception_skill': ' ',x
-        #              'deception_mod': '+3',x
-        #              'history_skill': ' ',x
-        #              'history_mod': '+3',x
-        #              'insight_skill': 'X',x
-        #              'insight_mod': '+3',x
-        #              'intimidation_skill': 'X',x
-        #              'intimidation_mod': '+3',x
-        #              'investigation_skill': ' ',x
-        #              'investigation_mod': '+1',x
-        #              'medicine_skill': ' ',x
-        #              'medicine_mod': '+1',x
-        #              'nature_skill': ' ',x
-        #              'nature_mod': '+1',x
-        #              'perception_skill': ' ',x
-        #              'perception_mod': '+1',x
-        #              'performance_skill': 'X',x
-        #              'performance_mod': '+4',x
-        #              'persuasion_skill': ' ',x
-        #              'persuasion_mod': '+2',x
-        #              'religion_skill': ' ',x
-        #              'religion_mod': '+2',x
-        #              'sleight_of_hand_skill': ' ',x
-        #              'sleight_of_hand_mod': '+2',x
-        #              'stealth_skill': ' ',x
-        #              'stealth_mod': '+2',x
-        #              'survival_skill': ' ',x
-        #              'survival_mod': '+2',x
-        #              'currency_cp': 20,
-        #              'currency_sp': 20,
-        #              'currency_ep': 20,
-        #              'currency_gp': 20,
-        #              'currency_pp': 20,
-        #              'prim_weap_name': 'Greataxe',
-        #              'prim_weap_hit': '+5',
-        #              'prim_weap_dmg': '1d12+3 Slashing',
-        #              'prim_weap_properties': 'Martial, Heavy, Two-Handed',
-        #              'prim_weap_weight': '3lbs',
-        #              'second_weap_name': 'Handaxe',
-        #              'second_weap_hit': '+5',
-        #              'second_weap_dmg': '1d6+3 Slashing',
-        #              'second_weap_properties': 'Light, Thrown, Range (20/60)',
-        #              'second_weap_weight': '2lbs',
-        #              'third_weap_name': 'Javelin',
-        #              'third_weap_hit': '+5',
-        #              'third_weap_dmg': '1d6+3 Piercing',
-        #              'third_weap_properties': 'Thrown, Range (30/120)',
-        #              'third_weap_weight': '8lbs',
-        #              'fourth_weap_name': 'Unarmed Strike',
-        #              'fourth_weap_hit': '+5',
-        #              'fourth_weap_dmg': '4 Bludgeoning',
-        #              'fourth_weap_properties': '',
-        #              'fourth_weap_weight': '',
-        #              'abilities': ['COMBAT WILD SHAPE', 'CIRCLE FORMS', 'PRIMAL STRIKE', 'WILD SHAPE (CR 1 OR BELOW)',
-        #                            'ELEMENTAL WILD SHAPE', 'THOUSAND FORMS', 'TIMELESS BODY', 'BEAST SPELLS',
-        #                            'DAMAGE RESISTANCE'],
-        #              'spells': ['Acid Splash', 'Blade Ward', 'Chill Touch', 'Dancing Lights', 'Alarm', 'Burning Hands',
-        #                         'Charm Person', 'Chromatic Orb', 'Alter Self', 'Arcane Lock', 'Blindness/Deafness',
-        #                         'Animate Dead', 'Bestow Curse', 'Blink', 'Arcane Eye']
-        #              })
         # Class Specific Entries
         print(newcharacter.character_class.name)
         if newcharacter.character_class.name == 'Warlock':
@@ -607,15 +502,11 @@ def generate_character():
         if newcharacter.character_class.name == 'Monk':
             character_data['elemental_discipline'] = newcharacter.character_class.elemental_discipline
 
+    # Print out Character Data for Debugging
     #     for key, value in character_data.items():
-    #         outputfile.write('%s:%s\n' % (key, value))
-        for key, value in character_data.items():
-            print(key.capitalize(), ":", value)
+    #         print(key.capitalize(), ":", value)
 
-    with open('characters\\data.json', 'w') as outfile:
-        json.dump(character_data, outfile)
-
-    build_sheet(character_data)
+        build_sheet(character_data)
 
 
 if __name__ == '__main__':

@@ -1,9 +1,7 @@
-from modifiers import validate_choice
-
 from Race import *
 
 
-def looks(race):
+def looks(race: Race):
     print('Appearance Personalization')
     print('The Average age for a {} is between {} and {} years'.format(race.name, race.age[0], race.age[1]))
     race.age = int(validate_choice(1000, message='Please enter an Age: '))

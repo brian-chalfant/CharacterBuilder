@@ -165,12 +165,6 @@ class Barbarian(CharacterClass):
         self.hit_die = 12  # Hit die is 1d12
         self.primary_ability = "Strength"  # primary ability is Strength
         self.statblock = stat_selection(self.name, self.primary_ability)
-        # self.strength_addition = self.statblock.get('Strength')
-        # self.dexterity_addition = self.statblock.get('Dexterity')
-        # self.charisma_addition = self.statblock.get('Charisma')
-        # self.wisdom_addition = self.statblock.get('Wisdom')
-        # self.intelligence_addition = self.statblock.get('Intelligence')
-        # self.constitution_addition = self.statblock.get('Constitution')
         self.saves = ["Strength", "Constitution"]  # Saving throws are Strength and Constitution
         self.armorpro = ["Light Armor", "Medium Armor", "Shields"]  # Proficient in Light, Medium Armor and Shields
         self.weaponpro = ["Simple Weapons", "Martial Weapons"]  # Proficient in Simple and Martial Weapons
@@ -284,7 +278,6 @@ class Bard(CharacterClass):
         self.spellcasting_ability = "Charisma"
         self.language = []
         self.wealth = (diceroll(5, 4) * 10)
-        # assign equipment in here somewhere
         valid = False
         while valid is not True:
             self.skill_list = full_skill_list()
@@ -1006,7 +999,8 @@ class Fighter(CharacterClass):
                     print('Select Combat Superiority:')
                     for key, value in manu.items():
                         print(key, value)
-                    a = validate_choice(len(get_maneuvers().items()), message='Choose one Maneuver ({} of {}'.format(i+1, 3))
+                    a = validate_choice(len(get_maneuvers().items()),
+                                        message='Choose one Maneuver ({} of {}'.format(i+1, 3))
                     try:
                         del manu[a]
                     except KeyError:
@@ -1033,7 +1027,8 @@ class Fighter(CharacterClass):
                     print('Select Combat Superiority:')
                     for key, value in manu.items():
                         print(key, value)
-                    a = validate_choice(len(get_maneuvers().items()), message='Choose one Maneuver ({} of {}'.format(i+1, 2))
+                    a = validate_choice(len(get_maneuvers().items()),
+                                        message='Choose one Maneuver ({} of {}'.format(i+1, 2))
                     try:
                         del manu[a]
                     except KeyError:
@@ -1060,7 +1055,8 @@ class Fighter(CharacterClass):
                     print('Select Combat Superiority:')
                     for key, value in manu.items():
                         print(key, value)
-                    a = validate_choice(len(get_maneuvers().items()), message='Choose one Maneuver ({} of {}'.format(i+1, 2))
+                    a = validate_choice(len(get_maneuvers().items()),
+                                        message='Choose one Maneuver ({} of {}'.format(i+1, 2))
                     try:
                         del manu[a]
                     except KeyError:
@@ -1090,7 +1086,8 @@ class Fighter(CharacterClass):
                     print('Select Combat Superiority:')
                     for key, value in manu.items():
                         print(key, value)
-                    a = validate_choice(len(get_maneuvers().items()), message='Choose one Maneuver ({} of {}'.format(i+1, 2))
+                    a = validate_choice(len(get_maneuvers().items()),
+                                        message='Choose one Maneuver ({} of {}'.format(i+1, 2))
                     try:
                         del manu[a]
                     except KeyError:
@@ -1139,7 +1136,7 @@ class Monk(CharacterClass):
         self.spellcasting = False
         self.spellcasting_ability = "Wisdom"
         self.language = []
-        self.wealth = diceroll(5,4)
+        self.wealth = diceroll(5, 4)
         self.elemental_discipline = []
         clearscreen()
         for key, value in monk_skill_list().items():
@@ -1206,7 +1203,7 @@ class Monk(CharacterClass):
                     if y.lower() == ('n' or 'no'):
                         continue
                     else:
-                        self.elemental_discipline.append (x.get(a))
+                        self.elemental_discipline.append(x.get(a))
                         done = True
         if level >= 4:
             self.abilities.append("SLOW FALL")
@@ -1232,7 +1229,7 @@ class Monk(CharacterClass):
                     if y.lower() == ('n' or 'no'):
                         continue
                     else:
-                        self.elemental_discipline.append (x.get(a))
+                        self.elemental_discipline.append(x.get(a))
                         done = True
         if level >= 7:
             self.abilities.append("EVASION")
@@ -1261,7 +1258,7 @@ class Monk(CharacterClass):
                     if y.lower() == ('n' or 'no'):
                         continue
                     else:
-                        self.elemental_discipline.append (x.get(a))
+                        self.elemental_discipline.append(x.get(a))
                         done = True
         if level >= 12:
             self.ability_up(self.statblock)
@@ -1290,7 +1287,7 @@ class Monk(CharacterClass):
                     if y.lower() == ('n' or 'no'):
                         continue
                     else:
-                        self.elemental_discipline.append (x.get(a))
+                        self.elemental_discipline.append(x.get(a))
                         done = True
         if level >= 18:
             self.abilities.append("EMPTY BODY")

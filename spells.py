@@ -4,7 +4,7 @@ from modifiers import BColors, validate_choice
 
 def warlock_slots(level):
     slots = {
-        1: {'Known':2,'Level':1},
+        1: {'Known': 2, 'Level': 1},
         2: {'Known': 3, 'Level': 1},
         3: {'Known': 4, 'Level': 2},
         4: {'Known': 5, 'Level': 2},
@@ -319,7 +319,7 @@ def get_warlock_spells(level):
     return spell_dict
 
 
-def warlock_spell_queue(level, **kwargs):
+def warlock_spell_queue(level):
     spells = []
     slots = warlock_slots(level)
     number_known = slots.get('Known')
@@ -372,8 +372,8 @@ def spell_queue(user_class, level, **kwargs):
                 for i in range(value):
                     valid = False
                     while valid is not True:
-                        item = str(validate_choice(len(x), message="Level " + str(key) + ": " + "Select number " + str(i+1)
-                                         + " of " + str(value) + ": "))
+                        item = str(validate_choice(len(x), message="Level " + str(key) + ": " + "Select number "
+                                                                   + str(i+1) + " of " + str(value) + ": "))
                         if x[int(item)] in spells:
                             valid = False
                             print(BColors.FAIL + "You already have that Spell, Pick Another.")
@@ -398,7 +398,7 @@ def single_spell_select(user_class, spell_level):
     return spells
 
 
-def get_invocations_name(level, **kwargs):
+def get_invocations_name(level):
     rtn_list = []
     conn = sqlite3.connect('CharacterBuilder.db')
     c = conn.cursor()

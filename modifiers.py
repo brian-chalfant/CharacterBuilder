@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import re
 
 
 class BColors:
@@ -22,17 +23,16 @@ def validate_choice(maximum, **kwargs):
                 entered = input(BColors.UNDERLINE + kwargs.get('message') + BColors.ENDC)
             else:
                 entered = input(BColors.UNDERLINE + "Please enter a number:" + BColors.ENDC)
-            x = int(entered)
             if entered == '':
                 valid = False
-                print(BColors.FAIL + "THIS IS A REQUIRED FIELD, PLEASE TRY AGAIN")
+                print(BColors.FAIL + "THIS IS A REQUIRED FIELD, PLEASE TRY AGAIN" + BColors.ENDC)
             elif 1 <= int(entered) <= maximum:
                 valid = True
             else:
                 valid = False
-                print(BColors.FAIL + "WARNING, NOT A VALID NUMBER, TRY AGAIN")
+                print(BColors.FAIL + "WARNING, NOT A VALID NUMBER, TRY AGAIN" + BColors.ENDC)
         except ValueError:
-            print(BColors.FAIL + 'ENTER A VALID NUMBER')
+            print(BColors.FAIL + 'ENTER A VALID NUMBER' + BColors.ENDC)
             valid = False
     print(BColors.ENDC)
     return int(entered)
@@ -106,6 +106,7 @@ def exp(level):
     }
     return exp_points.get(level)
 
+
 def alignment():
     alignments = {
         1: 'Lawful Good',
@@ -119,6 +120,7 @@ def alignment():
         9: 'Chaotic Evil'
     }
     return alignments
+
 
 def proficiency(level):
     pro_bonus = {
@@ -166,7 +168,6 @@ def make_a_dict(lst):
         rtndict[count] = lst[i]
         count += 1
     return rtndict
-
 
 
 def levelup_ability_increase(statblock):
@@ -550,6 +551,7 @@ def superior_hunters_defense_options():
     }
     return dt
 
+
 def circle_spells(land_type, level):
     if land_type == "Arctic":
         switcher = {
@@ -710,6 +712,7 @@ def list_races():
     }
     return races
 
+
 def get_elemental_disciplines(level):
     rtn_list = []
     conn = sqlite3.connect('CharacterBuilder.db')
@@ -722,6 +725,7 @@ def get_elemental_disciplines(level):
     conn.close()
     return make_a_dict(rtn_list)
 
+
 def get_elemental_disciplines_desc(name):
     rtn_list = []
     conn = sqlite3.connect('CharacterBuilder.db')
@@ -733,6 +737,7 @@ def get_elemental_disciplines_desc(name):
             rtn_list.append(item)
     conn.close()
     return rtn_list
+
 
 def get_maneuvers():
     rtn_list = []
@@ -758,6 +763,7 @@ def get_maneuvers_desc(name):
             rtn_list.append(item)
     conn.close()
     return rtn_list
+
 
 def favored_enemy(already_known: list):
     clearscreen()
@@ -916,17 +922,19 @@ def classes_list():
 
 
 def saving_throws(lst):
-    saves = {'Strength': ' ', 'Dexterity': ' ', 'Constitution': ' ', 'Wisdom': ' ', 'Intelligence': ' ', 'Charisma': ' '}
+    saves = {'Strength': ' ', 'Dexterity': ' ', 'Constitution': ' ', 'Wisdom': ' ',
+             'Intelligence': ' ', 'Charisma': ' '}
     for i in lst:
         saves[i] = "X"
     return saves
 
 
+def valid_name(name):
+    pattern = r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+    return bool(re.match(pattern, name))
+
+
 if __name__ == '__main__':
 
-    x = get_maneuvers()
-    for key, value in x.items():
-        print(key, value)
-
-    y = get_maneuvers_desc('Parry')
-    print(y[0])
+    x = valid_name("Anna 0'Brien")
+    print(x)

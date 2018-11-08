@@ -10,7 +10,7 @@ class Background:
         self.skillpro = x.get('SKILLPROF')
         self.language = x.get('LANGUAGES')
         self.toolpro = x.get('LANGUAGES')
-        self.personalitytraits = {}
+        self.personalitytraits = dict()
         self.alignment = ''
         for i in range(1, 9):
             self.personalitytraits[i] = x.get('PERSTRAIT' + str(i))
@@ -24,10 +24,10 @@ class Background:
         for i in range(1, 7):
             self.flaws[i] = x.get('FLAW' + str(i))
 
-        self.personalitytraits = self.process_selection(self.print_personality_traits())
-        self.ideals = self.process_selection(self.print_ideals())
-        self.bonds = self.process_selection(self.print_bonds())
-        self.flaws = self.process_selection(self.print_flaws())
+        self.personalitytraits = process_selection(self.print_personality_traits())
+        self.ideals = process_selection(self.print_ideals())
+        self.bonds = process_selection(self.print_bonds())
+        self.flaws = process_selection(self.print_flaws())
 
         self.set_alignment()
 
@@ -62,32 +62,25 @@ class Background:
         self.alignment = alignment().get(a)
 
 
-    def process_selection(self, argument):
-        complete = False
-        rtnlist = []
-        if len(argument) > 6:
-            while complete is False:
-                a = argument
-                x = validate_choice(len(argument), message='Select Traits (1 of 2)')
-                y = validate_choice(len(argument), message='Select Traits (2 of 2)')
-                if x == y:
-                    complete = False
-                else:
-                    complete = True
-                    rtnlist.append(a.get(x))
-                    rtnlist.append(a.get(y))
-        else:
+def process_selection(argument):
+    complete = False
+    rtnlist = []
+    if len(argument) > 6:
+        while complete is False:
             a = argument
-            x = validate_choice(len(argument), message='Select one trait')
-            rtnlist.append(a[x])
-        return rtnlist
+            x = validate_choice(len(argument), message='Select Traits (1 of 2)')
+            y = validate_choice(len(argument), message='Select Traits (2 of 2)')
+            if x == y:
+                complete = False
+            else:
+                complete = True
+                rtnlist.append(a.get(x))
+                rtnlist.append(a.get(y))
+    else:
+        a = argument
+        x = validate_choice(len(argument), message='Select one trait')
+        rtnlist.append(a[x])
+    return rtnlist
 
 
-if __name__ == '__main__':
-    b = Background('Acolyte')
-
-    print(b.personalitytraits)
-    print(b.ideals)
-    print(b.bonds)
-    print(b.flaws)
-    print(b.alignment)
+# if __name__ == '__main__':

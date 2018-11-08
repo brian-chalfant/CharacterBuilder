@@ -1,14 +1,6 @@
-from random import randrange
-
-from DiceRoll import initial_diceroll
 from language import choose_language
 from modifiers import draconic_lines, clearscreen, validate_choice
 from spells import single_spell_select
-
-
-# character_name = input("Enter Character Name: ")
-# character_name = character_name.strip()
-# print(character_name.upper())
 
 
 class Race:
@@ -25,7 +17,7 @@ class Race:
         self.cantrip = []
         self.abilities = []
         self.speed = 25
-        #Looks
+        # Looks
         self.age = 0
         self.height = 0
         self.weight = 0
@@ -55,9 +47,8 @@ class Race:
     def get_constitution(self):
         return self.constitution
 
+
 # Start Aarokocra --------------------------------------------------
-
-
 class Aarakocra(Race):
     def __init__(self):
         super(Aarakocra, self).__init__()
@@ -73,9 +64,8 @@ class Aarakocra(Race):
         self.height = [53, 60]
         self.weight = [80, 100]
         self.skin = []
-        self.hair = ['Blue', 'Green','Red', 'Orange', 'Yellow', 'Brown', 'Gray']
+        self.hair = ['Blue', 'Green', 'Red', 'Orange', 'Yellow', 'Brown', 'Gray']
         self.eyes = ['Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
-
 
 
 # Start Dragonborn --------------------------------------------------
@@ -105,9 +95,8 @@ class Dragonborn(Race):
         self.attacks = ["BREATH WEAPON" + xtype]
         self.language.append("Draconic")
 
+
 # Start Dwarf --------------------------------------------------
-
-
 class Dwarf(Race):
     def __init__(self):
         super(Dwarf, self).__init__()
@@ -156,6 +145,7 @@ class Elf(Race):
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
         self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
+
 class HighElf(Elf):
     def __init__(self):
         super(HighElf, self).__init__()
@@ -191,7 +181,7 @@ class DrowElf(Elf):
         self.name = 'Drow Elf'
         self.abilities = ["SUPERIOR DARKVISION", "DROW MAGIC", "DROW WEAPON TRAINING", "SUNLIGHT SENSITIVITY"]
         self.magic = True
-        self.cantrip = ["DANCING LIGHTS"]
+        self.cantrip = ["Dancing Lights"]
         if level > 3:
             self.cantrip.append("FAIRIE FIRE")
         elif level > 5:
@@ -215,6 +205,7 @@ class Genasi(Race):
         self.hair = []
         self.eyes = []
 
+
 class AirGenasi(Genasi):
     def __init__(self):
         super(AirGenasi, self).__init__()
@@ -224,9 +215,10 @@ class AirGenasi(Genasi):
         self.abilities.append("MINGLE WITH THE WIND")
         self.magic = True
         self.cantrip = ["Levitate"]
-        self.skin = ['Light Blue', 'Cerulean','Cobalt']
+        self.skin = ['Light Blue', 'Cerulean', 'Cobalt']
         self.hair = ['Midnight Blue', 'Electric Blue', 'Azure']
         self.eyes = ['Silver-Blue', 'Midnight Blue', 'Violet-Blue']
+
 
 class EarthGenasi(Genasi):
     def __init__(self):
@@ -241,6 +233,7 @@ class EarthGenasi(Genasi):
         self.hair = ['Dusty Brown', 'Muddy Hide', 'Waves of Smooth Copper']
         self.eyes = ['Diamond', 'Tiger\'s Eye', 'Rose Quartz']
 
+
 class FireGenasi(Genasi):
     def __init__(self):
         super(FireGenasi, self).__init__()
@@ -254,6 +247,7 @@ class FireGenasi(Genasi):
         self.skin = ['Flaming Red', 'Coal Black', 'Ash Gray', 'White Hot', 'Oxidising Blue']
         self.hair = ['Red Flames', 'Blue Flames', 'White Flames', 'Black Flames']
         self.eyes = ['White', 'Scarlet', 'Azure', 'Midnight']
+
 
 class WaterGenasi(Genasi):
     def __init__(self):
@@ -270,6 +264,7 @@ class WaterGenasi(Genasi):
         self.hair = ['Seafoam Green', 'Dark Green', 'Emerald', 'Azure', 'Sky Blue']
         self.eyes = ['White', 'Cyan', 'Mint', 'Midnight']
 
+
 # Start Gnome --------------------------------------------------
 class Gnome(Race):
     def __init__(self):
@@ -285,6 +280,7 @@ class Gnome(Race):
         self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
         self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+
 
 class RockGnome(Gnome):
     def __init__(self):
@@ -322,6 +318,7 @@ class Goliath(Race):
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
         self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
+
 # Start Half-Elf --------------------------------------------------
 class HalfElf(Race):
     def __init__(self):
@@ -358,6 +355,7 @@ class HalfOrc(Race):
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
         self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
+
 # Start Halfling --------------------------------------------------
 class Halfling(Race):
     def __init__(self):
@@ -373,6 +371,7 @@ class Halfling(Race):
         self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
         self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+
 
 class LightfootHalfling(Halfling):
     def __init__(self):
@@ -405,11 +404,11 @@ class Human(Race):
         self.age = [20, 80]
         self.height = [48, 80]
         self.weight = [90, 200]
-        self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony',]
+        self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony']
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
         self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
         self.language.append(str(choose_language(self.language)))
-        self.abilities = []
+        self.abilities = list()
 
 
 # Start Tiefling --------------------------------------------------

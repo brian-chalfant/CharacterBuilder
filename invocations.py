@@ -1,7 +1,6 @@
 from spells import get_invocations_name, get_invocation_description
 
 
-
 def num2word(number):
     import inflect
     x = inflect.engine()
@@ -50,12 +49,12 @@ def get_description(name):
 
 def invocation_cycling(slots):
     slot = 0
-    terminate = False
     invocations = []
     x = get_invocations_name(0)
-    while terminate is not True and slot < slots:
+    while slot < slots:
         count = 1
-        print("ELDRITCH INVOCATIONS:  Please Select " + str(num2word(slots - slot).capitalize() + "(" + str(slots - slot) + ")") + " Invocation Spells")
+        print("ELDRITCH INVOCATIONS:  Please Select " + str(num2word(slots - slot).capitalize() +
+                                                            "(" + str(slots - slot) + ")") + " Invocation Spells")
         for i in x:
             print(str(count) + ": " + i)
             count += 1
@@ -68,10 +67,8 @@ def invocation_cycling(slots):
             invocations.append(x.pop(selection-1))
             slot += 1
         elif process_item.upper() == 'T':
-            terminate = True
             break
         else:
             continue
 
     return invocations
-

@@ -1,6 +1,5 @@
-from weapons import *
-from modifiers import validate_choice, clearscreen
 
+from modifiers import validate_choice, clearscreen
 
 
 def starting_equipment(klass, background, proficiencies):
@@ -8,7 +7,7 @@ def starting_equipment(klass, background, proficiencies):
     print('Choose Starting Equipment for your Class:' + str(klass))
     equipment_list = []
 
-#BARBARIAN
+# BARBARIAN
     if klass == "Barbarian":
         print('1: A Greataxe')
         print('2: Any Martial Melee Weapon')
@@ -145,7 +144,7 @@ def starting_equipment(klass, background, proficiencies):
         equipment_list.append("Druidic Focus")
         for i in packs().get("Explorer's Pack"):
             equipment_list.append(i)
-#FIGHTER
+# FIGHTER
     if klass == 'Fighter':
         print("1: Chain Mail")
         print("2: Leather Armor, Longbow, 20 Arrows")
@@ -319,7 +318,7 @@ def starting_equipment(klass, background, proficiencies):
                 equipment_list.append(i)
         equipment_list.append("Longbow")
         equipment_list.append("20 Arrows")
-#ROGUE
+# ROGUE
     if klass == 'Rogue':
         print("1: Rapier")
         print("2: Shortsword")
@@ -552,8 +551,6 @@ def starting_equipment(klass, background, proficiencies):
     return equipment_list
 
 
-
-
 def simple_melee_names():
     names = {
         1: "Club",
@@ -578,17 +575,19 @@ def simple_melee_weapons():
     simple_melee_weapons_list = {
         "Club":  {"Cost": "1sp", "Damage": "1d4 Bludgeoning", "Weight": '2 lbs', "Properties":  "Light"},
         "Dagger": {"Cost": "2gp", "Damage": "1d4 Piercing", "Weight": '1lb', "Properties":  "Light, Finesse, "
-                                                                                        "Thrown(range 20/60)"},
+                   "Thrown(range 20/60)"},
         "Greatclub": {"Cost": "2sp", "Damage": "1d8 Bludgeoning", "Weight": '10 lbs', "Properties":  "Two-Handed"},
-        "Handaxe": {"Cost": "5gp", "Damage": "1d6 Slashing", "Weight": '2 lbs', "Properties":  "Light, Thrown(range 20/60"},
+        "Handaxe": {"Cost": "5gp", "Damage": "1d6 Slashing", "Weight": '2 lbs', "Properties":
+                    "Light, Thrown(range 20/60"},
         "Javelin": {"Cost": "5sp", "Damage": "1d6 Piercing", "Weight": '2 lbs', "Properties":  "Thrown(range 30/120)"},
         "Light Hammer": {"Cost": "2gp", "Damage": "1d4 Bludgeoning", "Weight": '2 lbs', "Properties":  "Light, "
-                                                                                                 "Thrown(range 20/60)"},
+                         "Thrown(range 20/60)"},
         "Mace": {"Cost": "5gp", "Damage": "1d6 Bludgeoning", "Weight": '4 lbs', "Properties":  " "},
-        "Quarterstaff": {"Cost": "2sp", "Damage": "1d6 Bludgeoning", "Weight": '4 lbs', "Properties":  "Versatile(1d8)"},
+        "Quarterstaff": {"Cost": "2sp", "Damage": "1d6 Bludgeoning", "Weight": '4 lbs', "Properties":
+                         "Versatile(1d8)"},
         "Sickle": {"Cost": "1gp", "Damage": "1d4 Slashing", "Weight": '2 lbs', "Properties":  "Light"},
         "Spear": {"Cost": "1gp", "Damage": "1d6 Piercing", "Weight": '3 lbs', "Properties":
-                                                                        "Thrown(range 20/60), Versatile(1d8)"}}
+                  "Thrown(range 20/60), Versatile(1d8)"}}
 
     return simple_melee_weapons_list
 
@@ -612,10 +611,10 @@ def simple_ranged_weapons():
         "Crossbow, light": {"Cost": "25gp", "Damage": "1d8 Piercing", "Weight": '5 lbs', "Properties":  "Ammunition, "
                                                       "(range 80/320), Loading, Two-Handed"},
         "Dart": {"Cost": "5cp", "Damage": "1d4 Piercing", "Weight": '1/4 lbs', "Properties":  "Finesse, Thrown(20/60)"},
-        "Shortbow": {"Cost": "25gp", "Damage": "1d6 Piercing", "Weight": '2 lbs', "Properties":  "Ammunition, (range 80/320),"
-                                                                                           " Two-Handed"},
+        "Shortbow": {"Cost": "25gp", "Damage": "1d6 Piercing", "Weight": '2 lbs', "Properties":
+                     "Ammunition, (range 80/320), Two-Handed"},
         "Sling": {"Cost": "1sp", "Damage": "1d4 Bludgeoning", "Weight": '0 lbs', "Properties":
-                                                                              "Ammunition, (range 30/120)"}}
+                  "Ammunition, (range 30/120)"}}
     return simple_ranged_weapons_list
 
 
@@ -649,20 +648,23 @@ def martial_melee_weapons():
     martial_melee_weapons_list = {
         "Battleaxe": {"Cost": "10gp", "Damage": "1d8 Slashing", "Weight": '4 lbs', "Properties":  "Versatile(1d10)"},
         "Flail": {"Cost": "10gp", "Damage": "1d8 Bludgeoning", "Weight": '2 lbs', "Properties":  " "},
-        "Glaive": {"Cost": "20gp", "Damage": "1d10 Slashing", "Weight": '6 lbs', "Properties":  "Heavy, Reach, Two-handed"},
+        "Glaive": {"Cost": "20gp", "Damage": "1d10 Slashing", "Weight": '6 lbs', "Properties":
+                   "Heavy, Reach, Two-handed"},
         "Greataxe": {"Cost": "30gp", "Damage": "1d12 Slashing", "Weight": '6 lbs', "Properties":  "Reach, Special"},
         "Greatsword": {"Cost": "50gp", "Damage": "2d6 Slashing", "Weight": '6 lbs', "Properties":  "Heavy, Two-handed"},
-        "Halberd": {"Cost": "20gp", "Damage": "1d10 Slashing", "Weight": '6 lbs', "Properties":  "Heavy, Reach, Two-handed"},
+        "Halberd": {"Cost": "20gp", "Damage": "1d10 Slashing", "Weight": '6 lbs', "Properties":
+                    "Heavy, Reach, Two-handed"},
         "Lance": {"Cost": "10gp", "Damage": "1d12 Piercing", "Weight": '6 lbs', "Properties":  "Reach, Special"},
         "Longsword": {"Cost": "15gp", "Damage": "1d8 Slashing", "Weight": '3 lbs', "Properties":  "Versatile(1d10)"},
         "Maul": {"Cost": "10gp", "Damage": "2d6 Bludgeoning", "Weight": '10 lbs', "Properties":  "Heavy, Two-handed"},
         "Morningstar": {"Cost": "15gp", "Damage": "1d8 Piercing", "Weight": '4 lbs', "Properties":  " "},
-        "Pike": {"Cost": "5gp", "Damage": "1d10 Piercing", "Weight": '18 lbs', "Properties":  "Heavy, Reach, Two-handed"},
+        "Pike": {"Cost": "5gp", "Damage": "1d10 Piercing", "Weight": '18 lbs', "Properties":
+                 "Heavy, Reach, Two-handed"},
         "Rapier": {"Cost": "25gp", "Damage": "1d8 Piercing", "Weight": '2 lbs', "Properties": "Finesse"},
         "Scimitar": {"Cost": "25gp", "Damage": "1d6 Slashing", "Weight": '3 lbs', "Properties": "Light, Finesse"},
         "Shortsword": {"Cost": "10gp", "Damage": "1d6 Piercing", "Weight": '2 lbs', "Properties": "Light, Finesse"},
         "Trident": {"Cost": "5gp", "Damage": "1d6 Piercing", "Weight": '4 lbs', "Properties": "Thrown (range 20/60), "
-                                                                                        "Versatile(1d8)"},
+                    "Versatile(1d8)"},
         "War Pick": {"Cost": "5gp", "Damage": "1d8 Piercing", "Weight": '2 lbs', "Properties": " "},
         "Warhammer": {"Cost": "15gp", "Damage": "1d8 Bludgeoning", "Weight": '2 lbs', "Properties": "Versatile(1d8)"},
         "Whip": {"Cost": "2gp", "Damage": "1d4 Slashing", "Weight": '3 lbs', "Properties": "Finesse, Reach"},
@@ -684,10 +686,11 @@ def martial_ranged_names():
     a = validate_choice(len(names.items()))
     return names.get(a)
 
+
 def martial_ranged_weapons():
     martial_ranged_weapons_list = {
-        "Blowgun": {"Cost": "10gp", "Damage": "1 Piercing", "Weight": '1 lbs', "Properties": "Ammunition (range 25/100), "
-                                                                                       "Loading"},
+        "Blowgun": {"Cost": "10gp", "Damage": "1 Piercing", "Weight": '1 lbs', "Properties":
+                    "Ammunition (range 25/100), Loading"},
         "Crossbow, hand": {"Cost": "75gp", "Damage": "1d6 Piercing", "Weight": '3 lbs', "Properties":
                                                      "Ammunition (range 30/120), Light, Loading"},
         "Crossbow, heavy": {"Cost": "50gp", "Damage": "1d10 Piercing", "Weight": '18 lbs', "Properties":
@@ -777,7 +780,7 @@ def artisan_tools():
         "Smith's Tools": {"Cost": "20gp", "Weight": 8},
         "Tinker's Tools": {"Cost": "50gp", "Weight": 10},
         "Weaver's Tools": {"Cost": "1gp", "Weight": 5},
-        "Woodcarver's Tools": {"Cost": "1gp", "Weight": 5},}
+        "Woodcarver's Tools": {"Cost": "1gp", "Weight": 5}}
     return artisan_tool_list
 
 
@@ -800,6 +803,7 @@ def musical_instruments_names():
         print(key, value)
     a = validate_choice(len(names.items()))
     return names.get(a)
+
 
 def musical_instruments():
     musical_instruments_list = {
@@ -840,15 +844,24 @@ def gaming_sets():
                   }
     return gaming_sets_list
 
+
 def packs():
     packs = {
-       "Burglar's Pack":['backpack', 'bag of 1,000 ball bearings', '10 feet of string', 'bell', '5 candles', 'crowbar', 'hammer', '10 pitons', 'hooded lantern', '2 flasks of oil', '5 days rations', 'tinderbox', 'waterskin', '50 feet of hempen rope'],
-       "Diplomat's Pack":['chest', '2 cases for maps and scrolls', 'set of fine clothes', 'bottle of ink', 'ink pen', 'lamp', '2 flasks of oil', '5 sheets of paper', 'vial of perfume', 'sealing wax', 'soap'],
-       "Dungeoneer's Pack":['backpack', 'crowbar', 'hammer', '10 pitons', '10 torches', 'tinderbox', '10 days of rations', 'waterskin', '50 feet of hempen rope'],
-       "Entertainer's Pack":['backpack', 'bedroll', '2 costumes', '5 candles', '5 days of rations', 'waterskin','disguise kit'],
-       "Explorer's Pack":['backpack', 'bedroll', 'mess kit', 'tinderbox', '10 torches', '10 days of rations', 'waterskin', '50 feet of hempen rope'],
-       "Priest's Pack":['backpack', 'blanket', '10 candles', 'tinderbox', 'alms box', '2 blocks of incense', 'censer', 'vestments', '2 days of rations', 'waterskin'],
-       "Scholar's Pack":['backpack', 'book of lore', 'bottle of ink', 'ink pen', '10 sheets of parchment', 'little bag of sand','a small knife'],
+       "Burglar's Pack": ['backpack', 'bag of 1,000 ball bearings', '10 feet of string', 'bell', '5 candles',
+                          'crowbar', 'hammer', '10 pitons', 'hooded lantern', '2 flasks of oil', '5 days rations',
+                          'tinderbox', 'waterskin', '50 feet of hempen rope'],
+       "Diplomat's Pack": ['chest', '2 cases for maps and scrolls', 'set of fine clothes', 'bottle of ink', 'ink pen',
+                           'lamp', '2 flasks of oil', '5 sheets of paper', 'vial of perfume', 'sealing wax', 'soap'],
+       "Dungeoneer's Pack": ['backpack', 'crowbar', 'hammer', '10 pitons', '10 torches', 'tinderbox',
+                             '10 days of rations', 'waterskin', '50 feet of hempen rope'],
+       "Entertainer's Pack": ['backpack', 'bedroll', '2 costumes', '5 candles', '5 days of rations',
+                              'waterskin', 'disguise kit'],
+       "Explorer's Pack": ['backpack', 'bedroll', 'mess kit', 'tinderbox', '10 torches', '10 days of rations',
+                           'waterskin', '50 feet of hempen rope'],
+       "Priest's Pack": ['backpack', 'blanket', '10 candles', 'tinderbox', 'alms box', '2 blocks of incense',
+                         'censer', 'vestments', '2 days of rations', 'waterskin'],
+       "Scholar's Pack": ['backpack', 'book of lore', 'bottle of ink', 'ink pen', '10 sheets of parchment',
+                          'little bag of sand', 'a small knife'],
     }
     return packs
 
@@ -857,8 +870,6 @@ def tool(selection):
     x = selection
     rtnlist = []
     selldict = {}
-
-    selected = 1
     count = 1
     for key, value in x.items():
         print(count, key)
@@ -868,32 +879,17 @@ def tool(selection):
     print(rtnlist)
     return selldict.get(a)
 
-def in_sheath(name, list):
+
+def in_sheath(name, lst):
     count = 0
-    for i in range(len(list)):
-        print("i:" + str(i) + " list-count:" + str(list[count]))
-        if name in list[count].get('name'):
+    for i in range(len(lst)):
+        print("i:" + str(i) + " lst-count:" + str(lst[count]))
+        if name in lst[count].get('name'):
             return True
         else:
             pass
         count += 1
     return False
 
-if __name__ == '__main__':
 
-    # x = starting_equipment("Cleric", "Sailor", ["ARMOR:", "-Light Armor", "-Medium Armor", "-Shields", "WEAPONS:", "-Warhammer", "TOOLS:", "LANGUAGES:", "-Abyssal", "-Aquan", "-Common", "-Aarakocra", "-Auran", "", "", "", "", "", "", "", "", "", ""] )
-    # weps = {}
-    # weplist = []
-    # count = 0
-    # for i in x:
-    #     if simple_melee_weapons().get(i):
-    #         weps['name'] = i
-    #         weps['cost'] = simple_melee_weapons().get(i).get('Cost')
-    #         weps['damage'] = simple_melee_weapons().get(i).get('Damage')
-    #         weps['weight'] = simple_melee_weapons().get(i).get('Weight')
-    #         weps['properties'] = simple_melee_weapons().get(i).get('Properties')
-    #         weplist.append(weps)
-
-    x = in_sheath('Dagger', [{'name': 'Rapier', 'cost': '25gp', 'damage': '1d8 Piercing', 'weight': '2 lbs', 'properties': 'Finesse'}, {'name': 'Dagger', 'cost': '2gp', 'damage': '1d4 Piercing', 'weight': '1lb', 'properties': 'Light, Finesse, Thrown(range 20/60)'}, {'name': 'Dagger', 'cost': '2gp', 'damage': '1d4 Piercing', 'weight': '1lb', 'properties': 'Light, Finesse, Thrown(range 20/60)'}, {'name': 'Club', 'cost': '1sp', 'damage': '1d4 Bludgeoning', 'weight': '2 lbs', 'properties': 'Light'}])
-
-    print(x)
+# if __name__ == '__main__':
