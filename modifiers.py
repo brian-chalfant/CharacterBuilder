@@ -934,7 +934,4 @@ def valid_name(name):
     return bool(re.match(pattern, name))
 
 
-if __name__ == '__main__':
-
-    x = valid_name("Anna 0'Brien")
-    print(x)
+# if __name__ == '__main__':

@@ -593,7 +593,7 @@ class Cleric(CharacterClass):
                 self.spells.append("Burning Hands")
                 self.spells.append("Faerie Fire")
                 self.spells.append("Light")
-                self.abilities.append("WARDING FLAME")
+                self.abilities.append("WARDING FLARE")
 
             elif self.classpath == "Nature Domain":
                 self.spells.append("Animal Friendship")
@@ -1684,7 +1684,7 @@ class Rogue(CharacterClass):
         if level >= 2:
             self.abilities.append("CUNNING ACTION")
         if level >= 3:
-            self.abilities.remove("SNEAK ATTACK (D6)")
+            self.abilities.remove("SNEAK ATTACK (1d6)")
             self.abilities.append("SNEAK ATTACK (2d6)")
             clearscreen()
             print("you must now choose your Rogue Archtype, you have the following options: \n"

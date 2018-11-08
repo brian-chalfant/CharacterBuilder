@@ -876,14 +876,12 @@ def tool(selection):
         selldict[count] = key
         count += 1
     a = validate_choice(len(x.items()), message='Choose an item: ')
-    print(rtnlist)
     return selldict.get(a)
 
 
 def in_sheath(name, lst):
     count = 0
     for i in range(len(lst)):
-        print("i:" + str(i) + " lst-count:" + str(lst[count]))
         if name in lst[count].get('name'):
             return True
         else:

@@ -401,7 +401,6 @@ def read_features(name):
     conn.close()
 
     try:
-        print(x[0][0])
         return name + ": " + x[0][0]
     except IndexError:
         print(name + 'Spell not in database')

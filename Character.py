@@ -218,7 +218,6 @@ def generate_character():
 
     newcharacter = Character(character_name, user_level, race_selection(character_name, user_level),
                              class_selection(character_name, user_level), background_selection())
-    print(newcharacter.character_class.name)
     # Passive Perception
     if newcharacter.character_class.perception_skill:
         passive_perc = 10 + proficiency(newcharacter.level) + \
@@ -255,7 +254,6 @@ def generate_character():
         hm = 23 - len(proficiencies)
         for i in range(hm):
             proficiencies.append('')
-    print(proficiencies)
 
     newcharacter.equipment = starting_equipment(newcharacter.character_class.name, newcharacter.background.name,
                                                 proficiencies)
@@ -304,10 +302,6 @@ def generate_character():
                 pass
             else:
                 newcharacter.weapons.append(weps)
-                print('newcharacter.weapons:')
-                print(newcharacter.weapons)
-                print(weps)
-                print('<1weps')
         elif simple_ranged_weapons().get(i):
             weps = dict()
             weps['name'] = i
@@ -319,10 +313,6 @@ def generate_character():
                 pass
             else:
                 newcharacter.weapons.append(weps)
-                print('newcharacter.weapons:')
-                print(newcharacter.weapons)
-                print(weps)
-                print('<2weps')
         elif martial_melee_weapons().get(i):
             weps = dict()
             weps['name'] = i
@@ -334,10 +324,6 @@ def generate_character():
                 pass
             else:
                 newcharacter.weapons.append(weps)
-                print('newcharacter.weapons:')
-                print(newcharacter.weapons)
-                print(weps)
-                print('<3weps')
         elif martial_ranged_weapons().get(i):
             weps = dict()
             weps['name'] = i
@@ -349,10 +335,6 @@ def generate_character():
                 pass
             else:
                 newcharacter.weapons.append(weps)
-                print('newcharacter.weapons:')
-                print(newcharacter.weapons)
-                print(weps)
-                print('<4weps')
         count += 1
 
         character_data = {
@@ -483,7 +465,6 @@ def generate_character():
         }
         count = 0
         for _ in newcharacter.weapons:
-            print(newcharacter.weapons[count].get('name'))
             character_data['wep'+str(count) + '_name'] = str(newcharacter.weapons[count].get('name'))
             character_data['wep'+str(count) + '_damage'] = str(newcharacter.weapons[count].get('damage'))
             character_data['wep'+str(count) + '_hit'] = str(((ability_modifiers(newcharacter.race.get_strength() +
@@ -494,7 +475,6 @@ def generate_character():
             count += 1
 
         # Class Specific Entries
-        print(newcharacter.character_class.name)
         if newcharacter.character_class.name == 'Warlock':
             character_data['Eldritch Invocation Spells'] = newcharacter.character_class.invocations
         if newcharacter.character_class.name == 'Fighter':
@@ -506,8 +486,27 @@ def generate_character():
     #     for key, value in character_data.items():
     #         print(key.capitalize(), ":", value)
 
-        build_sheet(character_data)
+    build_sheet(character_data)
+
+
+def another():
+    print("Generate Another Character?: ")
+    a = input('Y/N: ')
+    if a.lower() == ('y' or 'yes'):
+        return True
+    else:
+        return False
 
 
 if __name__ == '__main__':
-    generate_character()
+    done = False
+    while done is False:
+        generate_character()
+        print("Your Character Sheet is located in the 'characters' directory")
+        x = another()
+        if x is True:
+            done = False
+        else:
+            done = True
+
+
