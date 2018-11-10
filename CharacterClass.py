@@ -1560,7 +1560,7 @@ class Ranger(CharacterClass):
             for key, value in lands.items():
                 print(key, ":", value)
             selection = "NATURAL EXPLORER " + "(" + str(lands.pop(validate_choice(
-                                                        lands.items(), message='Choose a Land Type: ')) + ")")
+                                                        len(lands.items()), message='Choose a Land Type: ')) + ")")
             self.abilities.append(selection)
         if level >= 11:
             if self.classpath == "Hunter":
@@ -1630,7 +1630,7 @@ class Rogue(CharacterClass):
                 clearscreen()
                 for key, value in rogue_skill_list().items():
                     print(key, value)
-                print("Please Choose 3 Skill Proficiencies:")
+                print("Please Choose 4 Skill Proficiencies:")
                 answers = []
                 skill_1 = validate_choice(len(rogue_skill_list().items()), message='Skill 1:')
                 answers.append(skill_1)
@@ -1639,7 +1639,7 @@ class Rogue(CharacterClass):
                 skill_3 = validate_choice(len(rogue_skill_list().items()), message='Skill 3:')
                 answers.append(skill_3)
                 skill_4 = validate_choice(len(rogue_skill_list().items()), message='Skill 4:')
-                answers.append(skill_3)
+                answers.append(skill_4)
                 print(len(set(answers)))
                 if len(set(answers)) < 3:
                     valid = False
