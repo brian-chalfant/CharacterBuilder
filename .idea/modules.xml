@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/CharacterBuilder.iml" filepath="$PROJECT_DIR$/.idea/CharacterBuilder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../GuiWithPyQt/.idea/GuiWithPyQt.iml" filepath="$PROJECT_DIR$/../GuiWithPyQt/.idea/GuiWithPyQt.iml" />
       <module fileurl="file://$PROJECT_DIR$/../WHFRP Chargen/.idea/WHFRP Chargen.iml" filepath="$PROJECT_DIR$/../WHFRP Chargen/.idea/WHFRP Chargen.iml" />
     </modules>
   </component>

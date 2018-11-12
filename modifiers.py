@@ -811,18 +811,16 @@ def favored_enemy(already_known: list):
                 valid = True
         if race1 in race_languages().keys():
             rtn.append([race1, race_languages().get(race1)])
-            print(rtn)
+
         else:
             rtn.append([race1, 'No Language'])
-            print('else1')
-            print(rtn)
+
         if race2 in race_languages().keys():
             rtn.append([race2, race_languages().get(race2)])
-            print(rtn)
+
         else:
             rtn.append([race1, 'No Language'])
-            print('else2')
-            print(rtn)
+
     return rtn
 
 

@@ -1679,7 +1679,7 @@ class Rogue(CharacterClass):
             if (skill_1 == 11) or (skill_2 == 11) or (skill_3 == 11) or (skill_4 == 11):
                 self.stealth_skill = True
             self.abilities.append("EXPERTISE")
-            self.abilities.append("SNEAK ATTACK (D6)")
+            self.abilities.append("SNEAK ATTACK (1d6)")
             self.language.append("Thieves' Cant")
         if level >= 2:
             self.abilities.append("CUNNING ACTION")
