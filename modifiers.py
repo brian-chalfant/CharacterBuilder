@@ -1,6 +1,6 @@
 import os
-import sqlite3
 import re
+import sqlite3
 
 
 class BColors:
@@ -930,6 +930,18 @@ def saving_throws(lst):
 def valid_name(name):
     pattern = r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
     return bool(re.match(pattern, name))
+
+
+def damage_rolls_selector(properties, dexmod, strmod):
+    if properties.upper().find("FINESSE") > 0:
+        if dexmod > strmod:
+            return dexmod
+        else:
+            return strmod
+    elif properties.find("range") > 0:
+        return dexmod
+    else:
+        return strmod
 
 
 # if __name__ == '__main__':

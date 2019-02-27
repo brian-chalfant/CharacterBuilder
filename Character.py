@@ -1,18 +1,17 @@
 
 from pathlib import Path
-from backgrounds import Background
+
 from CharacterClass import *
 from Race import *
+from backgrounds import Background
 from build_sheet import build_sheet
+from equipment import *
 from looks import looks
 from modifiers import ability_modifiers, splashscreen
 from write_backgrounds import read_background_names
-from equipment import *
 
 home = str(Path.home())
 
-
-os.system('color F4')
 splashscreen()
 begin = (input("Press <ENTER> to Begin."))
 clearscreen()
@@ -201,12 +200,11 @@ def generate_character():
     user_level = 1   # Default
     valid = False
     while valid is not True:
-        character_name = str(input(BColors.UNDERLINE + "Please Enter your character's name :"))
+        character_name = str(input("Please Enter your character's name :"))
         if valid_name(character_name):
             valid = True
         else:
-            print(BColors.FAIL + "Invalid Name")
-            print(BColors.ENDC)
+            print("Invalid Name")
     clearscreen()
     valid = False
     while valid is not True:
@@ -461,13 +459,21 @@ def generate_character():
             'weapon_pro': newcharacter.character_class.weaponpro + newcharacter.race.weaponpro,
             'proficiencies': proficiencies,
             'wealth': newcharacter.character_class.wealth,
+            'equipment': newcharacter.equipment
 
         }
         count = 0
         for _ in newcharacter.weapons:
             character_data['wep'+str(count) + '_name'] = str(newcharacter.weapons[count].get('name'))
-            character_data['wep'+str(count) + '_damage'] = str(newcharacter.weapons[count].get('damage'))
-            character_data['wep'+str(count) + '_hit'] = str(((ability_modifiers(newcharacter.race.get_strength() +
+            character_data['wep' + str(count) + '_damage'] = str(
+                newcharacter.weapons[count].get('damage') + damage_rolls_selector(
+                    newcharacter.weapons[count].get('properties'),
+                    "%+d" % (ability_modifiers(newcharacter.race.get_dexterity() +
+                                               newcharacter.character_class.get_dexterity_addition())),
+                    "% +d" % (ability_modifiers(newcharacter.race.get_strength() +
+                                                newcharacter.character_class.get_strength_addition()))))
+            character_data['wep' + str(count) + '_hit'] = "+" + str(
+                ((ability_modifiers(newcharacter.race.get_strength() +
                                                               newcharacter.character_class.get_strength_addition())) +
                                                             proficiency(newcharacter.level)))
             character_data['wep'+str(count) + '_weight'] = str(newcharacter.weapons[count].get('weight'))

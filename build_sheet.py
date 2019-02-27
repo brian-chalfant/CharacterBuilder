@@ -1,8 +1,11 @@
 import sqlite3
+
 from modifiers import get_maneuvers_desc, get_elemental_disciplines_desc
 
 
 def build_sheet(character_data: dict):
+    for key, value in character_data.items():
+        print(key, value)
     width = 80  # standard width of character sheet
     filename = character_data.get('name') + '-' + character_data.get('race') + " " \
                                           + character_data.get('klass') + '.txt'
@@ -54,11 +57,11 @@ def build_sheet(character_data: dict):
         for j in string_format(character_data.get('ideals')):
             lines += j + '\n'
         lines += '+------------------------------------------------------------------------------+ \n'
-        lines += '+-Bonds-----------------------------------------------------------------------+ \n'
+        lines += '+-Bonds------------------------------------------------------------------------+ \n'
         for j in string_format(character_data.get('bonds')):
             lines += j + '\n'
         lines += '+------------------------------------------------------------------------------+ \n'
-        lines += '+-Flaws-----------------------------------------------------------------------+ \n'
+        lines += '+-Flaws------------------------------------------------------------------------+ \n'
         for j in string_format(character_data.get('flaws')):
             lines += j + '\n'
         lines += '+------------------------------------------------------------------------------+ \n'
@@ -262,32 +265,38 @@ def build_sheet(character_data: dict):
         except IndexError:
             lines += '| PP [   ] |                          |  |{:37}| \n'.format(
                 " ")
-        lines += '+-Attack--------+-HIT+-Damage/Typ-----+-Properties--------------------+-Weight-+ \n'
+        lines += '+-Weapons------------------+-Hit-+-Damage--------------------------------------+ \n'
         if 'wep0_name' in character_data:
-            lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('wep0_name'),
-                                                               character_data.get('wep0_hit'),
-                                                               character_data.get('wep0_damage'),
-                                                               character_data.get('wep0_properties'),
-                                                               character_data.get('wep0_weight'))
+            lines += '|{:26}|{:5}|{:45}| \n'.format(character_data.get('wep0_name'),
+                                                    character_data.get('wep0_hit'),
+                                                    character_data.get('wep0_damage'))
+            lines += '|{:78}| \n'.format(character_data.get('wep0_properties'))
+            lines += '|' + '-' * 78 + '| \n'
         if 'wep1_name' in character_data:
-            lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('wep1_name'),
-                                                               character_data.get('wep1_hit'),
-                                                               character_data.get('wep1_damage'),
-                                                               character_data.get('wep1_properties'),
-                                                               character_data.get('wep1_weight'))
+            lines += '|{:26}|{:5}|{:45}| \n'.format(character_data.get('wep1_name'),
+                                                    character_data.get('wep1_hit'),
+                                                    character_data.get('wep1_damage'))
+            lines += '|{:78}| \n'.format(character_data.get('wep1_properties'))
+            lines += '|' + '-' * 78 + '| \n'
         if 'wep2_name' in character_data:
-            lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('wep2_name'),
-                                                               character_data.get('wep2_hit'),
-                                                               character_data.get('wep2_damage'),
-                                                               character_data.get('wep2_properties'),
-                                                               character_data.get('wep2_weight'))
+            lines += '|{:26}|{:5}|{:45}| \n'.format(character_data.get('wep2_name'),
+                                                    character_data.get('wep2_hit'),
+                                                    character_data.get('wep2_damage'))
+            lines += '|{:78}| \n'.format(character_data.get('wep2_properties'))
+            lines += '|' + '-' * 78 + '| \n'
         if 'wep3_name' in character_data:
-            lines += '|{:15}|{:4}|{:16}|{:31}|{:8}| \n'.format(character_data.get('wep3_name'),
-                                                               character_data.get('wep3_hit'),
-                                                               character_data.get('wep3_damage'),
-                                                               character_data.get('wep3_properties'),
-                                                               character_data.get('wep3_weight'))
+            lines += '|{:26}|{:5}|{:45}| \n'.format(character_data.get('wep3_name'),
+                                                    character_data.get('wep3_hit'),
+                                                    character_data.get('wep3_damage'))
+            lines += '|{:78}| \n'.format(character_data.get('wep3_properties'))
+            lines += '|' + '-' * 78 + '| \n'
 
+        lines += '|-Equipment--------------------------------------------------------------------| \n'
+        for i in text_format(character_data.get('equipment')):
+            lines += i
+
+        lines += '|                                                                              | \n' * 10
+        lines += '|                                                                              | \n'
         lines += '+-Features---------------------------------------------------------------------+ \n'
         for i in character_data.get('abilities'):
             try:
@@ -302,17 +311,15 @@ def build_sheet(character_data: dict):
                     lines += j + '\n'
                 lines += string_decorator('*' + ('-' * 76) + '*') + '\n'
         if character_data.get('klass') == 'Fighter':
-                try:
-                    for k in character_data.get('maneuver'):
-                        for j in string_format(str(character_data.get('maneuver').upper()) + ": " +
-                                               str(get_maneuvers_desc(character_data.get('maneuver'))[0])):
-                            lines += j + '\n'
-                        lines += string_decorator('*' + (' - ' * 25) + '*') + '\n'
-                except AttributeError:
-                    x = str(k) + ': No Data Available (MANEUVER)'
-                    for j in string_format(x):
-                        lines += j + '\n'
+            if character_data.get('maneuver'):
+                lines += '+-Manuevers--------------------------------------------------------------------+ \n'
+            try:
+                for j in manu_format(character_data.get('maneuver')):
+                    for line in j:
+                        lines += line + '\n'
                     lines += string_decorator('*' + (' - ' * 25) + '*') + '\n'
+            except AttributeError:
+                lines += "No Data Available (MANUEVER)"
         if character_data.get('klass') == 'Monk':
                 try:
                     for m in character_data.get('elemental_discipline'):
@@ -351,8 +358,8 @@ def build_sheet(character_data: dict):
                         for j in string_format(x):
                             lines += j + '\n'
                         lines += string_decorator('*' + (' - ' * 25) + '*') + '\n'
-        lines += '|                                                                   D&DCB 2018 | \n'
-        lines += '+------------------------------------------------------------------------------+'
+        lines += '|                                                                  D&DCB 2018  | \n'
+        lines += '+------------------------------------------------------------------------------+ \n'
         print(lines)
         outfile.writelines(lines)
 
@@ -367,6 +374,14 @@ def text_format(textlist, width=78):
             yield decorator(b)
             b = '' + i + ", "
     return decorator(b)
+
+
+def manu_format(textlist):
+    a = textlist
+    for i in a:
+        print(i)
+        b = get_maneuvers_desc(i)
+        yield string_format(i.upper() + ': ' + str(b[0]))
 
 
 def string_format(text, width=78):
@@ -423,6 +438,5 @@ def read_spells(name):
         return name + prompt_string + x[0][0]
     except IndexError:
         print(str(name) + ': nope')
-
 
 # if __name__ == '__main__':

@@ -1,9 +1,10 @@
 from DiceRoll import diceroll, stat_selection
 from equipment import tool, artisan_tools, musical_instruments
-from modifiers import *
 from invocations import *
-from spells import spell_queue, warlock_spell_queue
 from language import choose_language
+from modifiers import *
+from spells import spell_queue, warlock_spell_queue
+
 
 # Class listing
 # # CharacterClass
@@ -1005,7 +1006,7 @@ class Fighter(CharacterClass):
                         del manu[a]
                     except KeyError:
                         pass
-                    self.maneuver = get_maneuvers().get(a)
+                    self.maneuver.append(get_maneuvers().get(a))
                     i += 1
             elif a == 3:
                 self.classpath = "Eldritch Knight"
@@ -1033,7 +1034,7 @@ class Fighter(CharacterClass):
                         del manu[a]
                     except KeyError:
                         pass
-                    self.maneuver = get_maneuvers().get(a)
+                    self.maneuver.append(get_maneuvers().get(a))
                     i += 1
                 self.superiority_die += 1
             elif self.classpath == "Eldritch Knight":
@@ -1061,7 +1062,7 @@ class Fighter(CharacterClass):
                         del manu[a]
                     except KeyError:
                         pass
-                    self.maneuver = get_maneuvers().get(a)
+                    self.maneuver.append(get_maneuvers().get(a))
                     i += 1
                 self.superiority_die_type = 'd10'
             elif self.classpath == "Eldritch Knight":
@@ -1092,7 +1093,7 @@ class Fighter(CharacterClass):
                         del manu[a]
                     except KeyError:
                         pass
-                    self.maneuver = get_maneuvers().get(a)
+                    self.maneuver.append(get_maneuvers().get(a))
                     i += 1
                 self.superiority_die += 1
                 self.abilities.append("RELENTLESS")
@@ -1471,28 +1472,59 @@ class Ranger(CharacterClass):
                     valid = True
 
             if (skill_1 == 1) or (skill_2 == 1) or (skill_3 == 1):
-                self.acrobatics_skill = True
-
-            if (skill_1 == 2) or (skill_2 == 2) or (skill_3 == 2):
-                self.animal_handling_skill = True
-
-            if (skill_1 == 3) or (skill_2 == 3) or (skill_3 == 3):
                 self.athletics_skill = True
-
+                self.skill_list.pop(1)
+            if (skill_1 == 2) or (skill_2 == 2) or (skill_3 == 2):
+                self.acrobatics_skill = True
+                self.skill_list.pop(2)
+            if (skill_1 == 3) or (skill_2 == 3) or (skill_3 == 3):
+                self.sleight_of_hand_skill = True
+                self.skill_list.pop(3)
             if (skill_1 == 4) or (skill_2 == 4) or (skill_3 == 4):
-                self.history_skill = True
-
+                self.stealth_skill = True
+                self.skill_list.pop(4)
             if (skill_1 == 5) or (skill_2 == 5) or (skill_3 == 5):
-                self.insight_skill = True
-
+                self.arcana_skill = True
+                self.skill_list.pop(5)
             if (skill_1 == 6) or (skill_2 == 6) or (skill_3 == 6):
-                self.intimidation_skill = True
-
+                self.history_skill = True
+                self.skill_list.pop(6)
             if (skill_1 == 7) or (skill_2 == 7) or (skill_3 == 7):
-                self.perception_skill = True
-
+                self.investigation_skill = True
+                self.skill_list.pop(7)
             if (skill_1 == 8) or (skill_2 == 8) or (skill_3 == 8):
+                self.nature_skill = True
+                self.skill_list.pop(8)
+            if (skill_1 == 9) or (skill_2 == 9) or (skill_3 == 9):
+                self.religion_skill = True
+                self.skill_list.pop(9)
+            if (skill_1 == 10) or (skill_2 == 10) or (skill_3 == 10):
+                self.animal_handling_skill = True
+                self.skill_list.pop(10)
+            if (skill_1 == 11) or (skill_2 == 11) or (skill_3 == 11):
+                self.insight_skill = True
+                self.skill_list.pop(11)
+            if (skill_1 == 12) or (skill_2 == 12) or (skill_3 == 12):
+                self.medicine_skill = True
+                self.skill_list.pop(12)
+            if (skill_1 == 13) or (skill_2 == 13) or (skill_3 == 13):
+                self.perception_skill = True
+                self.skill_list.pop(13)
+            if (skill_1 == 14) or (skill_2 == 14) or (skill_3 == 14):
                 self.survival_skill = True
+                self.skill_list.pop(14)
+            if (skill_1 == 15) or (skill_2 == 15) or (skill_3 == 15):
+                self.deception_skill = True
+                self.skill_list.pop(15)
+            if (skill_1 == 16) or (skill_2 == 16) or (skill_3 == 16):
+                self.intimidation_skill = True
+                self.skill_list.pop(16)
+            if (skill_1 == 17) or (skill_2 == 17) or (skill_3 == 17):
+                self.performance_skill = True
+                self.skill_list.pop(17)
+            if (skill_1 == 18) or (skill_2 == 18) or (skill_3 == 18):
+                self.persuasion_skill = True
+                self.skill_list.pop(18)
 
             clearscreen()
             print("What land type is {} familiar with?".format(self.myname()))
@@ -1604,6 +1636,7 @@ class Ranger(CharacterClass):
             self.ability_up(self.statblock)
         if level >= 20:
             self.abilities.append("FOE SLAYER")
+        self.spells = spell_queue("Ranger", level)
 
 
 class Rogue(CharacterClass):
