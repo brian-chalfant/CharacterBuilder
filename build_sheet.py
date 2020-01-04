@@ -204,12 +204,12 @@ def build_sheet(character_data: dict):
                 character_data.get('religion_skill'), character_data.get('religion_mod'),
                 " ")
         try:
-            lines += '| Religion (Int)             [{}] [{}] |  |{:37}| \n'.format(
-                character_data.get('religion_skill'), character_data.get('religion_mod'),
+            lines += '| Slight of Hand (Dex)       [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('sleight_of_hand_skill'), character_data.get('sleight_of_hand_mod'),
                 character_data.get('proficiencies')[14])
         except IndexError:
-            lines += '| Religion (Int)             [{}] [{}] |  |{:37}| \n'.format(
-                character_data.get('religion_skill'), character_data.get('religion_mod'),
+            lines += '| Sleight of Hand (Dex)      [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('sleight_of_hand_skill'), character_data.get('sleight_of_hand_mod'),
                 " ")
         try:
             lines += '| Stealth (Dex)              [{}] [{}] |  |{:37}| \n'.format(

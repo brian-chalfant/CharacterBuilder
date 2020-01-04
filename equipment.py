@@ -331,7 +331,7 @@ def starting_equipment(klass, background, proficiencies):
         print("1: Dungeoneer's Pack")
         print("2: Explorer's Pack")
         print("3: Burglar's Pack")
-        a = validate_choice(2)
+        a = validate_choice(3)
         if a == 1:
             for i in packs().get("Dungeoneer's Pack"):
                 equipment_list.append(i)
@@ -339,7 +339,7 @@ def starting_equipment(klass, background, proficiencies):
             for i in packs().get("Explorer's Pack"):
                 equipment_list.append(i)
         if a == 3:
-            for i in packs().get("Burgler's Pack"):
+            for i in packs().get("Burglar's Pack"):
                 equipment_list.append(i)
         equipment_list.append("Light Leather Armor")
         equipment_list.append("Dagger")
