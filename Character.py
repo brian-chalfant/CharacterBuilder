@@ -228,7 +228,8 @@ def generate_character():
     hpmax = newcharacter.character_class.hit_die + \
         (ability_modifiers(newcharacter.race.get_constitution() +
                            newcharacter.character_class.get_constitution_addition())) + \
-        (diceroll(newcharacter.level, newcharacter.character_class.hit_die))
+        (diceroll(newcharacter.level - 1, newcharacter.character_class.hit_die))
+    print("HPMAX = ", hpmax)
     # SAVING THROWS
     throws = saving_throws(newcharacter.character_class.saves)
     # PROFICIENCIES
@@ -335,7 +336,7 @@ def generate_character():
                 newcharacter.weapons.append(weps)
         count += 1
 
-        character_data = {
+    character_data = {
 
             "name": newcharacter.name,
             "race": newcharacter.race.name,
@@ -461,33 +462,75 @@ def generate_character():
             'wealth': newcharacter.character_class.wealth,
             'equipment': newcharacter.equipment
 
-        }
-        count = 0
-        for _ in newcharacter.weapons:
-            character_data['wep'+str(count) + '_name'] = str(newcharacter.weapons[count].get('name'))
-            character_data['wep' + str(count) + '_damage'] = str(
-                newcharacter.weapons[count].get('damage') + damage_rolls_selector(
-                    newcharacter.weapons[count].get('properties'),
-                    "%+d" % (ability_modifiers(newcharacter.race.get_dexterity() +
-                                               newcharacter.character_class.get_dexterity_addition())),
-                    "% +d" % (ability_modifiers(newcharacter.race.get_strength() +
-                                                newcharacter.character_class.get_strength_addition()))))
-            character_data['wep' + str(count) + '_hit'] = "+" + str(
-                ((ability_modifiers(newcharacter.race.get_strength() +
-                                                              newcharacter.character_class.get_strength_addition())) +
-                                                            proficiency(newcharacter.level)))
-            character_data['wep'+str(count) + '_weight'] = str(newcharacter.weapons[count].get('weight'))
-            character_data['wep'+str(count) + '_properties'] = str(newcharacter.weapons[count].get('properties'))
-            count += 1
+    }
+    count = 0
+    for _ in newcharacter.weapons:
+        character_data['wep'+str(count) + '_name'] = str(newcharacter.weapons[count].get('name'))
+        character_data['wep' + str(count) + '_damage'] = str(
+            newcharacter.weapons[count].get('damage') + damage_rolls_selector(
+                newcharacter.weapons[count].get('properties'),
+                "%+d" % (ability_modifiers(newcharacter.race.get_dexterity() +
+                                           newcharacter.character_class.get_dexterity_addition())),
+                "% +d" % (ability_modifiers(newcharacter.race.get_strength() +
+                                            newcharacter.character_class.get_strength_addition()))))
+        character_data['wep' + str(count) + '_hit'] = "+" + str(
+            ((ability_modifiers(newcharacter.race.get_strength() +
+                                                          newcharacter.character_class.get_strength_addition())) +
+                                                        proficiency(newcharacter.level)))
+        character_data['wep'+str(count) + '_weight'] = str(newcharacter.weapons[count].get('weight'))
+        character_data['wep'+str(count) + '_properties'] = str(newcharacter.weapons[count].get('properties'))
+        count += 1
 
-        # Class Specific Entries
-        if newcharacter.character_class.name == 'Warlock':
-            character_data['Eldritch Invocation Spells'] = newcharacter.character_class.invocations
-        if newcharacter.character_class.name == 'Fighter':
-            character_data['maneuver'] = newcharacter.character_class.maneuver
-        if newcharacter.character_class.name == 'Monk':
-            character_data['elemental_discipline'] = newcharacter.character_class.elemental_discipline
+    # Class Specific Entries
+    if newcharacter.character_class.name == 'Warlock':
+        character_data['Eldritch Invocation Spells'] = newcharacter.character_class.invocations
+    if newcharacter.character_class.name == 'Fighter':
+        character_data['maneuver'] = newcharacter.character_class.maneuver
+    if newcharacter.character_class.name == 'Monk':
+        character_data['elemental_discipline'] = newcharacter.character_class.elemental_discipline
 
+    # Adjust AC for Armor based on Armor Proficiencies
+    equip_armor = (input("Do you want to Equip Armor? (y/n) "))
+    armor_available = []
+    if equip_armor == "y":
+        if "Light Armor" in character_data['armor_pro']:
+            armor_available.append("Light Armor")
+        if "Medium Armor" in character_data['armor_pro']:
+            armor_available.append("Medium Armor")
+        if "Heavy Armor" in character_data['armor_pro']:
+            armor_available.append("Heavy Armor")
+        if "All Armor" in character_data['armor_pro']:
+            armor_available.append("Light Armor")
+            armor_available.append("Medium Armor")
+            armor_available.append("Heavy Armor")
+        for j in range(len(armor_available)):
+            print(str(j+1) + ": " + armor_available[j])
+        if len(armor_available) > 0:
+            user_choice = validate_choice(len(armor_available))
+            user_choice = armor_available[user_choice-1]
+            if user_choice == "Light Armor":
+                character_data['ac'] = (ability_modifiers(newcharacter.race.get_dexterity() +
+                                        newcharacter.character_class.get_dexterity_addition()) + 11)
+            if user_choice == "Medium Armor":
+                character_data['ac'] = ((ability_modifiers(newcharacter.race.get_dexterity() +
+                                                           newcharacter.character_class.get_dexterity_addition()))
+                                        if
+                                        (ability_modifiers(newcharacter.race.get_dexterity() +
+                                                           newcharacter.character_class.get_dexterity_addition()))
+                                        < 2 else 2) + 14
+                print("modifier", (ability_modifiers(newcharacter.race.get_dexterity() +
+                      newcharacter.character_class.get_dexterity_addition())))
+            if user_choice == "Heavy Armor":
+                character_data['ac'] = 17 if character_data['str'] >= 15 else 14
+        else:
+            print("no armor to equip")
+            pass
+    else:
+        if character_data["klass"] == "Barbarian":
+            character_data['ac'] = 10 + ((ability_modifiers(newcharacter.race.get_dexterity() +
+                                                      newcharacter.character_class.get_dexterity_addition()
+                                )) + (ability_modifiers(newcharacter.race.get_constitution() +
+                                                      newcharacter.character_class.get_constitution_addition())))
     # Print out Character Data for Debugging
     #     for key, value in character_data.items():
     #         print(key.capitalize(), ":", value)

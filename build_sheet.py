@@ -47,24 +47,7 @@ def build_sheet(character_data: dict):
                                                                    character_data.get('skin'),
                                                                    character_data.get('hair'))
         lines += '+------+--------+--------+--+--------------+----------------+------------------+ \n'
-        lines += '+-Personality Traits-----------------------------------------------------------+ \n'
-        for j in string_format(character_data.get('pers_trait1')):
-            lines += j + '\n'
-        for j in string_format(character_data.get('pers_trait2')):
-            lines += j + '\n'
-        lines += '+------------------------------------------------------------------------------+ \n'
-        lines += '+-Ideals-----------------------------------------------------------------------+ \n'
-        for j in string_format(character_data.get('ideals')):
-            lines += j + '\n'
-        lines += '+------------------------------------------------------------------------------+ \n'
-        lines += '+-Bonds------------------------------------------------------------------------+ \n'
-        for j in string_format(character_data.get('bonds')):
-            lines += j + '\n'
-        lines += '+------------------------------------------------------------------------------+ \n'
-        lines += '+-Flaws------------------------------------------------------------------------+ \n'
-        for j in string_format(character_data.get('flaws')):
-            lines += j + '\n'
-        lines += '+------------------------------------------------------------------------------+ \n'
+
         lines += '+-------------------------------------+  +-AC-------+ +-Ini------+ +-Speed-----+' + '\n'
         lines += '| Inspiration                    [  ] |  |   {}     | |     {}   | |    {}     | \n'.format(
             character_data.get('ac'), character_data.get('initiative'), character_data.get('speed'))
@@ -290,7 +273,24 @@ def build_sheet(character_data: dict):
                                                     character_data.get('wep3_damage'))
             lines += '|{:78}| \n'.format(character_data.get('wep3_properties'))
             lines += '|' + '-' * 78 + '| \n'
-
+        lines += '+--------------------------+-----+---------------------------------------------+ \n'
+        lines += '+-Personality Traits-----------------------------------------------------------+ \n'
+        for j in string_format(character_data.get('pers_trait1')):
+            lines += j + '\n'
+        for j in string_format(character_data.get('pers_trait2')):
+            lines += j + '\n'
+        lines += '+------------------------------------------------------------------------------+ \n'
+        lines += '+-Ideals-----------------------------------------------------------------------+ \n'
+        for j in string_format(character_data.get('ideals')):
+            lines += j + '\n'
+        lines += '+------------------------------------------------------------------------------+ \n'
+        lines += '+-Bonds------------------------------------------------------------------------+ \n'
+        for j in string_format(character_data.get('bonds')):
+            lines += j + '\n'
+        lines += '+------------------------------------------------------------------------------+ \n'
+        lines += '+-Flaws------------------------------------------------------------------------+ \n'
+        for j in string_format(character_data.get('flaws')):
+            lines += j + '\n'
         lines += '|-Equipment--------------------------------------------------------------------| \n'
         for i in text_format(character_data.get('equipment')):
             lines += i
