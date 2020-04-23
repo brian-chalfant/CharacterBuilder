@@ -103,7 +103,7 @@ def race_selection(character_name, user_level):
         elif user_race == 2:
             _race = DeepGnome()
     
-    # the user picked Halfling, clear teh screen and display genasi sub-races, query for selection
+    # the user picked Halfling, clear the screen and display genasi sub-races, query for selection
     elif user_race == 10:
         clearscreen()
         print("Please Choose a Subrace.")

@@ -1,9 +1,9 @@
 from modifiers import primary_abilities, validate_choice, clearscreen, BColors
 
+a = 12
 
 def initial_diceroll():
     from random import randrange
-
     a = []
     for i in range(4):
         a.append(randrange(1, 7))

@@ -890,4 +890,5 @@ def in_sheath(name, lst):
     return False
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
+    print("hello world")
