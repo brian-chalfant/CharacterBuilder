@@ -521,7 +521,7 @@ def generate_character():
                 print("modifier", (ability_modifiers(newcharacter.race.get_dexterity() +
                       newcharacter.character_class.get_dexterity_addition())))
             if user_choice == "Heavy Armor":
-                character_data['ac'] = 17 if character_data['str'] >= 15 else 14
+                character_data['ac'] = 17 if int(character_data['strength']) >= 15 else 14
         else:
             print("no armor to equip")
             pass
