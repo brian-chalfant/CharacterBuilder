@@ -2,6 +2,8 @@ from language import choose_language
 from modifiers import draconic_lines, clearscreen, validate_choice
 from spells import single_spell_select
 
+# TO ADD A RACE, CREATE A NEW CLASS BELOW WITH THE SAME NAME AS THE RACE AND FILL IN THE APPROPRIATE ATTRIBUTES
+# DON'T FORGET TO LINK THE NEW RACE TO THE RACE SELECTION FUNCTION AND THE list_races() FUNCTION
 
 class Race:
     def __init__(self, level=None):
@@ -16,6 +18,24 @@ class Race:
         self.weaponpro = []
         self.cantrip = []
         self.abilities = []
+        self.athletics_skill = False
+        self.acrobatics_skill = False
+        self.sleight_of_hand_skill = False
+        self.stealth_skill = False
+        self.arcana_skill = False
+        self.history_skill = False
+        self.investigation_skill = False
+        self.nature_skill = False
+        self.religion_skill = False
+        self.animal_handling_skill = False
+        self.insight_skill = False
+        self.medicine_skill = False
+        self.perception_skill = False
+        self.survival_skill = False
+        self.deception_skill = False
+        self.intimidation_skill = False
+        self.performance_skill = False
+        self.persuasion_skill = False
         self.speed = 25
         # Looks
         self.age = 0
@@ -309,7 +329,7 @@ class Goliath(Race):
         self.constitution += 1
         self.name = 'Goliath'
         self.speed = 30
-        self.abilities = ["NATURAL ATHLETE", "STONE'S ENDURANCE", "POWERFUL BUILD", "MOUNTAIN BORN"]
+        self.abilities = ["STONE'S ENDURANCE", "POWERFUL BUILD", "MOUNTAIN BORN"]
         self.language.append("Giant")
         self.age = [15, 80]
         self.height = [84, 96]
@@ -317,6 +337,7 @@ class Goliath(Race):
         self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
         self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+        self.athletics_skill = True
 
 
 # Start Half-Elf --------------------------------------------------
@@ -346,11 +367,12 @@ class HalfOrc(Race):
         self.strength += 1
         self.name = 'Half-Orc'
         self.speed = 30
-        self.abilities = ["DARKVISION", "MENACING", "RELENTLESS ENDURANCE", "SAVAGE ATTACKS"]
+        self.abilities = ["DARKVISION", "RELENTLESS ENDURANCE", "SAVAGE ATTACKS"]
         self.language.append("Orc")
         self.age = [14, 75]
         self.height = [60, 86]
         self.weight = [120, 220]
+        self.intimidation_skill = True
         self.skin = ['Pale Gray', 'Scarlet', 'Ash', 'Pickle', 'Emerald', 'Dark Green', 'Midnight Blue']
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
         self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
@@ -429,3 +451,45 @@ class Tiefling(Race):
         self.magic = True
         self.cantrip = ["Thaumaturgy"]
         self.language.append("Infernal")
+
+
+# Start Tabaxi --------------------------------------------------
+class Tabaxi(Race):
+    def __init__(self):
+        super(Tabaxi, self).__init__()
+        self.dexterity += 2
+        self.charisma += 1
+        self.name = 'Tabaxi'
+        self.speed = 30
+        self.age = [20, 80]
+        self.height = [48, 80]
+        self.weight = [90, 200]
+        self.skin = ['No Fur', 'Fur']
+        self.hair = ['Persian', 'Bengal', 'Maine Coon', 'Siamese', 'British Shorthair']
+        self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+        self.abilities = ["DARKVISION", "FELINE AGILITY", "CAT'S CLAWS"]
+        self.perception_skill = True
+        self.stealth_skill = True
+        self.language.append(str(choose_language(self.language)))
+
+
+# Start Firbolg --------------------------------------------------
+class Firbolg(Race):
+    def __init__(self):
+        super(Firbolg, self).__init__()
+        self.wisdom += 2
+        self.strength += 1
+        self.name = 'Firbolg'
+        self.speed = 30
+        self.age = [30, 500]
+        self.height = [76, 90]
+        self.weight = [240, 300]
+        self.skin = ['Pink', 'Light Blue', 'Light Orange', 'Grey']
+        self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
+        self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+        self.abilities = ["HIDDEN STEP", "POWERFUL BUILD", "SPEECH OF BEAST AND LEAF"]
+        self.perception_skill = True
+        self.stealth_skill = True
+        self.cantrip = ['Detect Magic', 'Disguise Self']
+        self.language.append("Elvish")
+        self.language.append("Giant")

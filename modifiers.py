@@ -708,7 +708,9 @@ def list_races():
         9: "Half-Orc",
         10: "Halfling",
         11: "Human",
-        12: "Tiefling"
+        12: "Tiefling",
+        13: "Tabaxi",
+        14: "Firbolg"
     }
     return races
 

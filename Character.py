@@ -131,6 +131,10 @@ def race_selection(character_name, user_level):
             _race = Human()
         elif user_race == 12:
             _race = Tiefling()
+        elif user_race == 13:
+            _race = Tabaxi()
+        elif user_race == 14:
+            _race = Firbolg()
 
     _race = looks(_race)
 
@@ -269,24 +273,38 @@ def generate_character():
     newcharacter.character_class.acrobatics_skill = skill_transform(newcharacter.character_class.acrobatics_skill)
     newcharacter.character_class.sleight_of_hand_skill = \
         skill_transform(newcharacter.character_class.sleight_of_hand_skill)
-    newcharacter.character_class.stealth_skill = skill_transform(newcharacter.character_class.stealth_skill)
-    newcharacter.character_class.arcana_skill = skill_transform(newcharacter.character_class.arcana_skill)
-    newcharacter.character_class.history_skill = skill_transform(newcharacter.character_class.history_skill)
-    newcharacter.character_class.investigation_skill = skill_transform(newcharacter.character_class.investigation_skill)
-    newcharacter.character_class.nature_skill = skill_transform(newcharacter.character_class.nature_skill)
-    newcharacter.character_class.religion_skill = skill_transform(newcharacter.character_class.religion_skill)
+    newcharacter.character_class.stealth_skill = skill_transform(
+        newcharacter.character_class.stealth_skill or newcharacter.race.stealth_skill)
+    newcharacter.character_class.arcana_skill = skill_transform(
+        newcharacter.character_class.arcana_skill or newcharacter.race.arcana_skill)
+    newcharacter.character_class.history_skill = skill_transform(
+        newcharacter.character_class.history_skill or newcharacter.race.history_skill)
+    newcharacter.character_class.investigation_skill = skill_transform(
+        newcharacter.character_class.investigation_skill or newcharacter.race.investigation_skill)
+    newcharacter.character_class.nature_skill = skill_transform(
+        newcharacter.character_class.nature_skill or newcharacter.race.nature_skill)
+    newcharacter.character_class.religion_skill = skill_transform(
+        newcharacter.character_class.religion_skill or newcharacter.race.religion_skill)
     newcharacter.character_class.animal_handling_skill = \
-        skill_transform(newcharacter.character_class.animal_handling_skill)
-    newcharacter.character_class.insight_skill = skill_transform(newcharacter.character_class.insight_skill)
-    newcharacter.character_class.medicine_skill = skill_transform(newcharacter.character_class.medicine_skill)
-    newcharacter.character_class.perception_skill = skill_transform(newcharacter.character_class.perception_skill)
-    newcharacter.character_class.survival_skill = skill_transform(newcharacter.character_class.survival_skill)
-    newcharacter.character_class.deception_skill = skill_transform(newcharacter.character_class.deception_skill)
-    newcharacter.character_class.intimidation_skill = skill_transform(newcharacter.character_class.intimidation_skill)
-    newcharacter.character_class.performance_skill = skill_transform(newcharacter.character_class.performance_skill)
+        skill_transform(newcharacter.character_class.animal_handling_skill or newcharacter.race.animal_handling_skill)
+    newcharacter.character_class.insight_skill = skill_transform(
+        newcharacter.character_class.insight_skill or newcharacter.race.insight_skill)
+    newcharacter.character_class.medicine_skill = skill_transform(
+        newcharacter.character_class.medicine_skill or newcharacter.race.medicine_skill)
+    newcharacter.character_class.perception_skill = skill_transform(
+        newcharacter.character_class.perception_skill or newcharacter.race.perception_skill)
+    newcharacter.character_class.survival_skill = skill_transform(
+        newcharacter.character_class.survival_skill or newcharacter.race.survival_skill)
+    newcharacter.character_class.deception_skill = skill_transform(
+        newcharacter.character_class.deception_skill or newcharacter.race.deception_skill)
+    newcharacter.character_class.intimidation_skill = skill_transform(
+        newcharacter.character_class.intimidation_skill or newcharacter.race.intimidation_skill)
+    newcharacter.character_class.performance_skill = skill_transform(
+        newcharacter.character_class.performance_skill or newcharacter.race.performance_skill)
     newcharacter.character_class.persuasion_skill = skill_transform(newcharacter.character_class.persuasion_skill)
 
-    # WEAPONIZE
+
+    #     #     # WEAPONIZE
 
     count = 0
     for i in newcharacter.equipment:
@@ -367,12 +385,13 @@ def generate_character():
             "hp_maximum": hpmax,
             "hp_modifier": "+" + str(ability_modifiers(newcharacter.race.get_constitution() +
                                      newcharacter.character_class.get_constitution_addition())),
-            "hit_dice": "1d" + str(newcharacter.character_class.hit_die),
+            "hit_dice": str(newcharacter.level) + "d" + str(newcharacter.character_class.hit_die),
             "strength": newcharacter.race.get_strength() +
             newcharacter.character_class.get_strength_addition(),
             'str_save': throws.get('Strength'),
             "wisdom": newcharacter.race.get_wisdom() +
             newcharacter.character_class.get_wisdom_addition(),
+            'wis_save': throws.get('Wisdom'),
             'wis_save': throws.get('Wisdom'),
             "dexterity": newcharacter.race.get_dexterity() +
             newcharacter.character_class.get_dexterity_addition(),
@@ -398,16 +417,16 @@ def generate_character():
                                                        newcharacter.character_class.get_charisma_addition())),
             "intelligence_mod": "%+d" % (ability_modifiers(newcharacter.race.get_intelligence() +
                                                            newcharacter.character_class.get_intelligence_addition())),
-            "athletics_skill": newcharacter.character_class.athletics_skill,
+            "athletics_skill": newcharacter.character_class.athletics_skill or newcharacter.race.athletics_skill,
             "athletics_mod": "%+d" % (ability_modifiers(newcharacter.race.get_strength() +
                                                         newcharacter.character_class.get_strength_addition())),
-            "acrobatics_skill": newcharacter.character_class.acrobatics_skill,
+            "acrobatics_skill": newcharacter.character_class.acrobatics_skill or newcharacter.race.acrobatics_skill,
             "acrobatics_mod": "%+d" % (ability_modifiers(newcharacter.race.get_dexterity() +
                                                          newcharacter.character_class.get_dexterity_addition())),
-            "sleight_of_hand_skill": newcharacter.character_class.sleight_of_hand_skill,
+            "sleight_of_hand_skill": newcharacter.character_class.sleight_of_hand_skill or newcharacter.race.sleight_of_hand_skill,
             "sleight_of_hand_mod": "%+d" % (ability_modifiers(newcharacter.race.get_dexterity() +
                                                               newcharacter.character_class.get_dexterity_addition())),
-            "stealth_skill": newcharacter.character_class.stealth_skill,
+            "stealth_skill": (newcharacter.character_class.stealth_skill or newcharacter.race.stealth_skill),
             "stealth_mod": "%+d" % (ability_modifiers(newcharacter.race.get_dexterity() +
                                                       newcharacter.character_class.get_dexterity_addition())),
             "arcana_skill": newcharacter.character_class.arcana_skill,
