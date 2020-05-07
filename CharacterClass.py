@@ -46,6 +46,7 @@ class CharacterClass:
         self.intimidation_skill = False
         self.performance_skill = False
         self.persuasion_skill = False
+        self.primary_ability = None
         self.strength_addition = 0
         self.dexterity_addition = 0
         self.constitution_addition = 0
