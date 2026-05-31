@@ -1,6 +1,11 @@
 import sqlite3
+from pathlib import Path
 
 from modifiers import get_maneuvers_desc, get_elemental_disciplines_desc
+
+BASE_DIR = Path(__file__).resolve().parent
+DB_PATH = BASE_DIR / 'CharacterBuilder.db'
+OUTPUT_DIR = BASE_DIR / 'characters'
 
 
 def build_sheet(character_data: dict):
@@ -10,7 +15,8 @@ def build_sheet(character_data: dict):
     filename = character_data.get('name') + '-' + character_data.get('race') + " " \
                                           + character_data.get('klass') + '.txt'
 
-    with open('characters\\' + filename, 'w', encoding='utf-16') as outfile:
+    OUTPUT_DIR.mkdir(exist_ok=True)
+    with (OUTPUT_DIR / filename).open('w', encoding='utf-16') as outfile:
 
         lines = str()
         lines += 'Name:> ' + str(character_data.get('name')) + (' ' * (int((width/2)) -
@@ -18,25 +24,25 @@ def build_sheet(character_data: dict):
                                                                 ) + '         ________     ____   ________   ' + '\n'
         lines += 'Race:> ' + str(character_data.get('race')) + (' ' * (int((width/2)) -
                                                                        int(len(character_data.get('race'))) - 7)
-                                                                ) + '         \______ \   /  _ \  \______ \  ' + '\n'
+                                                                ) + '         \\______ \\   /  _ \\  \\______ \\  ' + '\n'
         lines += 'Class:> ' + str(character_data.get('klass')) + "  (" + str(character_data.get('classpath')) + ")" \
                             + (' ' * (int((width/2)) - int(len(character_data.get('klass')) +
                                       len(character_data.get('classpath'))) - 12)
-                               ) + '          |    |  \  >  _ </\ |    |  \ ' + '\n'
+                               ) + '          |    |  \\  >  _ </\\ |    |  \\ ' + '\n'
         lines += 'Background:> ' + str(character_data.get('background')) + (' ' * (int((width/2)) -
                                                                             int(len(character_data.get('background')))
                                                                             - 13)
                                                                             ) + \
-                 '          |  __`   \/  <_\ \/ |  __`   \\' + '\n'
+                 '          |  __`   \\/  <_\\ \\/ |  __`   \\\\' + '\n'
         lines += 'Alignment:> ' + str(character_data.get('alignment')) + (' ' * (int((width/2)) -
                                                                           int(len(character_data.get('alignment')))
                                                                             - 12)
                                                                           ) + \
-                 '         /_______  /\_____\ \/_______  /' + '\n'
+                 '         /_______  /\\_____\\ \\/_______  /' + '\n'
         lines += 'Level & XP:> Level ' + str(character_data.get('level')) + "    " + str(character_data.get('xp')) + \
                  (' ' * (int((width/2)) - (int(len(str(character_data.get('level')))) +
                                            len(str(character_data.get('xp'))) +
-                                           23))) + '                 \/        \/        \/ ' + '\n'
+                                           23))) + '                 \\/        \\/        \\/ ' + '\n'
         # CHARACTER SECTION
 
         lines += '+-Age--+-Height-+-Weight-+--+-Eyes---------+-Skin-----------+-Hair-------------+ \n'
@@ -373,7 +379,8 @@ def text_format(textlist, width=78):
         else:
             yield decorator(b)
             b = '' + i + ", "
-    return decorator(b)
+    if b:
+        yield decorator(b)
 
 
 def manu_format(textlist):
@@ -407,10 +414,10 @@ def decorator(linetext):
 
 
 def read_features(name):
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
-    cur.execute('SELECT description FROM features WHERE NAME = \"{na}\"'.format(na=name))
+    cur.execute('SELECT description FROM features WHERE NAME = ?', (name,))
 
     x = cur.fetchall()
     conn.close()
@@ -422,10 +429,10 @@ def read_features(name):
 
 
 def read_spells(name):
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
-    cur.execute('SELECT description, level FROM spells WHERE NAME = \"{na}\"'.format(na=name))
+    cur.execute('SELECT description, level FROM spells WHERE NAME = ?', (name,))
 
     x = cur.fetchall()
     conn.close()

@@ -4,6 +4,7 @@ from pathlib import Path
 import json
 
 home = str(Path.home())
+DB_PATH = Path(__file__).resolve().parent / 'CharacterBuilder.db'
 
 
 def write_background():
@@ -76,26 +77,18 @@ def write_background():
     print(data)
     with open('data.json', 'w') as outfile:
         json.dump(data, outfile)
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
     cur.execute('INSERT INTO backgrounds (NAME, SKILLPROF, LANGUAGES, TOOLS, EQUIPMENT, FEATURE, FEATDESC, '
                 'PERSTRAIT1, PERSTRAIT2, PERSTRAIT3, PERSTRAIT4, PERSTRAIT5, PERSTRAIT6, '
                 'PERSTRAIT7, PERSTRAIT8, IDEAL1, IDEAL2, IDEAL3, IDEAL4, IDEAL5, IDEAL6, BOND1, '
                 'BOND2, BOND3, BOND4, BOND5, BOND6, FLAW1, FLAW2, FLAW3, FLAW4, FLAW5, FLAW6) VALUES '
-                '( \"{na}\",\"{sp}\",\"{la}\",\"{tl}\", \"{eq}\",\"{fe}\",\"{fd}\",\"{p1}\",\"{p2}\",\"{p3}\",\"{p4}\",'
-                '\"{p5}\",\"{p6}\",\"{p7}\",\"{p8}\",\"{i1}\",\"{i2}\",\"{i3}\",\"{i4}\",\"{i5}\",\"{i6}\",\"{b1}\",'
-                '\"{b2}\",\"{b3}\",\"{b4}\",\"{b5}\",\"{b6}\",\"{f1}\",\"{f2}\",\"{f3}\",\"{f4}\",\"{f5}\",\"{f6}\" )'
-                .format(na=NAME, sp=SKILLPROF, la=LANGUAGES,
-                        tl=TOOLS, fe=FEATURE, fd=FEATDESC, eq=EQUIPMENT,
-                        p1=PERSTRAIT1, p2=PERSTRAIT2,p3=PERSTRAIT3,
-                        p4=PERSTRAIT4, p5=PERSTRAIT5, p6=PERSTRAIT6,
-                        p7=PERSTRAIT7, p8=PERSTRAIT8, i1=IDEAL1,
-                        i2=IDEAL2, i3=IDEAL3, i4=IDEAL4, i5=IDEAL5,
-                        i6=IDEAL6, b1=BOND1, b2=BOND2,
-                        b3=BOND3, b4=BOND4, b5=BOND5,
-                        b6=BOND6, f1=FLAW1, f2=FLAW2,
-                        f3=FLAW3, f4=FLAW4, f5=FLAW5, f6=FLAW6))
+                '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (NAME, SKILLPROF, LANGUAGES, TOOLS, EQUIPMENT, FEATURE, FEATDESC,
+                 PERSTRAIT1, PERSTRAIT2, PERSTRAIT3, PERSTRAIT4, PERSTRAIT5, PERSTRAIT6,
+                 PERSTRAIT7, PERSTRAIT8, IDEAL1, IDEAL2, IDEAL3, IDEAL4, IDEAL5, IDEAL6,
+                 BOND1, BOND2, BOND3, BOND4, BOND5, BOND6, FLAW1, FLAW2, FLAW3, FLAW4, FLAW5, FLAW6))
     conn.commit()
     conn.close()
 
@@ -106,10 +99,10 @@ def read_backgrounds(name):
                     'IDEAL2', 'IDEAL3', 'IDEAL4', 'IDEAL5', 'IDEAL6', 'BOND1', 'BOND2', 'BOND3', 'BOND4',
                     'BOND5', 'BOND6', 'FLAW1', 'FLAW2', 'FLAW3', 'FLAW4', 'FLAW5', 'FLAW6']
     rtndict = {}
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
-    cur.execute('SELECT * FROM backgrounds WHERE NAME = \"{na}\"'.format(na=name))
+    cur.execute('SELECT * FROM backgrounds WHERE NAME = ?', (name,))
 
     x = cur.fetchall()
     conn.close()
@@ -121,7 +114,7 @@ def read_backgrounds(name):
 
 def read_background_names():
     rtndict = {}
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
     cur.execute('SELECT NAME FROM backgrounds')

@@ -1,5 +1,19 @@
 import sqlite3
+from pathlib import Path
 from modifiers import BColors, validate_choice
+
+DB_PATH = Path(__file__).resolve().parent / 'CharacterBuilder.db'
+SPELL_COLUMNS = {
+    'BARD_SPELL', 'CLERIC_SPELL', 'DRUID_SPELL', 'PALADIN_SPELL',
+    'RANGER_SPELL', 'SORCERER_SPELL', 'WARLOCK_SPELL', 'WIZARD_SPELL'
+}
+
+
+def spell_column(user_class):
+    column = f'{user_class.upper()}_SPELL'
+    if column not in SPELL_COLUMNS:
+        raise ValueError('Invalid spellcasting class')
+    return column
 
 
 def warlock_slots(level):
@@ -263,19 +277,20 @@ def rogue_slots(level):
 def get_spells(user_class, level, **kwargs):
     rtn_list = []
     spell_dict = {}
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
+    column = spell_column(user_class)
     if 'school' in kwargs:
         x = []  # Pull Each School of Magic from the database that is listed in kwargs
         for key, value in kwargs.items():
             if level == 0:
                 c.execute(
-                    "SELECT NAME FROM Spells WHERE {usc}_SPELL = 1 and LEVEL = {lvl}"
-                    " ORDER BY NAME ASC".format(usc=user_class, lvl=level))
+                    f"SELECT NAME FROM Spells WHERE {column} = 1 and LEVEL = ? ORDER BY NAME ASC",
+                    (level,))
             else:
                 c.execute(
-                    "SELECT NAME FROM Spells WHERE {usc}_SPELL = 1 and LEVEL = {lvl} and SCHOOL = \"{sc}\" "
-                    "ORDER BY NAME ASC".format(usc=user_class, lvl=level, sc=value))
+                    f"SELECT NAME FROM Spells WHERE {column} = 1 and LEVEL = ? and SCHOOL = ? ORDER BY NAME ASC",
+                    (level, value))
             spell_list = c.fetchall()
             for row in spell_list:
                 for item in row:
@@ -284,8 +299,8 @@ def get_spells(user_class, level, **kwargs):
         x.sort()
     else:  # no schools listed, pull from class and level only
         x = []
-        c.execute("SELECT NAME FROM Spells WHERE {usc}_SPELL = 1 and LEVEL = {lvl} ORDER BY NAME ASC"
-                  .format(usc=user_class, lvl=level))
+        c.execute(f"SELECT NAME FROM Spells WHERE {column} = 1 and LEVEL = ? ORDER BY NAME ASC",
+                  (level,))
         spell_list = c.fetchall()
         for row in spell_list:
             for item in row:
@@ -302,11 +317,11 @@ def get_spells(user_class, level, **kwargs):
 def get_warlock_spells(level):
     rtn_list = []
     spell_dict = {}
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     x = []
-    c.execute("SELECT NAME FROM Spells WHERE WARLOCK_SPELL = 1 and LEVEL <= {lvl} ORDER BY NAME ASC"
-              .format(lvl=level))
+    c.execute("SELECT NAME FROM Spells WHERE WARLOCK_SPELL = 1 and LEVEL <= ? ORDER BY NAME ASC",
+              (level,))
     spell_list = c.fetchall()
     x += set(spell_list)
     x.sort()
@@ -400,10 +415,10 @@ def single_spell_select(user_class, spell_level):
 
 def get_invocations_name(level):
     rtn_list = []
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute("SELECT name FROM Eldritch_Invocations WHERE level <= {lvl} ORDER BY name ASC"
-              .format(lvl=level))
+    c.execute("SELECT name FROM Eldritch_Invocations WHERE level <= ? ORDER BY name ASC",
+              (level,))
     spell_list = c.fetchall()
     for row in spell_list:
         for item in row:
@@ -414,10 +429,10 @@ def get_invocations_name(level):
 
 def get_invocation_description(name):
     rtn_list = []
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute("SELECT description FROM Eldritch_Invocations WHERE name = \"{nm}\" ORDER BY name ASC"
-              .format(nm=name))
+    c.execute("SELECT description FROM Eldritch_Invocations WHERE name = ? ORDER BY name ASC",
+              (name,))
     spell_list = c.fetchall()
     for row in spell_list:
         for item in row:

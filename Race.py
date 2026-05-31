@@ -143,7 +143,7 @@ class Elf(Race):
         self.weight = [110, 170]
         self.skin = ['Fair', 'Bronze', 'Ruddy', 'Ash', 'Olive', 'Ebony', 'Silver', 'Azure']
         self.hair = ['Black', 'Brunette', 'Auburn', 'Wildfire', 'Blonde']
-        self.eyes = ['Blue', 'Silver-Blue' 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
+        self.eyes = ['Blue', 'Silver-Blue', 'Black', 'Brown', 'Green', 'Hazel', 'Amber']
 
 
 class HighElf(Elf):
@@ -184,8 +184,7 @@ class DrowElf(Elf):
         self.cantrip = ["Dancing Lights"]
         if level > 3:
             self.cantrip.append("FAIRIE FIRE")
-        elif level > 5:
-            self.cantrip.append("FAIRIE FIRE")
+        if level > 5:
             self.cantrip.append("DARKNESS")
 
 
@@ -223,7 +222,7 @@ class AirGenasi(Genasi):
 class EarthGenasi(Genasi):
     def __init__(self):
         super(EarthGenasi, self).__init__()
-        self.strength += 1
+        self.constitution += 1
         self.name = 'Earth Genasi'
         self.abilities.append("EARTH WALK")
         self.abilities.append("MERGE WITH STONE")
