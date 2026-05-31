@@ -1,11 +1,14 @@
 import sqlite3
+from pathlib import Path
 from build_sheet import string_format
 
+DB_PATH = Path(__file__).resolve().parent / 'CharacterBuilder.db'
+
 def read_features(name):
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
-    cur.execute('SELECT description FROM features WHERE NAME = \"{na}\"'.format(na=name))
+    cur.execute('SELECT description FROM features WHERE NAME = ?', (name,))
 
     x = cur.fetchall()
     conn.close()

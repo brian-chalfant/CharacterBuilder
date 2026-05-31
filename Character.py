@@ -541,7 +541,7 @@ def generate_character():
 def another():
     print("Generate Another Character?: ")
     a = input('Y/N: ')
-    if a.lower() == ('y' or 'yes'):
+    if a.lower() in ('y', 'yes'):
         return True
     else:
         return False
@@ -557,5 +557,4 @@ if __name__ == '__main__':
             done = False
         else:
             done = True
-
 

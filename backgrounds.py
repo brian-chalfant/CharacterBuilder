@@ -9,7 +9,7 @@ class Background:
         self.featurename = x.get('FEATURE')
         self.skillpro = x.get('SKILLPROF')
         self.language = x.get('LANGUAGES')
-        self.toolpro = x.get('LANGUAGES')
+        self.toolpro = x.get('TOOLS')
         self.personalitytraits = dict()
         self.alignment = ''
         for i in range(1, 9):

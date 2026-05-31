@@ -1,6 +1,9 @@
 import os
 import re
 import sqlite3
+from pathlib import Path
+
+DB_PATH = Path(__file__).resolve().parent / 'CharacterBuilder.db'
 
 
 class BColors:
@@ -79,6 +82,7 @@ def ability_modifiers(ability_score):
     }
     if 1 <= ability_score <= 30:
         return modifiers.get(ability_score)
+    raise ValueError('Ability score must be between 1 and 30.')
 
 
 def exp(level):
@@ -715,9 +719,9 @@ def list_races():
 
 def get_elemental_disciplines(level):
     rtn_list = []
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute("SELECT name FROM elementaldisciplines WHERE level=\"{lvl}\" ORDER BY name ASC".format(lvl=level))
+    c.execute("SELECT name FROM elementaldisciplines WHERE level = ? ORDER BY name ASC", (level,))
     spell_list = c.fetchall()
     for row in spell_list:
         for item in row:
@@ -728,9 +732,9 @@ def get_elemental_disciplines(level):
 
 def get_elemental_disciplines_desc(name):
     rtn_list = []
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute("SELECT desc FROM elementaldisciplines WHERE name = \"{na}\"".format(na=name))
+    c.execute("SELECT desc FROM elementaldisciplines WHERE name = ?", (name,))
     spell_list = c.fetchall()
     for row in spell_list:
         for item in row:
@@ -741,7 +745,7 @@ def get_elemental_disciplines_desc(name):
 
 def get_maneuvers():
     rtn_list = []
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute("SELECT name FROM maneuvers ORDER BY name ASC")
     spell_list = c.fetchall()
@@ -754,9 +758,9 @@ def get_maneuvers():
 
 def get_maneuvers_desc(name):
     rtn_list = []
-    conn = sqlite3.connect('CharacterBuilder.db')
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute("SELECT desc FROM maneuvers WHERE name = \"{na}\" ORDER BY name ASC".format(na=name))
+    c.execute("SELECT desc FROM maneuvers WHERE name = ? ORDER BY name ASC", (name,))
     spell_list = c.fetchall()
     for row in spell_list:
         for item in row:
