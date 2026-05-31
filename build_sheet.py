@@ -101,8 +101,8 @@ def build_sheet(character_data: dict):
                 character_data.get('athletics_skill'), character_data.get('athletics_mod'),
                 character_data.get('proficiencies')[2])
         except IndexError:
-            lines += '| Athletics (Str)            [{}] [{}] |  |{:37}| \n'.format(
-                character_data.get('athletics_skill'), character_data.get('athletics_mod'),
+            lines += '| Deception (Cha)            [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('deception_skill'), character_data.get('deception_mod'),
                 " ")
         try:
             lines += '| Deception (Cha)            [{}] [{}] |  |{:37}| \n'.format(
@@ -119,14 +119,14 @@ def build_sheet(character_data: dict):
         except IndexError:
             lines += '| History (Int)              [{}] [{}] |  |{:37}| \n'.format(
                 character_data.get('history_skill'), character_data.get('history_mod'),
-                character_data.get('proficiencies')[4])
+                " ")
         try:
             lines += '| Insight (Wis)              [{}] [{}] |  |{:37}| \n'.format(
                 character_data.get('insight_skill'), character_data.get('insight_mod'),
                 character_data.get('proficiencies')[5])
         except IndexError:
-            lines += '| Insight (Wis)              [{}] [{}] |  |{:37}| \n'.format(
-                character_data.get('insight_skill'), character_data.get('insight_mod'),
+            lines += '| Intimidation (Cha)         [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('intimidation_skill'), character_data.get('intimidation_mod'),
                 " ")
         try:
             lines += '| Intimidation (Cha)         [{}] [{}] |  |{:37}| \n'.format(
@@ -319,23 +319,23 @@ def build_sheet(character_data: dict):
         if character_data.get('klass') == 'Fighter':
             if character_data.get('maneuver'):
                 lines += '+-Manuevers--------------------------------------------------------------------+ \n'
-            try:
                 for j in manu_format(character_data.get('maneuver')):
                     for line in j:
                         lines += line + '\n'
                     lines += string_decorator('*' + (' - ' * 25) + '*') + '\n'
-            except AttributeError:
-                lines += "No Data Available (MANUEVER)"
+            else:
+                for j in string_format('No Data Available (MANUEVER)'):
+                    lines += j + '\n'
         if character_data.get('klass') == 'Monk':
-                try:
+                if character_data.get('elemental_discipline'):
                     for m in character_data.get('elemental_discipline'):
                         print(get_elemental_disciplines_desc(m))
                         for j in string_format(str(m) + ": " +
                                                str(get_elemental_disciplines_desc(m)[0])):
                             lines += j + '\n'
                         lines += string_decorator('*' + (' - ' * 25) + '*') + '\n'
-                except AttributeError as e:
-                    x = str(m) + ': No Data Available (ELEMENTAL DISCIPLINE)' + str(e)
+                else:
+                    x = 'No Data Available (ELEMENTAL DISCIPLINE)'
                     for j in string_format(x):
                         lines += j + '\n'
                     lines += string_decorator('*' + (' - ' * 25) + '*') + '\n'
@@ -353,7 +353,7 @@ def build_sheet(character_data: dict):
                         lines += j + '\n'
                     lines += string_decorator('*' + (' - ' * 25) + '*') + '\n'
             if character_data.get('klass') == 'Warlock':
-                for i in character_data.get('Eldritch Invocation Spells'):
+                for i in character_data.get('Eldritch Invocation Spells', []):
                     try:
                         x = read_spells(i)
                         for j in string_format(x):

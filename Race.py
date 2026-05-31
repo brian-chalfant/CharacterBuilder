@@ -342,7 +342,7 @@ class HalfOrc(Race):
     def __init__(self):
         super(HalfOrc, self).__init__()
         self.strength += 2
-        self.strength += 1
+        self.constitution += 1
         self.name = 'Half-Orc'
         self.speed = 30
         self.abilities = ["DARKVISION", "MENACING", "RELENTLESS ENDURANCE", "SAVAGE ATTACKS"]
