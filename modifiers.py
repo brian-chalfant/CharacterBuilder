@@ -82,6 +82,7 @@ def ability_modifiers(ability_score):
     }
     if 1 <= ability_score <= 30:
         return modifiers.get(ability_score)
+    raise ValueError('Ability score must be between 1 and 30.')
 
 
 def exp(level):

@@ -101,16 +101,16 @@ def build_sheet(character_data: dict):
                 character_data.get('athletics_skill'), character_data.get('athletics_mod'),
                 character_data.get('proficiencies')[2])
         except IndexError:
-            lines += '| Deception (Cha)            [{}] [{}] |  |{:37}| \n'.format(
-                character_data.get('deception_skill'), character_data.get('deception_mod'),
+            lines += '| Athletics (Str)            [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('athletics_skill'), character_data.get('athletics_mod'),
                 " ")
         try:
             lines += '| Deception (Cha)            [{}] [{}] |  |{:37}| \n'.format(
                 character_data.get('deception_skill'), character_data.get('deception_mod'),
                 character_data.get('proficiencies')[3])
         except IndexError:
-            lines += '| Athletics (Str)            [{}] [{}] |  |{:37}| \n'.format(
-                character_data.get('athletics_skill'), character_data.get('athletics_mod'),
+            lines += '| Deception (Cha)            [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('deception_skill'), character_data.get('deception_mod'),
                 " ")
         try:
             lines += '| History (Int)              [{}] [{}] |  |{:37}| \n'.format(
@@ -125,16 +125,16 @@ def build_sheet(character_data: dict):
                 character_data.get('insight_skill'), character_data.get('insight_mod'),
                 character_data.get('proficiencies')[5])
         except IndexError:
-            lines += '| Intimidation (Cha)         [{}] [{}] |  |{:37}| \n'.format(
-                character_data.get('intimidation_skill'), character_data.get('intimidation_mod'),
+            lines += '| Insight (Wis)              [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('insight_skill'), character_data.get('insight_mod'),
                 " ")
         try:
             lines += '| Intimidation (Cha)         [{}] [{}] |  |{:37}| \n'.format(
                 character_data.get('intimidation_skill'), character_data.get('intimidation_mod'),
                 character_data.get('proficiencies')[6])
         except IndexError:
-            lines += '| Insight (Wis)              [{}] [{}] |  |{:37}| \n'.format(
-                character_data.get('insight_skill'), character_data.get('insight_mod'),
+            lines += '| Intimidation (Cha)         [{}] [{}] |  |{:37}| \n'.format(
+                character_data.get('intimidation_skill'), character_data.get('intimidation_mod'),
                 " ")
         try:
             lines += '| Investigation (Int)        [{}] [{}] |  |{:37}| \n'.format(

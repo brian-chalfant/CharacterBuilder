@@ -83,7 +83,7 @@ def starting_equipment(klass, background, proficiencies):
             a = validate_choice(3)
             if a == 1:
                 equipment_list.append('Medium Scale Mail Armor')
-            if a == 2:
+            elif a == 2:
                 equipment_list.append('Light Leather Armor')
             else:
                 equipment_list.append('Heavy Chain Mail Armor')
