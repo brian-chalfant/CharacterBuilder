@@ -1,0 +1,161 @@
+
+     __          ________ _      _____ ____  __  __ ______                            
+ \ \        / /  ____| |    / ____/ __ \|  \/  |  ____|                           
+  \ \  /\  / /| |__  | |   | |   | |  | | \  / | |__                              
+   \ \/  \/ / |  __| | |   | |   | |  | | |\/| |  __|                             
+    \  /\  /  | |____| |___| |___| |__| | |  | | |____                            
+  ___\/__\/___|______|______\_____\____/|_|__|_|______| _____                     
+ |__   __/ __ \  |__   __| |  | |  ____| |  __ \  ___  |  __ \                    
+    | | | |  | |    | |  | |__| | |__    | |  | |( _ ) | |  | |                   
+    | | | |  | |    | |  |  __  |  __|   | |  | |/ _ \/\ |  | |                   
+    | | | |__| |    | |  | |  | | |____  | |__| | (_>  < |__| |                   
+   _|_|_ \____/     |_|  |_|__|_|______| |_____/_\___/\/_____/ _____              
+  / ____| |  | |   /\   |  __ \     /\   / ____|__   __|  ____|  __ \             
+ | |    | |__| |  /  \  | |__) |   /  \ | |       | |  | |__  | |__) |            
+ | |    |  __  | / /\ \ |  _  /   / /\ \| |       | |  |  __| |  _  /             
+ | |____| |  | |/ ____ \| | \ \  / ____ \ |____   | |  | |____| | \ \             
+  \_____|_|  |_/_/__ _\_\_| _\_\/_/____\_\_____|  |_|  |______|_|  \_\            
+ |  _ \| |  | |_   _| |    |  __ \|  ____|  __ \                                  
+ | |_) | |  | | | | | |    | |  | | |__  | |__) |                                 
+ |  _ <| |  | | | | | |    | |  | |  __| |  _  /                                  
+ | |_) | |__| |_| |_| |____| |__| | |____| | \ \                                  
+ |____/ \____/|_____|______|_____/|______|_|  \_\___ ______ ______ ________     __
+ |  _ \         / ____| |  | |   /\   | |    |  ____|  ____|  ____|___  /\ \   / /
+ | |_) |_   _  | |    | |__| |  /  \  | |    | |__  | |__  | |__     / /  \ \_/ / 
+ |  _ <| | | | | |    |  __  | / /\ \ | |    |  __| |  __| |  __|   / /    \   /  
+ | |_) | |_| | | |____| |  | |/ ____ \| |____| |    | |____| |____ / /__    | |   
+ |____/ \__, |  \_____|_|  |_/_/    \_\______|_|    |______|______/_____|   |_|   
+         __/ |                                                                    
+        |___/
+        
+Press <ENTER> to Begin.'unknown': I need something more specific.
+[0m
+
+Please Enter your character's name :'unknown': I need something more specific.
+[0m
+
+[4mWhat level is Test (1-20): [0m[0m
+What RACE is Test
+1 Aarokocra
+2 Dragonborn
+3 Dwarf
+4 Elf
+5 Genasi
+6 Gnome
+7 Goliath
+8 Half-Elf
+9 Half-Orc
+10 Halfling
+11 Human
+12 Tiefling
+[4mPlease enter a number:[0m[0m
+Appearance Personalization
+The Average age for a Aarakocra is between 3 and 30 years
+[4mPlease enter an Age: [0m[0m
+The Average height for a Aarakocra is between 53 and 60 inches
+[4mPlease enter a Height: [0m[0m
+The Average weight for a Aarakocra is between 80 and 100 pounds
+[4mPlease enter a Weight: [0m[0m
+The following are some example Hair Color options for Aarakocras 
+Blue
+Green
+Red
+Orange
+Yellow
+Brown
+Gray
+Please enter any hair color you wish: The following are some example Eye Color options for Aarakocras 
+Blue
+Black
+Brown
+Green
+Hazel
+Amber
+Please enter any eye color you wish: 'unknown': I need something more specific.
+[0m
+
+What CLASS is Test?
+1 Barbarian
+2 Bard
+3 Cleric
+4 Druid
+5 Fighter
+6 Monk
+7 Paladin
+8 Ranger
+9 Rogue
+10 Sorcerer
+11 Warlock
+12 Wizard
+[4mPlease enter a number:[0m[0m
+1 Roll Stats
+2 Manually Enter Stats
+[4mChoose a method for choosing stats[0m[0m
+[4mEnter value for Strength stat: [0m[0m
+[4mEnter value for Dexterity stat: [0m[0m
+[4mEnter value for Constitution stat: [0m[0m
+[4mEnter value for Intelligence stat: [0m[0m
+[4mEnter value for Wisdom stat: [0m[0m
+[4mEnter value for Charisma stat: [0m[0m
+[0mpick two(2) skills from this list
+1 Animal Handling
+2 Athletics
+3 Intimidation
+4 Nature
+5 Perception
+6 Survival
+[4mPlease enter a number:[0m[0m
+[4mPlease enter a number:[0m[0m
+[4mPlease enter a number:[0m[0m
+[4mPlease enter a number:[0m[0m
+1 Acolyte
+2 Anthropologist
+3 Archaeologist
+4 Charlatan
+5 Criminal / Spy
+6 Entertainer
+7 Folk Hero
+8 Guild Artisan
+9 Hermit
+10 Knight
+11 Noble
+12 Outlander
+13 Pirate
+14 Sage
+15 Sailor
+16 Soldier
+17 Urchin
+[4mChoose a Background[0m[0m
+Acolyte
+PERSONALITY TRAITS
+1 I idolize a particular hero of my faith, and constantly refer to that person's deeds and example.
+2 I can find common ground between the fiercest enemies, empathizing with them and always working toward peace.
+3 I see omens in every event and action. The gods try to speak to us, we just need to listen.
+4 Nothing can shake my optimistic attitude.
+5 I quote (or misquote) sacred texts and proverbs in almost every situation.
+6 I am tolerant (or intolerant) of other faiths and respect (or condemn) the worship of other gods.
+7 I've enjoyed fine food, drink, and high society among my temple's elite. Rough living grates on me.
+8 I've spent so long in the temple that I have little practical experience dealing with people in the outside world.
+[4mSelect Traits (1 of 2)[0m[0m
+[4mSelect Traits (2 of 2)[0m[0m
+[4mSelect Traits (1 of 2)[0m[91mENTER A VALID NUMBER[0m
+[4mSelect Traits (1 of 2)[0m[91mENTER A VALID NUMBER[0m
+[4mSelect Traits (1 of 2)[0mTraceback (most recent call last):
+  File "/tmp/workspace/brian-chalfant/CharacterBuilder/Character.py", line 553, in <module>
+    generate_character()
+  File "/tmp/workspace/brian-chalfant/CharacterBuilder/Character.py", line 218, in generate_character
+    class_selection(character_name, user_level), background_selection())
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/workspace/brian-chalfant/CharacterBuilder/Character.py", line 194, in background_selection
+    _background = Background(read_background_names().get(back_choice))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/workspace/brian-chalfant/CharacterBuilder/backgrounds.py", line 27, in __init__
+    self.personalitytraits = process_selection(self.print_personality_traits())
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/workspace/brian-chalfant/CharacterBuilder/backgrounds.py", line 71, in process_selection
+    x = validate_choice(len(argument), message='Select Traits (1 of 2)')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/workspace/brian-chalfant/CharacterBuilder/modifiers.py", line 23, in validate_choice
+    entered = input(BColors.UNDERLINE + kwargs.get('message') + BColors.ENDC)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+EOFError: EOF when reading a line
